@@ -1,0 +1,15 @@
+{
+  "name": "@bui/tokens",
+  "version": "1.0.0",
+  "description": "Design tokens for BUI design system",
+  "main": "dist/variables.css",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": ["design-tokens", "css-variables", "design-system"],
+  "author": "",
+  "license": "ISC"
+} 
