@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "build:tokens": "pnpm --filter @bui/tokens build",
+    "storybook": "pnpm --filter @bui/ui storybook dev",
+    "storybook:build": "pnpm --filter @bui/ui storybook build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
