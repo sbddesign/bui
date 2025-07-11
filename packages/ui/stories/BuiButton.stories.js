@@ -12,35 +12,74 @@ export default {
     icon: { control: 'text' },
     label: { control: 'text' },
   },
-};
-
-const Template = (args) => {
-  return Object.entries(args.variants).map(([desc, variant]) =>
-    `<div style="margin: 0.5em 0;"><bui-button
-      style-type="${variant.styleType}"
-      size="${variant.size}"
-      content="${variant.content}"
-      ?active="${variant.active}"
-      icon="${variant.icon}"
-      label="${variant.label}"
-    ></bui-button> <span style="margin-left: 1em; font-size: 0.9em; color: #888;">${desc}</span></div>`
-  ).join('');
-};
-
-export const AllStates = Template.bind({});
-AllStates.args = {
-  variants: {
-    'Filled (label)': { styleType: 'filled', size: 'default', content: 'label', active: true, icon: '', label: 'Label' },
-    'Filled (icon)': { styleType: 'filled', size: 'default', content: 'icon', active: true, icon: 'cross', label: '' },
-    'Filled (label+icon)': { styleType: 'filled', size: 'default', content: 'label+icon', active: true, icon: 'cross', label: 'Label' },
-    'Outline (label)': { styleType: 'outline', size: 'default', content: 'label', active: true, icon: '', label: 'Label' },
-    'Outline (icon)': { styleType: 'outline', size: 'default', content: 'icon', active: true, icon: 'cross', label: '' },
-    'Outline (label+icon)': { styleType: 'outline', size: 'default', content: 'label+icon', active: true, icon: 'cross', label: 'Label' },
-    'Free (label)': { styleType: 'free', size: 'default', content: 'label', active: true, icon: '', label: 'Label' },
-    'Free (icon)': { styleType: 'free', size: 'default', content: 'icon', active: true, icon: 'cross', label: '' },
-    'Free (label+icon)': { styleType: 'free', size: 'default', content: 'label+icon', active: true, icon: 'cross', label: 'Label' },
-    'Large (filled)': { styleType: 'filled', size: 'large', content: 'label', active: true, icon: '', label: 'Large' },
-    'Small (outline)': { styleType: 'outline', size: 'small', content: 'label', active: true, icon: '', label: 'Small' },
-    'Inactive (filled)': { styleType: 'filled', size: 'default', content: 'label', active: false, icon: '', label: 'Inactive' },
+  args: {
+    label: 'Button',
+    active: true,
+    size: 'default',
+    content: 'label',
+    icon: 'cross'
   },
-}; 
+};
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Filled = {
+  args: {
+    styleType: 'filled',
+    label: 'Filled Button',
+  },
+};
+
+export const Outline = {
+  args: {
+    styleType: 'outline',
+    label: 'Outline Button',
+  },
+};
+
+export const Free = {
+  args: {
+    styleType: 'free',
+    label: 'Free Button',
+  },
+};
+
+export const WithIcon = {
+  args: {
+    styleType: 'filled',
+    content: 'label+icon',
+    label: 'Button with Icon',
+    icon: 'cross',
+  },
+};
+
+export const IconOnly = {
+  args: {
+    styleType: 'filled',
+    content: 'icon',
+    icon: 'cross',
+  },
+};
+
+export const Large = {
+  args: {
+    styleType: 'filled',
+    size: 'large',
+    label: 'Large Button',
+  },
+};
+
+export const Small = {
+  args: {
+    styleType: 'outline',
+    size: 'small',
+    label: 'Small Button',
+  },
+};
+
+export const Inactive = {
+  args: {
+    styleType: 'filled',
+    active: false,
+    label: 'Inactive Button',
+  },
+};
