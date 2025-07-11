@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 
 // Import CSS variables from tokens
 const tokenStyles = css`
-  @import url('../tokens/lib/tailwindcss/tailwind-theme.css');
+  @import url('../tokens/dist/variables.css');
 `;
 
 export class BuiButton extends LitElement {
@@ -22,7 +22,7 @@ export class BuiButton extends LitElement {
         display: inline-block;
       }
       button {
-        font-family: inherit;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         border-radius: 8px;
         border: none;
         cursor: pointer;
@@ -38,18 +38,18 @@ export class BuiButton extends LitElement {
       button.large { font-size: 1.15rem; padding: 0.75em 1.5em; }
       /* Style variants */
       button.filled {
-        background: var(--bui-primary, #F89C2A);
+        background: var(--color-orange);
         color: #fff;
         border: none;
       }
       button.outline {
         background: transparent;
-        color: var(--bui-primary, #F89C2A);
-        border: 2px solid var(--bui-primary, #F89C2A);
+        color: var(--color-orange);
+        border: 2px solid var(--color-orange);
       }
       button.free {
         background: none;
-        color: var(--bui-primary, #F89C2A);
+        color: var(--color-orange);
         border: none;
       }
       button[disabled], button.inactive {
