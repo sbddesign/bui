@@ -17,3 +17,8 @@ To build variables, run `pnpm build:tokens`.
 The `ui` package includes web components representing items in the Bitcoin UI Kit. This includes basic components such as buttons as well as more bitcoin-specific constructions like a seed word backup.
 
 The `ui` lib relies upon the CSS variables from `tokens`. It uses [Lit](https://lit.dev/) for the web components.
+
+
+### demo-react
+
+`demo-react` demonstrates usage of the `ui` components and `tokens` inside a basic React app.
