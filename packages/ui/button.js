@@ -32,18 +32,18 @@ export class BuiButton extends LitElement {
       button.large { font-size: 1.15rem; padding: 0.75em 1.5em; }
       /* Style variants */
       button.filled {
-        background: var(--color-orange);
-        color: #fff;
+        background: var(--bitcoin-design-light-button-filled-bg);
+        color: var(--bitcoin-design-light-button-filled-text);
         border: none;
       }
       button.outline {
         background: transparent;
-        color: var(--color-orange);
-        border: 2px solid var(--color-orange);
+        color: var(--bitcoin-design-light-button-outline-text);
+        border: 2px solid var(--bitcoin-design-light-button-outline-outline);
       }
       button.free {
         background: none;
-        color: var(--color-orange);
+        color: var(--bitcoin-design-light-button-free-bg);
         border: none;
       }
       button[disabled], button.inactive {

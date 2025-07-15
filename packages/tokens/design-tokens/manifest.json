@@ -1,0 +1,17 @@
+{
+  "name": "Design Tokens",
+  "collections": {
+    "bui": {
+      "modes": {
+        "themes": [
+          "bui.themes.bitcoin-design-light.tokens.json",
+          "bui.themes.bitcoin-design-dark.tokens.json"
+        ],
+        "primitives": [
+          "bui.primitives.tokens.json"
+        ]
+      }
+    }
+  },
+  "styles": {}
+}

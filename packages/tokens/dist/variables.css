@@ -1,10 +1,27 @@
 /* BUI Design Tokens - Generated CSS Variables */
+/* Generated from Design Tokens Manager */
 :root {
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-orange: #F89B2A;
-  --color-neutral-2: #2D2D2D;
-  --color-neutral-4: #5C5C5C;
-  --color-neutral-5: #787878;
-  --color-neutral-7: #B0B0B0;
+  --neutral-5: #787878;
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: #ffffff00;
+  --orange: #f89b2a;
+  --bitcoin-design-light-button-filled-bg: #f89b2a;
+  --bitcoin-design-light-button-filled-outline: #f89b2a;
+  --bitcoin-design-light-button-filled-text: #ffffff;
+  --bitcoin-design-light-button-outline-bg: #ffffff00;
+  --bitcoin-design-light-button-outline-outline: #f89b2a;
+  --bitcoin-design-light-button-outline-text: #f89b2a;
+  --bitcoin-design-light-button-free-bg: #ffffff00;
+  --bitcoin-design-light-button-free-outline: #ffffff00;
+  --bitcoin-design-light-button-free-text: #f89b2a;
+  --bitcoin-design-dark-button-filled-bg: #f89b2a;
+  --bitcoin-design-dark-button-filled-outline: #f89b2a;
+  --bitcoin-design-dark-button-filled-text: #ffffff;
+  --bitcoin-design-dark-button-outline-bg: #ffffff00;
+  --bitcoin-design-dark-button-outline-outline: #787878;
+  --bitcoin-design-dark-button-outline-text: #787878;
+  --bitcoin-design-dark-button-free-bg: #ffffff00;
+  --bitcoin-design-dark-button-free-outline: #ffffff00;
+  --bitcoin-design-dark-button-free-text: #ffffff;
 }
