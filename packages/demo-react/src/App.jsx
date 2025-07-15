@@ -32,11 +32,20 @@ function App() {
       <main className="main">
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>
-        <bui-button
-          style-type="filled" 
-          size="large" 
-          label="Get Started"
-        ></bui-button>
+        <div>
+          <bui-button
+            style-type="filled" 
+            size="large" 
+            label="Get Started"
+          ></bui-button>
+          </div>
+          <div>
+          <bui-button
+            style-type="outline" 
+            size="large" 
+            label="Restore Wallet"
+          ></bui-button>
+        </div>
       </main>
     </div>
   )
