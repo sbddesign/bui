@@ -21,6 +21,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #f89b2a;
+  --background: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #787878;
 }
 [data-theme="bitcoindesign"][data-mode="dark"] {
   --button-filled-bg: #f89b2a;
@@ -32,4 +35,7 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
+  --background: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #787878;
 }

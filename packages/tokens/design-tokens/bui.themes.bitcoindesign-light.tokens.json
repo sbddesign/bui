@@ -42,5 +42,19 @@
         "$value": "{orange}"
       }
     }
+  },
+  "background": {
+    "$type": "color",
+    "$value": "{white}"
+  },
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{black}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{neutral.5}"
+    }
   }
 }
