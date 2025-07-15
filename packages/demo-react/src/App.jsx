@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
 
@@ -6,6 +6,8 @@ import '@bui/ui/tokens.css'
 import '@bui/ui/button.js'
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   useEffect(() => {
     // Add Inter font if not already loaded
     if (!document.querySelector('link[href*="fonts.googleapis.com"]')) {
@@ -27,8 +29,15 @@ function App() {
     }
   }, [])
 
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <div className="app" data-theme="bitcoindesign" data-mode="light">
+    <div className="app" data-theme="bitcoindesign" data-mode={isDarkMode ? "dark" : "light"}>
+      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+        {isDarkMode ? '☀️' : '🌙'}
+      </button>
       <main className="main">
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>
