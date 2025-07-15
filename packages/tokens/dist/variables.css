@@ -1,27 +1,35 @@
 /* BUI Design Tokens - Generated CSS Variables */
 /* Generated from Design Tokens Manager */
+/* Primitives - available globally */
 :root {
   --neutral-5: #787878;
   --white: #ffffff;
   --black: #000000;
   --transparent: #ffffff00;
   --orange: #f89b2a;
-  --bitcoin-design-light-button-filled-bg: #f89b2a;
-  --bitcoin-design-light-button-filled-outline: #f89b2a;
-  --bitcoin-design-light-button-filled-text: #ffffff;
-  --bitcoin-design-light-button-outline-bg: #ffffff00;
-  --bitcoin-design-light-button-outline-outline: #f89b2a;
-  --bitcoin-design-light-button-outline-text: #f89b2a;
-  --bitcoin-design-light-button-free-bg: #ffffff00;
-  --bitcoin-design-light-button-free-outline: #ffffff00;
-  --bitcoin-design-light-button-free-text: #f89b2a;
-  --bitcoin-design-dark-button-filled-bg: #f89b2a;
-  --bitcoin-design-dark-button-filled-outline: #f89b2a;
-  --bitcoin-design-dark-button-filled-text: #ffffff;
-  --bitcoin-design-dark-button-outline-bg: #ffffff00;
-  --bitcoin-design-dark-button-outline-outline: #787878;
-  --bitcoin-design-dark-button-outline-text: #787878;
-  --bitcoin-design-dark-button-free-bg: #ffffff00;
-  --bitcoin-design-dark-button-free-outline: #ffffff00;
-  --bitcoin-design-dark-button-free-text: #ffffff;
+}
+
+/* Theme-specific variables - applied via data attributes */
+/* Usage: <html data-theme="bitcoin-design" data-mode="light"> */
+[data-theme="bitcoindesign"][data-mode="light"] {
+  --button-filled-bg: #f89b2a;
+  --button-filled-outline: #f89b2a;
+  --button-filled-text: #ffffff;
+  --button-outline-bg: #ffffff00;
+  --button-outline-outline: #f89b2a;
+  --button-outline-text: #f89b2a;
+  --button-free-bg: #ffffff00;
+  --button-free-outline: #ffffff00;
+  --button-free-text: #f89b2a;
+}
+[data-theme="bitcoindesign"][data-mode="dark"] {
+  --button-filled-bg: #f89b2a;
+  --button-filled-outline: #f89b2a;
+  --button-filled-text: #ffffff;
+  --button-outline-bg: #ffffff00;
+  --button-outline-outline: #787878;
+  --button-outline-text: #787878;
+  --button-free-bg: #ffffff00;
+  --button-free-outline: #ffffff00;
+  --button-free-text: #ffffff;
 }

@@ -28,7 +28,7 @@
 </script>
 
 <main>
-  <div class="app">
+  <div class="app" data-theme="bitcoindesign" data-mode="light">
     <div class="main">
       <h1>Bitcoin Wallet</h1>
       <p>A simple bitcoin wallet</p>

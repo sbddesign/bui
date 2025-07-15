@@ -28,7 +28,7 @@ function App() {
   }, [])
 
   return (
-    <div className="app">
+    <div className="app" data-theme="bitcoindesign" data-mode="light">
       <main className="main">
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>

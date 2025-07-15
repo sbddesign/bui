@@ -87,6 +87,21 @@ function processThemeTokens(themeTokens, primitives) {
   return traverse(themeTokens);
 }
 
+// Function to flatten tokens for CSS output
+function flattenTokens(obj, prefix = '') {
+  let result = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === 'object' && value !== null && value.$value !== undefined) {
+      const cssName = prefix ? `${prefix}-${key}` : key;
+      result[cssName] = value.$value;
+    } else if (typeof value === 'object' && value !== null) {
+      const newPrefix = prefix ? `${prefix}-${key}` : key;
+      Object.assign(result, flattenTokens(value, newPrefix));
+    }
+  }
+  return result;
+}
+
 // Main build process
 function buildTokens() {
   console.log('🔨 Building design tokens...');
@@ -105,52 +120,48 @@ function buildTokens() {
   
   // Process themes
   const themes = manifest.collections.bui.modes.themes;
-  let allThemeTokens = {};
+  let themeCSS = '';
+  let themeCount = 0;
   
   for (const themeFile of themes) {
     const themePath = path.join(designTokensDir, themeFile);
     const themeTokens = JSON.parse(fs.readFileSync(themePath, 'utf8'));
     
-    // Extract theme name from filename
-    const themeName = themeFile.replace('bui.themes.', '').replace('.tokens.json', '');
+    // Extract theme name and mode from filename
+    // Example: "bui.themes.bitcoindesign-light.tokens.json" -> theme: "bitcoindesign", mode: "light"
+    const themeNameMatch = themeFile.match(/bui\.themes\.([^.]+)-([^.]+)\.tokens\.json/);
+    if (!themeNameMatch) {
+      console.warn(`Warning: Could not parse theme filename: ${themeFile}`);
+      continue;
+    }
+    
+    const [, themeName, mode] = themeNameMatch;
     
     // Process theme tokens with primitive resolution
     const processedTokens = processThemeTokens(themeTokens, primitives);
     
-    // Flatten and prefix theme tokens
-    function flattenTokens(obj, prefix = '') {
-      let result = {};
-      for (const [key, value] of Object.entries(obj)) {
-        if (typeof value === 'object' && value !== null && value.$value !== undefined) {
-          const cssName = prefix ? `${prefix}-${key}` : key;
-          result[cssName] = value.$value;
-        } else if (typeof value === 'object' && value !== null) {
-          const newPrefix = prefix ? `${prefix}-${key}` : key;
-          Object.assign(result, flattenTokens(value, newPrefix));
-        }
-      }
-      return result;
-    }
-    
+    // Flatten tokens
     const flattenedTokens = flattenTokens(processedTokens);
     
-    // Add theme prefix
+    // Generate CSS for this theme/mode combination
+    themeCSS += `\n[data-theme="${themeName}"][data-mode="${mode}"] {\n`;
     for (const [key, value] of Object.entries(flattenedTokens)) {
-      allThemeTokens[`${themeName}-${key}`] = value;
+      themeCSS += `  --${key}: ${value};\n`;
     }
-  }
-  
-  // Generate theme CSS
-  let themeCSS = '';
-  for (const [key, value] of Object.entries(allThemeTokens)) {
-    themeCSS += `  --${key}: ${value};\n`;
+    themeCSS += `}`;
+    
+    themeCount++;
   }
   
   // Create the final CSS content
   const cssContent = `/* BUI Design Tokens - Generated CSS Variables */
 /* Generated from Design Tokens Manager */
+/* Primitives - available globally */
 :root {
-${primitivesCSS}${themeCSS}}`;
+${primitivesCSS}}
+
+/* Theme-specific variables - applied via data attributes */
+/* Usage: <html data-theme="bitcoin-design" data-mode="light"> */${themeCSS}`;
 
   // Write the CSS file
   const outputPath = path.join(distDir, 'variables.css');
@@ -158,8 +169,10 @@ ${primitivesCSS}${themeCSS}}`;
   
   console.log(`✅ Generated CSS variables at: ${outputPath}`);
   console.log(`📊 Generated ${primitivesCSS.split('\n').filter(line => line.trim().startsWith('--')).length} primitive variables`);
-  console.log(`🎨 Generated ${themeCSS.split('\n').filter(line => line.trim().startsWith('--')).length} theme variables`);
+  console.log(`🎨 Generated ${themeCount} theme/mode combinations`);
   console.log(`🎯 Total: ${cssContent.split('\n').filter(line => line.trim().startsWith('--')).length} CSS variables`);
+  console.log(`\n💡 Usage: Add data-theme and data-mode attributes to your <html> element`);
+  console.log(`   Example: <html data-theme="bitcoin-design" data-mode="light">`);
 }
 
 // Run the build
