@@ -16,6 +16,11 @@
   },
   "type": "module",
   "module": "dist/index.js",
+  "exports": {
+    ".": "./index.js",
+    "./button.js": "./button.js",
+    "./tokens.css": "./tokens.css"
+  },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",

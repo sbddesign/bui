@@ -1,10 +1,5 @@
 import { LitElement, html, css } from 'lit';
 
-// Import CSS variables from tokens
-const tokenStyles = css`
-  @import url('../tokens/dist/variables.css');
-`;
-
 export class BuiButton extends LitElement {
   static properties = {
     content: { type: String }, // 'label', 'icon', 'label+icon', etc.
@@ -16,7 +11,6 @@ export class BuiButton extends LitElement {
   };
 
   static styles = [
-    tokenStyles,
     css`
       :host {
         display: inline-block;
