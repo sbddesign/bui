@@ -8,6 +8,7 @@
     "storybook": "pnpm --filter @bui/ui storybook dev",
     "storybook:build": "pnpm --filter @bui/ui storybook build",
     "demo:react": "pnpm --filter @bui/demo-react dev",
+    "demo:svelte": "pnpm --filter @bui/demo-svelte dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

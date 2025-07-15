@@ -22,3 +22,7 @@ The `ui` lib relies upon the CSS variables from `tokens`. It uses [Lit](https://
 ### demo-react
 
 `demo-react` demonstrates usage of the `ui` components and `tokens` inside a basic React app.
+
+### demo-svelte
+
+`demo-svelte` demonstrates usage of the `ui` components and `tokens` inside a basic Svelte app, showing cross-framework compatibility of the web components.
