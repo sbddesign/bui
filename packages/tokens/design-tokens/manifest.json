@@ -5,7 +5,9 @@
       "modes": {
         "themes": [
           "bui.themes.bitcoindesign-light.tokens.json",
-          "bui.themes.bitcoindesign-dark.tokens.json"
+          "bui.themes.bitcoindesign-dark.tokens.json",
+          "bui.themes.conduit-light.tokens.json",
+          "bui.themes.conduit-dark.tokens.json"
         ],
         "primitives": [
           "bui.primitives.tokens.json"

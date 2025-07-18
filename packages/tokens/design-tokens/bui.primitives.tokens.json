@@ -20,5 +20,9 @@
   "orange": {
     "$type": "color",
     "$value": "#f89b2a"
+  },
+  "conduit-blue": {
+    "$type": "color",
+    "$value": "#1966ff"
   }
 }
