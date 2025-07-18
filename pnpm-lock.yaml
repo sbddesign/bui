@@ -49,18 +49,26 @@ importers:
         version: 7.0.4
 
   packages/demo-svelte:
+    dependencies:
+      '@bui/ui':
+        specifier: workspace:*
+        version: link:../ui
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.0.0
         version: 6.0.0(svelte@5.36.0)(vite@7.0.4)
       svelte:
-        specifier: ^5.35.5
+        specifier: ^5.36.0
         version: 5.36.0
       vite:
         specifier: ^7.0.4
         version: 7.0.4
 
-  packages/tokens: {}
+  packages/tokens:
+    dependencies:
+      culori:
+        specifier: ^4.0.2
+        version: 4.0.2
 
   packages/ui:
     dependencies:
@@ -913,6 +921,10 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+
+  culori@4.0.2:
+    resolution: {integrity: sha512-1+BhOB8ahCn4O0cep0Sh2l9KCOfOdY+BXJnKMHFFzDEouSr/el18QwXEMRlOj9UY5nCeA8UN3a/82rUWRBeyBw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
@@ -2476,6 +2488,8 @@ snapshots:
   css.escape@1.5.1: {}
 
   csstype@3.1.3: {}
+
+  culori@4.0.2: {}
 
   debug@4.4.1:
     dependencies:

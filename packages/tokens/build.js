@@ -9,26 +9,115 @@ const distDir = path.join(__dirname, 'dist');
 // Read the manifest
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-// Function to resolve token references like "{orange}" or "{neutral.5}"
-function resolveTokenReference(reference, primitives) {
+// Function to resolve token references recursively like "{orange}" or "{neutral.5}"
+function resolveTokenReference(reference, primitives, visited = new Set(), currentThemeTokens = null) {
   if (!reference.startsWith('{') || !reference.endsWith('}')) {
     return reference;
   }
   
   const tokenPath = reference.slice(1, -1); // Remove { and }
+  
+  // Prevent circular references
+  if (visited.has(tokenPath)) {
+    console.warn(`Warning: Circular reference detected: "${reference}"`);
+    return reference;
+  }
+  visited.add(tokenPath);
+  
   const pathParts = tokenPath.split('.');
   
-  let current = primitives;
-  for (const part of pathParts) {
-    if (current && current[part]) {
-      current = current[part];
-    } else {
-      console.warn(`Warning: Could not resolve token reference "${reference}"`);
-      return reference;
+  // First try to resolve from current theme tokens (for self-references)
+  let current = currentThemeTokens;
+  if (current) {
+    for (const part of pathParts) {
+      if (current && current[part]) {
+        current = current[part];
+      } else {
+        current = null;
+        break;
+      }
     }
   }
   
-  return current.$value || current;
+  // If not found in theme tokens, try primitives
+  if (!current) {
+    current = primitives;
+    for (const part of pathParts) {
+      if (current && current[part]) {
+        current = current[part];
+      } else {
+        console.warn(`Warning: Could not resolve token reference "${reference}"`);
+        return reference;
+      }
+    }
+  }
+  
+  const resolvedValue = current.$value || current;
+  
+  // If the resolved value is still a reference, resolve it recursively
+  if (typeof resolvedValue === 'string' && resolvedValue.startsWith('{')) {
+    return resolveTokenReference(resolvedValue, primitives, visited, currentThemeTokens);
+  }
+  
+  return resolvedValue;
+}
+
+// Function to recursively resolve all token references in an object
+function resolveAllReferences(obj, primitives, currentThemeTokens = null) {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
+  }
+  
+  const result = {};
+  
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === 'object' && value !== null) {
+      if (value.$value !== undefined) {
+        // This is a token with a value
+        const resolvedValue = typeof value.$value === 'string' && value.$value.startsWith('{') 
+          ? resolveTokenReference(value.$value, primitives, new Set(), currentThemeTokens)
+          : value.$value;
+        
+        result[key] = {
+          ...value,
+          $value: resolvedValue
+        };
+        
+        // Also resolve any nested properties that have their own $value
+        for (const [nestedKey, nestedValue] of Object.entries(value)) {
+          if (nestedKey !== '$value' && nestedKey !== '$type' && typeof nestedValue === 'object' && nestedValue !== null) {
+            if (nestedValue.$value !== undefined) {
+              // This nested property has its own $value, resolve it
+              const nestedResolvedValue = typeof nestedValue.$value === 'string' && nestedValue.$value.startsWith('{') 
+                ? resolveTokenReference(nestedValue.$value, primitives, new Set(), currentThemeTokens)
+                : nestedValue.$value;
+              
+              if (!result[key][nestedKey]) {
+                result[key][nestedKey] = {};
+              }
+              result[key][nestedKey] = {
+                ...nestedValue,
+                $value: nestedResolvedValue
+              };
+            } else {
+              // This nested property is an object without $value, recurse
+              if (!result[key][nestedKey]) {
+                result[key][nestedKey] = {};
+              }
+              Object.assign(result[key][nestedKey], resolveAllReferences({ [nestedKey]: nestedValue }, primitives, currentThemeTokens));
+            }
+          }
+        }
+      } else {
+        // This is a nested object, recurse
+        result[key] = resolveAllReferences(value, primitives, currentThemeTokens);
+      }
+    } else {
+      result[key] = value;
+    }
+  }
+  
+  return result;
 }
 
 // Function to convert tokens to CSS variables
@@ -54,49 +143,32 @@ function convertTokensToCSS(tokens, prefix = '') {
 
 // Function to process theme tokens with primitive resolution
 function processThemeTokens(themeTokens, primitives) {
-  let processedTokens = {};
-  
-  function processValue(value) {
-    if (typeof value === 'string' && value.startsWith('{')) {
-      return resolveTokenReference(value, primitives);
-    } else if (typeof value === 'object' && value !== null) {
-      if (value.$value && typeof value.$value === 'string' && value.$value.startsWith('{')) {
-        return {
-          ...value,
-          $value: resolveTokenReference(value.$value, primitives)
-        };
-      } else {
-        return value;
-      }
-    }
-    return value;
-  }
-  
-  function traverse(obj, result = {}) {
-    for (const [key, value] of Object.entries(obj)) {
-      if (typeof value === 'object' && value !== null && !value.$type) {
-        result[key] = {};
-        traverse(value, result[key]);
-      } else {
-        result[key] = processValue(value);
-      }
-    }
-    return result;
-  }
-  
-  return traverse(themeTokens);
+  // Use the new comprehensive reference resolution
+  return resolveAllReferences(themeTokens, primitives, themeTokens);
 }
 
 // Function to flatten tokens for CSS output
 function flattenTokens(obj, prefix = '') {
   let result = {};
   for (const [key, value] of Object.entries(obj)) {
-    if (typeof value === 'object' && value !== null && value.$value !== undefined) {
-      const cssName = prefix ? `${prefix}-${key}` : key;
-      result[cssName] = value.$value;
-    } else if (typeof value === 'object' && value !== null) {
-      const newPrefix = prefix ? `${prefix}-${key}` : key;
-      Object.assign(result, flattenTokens(value, newPrefix));
+    if (typeof value === 'object' && value !== null) {
+      if (value.$value !== undefined) {
+        // This is a token with a value
+        const cssName = prefix ? `${prefix}-${key}` : key;
+        result[cssName] = value.$value;
+        
+        // Process nested properties that have their own $value, but don't create duplicate paths
+        for (const [nestedKey, nestedValue] of Object.entries(value)) {
+          if (nestedKey !== '$value' && nestedKey !== '$type' && typeof nestedValue === 'object' && nestedValue !== null && nestedValue.$value !== undefined) {
+            const nestedCssName = `${cssName}-${nestedKey}`;
+            result[nestedCssName] = nestedValue.$value;
+          }
+        }
+      } else {
+        // This is a nested object, recurse
+        const newPrefix = prefix ? `${prefix}-${key}` : key;
+        Object.assign(result, flattenTokens(value, newPrefix));
+      }
     }
   }
   return result;
@@ -115,13 +187,42 @@ function buildTokens() {
   const primitivesPath = path.join(designTokensDir, 'bui.primitives.tokens.json');
   const primitives = JSON.parse(fs.readFileSync(primitivesPath, 'utf8'));
   
+  // Load Tailwind primitives
+  const tailwindPrimitivesPath = path.join(__dirname, 'lib', 'tailwindcss', 'tailwind.primitives.json');
+  let tailwindPrimitives = {};
+  if (fs.existsSync(tailwindPrimitivesPath)) {
+    tailwindPrimitives = JSON.parse(fs.readFileSync(tailwindPrimitivesPath, 'utf8'));
+    console.log('📦 Loaded Tailwind primitives');
+  } else {
+    console.warn('⚠️  Tailwind primitives not found. Run "pnpm run convert:oklch" first.');
+  }
+  
+  // Merge primitives (Tailwind primitives take precedence for overlapping keys)
+  const mergedPrimitives = { ...primitives, ...tailwindPrimitives };
+  
   // Generate primitives CSS
-  const primitivesCSS = convertTokensToCSS(primitives);
+  const primitivesCSS = convertTokensToCSS(mergedPrimitives);
   
   // Process themes
   const themes = manifest.collections.bui.modes.themes;
   let themeCSS = '';
   let themeCount = 0;
+  
+  // First pass: collect all system tokens from all themes
+  const allSystemTokens = {};
+  
+  for (const themeFile of themes) {
+    const themePath = path.join(designTokensDir, themeFile);
+    const themeTokens = JSON.parse(fs.readFileSync(themePath, 'utf8'));
+    
+    // Extract system tokens from this theme
+    if (themeTokens.system) {
+      Object.assign(allSystemTokens, themeTokens.system);
+    }
+  }
+  
+  // Create a complete token set including primitives, tailwind, and system tokens
+  const completeTokenSet = { ...mergedPrimitives, system: allSystemTokens };
   
   for (const themeFile of themes) {
     const themePath = path.join(designTokensDir, themeFile);
@@ -137,8 +238,8 @@ function buildTokens() {
     
     const [, themeName, mode] = themeNameMatch;
     
-    // Process theme tokens with primitive resolution
-    const processedTokens = processThemeTokens(themeTokens, primitives);
+    // Process theme tokens with complete token resolution (including Tailwind primitives)
+    const processedTokens = resolveAllReferences(themeTokens, completeTokenSet, themeTokens);
     
     // Flatten tokens
     const flattenedTokens = flattenTokens(processedTokens);

@@ -8,13 +8,13 @@ export default {
     styleType: { control: { type: 'select' }, options: ['filled', 'outline', 'free'] },
     size: { control: { type: 'select' }, options: ['default', 'small', 'large'] },
     content: { control: { type: 'select' }, options: ['label', 'icon', 'label+icon', 'icon+label'] },
-    active: { control: 'boolean' },
+    disabled: { control: 'boolean' },
     icon: { control: 'text' },
     label: { control: 'text' },
   },
   args: {
     label: 'Button',
-    active: true,
+    disabled: false,
     size: 'default',
     content: 'label',
     icon: 'cross'
@@ -76,10 +76,26 @@ export const Small = {
   },
 };
 
-export const Inactive = {
+export const Disabled = {
   args: {
     styleType: 'filled',
-    active: false,
-    label: 'Inactive Button',
+    disabled: true,
+    label: 'Disabled Button',
+  },
+};
+
+export const DisabledOutline = {
+  args: {
+    styleType: 'outline',
+    disabled: true,
+    label: 'Disabled Outline Button',
+  },
+};
+
+export const DisabledFree = {
+  args: {
+    styleType: 'free',
+    disabled: true,
+    label: 'Disabled Free Button',
   },
 };
