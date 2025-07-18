@@ -20,6 +20,7 @@
     ".": "./index.js",
     "./button.js": "./button.js",
     "./toggle.js": "./toggle.js",
+    "./message.js": "./message.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
