@@ -62,6 +62,64 @@ function resolveTokenReference(reference, primitives, visited = new Set(), curre
   return resolvedValue;
 }
 
+// Function to recursively resolve all token references in an object
+function resolveAllReferences(obj, primitives, currentThemeTokens = null) {
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
+  }
+  
+  const result = {};
+  
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === 'object' && value !== null) {
+      if (value.$value !== undefined) {
+        // This is a token with a value
+        const resolvedValue = typeof value.$value === 'string' && value.$value.startsWith('{') 
+          ? resolveTokenReference(value.$value, primitives, new Set(), currentThemeTokens)
+          : value.$value;
+        
+        result[key] = {
+          ...value,
+          $value: resolvedValue
+        };
+        
+        // Also resolve any nested properties that have their own $value
+        for (const [nestedKey, nestedValue] of Object.entries(value)) {
+          if (nestedKey !== '$value' && nestedKey !== '$type' && typeof nestedValue === 'object' && nestedValue !== null) {
+            if (nestedValue.$value !== undefined) {
+              // This nested property has its own $value, resolve it
+              const nestedResolvedValue = typeof nestedValue.$value === 'string' && nestedValue.$value.startsWith('{') 
+                ? resolveTokenReference(nestedValue.$value, primitives, new Set(), currentThemeTokens)
+                : nestedValue.$value;
+              
+              if (!result[key][nestedKey]) {
+                result[key][nestedKey] = {};
+              }
+              result[key][nestedKey] = {
+                ...nestedValue,
+                $value: nestedResolvedValue
+              };
+            } else {
+              // This nested property is an object without $value, recurse
+              if (!result[key][nestedKey]) {
+                result[key][nestedKey] = {};
+              }
+              Object.assign(result[key][nestedKey], resolveAllReferences({ [nestedKey]: nestedValue }, primitives, currentThemeTokens));
+            }
+          }
+        }
+      } else {
+        // This is a nested object, recurse
+        result[key] = resolveAllReferences(value, primitives, currentThemeTokens);
+      }
+    } else {
+      result[key] = value;
+    }
+  }
+  
+  return result;
+}
+
 // Function to convert tokens to CSS variables
 function convertTokensToCSS(tokens, prefix = '') {
   let css = '';
@@ -85,49 +143,32 @@ function convertTokensToCSS(tokens, prefix = '') {
 
 // Function to process theme tokens with primitive resolution
 function processThemeTokens(themeTokens, primitives) {
-  let processedTokens = {};
-  
-  function processValue(value) {
-    if (typeof value === 'string' && value.startsWith('{')) {
-      return resolveTokenReference(value, primitives, new Set(), themeTokens);
-    } else if (typeof value === 'object' && value !== null) {
-      if (value.$value && typeof value.$value === 'string' && value.$value.startsWith('{')) {
-        return {
-          ...value,
-          $value: resolveTokenReference(value.$value, primitives, new Set(), themeTokens)
-        };
-      } else {
-        return value;
-      }
-    }
-    return value;
-  }
-  
-  function traverse(obj, result = {}) {
-    for (const [key, value] of Object.entries(obj)) {
-      if (typeof value === 'object' && value !== null && !value.$type) {
-        result[key] = {};
-        traverse(value, result[key]);
-      } else {
-        result[key] = processValue(value);
-      }
-    }
-    return result;
-  }
-  
-  return traverse(themeTokens);
+  // Use the new comprehensive reference resolution
+  return resolveAllReferences(themeTokens, primitives, themeTokens);
 }
 
 // Function to flatten tokens for CSS output
 function flattenTokens(obj, prefix = '') {
   let result = {};
   for (const [key, value] of Object.entries(obj)) {
-    if (typeof value === 'object' && value !== null && value.$value !== undefined) {
-      const cssName = prefix ? `${prefix}-${key}` : key;
-      result[cssName] = value.$value;
-    } else if (typeof value === 'object' && value !== null) {
-      const newPrefix = prefix ? `${prefix}-${key}` : key;
-      Object.assign(result, flattenTokens(value, newPrefix));
+    if (typeof value === 'object' && value !== null) {
+      if (value.$value !== undefined) {
+        // This is a token with a value
+        const cssName = prefix ? `${prefix}-${key}` : key;
+        result[cssName] = value.$value;
+        
+        // Process nested properties that have their own $value, but don't create duplicate paths
+        for (const [nestedKey, nestedValue] of Object.entries(value)) {
+          if (nestedKey !== '$value' && nestedKey !== '$type' && typeof nestedValue === 'object' && nestedValue !== null && nestedValue.$value !== undefined) {
+            const nestedCssName = `${cssName}-${nestedKey}`;
+            result[nestedCssName] = nestedValue.$value;
+          }
+        }
+      } else {
+        // This is a nested object, recurse
+        const newPrefix = prefix ? `${prefix}-${key}` : key;
+        Object.assign(result, flattenTokens(value, newPrefix));
+      }
     }
   }
   return result;
@@ -197,8 +238,8 @@ function buildTokens() {
     
     const [, themeName, mode] = themeNameMatch;
     
-    // Process theme tokens with complete token resolution
-    const processedTokens = processThemeTokens(themeTokens, completeTokenSet);
+    // Process theme tokens with complete token resolution (including Tailwind primitives)
+    const processedTokens = resolveAllReferences(themeTokens, completeTokenSet, themeTokens);
     
     // Flatten tokens
     const flattenedTokens = flattenTokens(processedTokens);
