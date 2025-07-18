@@ -119,16 +119,16 @@
           "$value": "{tailwind.zinc.500}"
         }
       },
-      "hover": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.gray.300}"
-        }
-      },
       "active": {
         "bg": {
           "$type": "color",
           "$value": "{tailwind.gray.400}"
+        }
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.gray.300}"
         }
       }
     },
@@ -167,13 +167,13 @@
           "$value": "{tailwind.blue.300}"
         }
       },
-      "hover": {
-        "$type": "color",
-        "$value": "{tailwind.blue.500}"
-      },
       "disabled": {
         "$type": "color",
         "$value": "{tailwind.blue.300}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{tailwind.blue.500}"
       }
     },
     "mood": {
@@ -209,6 +209,10 @@
           "$value": "{text.secondary}"
         }
       }
+    },
+    "divider": {
+      "$type": "color",
+      "$value": "{tailwind.slate.300}"
     }
   },
   "component": {

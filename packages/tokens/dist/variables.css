@@ -293,8 +293,8 @@
   --button-free-outline: #ffffff00;
   --button-free-text: #000000;
   --button-free-disabled-text: #71717b;
-  --button-free-hover-bg: #d1d5dc;
   --button-free-active-bg: #99a1af;
+  --button-free-hover-bg: #d1d5dc;
   --button-rounding: 4px;
   --background: #ffffff;
   --text-primary: #000000;
@@ -302,8 +302,8 @@
   --Color: #ffffff;
   --system-interactive: #ff8904;
   --system-interactive-active: #f54900;
-  --system-interactive-hover: #ff6900;
   --system-interactive-disabled: #ffb86a;
+  --system-interactive-hover: #ff6900;
   --system-mood-danger: #cc0000;
   --system-mood-danger-text: #910000;
   --system-mood-caution: #ffbd00;
@@ -312,6 +312,7 @@
   --system-mood-success-text: #0c783b;
   --system-mood-neutral: #9f9fa9;
   --system-mood-neutral-text: #71717b;
+  --system-divider: #d4d4d8;
   --component-toggle-bg: #71717b;
   --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #ff8904;
@@ -342,8 +343,8 @@
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
   --button-free-disabled-text: #71717b;
-  --button-free-hover-bg: #101828;
   --button-free-active-bg: #1e2939;
+  --button-free-hover-bg: #101828;
   --button-rounding: 4px;
   --background: #000000;
   --text-primary: #ffffff;
@@ -351,8 +352,8 @@
   --Color: #ffffff;
   --system-interactive: #ff8904;
   --system-interactive-active: #ff6900;
-  --system-interactive-hover: #ffb86a;
   --system-interactive-disabled: #7e2a0c;
+  --system-interactive-hover: #ffb86a;
   --system-mood-danger: #fb2c36;
   --system-mood-danger-text: #ffa2a2;
   --system-mood-caution: #ffb900;
@@ -361,6 +362,7 @@
   --system-mood-success-text: #b9f8cf;
   --system-mood-neutral: #71717b;
   --system-mood-neutral-text: #d4d4d8;
+  --system-divider: #27272a;
   --component-toggle-bg: #3f3f46;
   --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #ff8904;
@@ -391,8 +393,8 @@
   --button-free-outline: #ffffff00;
   --button-free-text: #155dfc;
   --button-free-disabled-text: #71717b;
-  --button-free-hover-bg: #d1d5dc;
   --button-free-active-bg: #99a1af;
+  --button-free-hover-bg: #d1d5dc;
   --button-rounding: 24px;
   --background: #ffffff;
   --text-primary: #000000;
@@ -400,8 +402,8 @@
   --Color: #ffffff;
   --system-interactive: #155dfc;
   --system-interactive-active: #1447e6;
-  --system-interactive-hover: #2b7fff;
   --system-interactive-disabled: #8ec5ff;
+  --system-interactive-hover: #2b7fff;
   --system-mood-danger: #cc0000;
   --system-mood-danger-text: #910000;
   --system-mood-caution: #ffbd00;
@@ -410,6 +412,7 @@
   --system-mood-success-text: #0c783b;
   --system-mood-neutral: #90a1b9;
   --system-mood-neutral-text: #62748e;
+  --system-divider: #cad5e2;
   --component-toggle-bg: #62748e;
   --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #155dfc;
@@ -440,8 +443,8 @@
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
   --button-free-disabled-text: #71717b;
-  --button-free-hover-bg: #101828;
   --button-free-active-bg: #1e2939;
+  --button-free-hover-bg: #101828;
   --button-rounding: 24px;
   --background: #0f172b;
   --text-primary: #ffffff;
@@ -449,8 +452,8 @@
   --Color: #ffffff;
   --system-interactive: #155dfc;
   --system-interactive-active: #1447e6;
-  --system-interactive-hover: #2b7fff;
   --system-interactive-disabled: #052f4a;
+  --system-interactive-hover: #2b7fff;
   --system-mood-danger: #fc3b3b;
   --system-mood-danger-text: #ffbbbb;
   --system-mood-caution: #ffca34;
@@ -459,6 +462,7 @@
   --system-mood-success-text: #82f2b3;
   --system-mood-neutral: #62748e;
   --system-mood-neutral-text: #cad5e2;
+  --system-divider: #1d293d;
   --component-toggle-bg: #314158;
   --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #155dfc;
