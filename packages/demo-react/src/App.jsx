@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
-
-// Import the button component (it handles its own CSS dependencies)
 import '@bui/ui/button.js'
 
 function App() {
