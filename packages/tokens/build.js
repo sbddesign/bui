@@ -9,26 +9,57 @@ const distDir = path.join(__dirname, 'dist');
 // Read the manifest
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-// Function to resolve token references like "{orange}" or "{neutral.5}"
-function resolveTokenReference(reference, primitives) {
+// Function to resolve token references recursively like "{orange}" or "{neutral.5}"
+function resolveTokenReference(reference, primitives, visited = new Set(), currentThemeTokens = null) {
   if (!reference.startsWith('{') || !reference.endsWith('}')) {
     return reference;
   }
   
   const tokenPath = reference.slice(1, -1); // Remove { and }
+  
+  // Prevent circular references
+  if (visited.has(tokenPath)) {
+    console.warn(`Warning: Circular reference detected: "${reference}"`);
+    return reference;
+  }
+  visited.add(tokenPath);
+  
   const pathParts = tokenPath.split('.');
   
-  let current = primitives;
-  for (const part of pathParts) {
-    if (current && current[part]) {
-      current = current[part];
-    } else {
-      console.warn(`Warning: Could not resolve token reference "${reference}"`);
-      return reference;
+  // First try to resolve from current theme tokens (for self-references)
+  let current = currentThemeTokens;
+  if (current) {
+    for (const part of pathParts) {
+      if (current && current[part]) {
+        current = current[part];
+      } else {
+        current = null;
+        break;
+      }
     }
   }
   
-  return current.$value || current;
+  // If not found in theme tokens, try primitives
+  if (!current) {
+    current = primitives;
+    for (const part of pathParts) {
+      if (current && current[part]) {
+        current = current[part];
+      } else {
+        console.warn(`Warning: Could not resolve token reference "${reference}"`);
+        return reference;
+      }
+    }
+  }
+  
+  const resolvedValue = current.$value || current;
+  
+  // If the resolved value is still a reference, resolve it recursively
+  if (typeof resolvedValue === 'string' && resolvedValue.startsWith('{')) {
+    return resolveTokenReference(resolvedValue, primitives, visited, currentThemeTokens);
+  }
+  
+  return resolvedValue;
 }
 
 // Function to convert tokens to CSS variables
@@ -58,12 +89,12 @@ function processThemeTokens(themeTokens, primitives) {
   
   function processValue(value) {
     if (typeof value === 'string' && value.startsWith('{')) {
-      return resolveTokenReference(value, primitives);
+      return resolveTokenReference(value, primitives, new Set(), themeTokens);
     } else if (typeof value === 'object' && value !== null) {
       if (value.$value && typeof value.$value === 'string' && value.$value.startsWith('{')) {
         return {
           ...value,
-          $value: resolveTokenReference(value.$value, primitives)
+          $value: resolveTokenReference(value.$value, primitives, new Set(), themeTokens)
         };
       } else {
         return value;
@@ -115,13 +146,42 @@ function buildTokens() {
   const primitivesPath = path.join(designTokensDir, 'bui.primitives.tokens.json');
   const primitives = JSON.parse(fs.readFileSync(primitivesPath, 'utf8'));
   
+  // Load Tailwind primitives
+  const tailwindPrimitivesPath = path.join(__dirname, 'lib', 'tailwindcss', 'tailwind.primitives.json');
+  let tailwindPrimitives = {};
+  if (fs.existsSync(tailwindPrimitivesPath)) {
+    tailwindPrimitives = JSON.parse(fs.readFileSync(tailwindPrimitivesPath, 'utf8'));
+    console.log('📦 Loaded Tailwind primitives');
+  } else {
+    console.warn('⚠️  Tailwind primitives not found. Run "pnpm run convert:oklch" first.');
+  }
+  
+  // Merge primitives (Tailwind primitives take precedence for overlapping keys)
+  const mergedPrimitives = { ...primitives, ...tailwindPrimitives };
+  
   // Generate primitives CSS
-  const primitivesCSS = convertTokensToCSS(primitives);
+  const primitivesCSS = convertTokensToCSS(mergedPrimitives);
   
   // Process themes
   const themes = manifest.collections.bui.modes.themes;
   let themeCSS = '';
   let themeCount = 0;
+  
+  // First pass: collect all system tokens from all themes
+  const allSystemTokens = {};
+  
+  for (const themeFile of themes) {
+    const themePath = path.join(designTokensDir, themeFile);
+    const themeTokens = JSON.parse(fs.readFileSync(themePath, 'utf8'));
+    
+    // Extract system tokens from this theme
+    if (themeTokens.system) {
+      Object.assign(allSystemTokens, themeTokens.system);
+    }
+  }
+  
+  // Create a complete token set including primitives, tailwind, and system tokens
+  const completeTokenSet = { ...mergedPrimitives, system: allSystemTokens };
   
   for (const themeFile of themes) {
     const themePath = path.join(designTokensDir, themeFile);
@@ -137,8 +197,8 @@ function buildTokens() {
     
     const [, themeName, mode] = themeNameMatch;
     
-    // Process theme tokens with primitive resolution
-    const processedTokens = processThemeTokens(themeTokens, primitives);
+    // Process theme tokens with complete token resolution
+    const processedTokens = processThemeTokens(themeTokens, completeTokenSet);
     
     // Flatten tokens
     const flattenedTokens = flattenTokens(processedTokens);
