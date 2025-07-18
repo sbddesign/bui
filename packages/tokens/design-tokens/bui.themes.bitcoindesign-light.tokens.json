@@ -3,15 +3,49 @@
     "filled": {
       "bg": {
         "$type": "color",
-        "$value": "{orange}"
+        "$value": "{system.interactive}"
       },
       "outline": {
         "$type": "color",
-        "$value": "{orange}"
+        "$value": "{system.interactive}"
       },
       "text": {
         "$type": "color",
         "$value": "{white}"
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{system.interactive.active}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{system.interactive.active.alternate}"
+        }
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{system.interactive.hover}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{system.interactive.hover}"
+        }
+      },
+      "disabled": {
+        "bg": {
+          "$type": "color",
+          "$value": "{system.interactive.disabled}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{button.filled.disabled.bg}"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{button.filled.text}"
+        }
       }
     },
     "outline": {
@@ -21,11 +55,49 @@
       },
       "outline": {
         "$type": "color",
-        "$value": "{orange}"
+        "$value": "{system.interactive}"
       },
       "text": {
         "$type": "color",
-        "$value": "{orange}"
+        "$value": "{system.interactive}"
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.orange.50}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{system.interactive.hover}"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{system.interactive.hover}"
+        }
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.orange.100}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{system.interactive.active.alternate}"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{system.interactive}"
+        }
+      },
+      "disabled": {
+        "outline": {
+          "$type": "color",
+          "$value": "{system.interactive.disabled}"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{system.interactive.disabled}"
+        }
       }
     },
     "free": {
@@ -39,8 +111,30 @@
       },
       "text": {
         "$type": "color",
-        "$value": "{orange}"
+        "$value": "{black}"
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.gray.400}"
+        }
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.gray.300}"
+        }
+      },
+      "disabled": {
+        "text": {
+          "$type": "color",
+          "$value": "{tailwind.zinc.500}"
+        }
       }
+    },
+    "rounding": {
+      "$type": "dimension",
+      "$value": "{size.1}"
     }
   },
   "background": {
@@ -54,7 +148,33 @@
     },
     "secondary": {
       "$type": "color",
-      "$value": "{neutral.5}"
+      "$value": "{tailwind.zinc.500}"
+    }
+  },
+  "Color": {
+    "$type": "color",
+    "$value": "#ffffff"
+  },
+  "system": {
+    "interactive": {
+      "$type": "color",
+      "$value": "{tailwind.orange.400}",
+      "active": {
+        "$type": "color",
+        "$value": "{tailwind.orange.600}",
+        "alternate": {
+          "$type": "color",
+          "$value": "{tailwind.orange.300}"
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{tailwind.orange.300}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{tailwind.orange.500}"
+      }
     }
   }
 }

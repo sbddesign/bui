@@ -13,6 +13,13 @@
           "bui.primitives.tokens.json"
         ]
       }
+    },
+    "tailwind": {
+      "modes": {
+        "primitives": [
+          "tailwind.primitives.Default.tokens.json"
+        ]
+      }
     }
   },
   "styles": {}

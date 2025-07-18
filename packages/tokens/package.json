@@ -7,9 +7,18 @@
     "dist"
   ],
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "convert:oklch": "node convert-oklch-to-hex.js",
+    "build:all": "pnpm run build && pnpm run convert:oklch"
   },
-  "keywords": ["design-tokens", "css-variables", "design-system"],
+  "keywords": [
+    "design-tokens",
+    "css-variables",
+    "design-system"
+  ],
   "author": "",
-  "license": "ISC"
-} 
+  "license": "ISC",
+  "dependencies": {
+    "culori": "^4.0.2"
+  }
+}
