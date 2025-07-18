@@ -121,6 +121,10 @@ export class BuiButton extends LitElement {
       // Simple SVG cross icon
       return html`<span class="icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2"/></svg></span>`;
     }
+    if (this.icon === 'arrow-right') {
+      // Right arrow icon
+      return html`<span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+    }
     return null;
   }
 
