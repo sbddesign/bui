@@ -1,5 +1,5 @@
 import '../../tokens/lib/tailwindcss/tailwind-theme.css';
-import '../../tokens/dist/variables.css';
+import '../tokens.css';
 
 /** @type { import('@storybook/web-components-vite').Preview } */
 const preview = {
@@ -31,8 +31,10 @@ const preview = {
     },
   },
   decorators: [
-    (Story) => {
+    (Story, context) => {
       const wrapper = document.createElement('div');
+      wrapper.setAttribute('data-theme', 'bitcoindesign');
+      wrapper.setAttribute('data-mode', context.globals.theme || 'light');
       wrapper.innerHTML = `
         <style>
           @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
