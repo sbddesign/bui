@@ -25,6 +25,7 @@ export class BuiButton extends LitElement {
         gap: 0.5em;
         font-weight: 500;
         transition: background 0.2s, color 0.2s, border 0.2s;
+        color: var(--text-primary);
       }
       /* Size variants */
       button.default { font-size: 1rem; padding: 0.5em 1.25em; }
@@ -43,7 +44,6 @@ export class BuiButton extends LitElement {
       }
       button.free {
         background: none;
-        color: var(--button-free-bg);
         border: none;
       }
       button[disabled], button.inactive {
