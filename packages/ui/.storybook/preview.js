@@ -25,7 +25,10 @@ const preview = {
       toolbar: {
         title: 'Theme',
         icon: 'circlehollow',
-        items: ['light', 'dark'],
+        items: [
+          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: 'Dark', icon: 'moon' }
+        ],
         dynamicTitle: true,
       },
     },
@@ -35,6 +38,10 @@ const preview = {
       const wrapper = document.createElement('div');
       wrapper.setAttribute('data-theme', 'bitcoindesign');
       wrapper.setAttribute('data-mode', context.globals.theme || 'light');
+      wrapper.style.padding = '24px';
+      wrapper.style.backgroundColor = 'var(--background)';
+      wrapper.style.color = 'var(--text-primary)';
+      
       wrapper.innerHTML = `
         <style>
           @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
