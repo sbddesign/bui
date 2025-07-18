@@ -1,0 +1,60 @@
+{
+  "button": {
+    "filled": {
+      "bg": {
+        "$type": "color",
+        "$value": "{orange}"
+      },
+      "outline": {
+        "$type": "color",
+        "$value": "{orange}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{white}"
+      }
+    },
+    "outline": {
+      "bg": {
+        "$type": "color",
+        "$value": "{transparent}"
+      },
+      "outline": {
+        "$type": "color",
+        "$value": "{neutral.5}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{neutral.5}"
+      }
+    },
+    "free": {
+      "bg": {
+        "$type": "color",
+        "$value": "{transparent}"
+      },
+      "outline": {
+        "$type": "color",
+        "$value": "{transparent}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{white}"
+      }
+    }
+  },
+  "background": {
+    "$type": "color",
+    "$value": "{black}"
+  },
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{white}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{neutral.5}"
+    }
+  }
+}

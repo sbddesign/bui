@@ -1,0 +1,70 @@
+/* BUI Design Tokens - Generated CSS Variables */
+/* Generated from Design Tokens Manager */
+/* Primitives - available globally */
+:root {
+  --neutral-5: #787878;
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: #ffffff00;
+  --orange: #f89b2a;
+  --conduit-blue: #1966ff;
+}
+
+/* Theme-specific variables - applied via data attributes */
+/* Usage: <html data-theme="bitcoin-design" data-mode="light"> */
+[data-theme="bitcoindesign"][data-mode="light"] {
+  --button-filled-bg: #f89b2a;
+  --button-filled-outline: #f89b2a;
+  --button-filled-text: #ffffff;
+  --button-outline-bg: #ffffff00;
+  --button-outline-outline: #f89b2a;
+  --button-outline-text: #f89b2a;
+  --button-free-bg: #ffffff00;
+  --button-free-outline: #ffffff00;
+  --button-free-text: #f89b2a;
+  --background: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #787878;
+}
+[data-theme="bitcoindesign"][data-mode="dark"] {
+  --button-filled-bg: #f89b2a;
+  --button-filled-outline: #f89b2a;
+  --button-filled-text: #ffffff;
+  --button-outline-bg: #ffffff00;
+  --button-outline-outline: #787878;
+  --button-outline-text: #787878;
+  --button-free-bg: #ffffff00;
+  --button-free-outline: #ffffff00;
+  --button-free-text: #ffffff;
+  --background: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #787878;
+}
+[data-theme="conduit"][data-mode="light"] {
+  --button-filled-bg: #1966ff;
+  --button-filled-outline: #1966ff;
+  --button-filled-text: #ffffff;
+  --button-outline-bg: #ffffff00;
+  --button-outline-outline: #1966ff;
+  --button-outline-text: #1966ff;
+  --button-free-bg: #ffffff00;
+  --button-free-outline: #ffffff00;
+  --button-free-text: #1966ff;
+  --background: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #787878;
+}
+[data-theme="conduit"][data-mode="dark"] {
+  --button-filled-bg: #1966ff;
+  --button-filled-outline: #1966ff;
+  --button-filled-text: #ffffff;
+  --button-outline-bg: #ffffff00;
+  --button-outline-outline: #ffffff;
+  --button-outline-text: #ffffff;
+  --button-free-bg: #ffffff00;
+  --button-free-outline: #ffffff00;
+  --button-free-text: #ffffff;
+  --background: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #787878;
+}

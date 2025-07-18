@@ -1,0 +1,28 @@
+{
+  "neutral": {
+    "5": {
+      "$type": "color",
+      "$value": "#787878"
+    }
+  },
+  "white": {
+    "$type": "color",
+    "$value": "#ffffff"
+  },
+  "black": {
+    "$type": "color",
+    "$value": "#000000"
+  },
+  "transparent": {
+    "$type": "color",
+    "$value": "#ffffff00"
+  },
+  "orange": {
+    "$type": "color",
+    "$value": "#f89b2a"
+  },
+  "conduit-blue": {
+    "$type": "color",
+    "$value": "#1966ff"
+  }
+}

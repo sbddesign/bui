@@ -1,12 +1,21 @@
 {
   "name": "bui",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "BUI Design System Monorepo",
+  "private": true,
   "scripts": {
+    "build:tokens": "pnpm --filter @bui/tokens build",
+    "storybook": "pnpm --filter @bui/ui storybook dev",
+    "storybook:build": "pnpm --filter @bui/ui storybook build",
+    "demo:react": "pnpm --filter @bui/demo-react dev",
+    "demo:svelte": "pnpm --filter @bui/demo-svelte dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "design-system",
+    "monorepo"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
 }
