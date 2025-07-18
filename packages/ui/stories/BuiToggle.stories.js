@@ -132,4 +132,34 @@ export const StateComparison = {
       },
     },
   },
+};
+
+// Theme demonstration
+export const ThemeAware = {
+  render: () => html`
+    <div style="padding: 20px;">
+      <h3 style="margin: 0 0 20px 0;">Theme-Aware Toggle</h3>
+      <p style="margin: 0 0 20px 0; font-size: 14px;">
+        This toggle automatically adapts to the current theme and mode. 
+        The active state uses the theme's primary color (orange for Bitcoin Design, blue for Conduit).
+      </p>
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <div>
+          <p style="margin: 0 0 10px 0; font-size: 14px;">Inactive</p>
+          <bui-toggle size="big" active="false"></bui-toggle>
+        </div>
+        <div>
+          <p style="margin: 0 0 10px 0; font-size: 14px;">Active</p>
+          <bui-toggle size="big" active="true"></bui-toggle>
+        </div>
+      </div>
+    </div>
+  `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'The toggle component automatically adapts to the current theme (Bitcoin Design vs Conduit) and mode (light vs dark). The active state uses the theme\'s primary color.',
+      },
+    },
+  },
 }; 

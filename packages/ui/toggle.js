@@ -35,7 +35,7 @@ export class BuiToggle extends LitElement {
       
       .toggle-switch {
         position: absolute;
-        background: var(--white);
+        background: var(--component-toggle-switch);
         border-radius: 18px;
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         transition: all 0.2s ease;
@@ -93,12 +93,12 @@ export class BuiToggle extends LitElement {
       
       /* Active state */
       .toggle.active .toggle-track {
-        background: var(--orange);
+        background: var(--component-toggle-active-bg);
       }
       
       /* Inactive state */
       .toggle:not(.active) .toggle-track {
-        background: var(--tailwind-zinc-700);
+        background: var(--component-toggle-bg);
       }
       
       /* Focus styles for accessibility */
