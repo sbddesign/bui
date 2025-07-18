@@ -23,7 +23,7 @@ const preview = {
       description: 'Global theme for components',
       defaultValue: 'light',
       toolbar: {
-        title: 'Theme',
+        title: 'Mode',
         icon: 'circlehollow',
         items: [
           { value: 'light', title: 'Light', icon: 'sun' },
@@ -32,11 +32,24 @@ const preview = {
         dynamicTitle: true,
       },
     },
+    designSystem: {
+      description: 'Design system theme',
+      defaultValue: 'bitcoindesign',
+      toolbar: {
+        title: 'Design System',
+        icon: 'paintbrush',
+        items: [
+          { value: 'bitcoindesign', title: 'Bitcoin Design' },
+          { value: 'conduit', title: 'Conduit' }
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   decorators: [
     (Story, context) => {
       const wrapper = document.createElement('div');
-      wrapper.setAttribute('data-theme', 'bitcoindesign');
+      wrapper.setAttribute('data-theme', context.globals.designSystem || 'bitcoindesign');
       wrapper.setAttribute('data-mode', context.globals.theme || 'light');
       wrapper.style.padding = '24px';
       wrapper.style.backgroundColor = 'var(--background)';
