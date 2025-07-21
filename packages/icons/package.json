@@ -1,0 +1,51 @@
+{
+  "name": "@bui/icons",
+  "version": "1.0.0",
+  "description": "Icon web components for BUI Design System",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["icons", "web-components", "svg"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "chokidar": "^3.5.3"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./arrowLeft/lg": "./dist/arrowLeft/lg.js",
+    "./arrowLeft/md": "./dist/arrowLeft/md.js",
+    "./arrowLeft/sm": "./dist/arrowLeft/sm.js",
+    "./arrowRight/lg": "./dist/arrowRight/lg.js",
+    "./arrowRight/md": "./dist/arrowRight/md.js",
+    "./arrowRight/sm": "./dist/arrowRight/sm.js",
+    "./arrowUp/lg": "./dist/arrowUp/lg.js",
+    "./arrowUp/md": "./dist/arrowUp/md.js",
+    "./arrowUp/sm": "./dist/arrowUp/sm.js",
+    "./arrowDown/lg": "./dist/arrowDown/lg.js",
+    "./arrowDown/md": "./dist/arrowDown/md.js",
+    "./arrowDown/sm": "./dist/arrowDown/sm.js",
+    "./checkCircle/lg": "./dist/checkCircle/lg.js",
+    "./checkCircle/md": "./dist/checkCircle/md.js",
+    "./clipboard/lg": "./dist/clipboard/lg.js",
+    "./crossCircle/lg": "./dist/crossCircle/lg.js",
+    "./crossCircle/md": "./dist/crossCircle/md.js",
+    "./scan/lg": "./dist/scan/lg.js",
+    "./scan/md": "./dist/scan/md.js",
+    "./scan/sm": "./dist/scan/sm.js",
+    "./search/lg": "./dist/search/lg.js",
+    "./search/md": "./dist/search/md.js",
+    "./search/sm": "./dist/search/sm.js",
+    "./warning/lg": "./dist/warning/lg.js"
+  },
+  "files": [
+    "dist"
+  ]
+} 

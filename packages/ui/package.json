@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit": "^3.3.0"
+    "lit": "^3.3.0",
+    "@bui/icons": "workspace:*"
   },
   "type": "module",
   "module": "dist/index.js",
@@ -21,6 +22,7 @@
     "./button.js": "./button.js",
     "./toggle.js": "./toggle.js",
     "./message.js": "./message.js",
+    "./icon-example.js": "./icon-example.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",

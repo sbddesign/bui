@@ -12,11 +12,19 @@ The `tokens` package includes colors, sizes, and other values as W3C compatible 
 
 To build variables, run `pnpm build:tokens`.
 
+To build icons, run `pnpm build:icons`.
+
+### icons
+
+The `icons` package automatically generates web components from SVG files in the `src/svg` directory. Each SVG file becomes a web component that can be imported and used in other packages.
+
+To build icons, run `pnpm build:icons`.
+
 ### ui
 
 The `ui` package includes web components representing items in the Bitcoin UI Kit. This includes basic components such as buttons as well as more bitcoin-specific constructions like a seed word backup.
 
-The `ui` lib relies upon the CSS variables from `tokens`. It uses [Lit](https://lit.dev/) for the web components.
+The `ui` lib relies upon the CSS variables from `tokens` and can use icons from the `icons` package. It uses [Lit](https://lit.dev/) for the web components.
 
 
 ### demo-react
