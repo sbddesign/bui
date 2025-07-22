@@ -11,7 +11,6 @@ export default {
     size: { control: { type: 'select' }, options: ['default', 'small', 'large'] },
     content: { control: { type: 'select' }, options: ['label', 'icon', 'label+icon', 'icon+label'] },
     disabled: { control: 'boolean' },
-    icon: { control: 'text' },
     label: { control: 'text' },
   },
   args: {
@@ -19,7 +18,6 @@ export default {
     disabled: false,
     size: 'default',
     content: 'label',
-    icon: 'cross'
   },
 };
 
@@ -49,15 +47,6 @@ export const WithIcon = {
   args: {
     styleType: 'filled',
     content: 'label+icon',
-    label: 'Button with Icon',
-    icon: 'cross',
-  },
-};
-
-export const WithSlotIcon = {
-  args: {
-    styleType: 'filled',
-    content: 'label+icon',
     label: 'Back',
   },
   render: (args) => {
@@ -80,15 +69,6 @@ export const IconOnly = {
   args: {
     styleType: 'filled',
     content: 'icon',
-    icon: 'cross',
-  },
-};
-
-export const IconOnlyWithSlot = {
-  args: {
-    styleType: 'filled',
-    content: 'icon',
-    size: 'small',
   },
   render: (args) => {
     const button = document.createElement('bui-button');
@@ -121,28 +101,6 @@ export const Small = {
   },
 };
 
-export const IconLabelWithSlot = {
-  args: {
-    styleType: 'outline',
-    content: 'icon+label',
-    label: 'Next',
-    size: 'default',
-  },
-  render: (args) => {
-    const button = document.createElement('bui-button');
-    button.setAttribute('style-type', args.styleType);
-    button.setAttribute('content', args.content);
-    button.setAttribute('label', args.label);
-    button.setAttribute('size', args.size);
-    if (args.disabled) button.setAttribute('disabled', '');
-    
-    const icon = document.createElement('bui-arrow-right-lg');
-    icon.setAttribute('slot', 'icon');
-    
-    button.appendChild(icon);
-    return button;
-  },
-};
 
 export const Disabled = {
   args: {
@@ -168,7 +126,7 @@ export const DisabledFree = {
   },
 };
 
-export const AllStylesWithSlotIcon = {
+export const AllStylesWithIcon = {
   args: {
     content: 'label+icon',
     label: 'Back',
@@ -200,7 +158,7 @@ export const AllStylesWithSlotIcon = {
   },
 };
 
-export const AllSizesWithSlotIcon = {
+export const AllSizesWithIcon = {
   args: {
     styleType: 'filled',
     content: 'label+icon',

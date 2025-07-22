@@ -6,7 +6,6 @@ export class BuiButton extends LitElement {
     styleType: { type: String, attribute: 'style-type' }, // 'filled', 'outline', 'free'
     size: { type: String }, // 'default', 'small', 'large'
     disabled: { type: Boolean },
-    icon: { type: String }, // e.g. 'cross' - legacy support
     label: { type: String },
   };
 
@@ -125,19 +124,7 @@ export class BuiButton extends LitElement {
     this.styleType = 'filled';
     this.size = 'default';
     this.disabled = false;
-    this.icon = '';
     this.label = 'Label';
-  }
-
-  renderIcon() {
-    // Legacy icon rendering - only show if no slot content is provided
-    if (this.icon === 'cross') {
-      return html`<span class="icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2"/></svg></span>`;
-    }
-    if (this.icon === 'arrow-right') {
-      return html`<span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
-    }
-    return null;
   }
 
   render() {
@@ -148,7 +135,6 @@ export class BuiButton extends LitElement {
         ${['label', 'label+icon', 'icon+label'].includes(this.content) ? html`<span>${this.label}</span>` : ''}
         ${this.content === 'icon+label' ? html`<slot name="icon"></slot>` : ''}
         ${this.content === 'icon' ? html`<slot name="icon"></slot>` : ''}
-        ${['icon', 'label+icon', 'icon+label'].includes(this.content) ? this.renderIcon() : ''}
       </button>
     `;
   }
