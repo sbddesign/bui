@@ -131,9 +131,9 @@ export class BuiButton extends LitElement {
     const classes = [this.size, this.styleType].join(' ');
     return html`
       <button class="${classes}" ?disabled="${this.disabled}">
-        ${this.content === 'label+icon' ? html`<slot name="icon"></slot>` : ''}
-        ${['label', 'label+icon', 'icon+label'].includes(this.content) ? html`<span>${this.label}</span>` : ''}
         ${this.content === 'icon+label' ? html`<slot name="icon"></slot>` : ''}
+        ${['label', 'label+icon', 'icon+label'].includes(this.content) ? html`<span>${this.label}</span>` : ''}
+        ${this.content === 'label+icon' ? html`<slot name="icon"></slot>` : ''}
         ${this.content === 'icon' ? html`<slot name="icon"></slot>` : ''}
       </button>
     `;
