@@ -22,7 +22,6 @@
     "./button.js": "./button.js",
     "./toggle.js": "./toggle.js",
     "./message.js": "./message.js",
-    "./icon-example.js": "./icon-example.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",

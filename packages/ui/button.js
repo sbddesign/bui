@@ -6,7 +6,7 @@ export class BuiButton extends LitElement {
     styleType: { type: String, attribute: 'style-type' }, // 'filled', 'outline', 'free'
     size: { type: String }, // 'default', 'small', 'large'
     disabled: { type: Boolean },
-    icon: { type: String }, // e.g. 'cross'
+    icon: { type: String }, // e.g. 'cross' - legacy support
     label: { type: String },
   };
 
@@ -103,6 +103,19 @@ export class BuiButton extends LitElement {
         align-items: center;
         justify-content: center;
       }
+      
+      /* Slot styles for icon content */
+      ::slotted([slot="icon"]) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      /* Ensure icons have consistent sizing */
+      ::slotted([slot="icon"]) {
+        width: 1em;
+        height: 1em;
+      }
     `
   ];
 
@@ -117,12 +130,11 @@ export class BuiButton extends LitElement {
   }
 
   renderIcon() {
+    // Legacy icon rendering - only show if no slot content is provided
     if (this.icon === 'cross') {
-      // Simple SVG cross icon
       return html`<span class="icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2"/></svg></span>`;
     }
     if (this.icon === 'arrow-right') {
-      // Right arrow icon
       return html`<span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
     }
     return null;
@@ -132,9 +144,11 @@ export class BuiButton extends LitElement {
     const classes = [this.size, this.styleType].join(' ');
     return html`
       <button class="${classes}" ?disabled="${this.disabled}">
-        ${['icon', 'label+icon', 'icon+label'].includes(this.content) ? this.renderIcon() : ''}
+        ${this.content === 'label+icon' ? html`<slot name="icon"></slot>` : ''}
         ${['label', 'label+icon', 'icon+label'].includes(this.content) ? html`<span>${this.label}</span>` : ''}
-        ${this.content === 'icon+label' ? this.renderIcon() : ''}
+        ${this.content === 'icon+label' ? html`<slot name="icon"></slot>` : ''}
+        ${this.content === 'icon' ? html`<slot name="icon"></slot>` : ''}
+        ${['icon', 'label+icon', 'icon+label'].includes(this.content) ? this.renderIcon() : ''}
       </button>
     `;
   }

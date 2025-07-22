@@ -1,4 +1,3 @@
 export * from './button.js';
 export * from './toggle.js';
 export * from './message.js';
-export * from './icon-example.js'; 
