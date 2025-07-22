@@ -17,7 +17,7 @@ export class BuiIconScanMd extends LitElement {
     return html`
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         
-  <path stroke="currentColor" stroke-linecap="square" stroke-width="2" d="M14 10.77V14h-3.23m-5.54 0H2v-3.23M10.77 2h3.226v3.23M5.231 2H2v3.23"/>
+  <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M14 10.77V14h-3.23m-5.54 0H2v-3.23M10.77 2h3.226v3.23M5.231 2H2v3.23"/>
 
 
       </svg>

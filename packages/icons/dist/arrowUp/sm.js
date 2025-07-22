@@ -17,7 +17,7 @@ export class BuiIconArrowUpSm extends LitElement {
     return html`
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         
-  <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M6 1.75v8.5m0-8.5-3.5 3.5M6 1.75l3.5 3.5"/>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 1.75v8.5m0-8.5-3.5 3.5M6 1.75l3.5 3.5"/>
 
 
       </svg>

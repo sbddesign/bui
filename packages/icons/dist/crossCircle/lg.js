@@ -17,7 +17,7 @@ export class BuiIconCrossCircleLg extends LitElement {
     return html`
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         
-  <path stroke="currentColor" stroke-linecap="square" stroke-width="2" d="m9 15 6-6M9 9l6 6m6.25-3a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"/>
+  <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m9 15 6-6M9 9l6 6m6.25-3a9.25 9.25 0 1 1-18.5 0 9.25 9.25 0 0 1 18.5 0Z"/>
 
 
       </svg>

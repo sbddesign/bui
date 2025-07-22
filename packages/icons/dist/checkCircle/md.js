@@ -18,7 +18,7 @@ export class BuiIconCheckCircleMd extends LitElement {
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         
   <g clip-path="url(#a)">
-    <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="m10.75 6.5-3.7 3.7-1.8-1.7m9-.5a6.25 6.25 0 1 1-12.5 0 6.25 6.25 0 0 1 12.5 0Z"/>
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10.75 6.5-3.7 3.7-1.8-1.7m9-.5a6.25 6.25 0 1 1-12.5 0 6.25 6.25 0 0 1 12.5 0Z"/>
   </g>
   <defs>
     <clipPath id="a">
