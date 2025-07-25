@@ -26,3 +26,7 @@ The `ui` lib relies upon the CSS variables from `tokens`. It uses [Lit](https://
 ### demo-svelte
 
 `demo-svelte` demonstrates usage of the `ui` components and `tokens` inside a basic Svelte app, showing cross-framework compatibility of the web components.
+
+### demo-flutter
+
+`demo-flutter` demonstrates a native Flutter implementation of the Bitcoin UI Kit components. This shows how the design system can be adapted for mobile and desktop applications using Flutter's Material Design components with custom styling.
