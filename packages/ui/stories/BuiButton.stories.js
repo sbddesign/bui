@@ -1,4 +1,6 @@
 import '../button.js';
+import '../../icons/dist/arrowRight/lg.js';
+import '../../icons/dist/arrowLeft/lg.js';
 
 export default {
   title: 'BUI/Button',
@@ -9,7 +11,6 @@ export default {
     size: { control: { type: 'select' }, options: ['default', 'small', 'large'] },
     content: { control: { type: 'select' }, options: ['label', 'icon', 'label+icon', 'icon+label'] },
     disabled: { control: 'boolean' },
-    icon: { control: 'text' },
     label: { control: 'text' },
   },
   args: {
@@ -17,7 +18,6 @@ export default {
     disabled: false,
     size: 'default',
     content: 'label',
-    icon: 'cross'
   },
 };
 
@@ -47,8 +47,21 @@ export const WithIcon = {
   args: {
     styleType: 'filled',
     content: 'label+icon',
-    label: 'Button with Icon',
-    icon: 'cross',
+    label: 'Back',
+  },
+  render: (args) => {
+    const button = document.createElement('bui-button');
+    button.setAttribute('style-type', args.styleType);
+    button.setAttribute('content', args.content);
+    button.setAttribute('label', args.label);
+    button.setAttribute('size', args.size);
+    if (args.disabled) button.setAttribute('disabled', '');
+    
+    const icon = document.createElement('bui-arrow-left-lg');
+    icon.setAttribute('slot', 'icon');
+    
+    button.appendChild(icon);
+    return button;
   },
 };
 
@@ -56,7 +69,19 @@ export const IconOnly = {
   args: {
     styleType: 'filled',
     content: 'icon',
-    icon: 'cross',
+  },
+  render: (args) => {
+    const button = document.createElement('bui-button');
+    button.setAttribute('style-type', args.styleType);
+    button.setAttribute('content', args.content);
+    button.setAttribute('size', args.size);
+    if (args.disabled) button.setAttribute('disabled', '');
+    
+    const icon = document.createElement('bui-arrow-right-lg');
+    icon.setAttribute('slot', 'icon');
+    
+    button.appendChild(icon);
+    return button;
   },
 };
 
@@ -75,6 +100,7 @@ export const Small = {
     label: 'Small Button',
   },
 };
+
 
 export const Disabled = {
   args: {
@@ -97,5 +123,70 @@ export const DisabledFree = {
     styleType: 'free',
     disabled: true,
     label: 'Disabled Free Button',
+  },
+};
+
+export const AllStylesWithIcon = {
+  args: {
+    content: 'label+icon',
+    label: 'Back',
+    size: 'default',
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.gap = '1rem';
+    container.style.flexWrap = 'wrap';
+    
+    const styles = ['filled', 'outline', 'free'];
+    
+    styles.forEach(styleType => {
+      const button = document.createElement('bui-button');
+      button.setAttribute('style-type', styleType);
+      button.setAttribute('content', args.content);
+      button.setAttribute('label', args.label);
+      button.setAttribute('size', args.size);
+      
+      const icon = document.createElement('bui-arrow-left-lg');
+      icon.setAttribute('slot', 'icon');
+      
+      button.appendChild(icon);
+      container.appendChild(button);
+    });
+    
+    return container;
+  },
+};
+
+export const AllSizesWithIcon = {
+  args: {
+    styleType: 'filled',
+    content: 'label+icon',
+    label: 'Back',
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.gap = '1rem';
+    container.style.flexWrap = 'wrap';
+    container.style.alignItems = 'center';
+    
+    const sizes = ['small', 'default', 'large'];
+    
+    sizes.forEach(size => {
+      const button = document.createElement('bui-button');
+      button.setAttribute('style-type', args.styleType);
+      button.setAttribute('content', args.content);
+      button.setAttribute('label', args.label);
+      button.setAttribute('size', size);
+      
+      const icon = document.createElement('bui-arrow-right-lg');
+      icon.setAttribute('slot', 'icon');
+      
+      button.appendChild(icon);
+      container.appendChild(button);
+    });
+    
+    return container;
   },
 };

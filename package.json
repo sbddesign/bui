@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build:tokens": "pnpm --filter @bui/tokens build",
+    "build:icons": "pnpm --filter @bui/icons build",
     "storybook": "pnpm --filter @bui/ui storybook dev",
     "storybook:build": "pnpm --filter @bui/ui storybook build",
     "demo:react": "pnpm --filter @bui/demo-react dev",

@@ -57,10 +57,6 @@
         "$type": "color",
         "$value": "{white}"
       },
-      "text": {
-        "$type": "color",
-        "$value": "{white}"
-      },
       "hover": {
         "bg": {
           "$type": "color",
@@ -74,6 +70,10 @@
           "$type": "color",
           "$value": "{white}"
         }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{white}"
       },
       "active": {
         "bg": {
@@ -113,12 +113,6 @@
         "$type": "color",
         "$value": "{white}"
       },
-      "disabled": {
-        "text": {
-          "$type": "color",
-          "$value": "{tailwind.zinc.500}"
-        }
-      },
       "active": {
         "bg": {
           "$type": "color",
@@ -129,6 +123,12 @@
         "bg": {
           "$type": "color",
           "$value": "{tailwind.gray.900}"
+        }
+      },
+      "disabled": {
+        "text": {
+          "$type": "color",
+          "$value": "{tailwind.zinc.500}"
         }
       }
     },
@@ -167,13 +167,13 @@
           "$value": "{tailwind.blue.950}"
         }
       },
-      "disabled": {
-        "$type": "color",
-        "$value": "{tailwind.sky.950}"
-      },
       "hover": {
         "$type": "color",
         "$value": "{tailwind.blue.500}"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{tailwind.sky.950}"
       }
     },
     "mood": {
@@ -216,20 +216,38 @@
     }
   },
   "component": {
+    "numpad": {
+      "bg": {
+        "$type": "color",
+        "$value": "{background}"
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.slate.800}"
+        }
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.blue.950}"
+        }
+      }
+    },
     "toggle": {
       "bg": {
         "$type": "color",
         "$value": "{tailwind.slate.700}"
-      },
-      "switch": {
-        "$type": "color",
-        "$value": "{white}"
       },
       "active": {
         "bg": {
           "$type": "color",
           "$value": "{system.interactive}"
         }
+      },
+      "switch": {
+        "$type": "color",
+        "$value": "{white}"
       }
     }
   }
