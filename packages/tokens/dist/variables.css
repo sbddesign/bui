@@ -280,10 +280,10 @@
   --button-filled-disabled-text: #ffffff;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #ff8904;
-  --button-outline-text: #ff8904;
   --button-outline-hover-bg: #fff7ed;
   --button-outline-hover-outline: #ff6900;
   --button-outline-hover-text: #ff6900;
+  --button-outline-text: #ff8904;
   --button-outline-active-bg: #ffedd4;
   --button-outline-active-outline: #ffb86a;
   --button-outline-active-text: #ff8904;
@@ -292,9 +292,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #000000;
-  --button-free-disabled-text: #71717b;
   --button-free-active-bg: #99a1af;
   --button-free-hover-bg: #d1d5dc;
+  --button-free-disabled-text: #71717b;
   --button-rounding: 4px;
   --background: #ffffff;
   --text-primary: #000000;
@@ -302,8 +302,8 @@
   --Color: #ffffff;
   --system-interactive: #ff8904;
   --system-interactive-active: #f54900;
-  --system-interactive-disabled: #ffb86a;
   --system-interactive-hover: #ff6900;
+  --system-interactive-disabled: #ffb86a;
   --system-mood-danger: #cc0000;
   --system-mood-danger-text: #910000;
   --system-mood-caution: #ffbd00;
@@ -313,9 +313,12 @@
   --system-mood-neutral: #9f9fa9;
   --system-mood-neutral-text: #71717b;
   --system-divider: #d4d4d8;
+  --component-numpad-bg: #ffffff;
+  --component-numpad-hover-bg: #f4f4f5;
+  --component-numpad-active-bg: #ffd6a7;
   --component-toggle-bg: #71717b;
-  --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #ff8904;
+  --component-toggle-switch: #ffffff;
 }
 [data-theme="bitcoindesign"][data-mode="dark"] {
   --button-filled-bg: #ff8904;
@@ -330,10 +333,10 @@
   --button-filled-disabled-text: #ffffff80;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #ffffff;
-  --button-outline-text: #ffffff;
   --button-outline-hover-bg: #101828;
   --button-outline-hover-outline: #ffedd4;
   --button-outline-hover-text: #ffedd4;
+  --button-outline-text: #ffffff;
   --button-outline-active-bg: #101828;
   --button-outline-active-outline: #ffedd4;
   --button-outline-active-text: #ffedd4;
@@ -342,9 +345,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
-  --button-free-disabled-text: #71717b;
   --button-free-active-bg: #1e2939;
   --button-free-hover-bg: #101828;
+  --button-free-disabled-text: #71717b;
   --button-rounding: 4px;
   --background: #000000;
   --text-primary: #ffffff;
@@ -352,8 +355,8 @@
   --Color: #ffffff;
   --system-interactive: #ff8904;
   --system-interactive-active: #ff6900;
-  --system-interactive-disabled: #7e2a0c;
   --system-interactive-hover: #ffb86a;
+  --system-interactive-disabled: #7e2a0c;
   --system-mood-danger: #fb2c36;
   --system-mood-danger-text: #ffa2a2;
   --system-mood-caution: #ffb900;
@@ -363,9 +366,12 @@
   --system-mood-neutral: #71717b;
   --system-mood-neutral-text: #d4d4d8;
   --system-divider: #27272a;
+  --component-numpad-bg: #000000;
+  --component-numpad-hover-bg: #27272a;
+  --component-numpad-active-bg: #9f2d00;
   --component-toggle-bg: #3f3f46;
-  --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #ff8904;
+  --component-toggle-switch: #ffffff;
 }
 [data-theme="conduit"][data-mode="light"] {
   --button-filled-bg: #155dfc;
@@ -380,10 +386,10 @@
   --button-filled-disabled-text: #ffffff;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #155dfc;
-  --button-outline-text: #155dfc;
   --button-outline-hover-bg: #dbeafe;
   --button-outline-hover-outline: #2b7fff;
   --button-outline-hover-text: #2b7fff;
+  --button-outline-text: #155dfc;
   --button-outline-active-bg: #dbeafe;
   --button-outline-active-outline: #8ec5ff;
   --button-outline-active-text: #1447e6;
@@ -392,9 +398,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #155dfc;
-  --button-free-disabled-text: #71717b;
   --button-free-active-bg: #99a1af;
   --button-free-hover-bg: #d1d5dc;
+  --button-free-disabled-text: #71717b;
   --button-rounding: 24px;
   --background: #ffffff;
   --text-primary: #000000;
@@ -402,8 +408,8 @@
   --Color: #ffffff;
   --system-interactive: #155dfc;
   --system-interactive-active: #1447e6;
-  --system-interactive-disabled: #8ec5ff;
   --system-interactive-hover: #2b7fff;
+  --system-interactive-disabled: #8ec5ff;
   --system-mood-danger: #cc0000;
   --system-mood-danger-text: #910000;
   --system-mood-caution: #ffbd00;
@@ -413,9 +419,12 @@
   --system-mood-neutral: #90a1b9;
   --system-mood-neutral-text: #62748e;
   --system-divider: #cad5e2;
+  --component-numpad-bg: #ffffff;
+  --component-numpad-hover-bg: #f1f5f9;
+  --component-numpad-active-bg: #e2e8f0;
   --component-toggle-bg: #62748e;
-  --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #155dfc;
+  --component-toggle-switch: #ffffff;
 }
 [data-theme="conduit"][data-mode="dark"] {
   --button-filled-bg: #155dfc;
@@ -430,10 +439,10 @@
   --button-filled-disabled-text: #ffffff;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #ffffff;
-  --button-outline-text: #ffffff;
   --button-outline-hover-bg: #101828;
   --button-outline-hover-outline: #ffffff;
   --button-outline-hover-text: #ffffff;
+  --button-outline-text: #ffffff;
   --button-outline-active-bg: #162456;
   --button-outline-active-outline: #bedbff;
   --button-outline-active-text: #bedbff;
@@ -442,9 +451,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
-  --button-free-disabled-text: #71717b;
   --button-free-active-bg: #1e2939;
   --button-free-hover-bg: #101828;
+  --button-free-disabled-text: #71717b;
   --button-rounding: 24px;
   --background: #0f172b;
   --text-primary: #ffffff;
@@ -452,8 +461,8 @@
   --Color: #ffffff;
   --system-interactive: #155dfc;
   --system-interactive-active: #1447e6;
-  --system-interactive-disabled: #052f4a;
   --system-interactive-hover: #2b7fff;
+  --system-interactive-disabled: #052f4a;
   --system-mood-danger: #fc3b3b;
   --system-mood-danger-text: #ffbbbb;
   --system-mood-caution: #ffca34;
@@ -463,7 +472,10 @@
   --system-mood-neutral: #62748e;
   --system-mood-neutral-text: #cad5e2;
   --system-divider: #1d293d;
+  --component-numpad-bg: #0f172b;
+  --component-numpad-hover-bg: #1d293d;
+  --component-numpad-active-bg: #162456;
   --component-toggle-bg: #314158;
-  --component-toggle-switch: #ffffff;
   --component-toggle-active-bg: #155dfc;
+  --component-toggle-switch: #ffffff;
 }
