@@ -23,6 +23,7 @@
     "./toggle.js": "./toggle.js",
     "./message.js": "./message.js",
     "./numpad-button.js": "./numpad-button.js",
+    "./button-cluster.js": "./button-cluster.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",

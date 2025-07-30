@@ -7,6 +7,8 @@ export class BuiButton extends LitElement {
     size: { type: String }, // 'default', 'small', 'large'
     disabled: { type: Boolean },
     label: { type: String },
+    cluster: { type: String }, // 'top', 'bottom', 'left', 'right', 'middle'
+    wide: { type: Boolean }, // expands to fill available space
   };
 
   static styles = [
@@ -120,6 +122,42 @@ export class BuiButton extends LitElement {
         width: 1em;
         height: 1em;
       }
+      
+      /* Cluster-specific border radius overrides */
+      button.cluster-top {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+      
+      button.cluster-bottom {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
+      
+      button.cluster-left {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+      }
+      
+      button.cluster-right {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+      }
+      
+      button.cluster-middle {
+        border-radius: 0 !important;
+      }
+      
+      /* Wide button styles */
+      :host([wide]) {
+        display: block;
+        width: 100%;
+      }
+      
+      button.wide {
+        width: 100%;
+        justify-content: center;
+      }
     `
   ];
 
@@ -130,13 +168,16 @@ export class BuiButton extends LitElement {
     this.size = 'default';
     this.disabled = false;
     this.label = 'Label';
+    this.wide = false;
   }
 
   render() {
     const classes = [this.size, this.styleType].join(' ');
     const isIconOnly = this.content === 'icon';
     const iconOnlyClass = isIconOnly ? 'icon-only' : '';
-    const allClasses = [classes, iconOnlyClass].filter(Boolean).join(' ');
+    const clusterClass = this.cluster ? `cluster-${this.cluster}` : '';
+    const wideClass = this.wide ? 'wide' : '';
+    const allClasses = [classes, iconOnlyClass, clusterClass, wideClass].filter(Boolean).join(' ');
     
     return html`
       <button class="${allClasses}" ?disabled="${this.disabled}">

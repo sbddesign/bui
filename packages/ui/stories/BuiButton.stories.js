@@ -12,12 +12,14 @@ export default {
     content: { control: { type: 'select' }, options: ['label', 'icon', 'label+icon', 'icon+label'] },
     disabled: { control: 'boolean' },
     label: { control: 'text' },
+    wide: { control: 'boolean' },
   },
   args: {
     label: 'Button',
     disabled: false,
     size: 'default',
     content: 'label',
+    wide: false,
   },
 };
 
@@ -187,6 +189,60 @@ export const AllSizesWithIcon = {
       container.appendChild(button);
     });
     
+    return container;
+  },
+};
+
+export const Wide = {
+  args: {
+    styleType: 'filled',
+    label: 'Wide Button',
+    wide: true,
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.width = '400px';
+    container.style.border = '1px solid #ccc';
+    container.style.padding = '1rem';
+    
+    const button = document.createElement('bui-button');
+    button.setAttribute('style-type', args.styleType);
+    button.setAttribute('label', args.label);
+    button.setAttribute('size', args.size);
+    button.setAttribute('wide', args.wide);
+    if (args.disabled) button.setAttribute('disabled', '');
+    
+    container.appendChild(button);
+    return container;
+  },
+};
+
+export const WideWithIcon = {
+  args: {
+    styleType: 'filled',
+    content: 'label+icon',
+    label: 'Wide Button with Icon',
+    wide: false,
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.width = '400px';
+    container.style.border = '1px solid #ccc';
+    container.style.padding = '1rem';
+    
+    const button = document.createElement('bui-button');
+    button.setAttribute('style-type', args.styleType);
+    button.setAttribute('content', args.content);
+    button.setAttribute('label', args.label);
+    button.setAttribute('size', args.size);
+    button.setAttribute('wide', args.wide);
+    if (args.disabled) button.setAttribute('disabled', '');
+    
+    const icon = document.createElement('bui-arrow-right-lg');
+    icon.setAttribute('slot', 'icon');
+    button.appendChild(icon);
+    
+    container.appendChild(button);
     return container;
   },
 };
