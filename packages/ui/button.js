@@ -32,6 +32,11 @@ export class BuiButton extends LitElement {
       button.small { font-size: 0.85rem; padding: 0.25em 0.75em; }
       button.large { font-size: 1.15rem; padding: 0.75em 1.5em; }
       
+      /* Square appearance for icon-only buttons */
+      button.icon-only.default { padding: 0.5em; }
+      button.icon-only.small { padding: 0.25em; }
+      button.icon-only.large { padding: 0.75em; }
+      
       /* Filled button styles */
       button.filled {
         background: var(--button-filled-bg);
@@ -129,8 +134,12 @@ export class BuiButton extends LitElement {
 
   render() {
     const classes = [this.size, this.styleType].join(' ');
+    const isIconOnly = this.content === 'icon';
+    const iconOnlyClass = isIconOnly ? 'icon-only' : '';
+    const allClasses = [classes, iconOnlyClass].filter(Boolean).join(' ');
+    
     return html`
-      <button class="${classes}" ?disabled="${this.disabled}">
+      <button class="${allClasses}" ?disabled="${this.disabled}">
         ${this.content === 'icon+label' ? html`<slot name="icon"></slot>` : ''}
         ${['label', 'label+icon', 'icon+label'].includes(this.content) ? html`<span>${this.label}</span>` : ''}
         ${this.content === 'label+icon' ? html`<slot name="icon"></slot>` : ''}
