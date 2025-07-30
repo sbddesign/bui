@@ -35,9 +35,21 @@ export class BuiButton extends LitElement {
       button.large { font-size: 1.15rem; padding: 0.75em 1.5em; }
       
       /* Square appearance for icon-only buttons */
-      button.icon-only.default { padding: 0.5em; }
-      button.icon-only.small { padding: 0.25em; }
-      button.icon-only.large { padding: 0.75em; }
+      button.icon-only.default { 
+        padding: 0.5em; 
+        min-height: calc(2.45em + 0.5px); /* Split the difference - account for 1px border on top and bottom */
+        line-height: 1.5; /* Match line-height of text buttons */
+      }
+      button.icon-only.small { 
+        padding: 0.25em; 
+        min-height: calc(2em + 0.5px); /* Split the difference - account for 1px border on top and bottom */
+        line-height: 1.5;
+      }
+      button.icon-only.large { 
+        padding: 0.75em; 
+        min-height: calc(2.9em + 0.5px); /* Split the difference - account for 1px border on top and bottom */
+        line-height: 1.5;
+      }
       
       /* Filled button styles */
       button.filled {
