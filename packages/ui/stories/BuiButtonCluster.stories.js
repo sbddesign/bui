@@ -39,7 +39,7 @@ export const Horizontal = {
     button2.setAttribute('style-type', 'filled');
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Save');
-    button2.setAttribute('cluster', 'middle');
+    button2.setAttribute('cluster', 'middle-horizontal');
     
     const button3 = document.createElement('bui-button');
     button3.setAttribute('style-type', 'filled');
@@ -81,7 +81,7 @@ export const Vertical = {
     button2.setAttribute('style-type', 'outline');
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Option 2');
-    button2.setAttribute('cluster', 'middle');
+    button2.setAttribute('cluster', 'middle-vertical');
     button2.setAttribute('wide', 'true');
     
     const button3 = document.createElement('bui-button');
@@ -125,7 +125,7 @@ export const MixedStyles = {
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Center');
     button2.setAttribute('size', 'small');
-    button2.setAttribute('cluster', 'middle');
+    button2.setAttribute('cluster', 'middle-horizontal');
     
     const button3 = document.createElement('bui-button');
     button3.setAttribute('style-type', 'free');
@@ -203,9 +203,9 @@ export const LargeCluster = {
     
     const buttons = [
       { label: 'First', icon: 'bui-arrow-left-lg', cluster: 'left' },
-      { label: 'Second', icon: null, cluster: 'middle' },
-      { label: 'Third', icon: null, cluster: 'middle' },
-      { label: 'Fourth', icon: null, cluster: 'middle' },
+      { label: 'Second', icon: null, cluster: 'middle-horizontal' },
+      { label: 'Third', icon: null, cluster: 'middle-horizontal' },
+      { label: 'Fourth', icon: null, cluster: 'middle-horizontal' },
       { label: 'Last', icon: 'bui-arrow-right-lg', cluster: 'right' }
     ];
     
@@ -239,9 +239,9 @@ export const VerticalLarge = {
     
     const buttons = [
       { label: 'Top', icon: 'bui-arrow-up-lg', cluster: 'top' },
-      { label: 'Middle 1', icon: null, cluster: 'middle' },
-      { label: 'Middle 2', icon: null, cluster: 'middle' },
-      { label: 'Middle 3', icon: null, cluster: 'middle' },
+      { label: 'Middle 1', icon: null, cluster: 'middle-vertical' },
+      { label: 'Middle 2', icon: null, cluster: 'middle-vertical' },
+      { label: 'Middle 3', icon: null, cluster: 'middle-vertical' },
       { label: 'Bottom', icon: 'bui-arrow-down-lg', cluster: 'bottom' }
     ];
     

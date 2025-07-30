@@ -24,14 +24,7 @@ export class BuiButtonCluster extends LitElement {
         flex-direction: column;
       }
       
-      /* Remove borders between adjacent buttons */
-      ::slotted(bui-button:not(:last-child)) {
-        border-right: none !important;
-      }
-      
-      .cluster.vertical ::slotted(bui-button:not(:last-child)) {
-        border-bottom: none !important;
-      }
+
     `
   ];
 
@@ -68,7 +61,7 @@ export class BuiButtonCluster extends LitElement {
           } else if (index === buttons.length - 1) {
             button.setAttribute('cluster', 'right');
           } else {
-            button.setAttribute('cluster', 'middle');
+            button.setAttribute('cluster', 'middle-horizontal');
           }
         } else if (this.direction === 'vertical') {
           if (index === 0) {
@@ -76,7 +69,7 @@ export class BuiButtonCluster extends LitElement {
           } else if (index === buttons.length - 1) {
             button.setAttribute('cluster', 'bottom');
           } else {
-            button.setAttribute('cluster', 'middle');
+            button.setAttribute('cluster', 'middle-vertical');
           }
         }
       });

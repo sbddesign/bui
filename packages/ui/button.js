@@ -127,6 +127,7 @@ export class BuiButton extends LitElement {
       button.cluster-top {
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
+        border-bottom: 0 !important;
       }
       
       button.cluster-bottom {
@@ -137,6 +138,7 @@ export class BuiButton extends LitElement {
       button.cluster-left {
         border-top-right-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
+        border-right: 0 !important;
       }
       
       button.cluster-right {
@@ -144,8 +146,14 @@ export class BuiButton extends LitElement {
         border-bottom-left-radius: 0 !important;
       }
       
-      button.cluster-middle {
+      button.cluster-middle-horizontal {
         border-radius: 0 !important;
+        border-right: 0 !important;
+      }
+      
+      button.cluster-middle-vertical {
+        border-radius: 0 !important;
+        border-bottom: 0 !important;
       }
       
       /* Wide button styles */
