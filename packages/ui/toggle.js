@@ -2,9 +2,9 @@ import { LitElement, html, css } from 'lit';
 
 export class BuiToggle extends LitElement {
   static properties = {
-    active: { type: Boolean },
+    active: { type: Boolean, reflect: true },
     size: { type: String }, // 'big', 'small'
-    disabled: { type: Boolean },
+    disabled: { type: Boolean, reflect: true },
   };
 
   static styles = [

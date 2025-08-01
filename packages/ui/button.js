@@ -5,10 +5,10 @@ export class BuiButton extends LitElement {
     content: { type: String }, // 'label', 'icon', 'label+icon', etc.
     styleType: { type: String, attribute: 'style-type' }, // 'filled', 'outline', 'free'
     size: { type: String }, // 'default', 'small', 'large'
-    disabled: { type: Boolean },
+    disabled: { type: Boolean, reflect: true },
     label: { type: String },
     cluster: { type: String }, // 'top', 'bottom', 'left', 'right', 'middle'
-    wide: { type: Boolean }, // expands to fill available space
+    wide: { type: Boolean, reflect: true }, // expands to fill available space
   };
 
   static styles = [

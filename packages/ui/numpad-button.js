@@ -4,7 +4,7 @@ export class BuiNumPadButton extends LitElement {
   static properties = {
     number: { type: String },
     content: { type: String }, // 'number' or 'icon'
-    disabled: { type: Boolean },
+    disabled: { type: Boolean, reflect: true },
   };
 
   static styles = [

@@ -44,6 +44,7 @@ function App() {
             style-type="filled" 
             size="large" 
             label="Get Started"
+            wide
           ></bui-button>
           </div>
           <div>
@@ -51,6 +52,7 @@ function App() {
             style-type="outline" 
             size="large" 
             label="Restore Wallet"
+            wide
           ></bui-button>
         </div>
       </main>

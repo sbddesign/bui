@@ -4,7 +4,7 @@ export class BuiMessage extends LitElement {
   static properties = {
     text: { type: String },
     mood: { type: String }, // 'neutral', 'success', 'caution', 'danger'
-    showIcon: { type: Boolean },
+    showIcon: { type: Boolean, reflect: true },
     icon: { type: String }, // custom icon slot
   };
 
