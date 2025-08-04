@@ -45,8 +45,7 @@ export const BIP177 = {
 export const Sats = {
   args: {
     format: 'sats',
-    amount: 123456789,
-    symbolPosition: "left"
+    amount: 123456789
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
