@@ -23,16 +23,6 @@
           "$value": "{system.interactive.active.alternate}"
         }
       },
-      "hover": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.blue.500}"
-        },
-        "outline": {
-          "$type": "color",
-          "$value": "{tailwind.blue.500}"
-        }
-      },
       "disabled": {
         "bg": {
           "$type": "color",
@@ -45,6 +35,16 @@
         "text": {
           "$type": "color",
           "$value": "{button.filled.text}"
+        }
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.blue.500}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{tailwind.blue.500}"
         }
       }
     },
@@ -113,12 +113,6 @@
         "$type": "color",
         "$value": "{white}"
       },
-      "active": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.gray.800}"
-        }
-      },
       "hover": {
         "bg": {
           "$type": "color",
@@ -129,6 +123,12 @@
         "text": {
           "$type": "color",
           "$value": "{tailwind.zinc.500}"
+        }
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.gray.800}"
         }
       }
     },
@@ -157,8 +157,6 @@
   },
   "system": {
     "interactive": {
-      "$type": "color",
-      "$value": "{tailwind.blue.600}",
       "active": {
         "$type": "color",
         "$value": "{tailwind.blue.700}",
@@ -167,13 +165,15 @@
           "$value": "{tailwind.blue.950}"
         }
       },
-      "hover": {
-        "$type": "color",
-        "$value": "{tailwind.blue.500}"
-      },
+      "$type": "color",
+      "$value": "{tailwind.blue.600}",
       "disabled": {
         "$type": "color",
         "$value": "{tailwind.sky.950}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{tailwind.blue.500}"
       }
     },
     "mood": {
@@ -221,16 +221,36 @@
         "$type": "color",
         "$value": "{background}"
       },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.blue.950}"
+        }
+      },
       "hover": {
         "bg": {
           "$type": "color",
           "$value": "{tailwind.slate.800}"
         }
+      }
+    },
+    "input": {
+      "bg": {
+        "$type": "color",
+        "$value": "{background}"
       },
-      "active": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.blue.950}"
+      "placeholder": {
+        "$type": "color",
+        "$value": "{tailwind.slate.700}"
+      },
+      "rounding": {
+        "large": {
+          "$type": "dimension",
+          "$value": "{size.6}"
+        },
+        "small": {
+          "$type": "dimension",
+          "$value": "{size.4}"
         }
       }
     },
@@ -239,15 +259,15 @@
         "$type": "color",
         "$value": "{tailwind.slate.700}"
       },
+      "switch": {
+        "$type": "color",
+        "$value": "{white}"
+      },
       "active": {
         "bg": {
           "$type": "color",
           "$value": "{system.interactive}"
         }
-      },
-      "switch": {
-        "$type": "color",
-        "$value": "{white}"
       }
     }
   }

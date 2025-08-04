@@ -273,11 +273,11 @@
   --button-filled-text: #ffffff;
   --button-filled-active-bg: #f54900;
   --button-filled-active-outline: #ffb86a;
-  --button-filled-hover-bg: #ff6900;
-  --button-filled-hover-outline: #ff6900;
   --button-filled-disabled-bg: #ffb86a;
   --button-filled-disabled-outline: #ffb86a;
   --button-filled-disabled-text: #ffffff;
+  --button-filled-hover-bg: #ff6900;
+  --button-filled-hover-outline: #ff6900;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #ff8904;
   --button-outline-hover-bg: #fff7ed;
@@ -292,9 +292,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #000000;
-  --button-free-active-bg: #99a1af;
   --button-free-hover-bg: #d1d5dc;
   --button-free-disabled-text: #71717b;
+  --button-free-active-bg: #99a1af;
   --button-rounding: 4px;
   --background: #ffffff;
   --text-primary: #000000;
@@ -302,8 +302,8 @@
   --Color: #ffffff;
   --system-interactive: #ff8904;
   --system-interactive-active: #f54900;
-  --system-interactive-hover: #ff6900;
   --system-interactive-disabled: #ffb86a;
+  --system-interactive-hover: #ff6900;
   --system-mood-danger: #cc0000;
   --system-mood-danger-text: #910000;
   --system-mood-caution: #ffbd00;
@@ -314,11 +314,15 @@
   --system-mood-neutral-text: #71717b;
   --system-divider: #d4d4d8;
   --component-numpad-bg: #ffffff;
-  --component-numpad-hover-bg: #f4f4f5;
   --component-numpad-active-bg: #ffd6a7;
+  --component-numpad-hover-bg: #f4f4f5;
+  --component-input-bg: #ffffff;
+  --component-input-placeholder: #9f9fa9;
+  --component-input-rounding-large: 4px;
+  --component-input-rounding-small: 4px;
   --component-toggle-bg: #71717b;
-  --component-toggle-active-bg: #ff8904;
   --component-toggle-switch: #ffffff;
+  --component-toggle-active-bg: #ff8904;
 }
 [data-theme="bitcoindesign"][data-mode="dark"] {
   --button-filled-bg: #ff8904;
@@ -326,11 +330,11 @@
   --button-filled-text: #ffffff;
   --button-filled-active-bg: #ff6900;
   --button-filled-active-outline: #82181a;
-  --button-filled-hover-bg: #ffb86a;
-  --button-filled-hover-outline: #ffb86a;
   --button-filled-disabled-bg: #7e2a0c;
   --button-filled-disabled-outline: #7e2a0c;
   --button-filled-disabled-text: #ffffff80;
+  --button-filled-hover-bg: #ffb86a;
+  --button-filled-hover-outline: #ffb86a;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #ffffff;
   --button-outline-hover-bg: #101828;
@@ -345,9 +349,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
-  --button-free-active-bg: #1e2939;
   --button-free-hover-bg: #101828;
   --button-free-disabled-text: #71717b;
+  --button-free-active-bg: #1e2939;
   --button-rounding: 4px;
   --background: #000000;
   --text-primary: #ffffff;
@@ -355,8 +359,8 @@
   --Color: #ffffff;
   --system-interactive: #ff8904;
   --system-interactive-active: #ff6900;
-  --system-interactive-hover: #ffb86a;
   --system-interactive-disabled: #7e2a0c;
+  --system-interactive-hover: #ffb86a;
   --system-mood-danger: #fb2c36;
   --system-mood-danger-text: #ffa2a2;
   --system-mood-caution: #ffb900;
@@ -367,11 +371,15 @@
   --system-mood-neutral-text: #d4d4d8;
   --system-divider: #27272a;
   --component-numpad-bg: #000000;
-  --component-numpad-hover-bg: #27272a;
   --component-numpad-active-bg: #9f2d00;
+  --component-numpad-hover-bg: #27272a;
+  --component-input-bg: #000000;
+  --component-input-placeholder: #3f3f46;
+  --component-input-rounding-large: 4px;
+  --component-input-rounding-small: 4px;
   --component-toggle-bg: #3f3f46;
-  --component-toggle-active-bg: #ff8904;
   --component-toggle-switch: #ffffff;
+  --component-toggle-active-bg: #ff8904;
 }
 [data-theme="conduit"][data-mode="light"] {
   --button-filled-bg: #155dfc;
@@ -379,11 +387,11 @@
   --button-filled-text: #ffffff;
   --button-filled-active-bg: #155dfc;
   --button-filled-active-outline: #8ec5ff;
-  --button-filled-hover-bg: #2b7fff;
-  --button-filled-hover-outline: #2b7fff;
   --button-filled-disabled-bg: #8ec5ff;
   --button-filled-disabled-outline: #8ec5ff;
   --button-filled-disabled-text: #ffffff;
+  --button-filled-hover-bg: #2b7fff;
+  --button-filled-hover-outline: #2b7fff;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #155dfc;
   --button-outline-hover-bg: #dbeafe;
@@ -398,9 +406,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #155dfc;
-  --button-free-active-bg: #99a1af;
   --button-free-hover-bg: #d1d5dc;
   --button-free-disabled-text: #71717b;
+  --button-free-active-bg: #99a1af;
   --button-rounding: 24px;
   --background: #ffffff;
   --text-primary: #000000;
@@ -408,8 +416,8 @@
   --Color: #ffffff;
   --system-interactive: #155dfc;
   --system-interactive-active: #1447e6;
-  --system-interactive-hover: #2b7fff;
   --system-interactive-disabled: #8ec5ff;
+  --system-interactive-hover: #2b7fff;
   --system-mood-danger: #cc0000;
   --system-mood-danger-text: #910000;
   --system-mood-caution: #ffbd00;
@@ -420,11 +428,15 @@
   --system-mood-neutral-text: #62748e;
   --system-divider: #cad5e2;
   --component-numpad-bg: #ffffff;
-  --component-numpad-hover-bg: #f1f5f9;
   --component-numpad-active-bg: #e2e8f0;
+  --component-numpad-hover-bg: #f1f5f9;
+  --component-input-bg: #ffffff;
+  --component-input-placeholder: #90a1b9;
+  --component-input-rounding-large: 24px;
+  --component-input-rounding-small: 16px;
   --component-toggle-bg: #62748e;
-  --component-toggle-active-bg: #155dfc;
   --component-toggle-switch: #ffffff;
+  --component-toggle-active-bg: #155dfc;
 }
 [data-theme="conduit"][data-mode="dark"] {
   --button-filled-bg: #155dfc;
@@ -432,11 +444,11 @@
   --button-filled-text: #ffffff;
   --button-filled-active-bg: #155dfc;
   --button-filled-active-outline: #162456;
-  --button-filled-hover-bg: #2b7fff;
-  --button-filled-hover-outline: #2b7fff;
   --button-filled-disabled-bg: #052f4a;
   --button-filled-disabled-outline: #052f4a;
   --button-filled-disabled-text: #ffffff;
+  --button-filled-hover-bg: #2b7fff;
+  --button-filled-hover-outline: #2b7fff;
   --button-outline-bg: #ffffff00;
   --button-outline-outline: #ffffff;
   --button-outline-hover-bg: #101828;
@@ -451,9 +463,9 @@
   --button-free-bg: #ffffff00;
   --button-free-outline: #ffffff00;
   --button-free-text: #ffffff;
-  --button-free-active-bg: #1e2939;
   --button-free-hover-bg: #101828;
   --button-free-disabled-text: #71717b;
+  --button-free-active-bg: #1e2939;
   --button-rounding: 24px;
   --background: #0f172b;
   --text-primary: #ffffff;
@@ -461,8 +473,8 @@
   --Color: #ffffff;
   --system-interactive: #155dfc;
   --system-interactive-active: #1447e6;
-  --system-interactive-hover: #2b7fff;
   --system-interactive-disabled: #052f4a;
+  --system-interactive-hover: #2b7fff;
   --system-mood-danger: #fc3b3b;
   --system-mood-danger-text: #ffbbbb;
   --system-mood-caution: #ffca34;
@@ -473,9 +485,13 @@
   --system-mood-neutral-text: #cad5e2;
   --system-divider: #1d293d;
   --component-numpad-bg: #0f172b;
-  --component-numpad-hover-bg: #1d293d;
   --component-numpad-active-bg: #162456;
+  --component-numpad-hover-bg: #1d293d;
+  --component-input-bg: #0f172b;
+  --component-input-placeholder: #314158;
+  --component-input-rounding-large: 24px;
+  --component-input-rounding-small: 16px;
   --component-toggle-bg: #314158;
-  --component-toggle-active-bg: #155dfc;
   --component-toggle-switch: #ffffff;
+  --component-toggle-active-bg: #155dfc;
 }
