@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
 import '@bui/ui/button.js'
+import '@bui/ui/money-value.js'
+import '@bui/ui/bitcoin-value.js'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -39,6 +41,24 @@ function App() {
       <main className="main">
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>
+        
+        <div style={{ marginBottom: '2rem' }}>
+          <h2>Bitcoin Values</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem' }}>
+            <div>
+              <bui-bitcoin-value amount="123456789" format="bip177"></bui-bitcoin-value>
+            </div>
+            <div>
+              <bui-bitcoin-value amount="123456789" format="sats"></bui-bitcoin-value>
+            </div>
+            <div>
+              <bui-bitcoin-value amount="123456789" format="BTC"></bui-bitcoin-value>
+            </div>
+            <div>
+              <bui-bitcoin-value amount="1000000000" format="bip177" truncated={true}></bui-bitcoin-value>
+            </div>
+          </div>
+        </div>
         <div>
           <bui-button
             style-type="filled" 
