@@ -34,7 +34,7 @@ export const BIP177 = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.setAttribute('format', args.format);
+    bitcoinValue.format = args.format;
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
     return bitcoinValue;
@@ -50,7 +50,7 @@ export const Sats = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.setAttribute('format', args.format);
+    bitcoinValue.format = args.format;
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
     return bitcoinValue;
@@ -65,7 +65,7 @@ export const BTC = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.setAttribute('format', args.format);
+    bitcoinValue.format = args.format;
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
     return bitcoinValue;
@@ -99,7 +99,7 @@ export const AllFormats = {
       label.style.color = 'var(--text-secondary)';
       
       const bitcoinValue = document.createElement('bui-bitcoin-value');
-      bitcoinValue.setAttribute('format', example.format);
+      bitcoinValue.format = example.format;
       bitcoinValue.amount = example.amount;
       
       wrapper.appendChild(label);
@@ -139,15 +139,15 @@ export const DifferentAmounts = {
       label.style.color = 'var(--text-secondary)';
       
       const bip177 = document.createElement('bui-bitcoin-value');
-      bip177.setAttribute('format', 'bip177');
+      bip177.format = 'bip177';
       bip177.amount = item.sats;
       
       const sats = document.createElement('bui-bitcoin-value');
-      sats.setAttribute('format', 'sats');
+      sats.format = 'sats';
       sats.amount = item.sats;
       
       const btc = document.createElement('bui-bitcoin-value');
-      btc.setAttribute('format', 'BTC');
+      btc.format = 'BTC';
       btc.amount = item.sats;
       
       wrapper.appendChild(label);
@@ -189,12 +189,12 @@ export const WithTruncation = {
       label.style.color = 'var(--text-secondary)';
       
       const withoutTruncation = document.createElement('bui-bitcoin-value');
-      withoutTruncation.setAttribute('format', 'bip177');
+      withoutTruncation.format = 'bip177';
       withoutTruncation.amount = example.sats;
       withoutTruncation.truncated = false;
       
       const withTruncation = document.createElement('bui-bitcoin-value');
-      withTruncation.setAttribute('format', 'bip177');
+      withTruncation.format = 'bip177';
       withTruncation.amount = example.sats;
       withTruncation.truncated = true;
       
@@ -235,18 +235,18 @@ export const SymbolPositionOverrides = {
       label.style.color = 'var(--text-secondary)';
       
       const defaultPos = document.createElement('bui-bitcoin-value');
-      defaultPos.setAttribute('format', example.format);
+      defaultPos.format = example.format;
       defaultPos.amount = example.amount;
       
       const overrideLeft = document.createElement('bui-bitcoin-value');
-      overrideLeft.setAttribute('format', example.format);
+      overrideLeft.format = example.format;
       overrideLeft.amount = example.amount;
-      overrideLeft.setAttribute('symbol-position', 'left');
+      overrideLeft.symbolPosition = 'left';
       
       const overrideRight = document.createElement('bui-bitcoin-value');
-      overrideRight.setAttribute('format', example.format);
+      overrideRight.format = example.format;
       overrideRight.amount = example.amount;
-      overrideRight.setAttribute('symbol-position', 'right');
+      overrideRight.symbolPosition = 'right';
       
       wrapper.appendChild(label);
       wrapper.appendChild(defaultPos);
@@ -286,12 +286,12 @@ export const SatcommaExamples = {
       label.style.color = 'var(--text-secondary)';
       
       const withoutSatcomma = document.createElement('bui-bitcoin-value');
-      withoutSatcomma.setAttribute('format', 'BTC');
+      withoutSatcomma.format = 'BTC';
       withoutSatcomma.amount = example.sats;
       withoutSatcomma.satcomma = false;
       
       const withSatcomma = document.createElement('bui-bitcoin-value');
-      withSatcomma.setAttribute('format', 'BTC');
+      withSatcomma.format = 'BTC';
       withSatcomma.amount = example.sats;
       withSatcomma.satcomma = true;
       
@@ -316,12 +316,12 @@ export const Interactive = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.setAttribute('format', args.format);
+    bitcoinValue.format = args.format;
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
     bitcoinValue.satcomma = args.satcomma;
     if (args.symbolPosition) {
-      bitcoinValue.setAttribute('symbol-position', args.symbolPosition);
+      bitcoinValue.symbolPosition = args.symbolPosition;
     }
     return bitcoinValue;
   },
