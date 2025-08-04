@@ -12,6 +12,7 @@ export default {
     symbol: { control: 'text' },
     amount: { control: 'number' },
     truncation: { control: 'boolean' },
+    satcomma: { control: 'boolean' },
     size: { 
       control: { type: 'select' }, 
       options: ['small', 'default', 'large', 'xlarge'] 
@@ -22,6 +23,7 @@ export default {
     symbol: '₿',
     amount: 1234.56,
     truncation: false,
+    satcomma: false,
     size: 'default',
   },
 };
@@ -272,6 +274,54 @@ export const DifferentSizes = {
       
       wrapper.appendChild(label);
       wrapper.appendChild(moneyValue);
+      container.appendChild(wrapper);
+    });
+    
+    return container;
+  },
+};
+
+// Satcomma examples
+export const SatcommaExamples = {
+  render: () => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '1rem';
+    
+    const examples = [
+      { amount: 0.12345678, label: '0.12345678' },
+      { amount: 1.095672, label: '1.095672' },
+      { amount: 1.083, label: '1.083' },
+      { amount: 123.456789, label: '123.456789' },
+    ];
+    
+    examples.forEach(example => {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.gap = '2rem';
+      
+      const label = document.createElement('span');
+      label.textContent = example.label;
+      label.style.minWidth = '120px';
+      label.style.fontSize = '0.875rem';
+      label.style.color = 'var(--text-secondary)';
+      
+      const withoutSatcomma = document.createElement('bui-money-value');
+      withoutSatcomma.setAttribute('symbol', '₿');
+      withoutSatcomma.amount = example.amount;
+      withoutSatcomma.satcomma = false;
+      
+      const withSatcomma = document.createElement('bui-money-value');
+      withSatcomma.setAttribute('symbol', 'BTC');
+      withSatcomma.setAttribute('symbol-position', 'right')
+      withSatcomma.amount = example.amount;
+      withSatcomma.satcomma = true;
+      
+      wrapper.appendChild(label);
+      wrapper.appendChild(withoutSatcomma);
+      wrapper.appendChild(withSatcomma);
       container.appendChild(wrapper);
     });
     

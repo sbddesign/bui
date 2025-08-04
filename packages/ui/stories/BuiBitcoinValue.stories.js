@@ -15,12 +15,14 @@ export default {
       control: { type: 'select' }, 
       options: ['left', 'right', undefined] 
     },
+    satcomma: { control: 'boolean' },
   },
   args: {
     format: 'bip177',
     truncated: false,
     amount: 123456789, // 1.23456789 BTC
     symbolPosition: undefined,
+    satcomma: false,
   },
 };
 
@@ -257,6 +259,52 @@ export const SymbolPositionOverrides = {
   },
 };
 
+// Satcomma examples for BTC format
+export const SatcommaExamples = {
+  render: () => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '1rem';
+    
+    const examples = [
+      { sats: 12345678, label: '12,345,678 sats' },
+      { sats: 123456789, label: '123,456,789 sats' },
+      { sats: 1234567890, label: '1,234,567,890 sats' },
+    ];
+    
+    examples.forEach(example => {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.gap = '2rem';
+      
+      const label = document.createElement('span');
+      label.textContent = example.label;
+      label.style.minWidth = '150px';
+      label.style.fontSize = '0.875rem';
+      label.style.color = 'var(--text-secondary)';
+      
+      const withoutSatcomma = document.createElement('bui-bitcoin-value');
+      withoutSatcomma.setAttribute('format', 'BTC');
+      withoutSatcomma.amount = example.sats;
+      withoutSatcomma.satcomma = false;
+      
+      const withSatcomma = document.createElement('bui-bitcoin-value');
+      withSatcomma.setAttribute('format', 'BTC');
+      withSatcomma.amount = example.sats;
+      withSatcomma.satcomma = true;
+      
+      wrapper.appendChild(label);
+      wrapper.appendChild(withoutSatcomma);
+      wrapper.appendChild(withSatcomma);
+      container.appendChild(wrapper);
+    });
+    
+    return container;
+  },
+};
+
 // Interactive example
 export const Interactive = {
   args: {
@@ -264,12 +312,14 @@ export const Interactive = {
     amount: 123456789,
     truncated: false,
     symbolPosition: undefined,
+    satcomma: false,
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
     bitcoinValue.setAttribute('format', args.format);
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
+    bitcoinValue.satcomma = args.satcomma;
     if (args.symbolPosition) {
       bitcoinValue.setAttribute('symbol-position', args.symbolPosition);
     }

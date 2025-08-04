@@ -7,6 +7,7 @@ export class BuiMoneyValue extends LitElement {
     amount: { type: Number, reflect: true }, // required amount
     truncation: { type: Boolean, reflect: true }, // whether to truncate numbers
     size: { type: String, reflect: true }, // 'small', 'default', 'large', 'xlarge'
+    satcomma: { type: Boolean, reflect: true }, // format with spaces in decimal places
   };
 
   static styles = [
@@ -66,11 +67,15 @@ export class BuiMoneyValue extends LitElement {
     this.amount = 0;
     this.truncation = false;
     this.size = 'default';
+    this.satcomma = false;
   }
 
   formatAmount(amount) {
     if (this.truncation) {
       return this.formatWithTruncation(amount);
+    }
+    if (this.satcomma) {
+      return this.formatWithSatcomma(amount);
     }
     return this.formatStandard(amount);
   }
@@ -81,6 +86,40 @@ export class BuiMoneyValue extends LitElement {
       minimumFractionDigits: 0,
       maximumFractionDigits: 8, // Allow up to 8 decimal places for crypto
     }).format(amount);
+  }
+
+  formatWithSatcomma(amount) {
+    // Format with spaces in decimal places (satcomma format)
+    const formatted = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 8, // Allow up to 8 decimal places for crypto
+    }).format(amount);
+    
+    // Split into integer and decimal parts
+    const parts = formatted.split('.');
+    if (parts.length === 1) {
+      // No decimal part, just return the integer part
+      return parts[0];
+    }
+    
+    const integerPart = parts[0];
+    const decimalPart = parts[1];
+    
+    // Add spaces to decimal part: 2 chars, then every 3 chars
+    let formattedDecimal = '';
+    if (decimalPart.length >= 2) {
+      formattedDecimal = decimalPart.substring(0, 2);
+      const remaining = decimalPart.substring(2);
+      
+      // Add spaces every 3 characters
+      for (let i = 0; i < remaining.length; i += 3) {
+        formattedDecimal += ' ' + remaining.substring(i, i + 3);
+      }
+    } else {
+      formattedDecimal = decimalPart;
+    }
+    
+    return `${integerPart}.${formattedDecimal}`;
   }
 
   formatWithTruncation(amount) {

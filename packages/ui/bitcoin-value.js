@@ -7,6 +7,7 @@ export class BuiBitcoinValue extends LitElement {
     truncated: { type: Boolean, reflect: true }, // whether to truncate numbers
     amount: { type: Number, reflect: true }, // amount in sats (integer)
     symbolPosition: { type: String, attribute: 'symbol-position', reflect: true }, // 'left', 'right', undefined
+    satcomma: { type: Boolean, reflect: true }, // format with spaces in decimal places
   };
 
   static styles = [
@@ -23,6 +24,7 @@ export class BuiBitcoinValue extends LitElement {
     this.truncated = false;
     this.amount = 0;
     this.symbolPosition = undefined;
+    this.satcomma = false;
   }
 
   // Convert sats to BTC
@@ -67,6 +69,7 @@ export class BuiBitcoinValue extends LitElement {
         .amount="${formatted.amount}"
         symbol-position="${symbolPosition}"
         .truncation="${this.truncated}"
+        .satcomma="${this.satcomma}"
       ></bui-money-value>
     `;
   }
