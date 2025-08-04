@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
 import '@bui/ui/button.js'
-import '@bui/ui/money-value.js'
-import '@bui/ui/bitcoin-value.js'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
