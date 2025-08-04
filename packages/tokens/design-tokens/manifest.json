@@ -10,7 +10,7 @@
           "bui.themes.conduit-dark.tokens.json"
         ],
         "primitives": [
-          "bui.primitives.Mode 1.tokens.json"
+          "bui.primitives.tokens.json"
         ]
       }
     },

@@ -71,10 +71,6 @@
           "$value": "{tailwind.orange.100}"
         }
       },
-      "text": {
-        "$type": "color",
-        "$value": "{white}"
-      },
       "active": {
         "bg": {
           "$type": "color",
@@ -88,6 +84,10 @@
           "$type": "color",
           "$value": "{tailwind.orange.100}"
         }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{white}"
       },
       "disabled": {
         "outline": {
@@ -113,10 +113,10 @@
         "$type": "color",
         "$value": "{white}"
       },
-      "active": {
-        "bg": {
+      "disabled": {
+        "text": {
           "$type": "color",
-          "$value": "{tailwind.gray.800}"
+          "$value": "{tailwind.zinc.500}"
         }
       },
       "hover": {
@@ -125,10 +125,10 @@
           "$value": "{tailwind.gray.900}"
         }
       },
-      "disabled": {
-        "text": {
+      "active": {
+        "bg": {
           "$type": "color",
-          "$value": "{tailwind.zinc.500}"
+          "$value": "{tailwind.gray.800}"
         }
       }
     },
@@ -167,19 +167,23 @@
           "$value": "{tailwind.red.900}"
         }
       },
-      "hover": {
-        "$type": "color",
-        "$value": "{tailwind.orange.300}"
-      },
       "disabled": {
         "$type": "color",
         "$value": "{tailwind.orange.900}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{tailwind.orange.300}"
       }
     },
     "mood": {
       "danger": {
         "$type": "color",
         "$value": "{tailwind.red.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#fb2c3680"
+        },
         "text": {
           "$type": "color",
           "$value": "{tailwind.red.300}"
@@ -188,6 +192,10 @@
       "caution": {
         "$type": "color",
         "$value": "{tailwind.amber.400}",
+        "active": {
+          "$type": "color",
+          "$value": "#ffb90080"
+        },
         "text": {
           "$type": "color",
           "$value": "{tailwind.amber.100}"
@@ -196,6 +204,10 @@
       "success": {
         "$type": "color",
         "$value": "{tailwind.green.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#00c95080"
+        },
         "text": {
           "$type": "color",
           "$value": "{tailwind.green.200}"
@@ -204,6 +216,10 @@
       "neutral": {
         "$type": "color",
         "$value": "{tailwind.zinc.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#ff690080"
+        },
         "text": {
           "$type": "color",
           "$value": "{text.secondary}"
@@ -216,6 +232,26 @@
     }
   },
   "component": {
+    "input": {
+      "bg": {
+        "$type": "color",
+        "$value": "{background}"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{tailwind.zinc.700}"
+      },
+      "rounding": {
+        "large": {
+          "$type": "dimension",
+          "$value": "{size.1}"
+        },
+        "small": {
+          "$type": "dimension",
+          "$value": "{size.1}"
+        }
+      }
+    },
     "numpad": {
       "bg": {
         "$type": "color",

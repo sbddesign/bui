@@ -71,10 +71,6 @@
           "$value": "{white}"
         }
       },
-      "text": {
-        "$type": "color",
-        "$value": "{white}"
-      },
       "active": {
         "bg": {
           "$type": "color",
@@ -88,6 +84,10 @@
           "$type": "color",
           "$value": "{tailwind.blue.200}"
         }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{white}"
       },
       "disabled": {
         "outline": {
@@ -113,10 +113,10 @@
         "$type": "color",
         "$value": "{white}"
       },
-      "active": {
-        "bg": {
+      "disabled": {
+        "text": {
           "$type": "color",
-          "$value": "{tailwind.gray.800}"
+          "$value": "{tailwind.zinc.500}"
         }
       },
       "hover": {
@@ -125,10 +125,10 @@
           "$value": "{tailwind.gray.900}"
         }
       },
-      "disabled": {
-        "text": {
+      "active": {
+        "bg": {
           "$type": "color",
-          "$value": "{tailwind.zinc.500}"
+          "$value": "{tailwind.gray.800}"
         }
       }
     },
@@ -167,19 +167,23 @@
           "$value": "{tailwind.blue.950}"
         }
       },
-      "hover": {
-        "$type": "color",
-        "$value": "{tailwind.blue.500}"
-      },
       "disabled": {
         "$type": "color",
         "$value": "{tailwind.sky.950}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{tailwind.blue.500}"
       }
     },
     "mood": {
       "danger": {
         "$type": "color",
         "$value": "#fc3b3b",
+        "active": {
+          "$type": "color",
+          "$value": "#fc3b3b80"
+        },
         "text": {
           "$type": "color",
           "$value": "#ffbbbb"
@@ -188,6 +192,10 @@
       "caution": {
         "$type": "color",
         "$value": "#ffca34",
+        "active": {
+          "$type": "color",
+          "$value": "#ffca3480"
+        },
         "text": {
           "$type": "color",
           "$value": "#ffebb1"
@@ -196,6 +204,10 @@
       "success": {
         "$type": "color",
         "$value": "#12b65b",
+        "active": {
+          "$type": "color",
+          "$value": "#12b65b80"
+        },
         "text": {
           "$type": "color",
           "$value": "#82f2b3"
@@ -204,6 +216,10 @@
       "neutral": {
         "$type": "color",
         "$value": "{tailwind.slate.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#1447e680"
+        },
         "text": {
           "$type": "color",
           "$value": "{text.secondary}"
@@ -216,6 +232,26 @@
     }
   },
   "component": {
+    "input": {
+      "bg": {
+        "$type": "color",
+        "$value": "{background}"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{tailwind.slate.700}"
+      },
+      "rounding": {
+        "large": {
+          "$type": "dimension",
+          "$value": "{size.6}"
+        },
+        "small": {
+          "$type": "dimension",
+          "$value": "{size.4}"
+        }
+      }
+    },
     "numpad": {
       "bg": {
         "$type": "color",

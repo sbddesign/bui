@@ -71,10 +71,6 @@
           "$value": "{system.interactive.hover}"
         }
       },
-      "text": {
-        "$type": "color",
-        "$value": "{system.interactive}"
-      },
       "active": {
         "bg": {
           "$type": "color",
@@ -88,6 +84,10 @@
           "$type": "color",
           "$value": "{system.interactive}"
         }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{system.interactive}"
       },
       "disabled": {
         "outline": {
@@ -113,10 +113,10 @@
         "$type": "color",
         "$value": "{black}"
       },
-      "active": {
-        "bg": {
+      "disabled": {
+        "text": {
           "$type": "color",
-          "$value": "{tailwind.gray.400}"
+          "$value": "{tailwind.zinc.500}"
         }
       },
       "hover": {
@@ -125,10 +125,10 @@
           "$value": "{tailwind.gray.300}"
         }
       },
-      "disabled": {
-        "text": {
+      "active": {
+        "bg": {
           "$type": "color",
-          "$value": "{tailwind.zinc.500}"
+          "$value": "{tailwind.gray.400}"
         }
       }
     },
@@ -167,19 +167,23 @@
           "$value": "{tailwind.orange.300}"
         }
       },
-      "hover": {
-        "$type": "color",
-        "$value": "{tailwind.orange.500}"
-      },
       "disabled": {
         "$type": "color",
         "$value": "{tailwind.orange.300}"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{tailwind.orange.500}"
       }
     },
     "mood": {
       "danger": {
         "$type": "color",
         "$value": "#cc0000",
+        "active": {
+          "$type": "color",
+          "$value": "#cc000080"
+        },
         "text": {
           "$type": "color",
           "$value": "#910000"
@@ -188,6 +192,10 @@
       "caution": {
         "$type": "color",
         "$value": "#ffbd00",
+        "active": {
+          "$type": "color",
+          "$value": "#ffbd0080"
+        },
         "text": {
           "$type": "color",
           "$value": "#997100"
@@ -196,6 +204,10 @@
       "success": {
         "$type": "color",
         "$value": "#12b65b",
+        "active": {
+          "$type": "color",
+          "$value": "#12b65b80"
+        },
         "text": {
           "$type": "color",
           "$value": "#0c783b"
@@ -204,6 +216,10 @@
       "neutral": {
         "$type": "color",
         "$value": "{tailwind.zinc.400}",
+        "active": {
+          "$type": "color",
+          "$value": "#f5490080"
+        },
         "text": {
           "$type": "color",
           "$value": "{text.secondary}"
@@ -216,6 +232,26 @@
     }
   },
   "component": {
+    "input": {
+      "bg": {
+        "$type": "color",
+        "$value": "{background}"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{tailwind.zinc.400}"
+      },
+      "rounding": {
+        "large": {
+          "$type": "dimension",
+          "$value": "{size.1}"
+        },
+        "small": {
+          "$type": "dimension",
+          "$value": "{size.1}"
+        }
+      }
+    },
     "numpad": {
       "bg": {
         "$type": "color",
