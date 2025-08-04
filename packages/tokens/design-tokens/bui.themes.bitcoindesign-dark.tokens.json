@@ -23,6 +23,16 @@
           "$value": "{system.interactive.active.alternate}"
         }
       },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{system.interactive.hover}"
+        },
+        "outline": {
+          "$type": "color",
+          "$value": "{system.interactive.hover}"
+        }
+      },
       "disabled": {
         "bg": {
           "$type": "color",
@@ -35,16 +45,6 @@
         "text": {
           "$type": "color",
           "$value": "#ffffff80"
-        }
-      },
-      "hover": {
-        "bg": {
-          "$type": "color",
-          "$value": "{system.interactive.hover}"
-        },
-        "outline": {
-          "$type": "color",
-          "$value": "{system.interactive.hover}"
         }
       }
     },
@@ -71,10 +71,6 @@
           "$value": "{tailwind.orange.100}"
         }
       },
-      "text": {
-        "$type": "color",
-        "$value": "{white}"
-      },
       "active": {
         "bg": {
           "$type": "color",
@@ -88,6 +84,10 @@
           "$type": "color",
           "$value": "{tailwind.orange.100}"
         }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{white}"
       },
       "disabled": {
         "outline": {
@@ -113,16 +113,16 @@
         "$type": "color",
         "$value": "{white}"
       },
-      "hover": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.gray.900}"
-        }
-      },
       "disabled": {
         "text": {
           "$type": "color",
           "$value": "{tailwind.zinc.500}"
+        }
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.gray.900}"
         }
       },
       "active": {
@@ -157,6 +157,8 @@
   },
   "system": {
     "interactive": {
+      "$type": "color",
+      "$value": "{tailwind.orange.400}",
       "active": {
         "$type": "color",
         "$value": "{tailwind.orange.500}",
@@ -165,8 +167,6 @@
           "$value": "{tailwind.red.900}"
         }
       },
-      "$type": "color",
-      "$value": "{tailwind.orange.400}",
       "disabled": {
         "$type": "color",
         "$value": "{tailwind.orange.900}"
@@ -180,6 +180,10 @@
       "danger": {
         "$type": "color",
         "$value": "{tailwind.red.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#fb2c3680"
+        },
         "text": {
           "$type": "color",
           "$value": "{tailwind.red.300}"
@@ -188,6 +192,10 @@
       "caution": {
         "$type": "color",
         "$value": "{tailwind.amber.400}",
+        "active": {
+          "$type": "color",
+          "$value": "#ffb90080"
+        },
         "text": {
           "$type": "color",
           "$value": "{tailwind.amber.100}"
@@ -196,6 +204,10 @@
       "success": {
         "$type": "color",
         "$value": "{tailwind.green.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#00c95080"
+        },
         "text": {
           "$type": "color",
           "$value": "{tailwind.green.200}"
@@ -204,6 +216,10 @@
       "neutral": {
         "$type": "color",
         "$value": "{tailwind.zinc.500}",
+        "active": {
+          "$type": "color",
+          "$value": "#ff690080"
+        },
         "text": {
           "$type": "color",
           "$value": "{text.secondary}"
@@ -216,24 +232,6 @@
     }
   },
   "component": {
-    "numpad": {
-      "bg": {
-        "$type": "color",
-        "$value": "{background}"
-      },
-      "active": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.orange.800}"
-        }
-      },
-      "hover": {
-        "bg": {
-          "$type": "color",
-          "$value": "{tailwind.zinc.800}"
-        }
-      }
-    },
     "input": {
       "bg": {
         "$type": "color",
@@ -254,20 +252,38 @@
         }
       }
     },
+    "numpad": {
+      "bg": {
+        "$type": "color",
+        "$value": "{background}"
+      },
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.zinc.800}"
+        }
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{tailwind.orange.800}"
+        }
+      }
+    },
     "toggle": {
       "bg": {
         "$type": "color",
         "$value": "{tailwind.zinc.700}"
-      },
-      "switch": {
-        "$type": "color",
-        "$value": "{white}"
       },
       "active": {
         "bg": {
           "$type": "color",
           "$value": "{system.interactive}"
         }
+      },
+      "switch": {
+        "$type": "color",
+        "$value": "{white}"
       }
     }
   }

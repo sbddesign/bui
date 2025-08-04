@@ -17,7 +17,6 @@ export class BuiInput extends LitElement {
     css`
       :host {
         display: block;
-        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
       
       .input-container {
@@ -51,22 +50,17 @@ export class BuiInput extends LitElement {
         border-radius: var(--component-input-rounding-large);
         padding: var(--size-4) var(--size-6);
         position: relative;
-        margin-bottom: calc(-1 * var(--size-6));
         order: 2;
       }
       
       .input-field.small {
-        height: 48px;
-        padding: var(--size-3) var(--size-4);
+        padding: var(--size-4) var(--size-3);
         border-radius: var(--component-input-rounding-small);
-        margin-bottom: calc(-1 * var(--size-6));
       }
       
       .input-field.large {
-        height: 64px;
-        padding: var(--size-4) var(--size-6);
+        padding: var(--size-6) var(--size-4);
         border-radius: var(--component-input-rounding-large);
-        margin-bottom: calc(-1 * var(--size-6));
       }
       
       .input-content {
@@ -126,11 +120,11 @@ export class BuiInput extends LitElement {
         border-radius: 0 0 var(--component-input-rounding-large) var(--component-input-rounding-large);
         padding: calc(var(--size-6) + var(--size-3)) var(--size-6) var(--size-4);
         order: 1;
+        margin-top: calc(-1 * var(--size-6));
       }
       
       .message-container.small {
         border-radius: 0 0 var(--component-input-rounding-small) var(--component-input-rounding-small);
-        padding: calc(var(--size-4) + var(--size-3)) var(--size-4) var(--size-3);
       }
       
       .message-container.large {
@@ -203,37 +197,37 @@ export class BuiInput extends LitElement {
         color: var(--system-mood-success-text);
       }
       
-                        /* Focus styles */
-                  .input-field:focus-within {
-                    outline: 2px solid;
-                    outline-offset: 0;
-                  }
-                  
-                  .input-field.neutral:focus-within {
-                    outline-color: var(--system-mood-neutral);
-                  }
-                  
-                  .input-field.caution:focus-within {
-                    outline-color: var(--system-mood-caution);
-                  }
-                  
-                  .input-field.danger:focus-within {
-                    outline-color: var(--system-mood-danger);
-                  }
-                  
-                  .input-field.success:focus-within {
-                    outline-color: var(--system-mood-success);
-                  }
-      
-      /* Disabled state */
-      .input-field:disabled {
+    /* Focus styles */
+    .input-field:focus-within {
+    outline: 3px solid;
+    outline-offset: 0;
+    }
+    
+    .input-field.neutral:focus-within {
+    outline-color: var(--system-mood-neutral-active);
+    }
+    
+    .input-field.caution:focus-within {
+    outline-color: var(--system-mood-caution-active);
+    }
+    
+    .input-field.danger:focus-within {
+    outline-color: var(--system-mood-danger-active);
+    }
+    
+    .input-field.success:focus-within {
+    outline-color: var(--system-mood-success-active);
+    }
+
+    /* Disabled state */
+    .input-field:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-      }
-      
-      input:disabled {
+    }
+    
+    input:disabled {
         cursor: not-allowed;
-      }
+    }
     `
   ];
 
@@ -296,9 +290,7 @@ export class BuiInput extends LitElement {
     return html`
       <div class="input-container">
         ${this.showLabel ? html`
-          <div class="label">
-            <p>${this.label}</p>
-          </div>
+            <label class="label">${this.label}</label>  
         ` : ''}
         
         <div class="field-container">
