@@ -25,6 +25,8 @@
     "./numpad-button.js": "./numpad-button.js",
     "./button-cluster.js": "./button-cluster.js",
     "./input.js": "./input.js",
+    "./money-value.js": "./money-value.js",
+    "./bitcoin-value.js": "./bitcoin-value.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
