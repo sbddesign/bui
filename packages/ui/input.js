@@ -203,11 +203,27 @@ export class BuiInput extends LitElement {
         color: var(--system-mood-success-text);
       }
       
-      /* Focus styles */
-      .input-field:focus-within {
-        outline: 2px solid var(--system-interactive);
-        outline-offset: 2px;
-      }
+                        /* Focus styles */
+                  .input-field:focus-within {
+                    outline: 2px solid;
+                    outline-offset: 0;
+                  }
+                  
+                  .input-field.neutral:focus-within {
+                    outline-color: var(--system-mood-neutral);
+                  }
+                  
+                  .input-field.caution:focus-within {
+                    outline-color: var(--system-mood-caution);
+                  }
+                  
+                  .input-field.danger:focus-within {
+                    outline-color: var(--system-mood-danger);
+                  }
+                  
+                  .input-field.success:focus-within {
+                    outline-color: var(--system-mood-success);
+                  }
       
       /* Disabled state */
       .input-field:disabled {
