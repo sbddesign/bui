@@ -3,6 +3,7 @@ import '../../icons/dist/search/lg.js';
 import '../../icons/dist/scan/lg.js';
 import '../../icons/dist/crossCircle/lg.js';
 import '../../icons/dist/checkCircle/lg.js';
+import '../../icons/dist/warning/lg.js';
 
 export default {
   title: 'BUI/Input',
@@ -19,10 +20,8 @@ export default {
     },
     label: { control: 'text' },
     value: { control: 'text' },
-    message: { control: 'text' },
     placeholder: { control: 'text' },
     showLabel: { control: 'boolean' },
-    showMessage: { control: 'boolean' },
     showIconLeft: { control: 'boolean' },
     showIconRight: { control: 'boolean' },
     iconRightAction: { control: 'text' },
@@ -32,10 +31,8 @@ export default {
     size: 'large',
     label: 'Label',
     value: '',
-    message: 'Bitcoin ipsum dolor sit amet. Outputs, genesis block blockchain mempool hash soft fork digital signature whitepaper!',
     placeholder: 'Enter text...',
     showLabel: true,
-    showMessage: false,
     showIconLeft: false,
     showIconRight: false,
     iconRightAction: '',
@@ -54,10 +51,8 @@ export const Default = {
     input.size = args.size;
     input.label = args.label;
     input.value = args.value;
-    input.message = args.message;
     input.placeholder = args.placeholder;
     input.showLabel = args.showLabel;
-    input.showMessage = args.showMessage;
     input.showIconLeft = args.showIconLeft;
     input.showIconRight = args.showIconRight;
     input.iconRightAction = args.iconRightAction;
@@ -95,9 +90,12 @@ export const AllMoods = {
       const input = document.createElement('bui-input');
       input.mood = item.mood;
       input.label = item.label;
-      input.message = item.message;
-      input.showMessage = true;
       input.placeholder = `Enter ${item.mood} text...`;
+      
+      const message = document.createElement('span');
+      message.textContent = item.message;
+      message.setAttribute('slot', 'message');
+      input.appendChild(message);
       
       wrapper.appendChild(label);
       wrapper.appendChild(input);
@@ -273,9 +271,117 @@ export const WithMessages = {
       const input = document.createElement('bui-input');
       input.mood = example.mood;
       input.label = example.label;
-      input.message = example.message;
-      input.showMessage = true;
       input.placeholder = example.placeholder;
+      
+      const message = document.createElement('span');
+      message.textContent = example.message;
+      message.setAttribute('slot', 'message');
+      input.appendChild(message);
+      
+      wrapper.appendChild(label);
+      wrapper.appendChild(input);
+      container.appendChild(wrapper);
+    });
+    
+    return container;
+  },
+};
+
+// Complex message content
+export const ComplexMessages = {
+  render: () => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '2rem';
+    
+    const examples = [
+      { 
+        mood: 'neutral',
+        label: 'Input with Bullet List',
+        placeholder: 'Enter text...',
+        messageType: 'list'
+      },
+      { 
+        mood: 'caution',
+        label: 'Input with Link',
+        placeholder: 'Enter text...',
+        messageType: 'link'
+      },
+      { 
+        mood: 'danger',
+        label: 'Input with Icon',
+        placeholder: 'Enter text...',
+        messageType: 'icon'
+      },
+      { 
+        mood: 'success',
+        label: 'Input with Mixed Content',
+        placeholder: 'Enter text...',
+        messageType: 'mixed'
+      },
+    ];
+    
+    examples.forEach(example => {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.flexDirection = 'column';
+      wrapper.style.gap = '1rem';
+      
+      const label = document.createElement('h3');
+      label.textContent = example.label;
+      label.style.margin = '0';
+      label.style.fontSize = '1.125rem';
+      label.style.color = 'var(--text-secondary)';
+      
+      const input = document.createElement('bui-input');
+      input.mood = example.mood;
+      input.label = example.label;
+      input.placeholder = example.placeholder;
+      
+      // Create different types of message content
+      const message = document.createElement('div');
+      message.setAttribute('slot', 'message');
+      
+      switch (example.messageType) {
+        case 'list':
+          message.innerHTML = `
+            <ul style="margin: 0; padding-left: 1rem;">
+              <li style="margin-bottom: 0.35rem;">First requirement</li>
+              <li style="margin-bottom: 0.35rem;">Second requirement</li>
+              <li>Third requirement</li>
+            </ul>
+          `;
+          break;
+        case 'link':
+          message.innerHTML = `
+            <span>Please read our </span>
+            <a href="#" style="color: inherit; text-decoration: underline;">terms of service</a>
+            <span> before continuing.</span>
+          `;
+          break;
+        case 'icon':
+          const icon = document.createElement('bui-warning-lg');
+          icon.style.width = '24px';
+          icon.style.height = '24px';
+          icon.style.marginLeft = '8px';
+          icon.style.position = 'relative';
+          icon.style.top = '6px';
+          
+          message.innerHTML = 'This field requires attention.';
+          message.appendChild(icon);
+          break;
+        case 'mixed':
+          message.innerHTML = `
+            <div><strong>Success!</strong><br /><br /></div>
+            <div>
+                <a href="#" style="color: inherit; text-decoration: underline;">View details</a> or <a href="#" style="color: inherit; text-decoration: underline;">continue</a>.
+            </div>
+          `;
+          break;
+      }
+      
+      input.appendChild(message);
       
       wrapper.appendChild(label);
       wrapper.appendChild(input);
@@ -293,10 +399,8 @@ export const Interactive = {
     size: 'large',
     label: 'Interactive Input',
     value: '',
-    message: 'This is an interactive example',
     placeholder: 'Type something...',
     showLabel: true,
-    showMessage: true,
     showIconLeft: true,
     showIconRight: true,
     iconRightAction: 'clear',
@@ -307,10 +411,8 @@ export const Interactive = {
     input.size = args.size;
     input.label = args.label;
     input.value = args.value;
-    input.message = args.message;
     input.placeholder = args.placeholder;
     input.showLabel = args.showLabel;
-    input.showMessage = args.showMessage;
     input.showIconLeft = args.showIconLeft;
     input.showIconRight = args.showIconRight;
     input.iconRightAction = args.iconRightAction;
@@ -327,6 +429,12 @@ export const Interactive = {
       iconRight.setAttribute('slot', 'icon-right');
       input.appendChild(iconRight);
     }
+    
+    // Add message
+    const message = document.createElement('span');
+    message.textContent = 'This is an interactive example';
+    message.setAttribute('slot', 'message');
+    input.appendChild(message);
     
     // Add event listeners
     input.addEventListener('input', (e) => {

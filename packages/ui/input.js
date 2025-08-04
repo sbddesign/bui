@@ -6,10 +6,8 @@ export class BuiInput extends LitElement {
     size: { type: String, reflect: true }, // 'large', 'small'
     label: { type: String, reflect: true },
     value: { type: String, reflect: true },
-    message: { type: String, reflect: true },
     placeholder: { type: String, reflect: true },
     showLabel: { type: Boolean, reflect: true, attribute: 'show-label' },
-    showMessage: { type: Boolean, reflect: true, attribute: 'show-message' },
     showIconLeft: { type: Boolean, reflect: true, attribute: 'show-icon-left' },
     showIconRight: { type: Boolean, reflect: true, attribute: 'show-icon-right' },
     iconRightAction: { type: String, attribute: 'icon-right-action' }, // function name to call
@@ -229,10 +227,8 @@ export class BuiInput extends LitElement {
     this.size = 'large';
     this.label = 'Label';
     this.value = '';
-    this.message = '';
     this.placeholder = '';
     this.showLabel = true;
-    this.showMessage = false;
     this.showIconLeft = false;
     this.showIconRight = false;
     this.iconRightAction = '';
@@ -254,6 +250,26 @@ export class BuiInput extends LitElement {
         bubbles: true,
         composed: true
       }));
+    }
+  }
+
+  updated(changedProperties) {
+    super.updated(changedProperties);
+    
+    // Check if message slot has content and show/hide accordingly
+    const messageSlot = this.shadowRoot.querySelector('slot[name="message"]');
+    const messageContainer = this.shadowRoot.querySelector('.message-container');
+    
+    if (messageSlot && messageContainer) {
+      const assignedNodes = messageSlot.assignedNodes();
+      const hasContent = assignedNodes.length > 0 && assignedNodes.some(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return node.textContent.trim().length > 0;
+        }
+        return true; // Element nodes have content
+      });
+      
+      messageContainer.style.display = hasContent ? 'block' : 'none';
     }
   }
 
@@ -296,13 +312,11 @@ export class BuiInput extends LitElement {
             </div>
           </div>
           
-          ${this.showMessage ? html`
-            <div class="${messageClasses}">
-              <div class="message">
-                <p>${this.message}</p>
-              </div>
+          <div class="${messageClasses}" style="display: none;">
+            <div class="message">
+              <slot name="message"></slot>
             </div>
-          ` : ''}
+          </div>
         </div>
       </div>
     `;
