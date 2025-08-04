@@ -35,7 +35,7 @@ export const Default = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.setAttribute('amount', args.amount);
+    moneyValue.amount = args.amount;
     return moneyValue;
   },
 };
@@ -49,9 +49,9 @@ export const SymbolLeft = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.setAttribute('symbol-position', args.symbolPosition);
-    moneyValue.setAttribute('symbol', args.symbol);
-    moneyValue.setAttribute('amount', args.amount);
+    moneyValue.symbolPosition = args.symbolPosition;
+    moneyValue.symbol = args.symbol;
+    moneyValue.amount = args.amount;
     return moneyValue;
   },
 };
@@ -65,9 +65,9 @@ export const SymbolRight = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.setAttribute('symbol-position', args.symbolPosition);
-    moneyValue.setAttribute('symbol', args.symbol);
-    moneyValue.setAttribute('amount', args.amount);
+    moneyValue.symbolPosition = args.symbolPosition;
+    moneyValue.symbol = args.symbol;
+    moneyValue.amount = args.amount;
     return moneyValue;
   },
 };
@@ -101,8 +101,8 @@ export const DifferentCurrencies = {
       label.style.color = 'var(--text-secondary)';
       
       const moneyValue = document.createElement('bui-money-value');
-      moneyValue.setAttribute('symbol', currency.symbol);
-      moneyValue.setAttribute('amount', currency.amount);
+      moneyValue.symbol = currency.symbol;
+      moneyValue.amount = currency.amount;
       
       wrapper.appendChild(label);
       wrapper.appendChild(moneyValue);
@@ -143,7 +143,7 @@ export const WithTruncation = {
       label.style.color = 'var(--text-secondary)';
       
       const moneyValue = document.createElement('bui-money-value');
-      moneyValue.setAttribute('amount', example.amount);
+      moneyValue.amount = example.amount;
       moneyValue.truncation = true;
       
       wrapper.appendChild(label);
@@ -183,11 +183,11 @@ export const LargeAmounts = {
       label.style.color = 'var(--text-secondary)';
       
       const withoutTruncation = document.createElement('bui-money-value');
-      withoutTruncation.setAttribute('amount', item.amount);
+      withoutTruncation.amount = item.amount;
       withoutTruncation.truncation = false;
       
       const withTruncation = document.createElement('bui-money-value');
-      withTruncation.setAttribute('amount', item.amount);
+      withTruncation.amount = item.amount;
       withTruncation.truncation = true;
       
       wrapper.appendChild(label);
@@ -229,7 +229,7 @@ export const BitcoinAmounts = {
       label.style.color = 'var(--text-secondary)';
       
       const moneyValue = document.createElement('bui-money-value');
-      moneyValue.setAttribute('amount', item.amount);
+      moneyValue.amount = item.amount;
       
       wrapper.appendChild(label);
       wrapper.appendChild(moneyValue);
@@ -268,13 +268,13 @@ export const SatcommaExamples = {
       label.style.color = 'var(--text-secondary)';
       
       const withoutSatcomma = document.createElement('bui-money-value');
-      withoutSatcomma.setAttribute('symbol', '₿');
+      withoutSatcomma.symbol = '₿';
       withoutSatcomma.amount = example.amount;
       withoutSatcomma.satcomma = false;
       
       const withSatcomma = document.createElement('bui-money-value');
-      withSatcomma.setAttribute('symbol', 'BTC');
-      withSatcomma.setAttribute('symbol-position', 'right')
+      withSatcomma.symbol = 'BTC';
+      withSatcomma.symbolPosition = 'right';
       withSatcomma.amount = example.amount;
       withSatcomma.satcomma = true;
       
