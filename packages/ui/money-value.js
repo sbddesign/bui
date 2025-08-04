@@ -15,7 +15,6 @@ export class BuiMoneyValue extends LitElement {
       :host {
         display: inline-block;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: var(--text-primary);
       }
       
       .money-value {
@@ -35,27 +34,6 @@ export class BuiMoneyValue extends LitElement {
       
       .amount {
         font-weight: 500;
-      }
-      
-      /* Responsive font sizes */
-      .money-value.small .amount,
-      .money-value.small .symbol {
-        font-size: 0.875rem;
-      }
-      
-      .money-value.default .amount,
-      .money-value.default .symbol {
-        font-size: 1rem;
-      }
-      
-      .money-value.large .amount,
-      .money-value.large .symbol {
-        font-size: 1.25rem;
-      }
-      
-      .money-value.xlarge .amount,
-      .money-value.xlarge .symbol {
-        font-size: 1.5rem;
       }
     `
   ];

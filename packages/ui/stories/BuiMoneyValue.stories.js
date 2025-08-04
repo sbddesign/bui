@@ -240,47 +240,6 @@ export const BitcoinAmounts = {
   },
 };
 
-// Different sizes
-export const DifferentSizes = {
-  render: () => {
-    const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.flexDirection = 'column';
-    container.style.gap = '1rem';
-    
-    const sizes = [
-      { size: 'small', label: 'Small' },
-      { size: 'default', label: 'Default' },
-      { size: 'large', label: 'Large' },
-      { size: 'xlarge', label: 'Extra Large' },
-    ];
-    
-    sizes.forEach(item => {
-      const wrapper = document.createElement('div');
-      wrapper.style.display = 'flex';
-      wrapper.style.alignItems = 'center';
-      wrapper.style.gap = '1rem';
-      
-      const label = document.createElement('span');
-      label.textContent = `${item.label}:`;
-      label.style.minWidth = '100px';
-      label.style.fontSize = '0.875rem';
-      label.style.color = 'var(--text-secondary)';
-      
-      const moneyValue = document.createElement('bui-money-value');
-      moneyValue.setAttribute('amount', '1234.56');
-      moneyValue.setAttribute('symbol', '₿');
-      moneyValue.setAttribute('size', item.size);
-      
-      wrapper.appendChild(label);
-      wrapper.appendChild(moneyValue);
-      container.appendChild(wrapper);
-    });
-    
-    return container;
-  },
-};
-
 // Satcomma examples
 export const SatcommaExamples = {
   render: () => {
