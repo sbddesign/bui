@@ -85,6 +85,9 @@ importers:
       '@bui/icons':
         specifier: workspace:*
         version: link:../icons
+      bitcoin-qr:
+        specifier: ^1.4.1
+        version: 1.4.1
       lit:
         specifier: ^3.3.0
         version: 3.3.0
@@ -865,6 +868,9 @@ packages:
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
+
+  bitcoin-qr@1.4.1:
+    resolution: {integrity: sha512-IafTp8M1XmWHSuioBmxEFJ85uf/eL9JhQ0V+gALAoypa54Y1PwMyZG6PAzVvoFN3u5vlyetf+1BMu6m5ALiLdQ==}
 
   brace-expansion@1.1.12:
     resolution: {integrity: sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==}
@@ -2490,6 +2496,8 @@ snapshots:
       open: 8.4.2
 
   binary-extensions@2.3.0: {}
+
+  bitcoin-qr@1.4.1: {}
 
   brace-expansion@1.1.12:
     dependencies:
