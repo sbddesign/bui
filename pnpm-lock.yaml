@@ -85,6 +85,9 @@ importers:
       '@bui/icons':
         specifier: workspace:*
         version: link:../icons
+      '@mutinywallet/waila-wasm':
+        specifier: ^0.5.0
+        version: 0.5.0
       lit:
         specifier: ^3.3.0
         version: 3.3.0
@@ -475,6 +478,9 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@mutinywallet/waila-wasm@0.5.0':
+    resolution: {integrity: sha512-/gtawHeqKn7hPqPyU7AKEYW8Vy3lgTlvwfzTxpG077KGEKlMcYUImkEoJu14m4+q9YGi5YLYzdZd3BcMOXiVjA==}
 
   '@neoconfetti/react@1.0.0':
     resolution: {integrity: sha512-klcSooChXXOzIm+SE5IISIAn3bYzYfPjbX7D7HoqZL84oAfgREeSg5vSIaSFH+DaGzzvImTyWe1OyrJ67vik4A==}
@@ -2093,6 +2099,8 @@ snapshots:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.8
       react: 19.1.0
+
+  '@mutinywallet/waila-wasm@0.5.0': {}
 
   '@neoconfetti/react@1.0.0': {}
 

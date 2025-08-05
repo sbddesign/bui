@@ -1,0 +1,233 @@
+import { LitElement, html, css } from 'lit';
+import { BuiInput } from './input.js';
+import init, { PaymentParams } from '@mutinywallet/waila-wasm';
+
+export class BuiBitcoinInput extends LitElement {
+  static properties = {
+    value: { type: String, reflect: true },
+    placeholder: { type: String, reflect: true },
+    label: { type: String, reflect: true },
+    size: { type: String, reflect: true },
+    showLabel: { type: Boolean, reflect: true, attribute: 'show-label' },
+    showIconLeft: { type: Boolean, reflect: true, attribute: 'show-icon-left' },
+    showIconRight: { type: Boolean, reflect: true, attribute: 'show-icon-right' },
+    iconRightAction: { type: String, attribute: 'icon-right-action' },
+    
+    // Bitcoin-specific properties
+    enableNodePubkey: { type: Boolean, reflect: true, attribute: 'enable-node-pubkey' },
+    enableRgbInvoice: { type: Boolean, reflect: true, attribute: 'enable-rgb-invoice' },
+    enableNostrPubkey: { type: Boolean, reflect: true, attribute: 'enable-nostr-pubkey' },
+    unrecognizedMessage: { type: String, attribute: 'unrecognized-message' },
+    unsupportedMessage: { type: String, attribute: 'unsupported-message' },
+    
+    // Internal state
+    _currentMood: { type: String, state: true },
+    _currentMessage: { type: String, state: true },
+    _isWasmReady: { type: Boolean, state: true }
+  };
+
+  static styles = [
+    css`
+      :host {
+        display: block;
+        width: 100%;
+      }
+      
+      bui-input {
+        width: 100%;
+      }
+    `
+  ];
+
+  constructor() {
+    super();
+    this.value = '';
+    this.placeholder = 'Enter bitcoin address, invoice, or payment info...';
+    this.label = 'Bitcoin Payment';
+    this.size = 'large';
+    this.showLabel = true;
+    this.showIconLeft = false;
+    this.showIconRight = false;
+    this.iconRightAction = '';
+    
+    // Bitcoin-specific defaults
+    this.enableNodePubkey = false;
+    this.enableRgbInvoice = false;
+    this.enableNostrPubkey = false;
+    this.unrecognizedMessage = 'Format not recognized. Please enter a valid bitcoin address, invoice, or payment info.';
+    this.unsupportedMessage = 'This format is recognized but not currently supported.';
+    
+    // Internal state
+    this._currentMood = 'neutral';
+    this._currentMessage = '';
+    this._isWasmReady = false;
+    
+    // Initialize WASM
+    this._initializeWasm();
+  }
+
+  async _initializeWasm() {
+    try {
+      await init();
+      this._isWasmReady = true;
+      // Re-validate current value if any
+      if (this.value) {
+        this._validateInput(this.value);
+      }
+    } catch (error) {
+      console.error('Failed to initialize bitcoin-waila WASM:', error);
+    }
+  }
+
+  _validateInput(value) {
+    if (!this._isWasmReady || !value.trim()) {
+      this._currentMood = 'neutral';
+      this._currentMessage = '';
+      return;
+    }
+
+    try {
+      const params = new PaymentParams(value.trim());
+      
+      // Check what type of payment this is and if it's supported
+      const supportedTypes = this._getSupportedTypes();
+      const detectedType = this._detectPaymentType(params);
+      
+      if (detectedType && supportedTypes.includes(detectedType)) {
+        this._currentMood = 'success';
+        this._currentMessage = `Valid ${detectedType} detected`;
+      } else if (detectedType) {
+        this._currentMood = 'caution';
+        this._currentMessage = this.unsupportedMessage;
+      } else {
+        this._currentMood = 'danger';
+        this._currentMessage = this.unrecognizedMessage;
+      }
+    } catch (error) {
+      this._currentMood = 'danger';
+      this._currentMessage = this.unrecognizedMessage;
+    }
+    
+    this.requestUpdate();
+  }
+
+  _getSupportedTypes() {
+    const defaultSupported = [
+      'bitcoin-address',
+      'bip21-uri', 
+      'lightning-invoice',
+      'lightning-offer',
+      'bolt12-invoice',
+      'bolt12-refund',
+      'lnurl',
+      'lightning-address'
+    ];
+    
+    const optionalSupported = [];
+    if (this.enableNodePubkey) optionalSupported.push('node-pubkey');
+    if (this.enableRgbInvoice) optionalSupported.push('rgb-invoice');
+    if (this.enableNostrPubkey) optionalSupported.push('nostr-pubkey');
+    
+    return [...defaultSupported, ...optionalSupported];
+  }
+
+  _detectPaymentType(params) {
+    try {
+      // Check different properties to determine type
+      if (params.address && !params.invoice && !params.offer) {
+        return 'bitcoin-address';
+      }
+      
+      if (params.address && params.invoice) {
+        return 'bip21-uri';
+      }
+      
+      if (params.invoice && !params.address) {
+        return 'lightning-invoice';
+      }
+      
+      if (params.offer) {
+        return 'lightning-offer';
+      }
+      
+      if (params.lnurl) {
+        // Could be LNURL or Lightning Address
+        if (this.value.includes('@')) {
+          return 'lightning-address';
+        }
+        return 'lnurl';
+      }
+      
+      if (params.node_pubkey && this.enableNodePubkey) {
+        return 'node-pubkey';
+      }
+      
+      // Check for RGB invoice pattern
+      if (this.enableRgbInvoice && this.value.startsWith('rgb:')) {
+        return 'rgb-invoice';
+      }
+      
+      // Check for Nostr pubkey (basic pattern check)
+      if (this.enableNostrPubkey && this._isNostrPubkey(this.value)) {
+        return 'nostr-pubkey';
+      }
+      
+      return null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  _isNostrPubkey(value) {
+    // Basic check for Nostr pubkey format (npub or hex)
+    return value.startsWith('npub') || (value.length === 64 && /^[0-9a-fA-F]+$/.test(value));
+  }
+
+  _handleInput(e) {
+    this.value = e.detail.value;
+    this._validateInput(this.value);
+    
+    // Dispatch custom event
+    this.dispatchEvent(new CustomEvent('bitcoin-input', {
+      detail: { 
+        value: this.value,
+        mood: this._currentMood,
+        isValid: this._currentMood === 'success'
+      },
+      bubbles: true,
+      composed: true
+    }));
+  }
+
+  _handleIconRightClick(e) {
+    this.dispatchEvent(new CustomEvent('icon-right-click', {
+      detail: e.detail,
+      bubbles: true,
+      composed: true
+    }));
+  }
+
+  render() {
+    return html`
+      <bui-input
+        .value="${this.value}"
+        .placeholder="${this.placeholder}"
+        .label="${this.label}"
+        .size="${this.size}"
+        .mood="${this._currentMood}"
+        .showLabel="${this.showLabel}"
+        .showIconLeft="${this.showIconLeft}"
+        .showIconRight="${this.showIconRight}"
+        .iconRightAction="${this.iconRightAction}"
+        @input="${this._handleInput}"
+        @icon-right-click="${this._handleIconRightClick}"
+      >
+        <slot name="icon-left" slot="icon-left"></slot>
+        <slot name="icon-right" slot="icon-right"></slot>
+        <span slot="message">${this._currentMessage}</span>
+      </bui-input>
+    `;
+  }
+}
+
+customElements.define('bui-bitcoin-input', BuiBitcoinInput);

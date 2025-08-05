@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "lit": "^3.3.0",
-    "@bui/icons": "workspace:*"
+    "@bui/icons": "workspace:*",
+    "@mutinywallet/waila-wasm": "^0.5.0"
   },
   "type": "module",
   "module": "dist/index.js",
@@ -25,6 +26,7 @@
     "./numpad-button.js": "./numpad-button.js",
     "./button-cluster.js": "./button-cluster.js",
     "./input.js": "./input.js",
+    "./bitcoin-input.js": "./bitcoin-input.js",
     "./money-value.js": "./money-value.js",
     "./bitcoin-value.js": "./bitcoin-value.js",
     "./tokens.css": "./tokens.css"
