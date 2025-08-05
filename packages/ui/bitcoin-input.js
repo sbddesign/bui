@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { BuiInput } from './input.js';
-import init, { PaymentParams } from '@mutinywallet/waila-wasm';
+import init, { PaymentParams, initSync } from '@mutinywallet/waila-wasm';
 
 export class BuiBitcoinInput extends LitElement {
   static properties = {
@@ -68,14 +68,61 @@ export class BuiBitcoinInput extends LitElement {
 
   async _initializeWasm() {
     try {
+      // Try default initialization first
       await init();
       this._isWasmReady = true;
+      console.log('Bitcoin WASM initialized successfully');
+      
       // Re-validate current value if any
       if (this.value) {
         this._validateInput(this.value);
       }
     } catch (error) {
       console.error('Failed to initialize bitcoin-waila WASM:', error);
+      
+      // Try alternative initialization approaches
+      try {
+        console.log('Trying fallback WASM initialization...');
+        
+        // Try to fetch WASM from various possible paths
+        const possiblePaths = [
+          '/waila_wasm_bg.wasm',  // From public directory
+          './waila_wasm_bg.wasm',  // Relative to current
+          '/@mutinywallet/waila-wasm/waila_wasm_bg.wasm',
+          '/node_modules/@mutinywallet/waila-wasm/waila_wasm_bg.wasm',
+          '../node_modules/@mutinywallet/waila-wasm/waila_wasm_bg.wasm'
+        ];
+        
+        let wasmLoaded = false;
+        for (const path of possiblePaths) {
+          try {
+            console.log(`Trying to fetch WASM from: ${path}`);
+            const response = await fetch(path);
+            if (response.ok) {
+              const wasmBytes = await response.arrayBuffer();
+              initSync(wasmBytes);
+              this._isWasmReady = true;
+              wasmLoaded = true;
+              console.log(`Successfully loaded WASM from: ${path}`);
+              break;
+            }
+          } catch (fetchError) {
+            console.warn(`Failed to fetch from ${path}:`, fetchError);
+          }
+        }
+        
+        if (!wasmLoaded) {
+          throw new Error('All WASM loading attempts failed');
+        }
+        
+        // Re-validate current value if any
+        if (this.value) {
+          this._validateInput(this.value);
+        }
+      } catch (fallbackError) {
+        console.error('All WASM initialization attempts failed:', fallbackError);
+        this._isWasmReady = false;
+      }
     }
   }
 
