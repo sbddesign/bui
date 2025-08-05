@@ -41,7 +41,7 @@ export class BuiBitcoinInput extends LitElement {
 
   constructor() {
     super();
-    this.value = '';
+    this._value = '';
     this.placeholder = 'Enter bitcoin address, invoice, or payment info...';
     this.label = 'Bitcoin Payment';
     this.size = 'large';
@@ -66,6 +66,18 @@ export class BuiBitcoinInput extends LitElement {
     this._initializeWasm();
   }
 
+  // Override the property setter to ensure proper updates
+  set value(val) {
+    const oldValue = this._value;
+    this._value = val;
+    console.log('Value setter called:', val); // Debug log
+    this.requestUpdate('value', oldValue);
+  }
+
+  get value() {
+    return this._value || '';
+  }
+
   async _initializeWasm() {
     try {
       // Try default initialization first
@@ -74,7 +86,7 @@ export class BuiBitcoinInput extends LitElement {
       console.log('Bitcoin WASM initialized successfully');
       
       // Re-validate current value if any
-      if (this.value) {
+      if (this.value && this.value.trim()) {
         this._validateInput(this.value);
       }
     } catch (error) {
@@ -116,7 +128,7 @@ export class BuiBitcoinInput extends LitElement {
         }
         
         // Re-validate current value if any
-        if (this.value) {
+        if (this.value && this.value.trim()) {
           this._validateInput(this.value);
         }
       } catch (fallbackError) {
@@ -231,8 +243,13 @@ export class BuiBitcoinInput extends LitElement {
   }
 
   _handleInput(e) {
-    this.value = e.detail.value;
+    const newValue = e.detail.value;
+    console.log('Input received:', newValue); // Debug log
+    
+    this.value = newValue;
     this._validateInput(this.value);
+    
+    console.log('Value after validation:', this.value); // Debug log
     
     // Dispatch custom event
     this.dispatchEvent(new CustomEvent('bitcoin-input', {
