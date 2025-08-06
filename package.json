@@ -7,7 +7,7 @@
     "build:tokens": "pnpm --filter @bui/tokens build",
     "build:icons": "pnpm --filter @bui/icons build",
     "storybook": "pnpm --filter @bui/ui storybook dev",
-    "storybook:build": "pnpm --filter @bui/ui storybook build",
+    "storybook:build": "pnpm --filter @bui/ui build-storybook",
     "demo:react": "pnpm --filter @bui/demo-react dev",
     "demo:svelte": "pnpm --filter @bui/demo-svelte dev",
     "test": "echo \"Error: no test specified\" && exit 1"
