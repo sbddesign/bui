@@ -27,6 +27,7 @@
     "./input.js": "./input.js",
     "./money-value.js": "./money-value.js",
     "./bitcoin-value.js": "./bitcoin-value.js",
+    "./option-dot.js": "./option-dot.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
