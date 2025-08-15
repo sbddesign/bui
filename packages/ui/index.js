@@ -6,3 +6,4 @@ export * from './button-cluster.js';
 export * from './input.js';
 export * from './money-value.js';
 export * from './bitcoin-value.js';
+export * from './option-dot.js';
