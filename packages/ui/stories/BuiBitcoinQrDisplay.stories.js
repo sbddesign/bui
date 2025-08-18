@@ -26,7 +26,7 @@ export default {
   },
 };
 
-export const Default = {
+export const OptionDots = {
   args: {
     option: 'unified',
     selector: 'dots',
@@ -34,13 +34,13 @@ export const Default = {
   parameters: {
     docs: {
       description: {
-        story: 'Default behavior with both address and lightning invoice. Shows selector dots to switch between unified, on-chain, and lightning QR formats.'
+        story: 'Default behavior with option dots. Shows three clickable dots to switch between unified, on-chain, and lightning QR formats. The active dot is highlighted in orange.'
       }
     }
   }
 };
 
-export const ToggleSelector = {
+export const ToggleButton = {
   args: {
     option: 'unified',
     selector: 'toggle',
@@ -48,7 +48,7 @@ export const ToggleSelector = {
   parameters: {
     docs: {
       description: {
-        story: 'Same as default but uses toggle button instead of dots to cycle through QR formats.'
+        story: 'Uses a toggle button instead of dots. The button shows the current option text with a cycle icon. Clicking cycles through the available QR formats.'
       }
     }
   }
@@ -64,7 +64,7 @@ export const LightningOnly = {
   parameters: {
     docs: {
       description: {
-        story: 'When only lightning invoice is provided, no selector is shown. Component automatically renders lightning-only QR code.'
+        story: 'When only lightning invoice is provided, no selector is shown. Component automatically renders lightning-only QR code with appropriate helper text.'
       }
     }
   }
@@ -80,7 +80,7 @@ export const OnchainOnly = {
   parameters: {
     docs: {
       description: {
-        story: 'When only on-chain address is provided, no selector is shown. Component automatically renders on-chain-only QR code.'
+        story: 'When only on-chain address is provided, no selector is shown. Component automatically renders on-chain-only QR code with appropriate helper text.'
       }
     }
   }
@@ -96,7 +96,7 @@ export const NoData = {
   parameters: {
     docs: {
       description: {
-        story: 'When no data is provided, shows "No data provided" message and no selector.'
+        story: 'When no data is provided, shows an error message and no selector. This helps developers identify when required data is missing.'
       }
     }
   }
