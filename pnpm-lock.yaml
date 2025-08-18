@@ -6,11 +6,7 @@ settings:
 
 importers:
 
-  .:
-    dependencies:
-      bitcoin-qr:
-        specifier: ^1.4.1
-        version: 1.5.0
+  .: {}
 
   packages/demo-react:
     dependencies:
