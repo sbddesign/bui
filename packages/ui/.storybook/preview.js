@@ -40,7 +40,8 @@ const preview = {
         icon: 'paintbrush',
         items: [
           { value: 'bitcoindesign', title: 'Bitcoin Design' },
-          { value: 'conduit', title: 'Conduit' }
+          { value: 'conduit', title: 'Conduit' },
+          { value: 'nuclearcandy', title: 'Nuclear Candy' }
         ],
         dynamicTitle: true,
       },
