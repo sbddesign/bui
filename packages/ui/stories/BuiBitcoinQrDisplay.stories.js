@@ -31,6 +31,13 @@ export const Default = {
     option: 'unified',
     selector: 'dots',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default behavior with both address and lightning invoice. Shows selector dots to switch between unified, on-chain, and lightning QR formats.'
+      }
+    }
+  }
 };
 
 export const ToggleSelector = {
@@ -38,18 +45,59 @@ export const ToggleSelector = {
     option: 'unified',
     selector: 'toggle',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Same as default but uses toggle button instead of dots to cycle through QR formats.'
+      }
+    }
+  }
 };
 
 export const LightningOnly = {
   args: {
+    address: '',
+    lightning: 'lnbc10u1pn9eh8vpp5k7q2dz6c4w0d3p0d8n2k3z6a7n8r7c9e9e0t8s8y5j6lm3vwm3dqzsdz5xysxxmmnwssx7un9de6xzetjv4kxzcm9d5c8g6t5de5k2mr0d5c8g6t5de5k2mr0da5gzqzjccqzpgxqyz5vqsp5usyc4lk9chsfp53kvcnvq456ganh60d89reykdngsmtj6yw3nhvq9qyysgqc8u6w',
     option: 'lightning',
     selector: 'dots',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'When only lightning invoice is provided, no selector is shown. Component automatically renders lightning-only QR code.'
+      }
+    }
+  }
 };
 
 export const OnchainOnly = {
   args: {
+    address: 'BC1QYLH3U67J673H6Y6ALV70M0PL2YZ53TZHVXGG7U',
+    lightning: '',
     option: 'onchain',
     selector: 'dots',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'When only on-chain address is provided, no selector is shown. Component automatically renders on-chain-only QR code.'
+      }
+    }
+  }
+};
+
+export const NoData = {
+  args: {
+    address: '',
+    lightning: '',
+    option: 'unified',
+    selector: 'dots',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'When no data is provided, shows "No data provided" message and no selector.'
+      }
+    }
+  }
 };

@@ -87,12 +87,30 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.size = 332;
   }
 
+  get hasBothAddressAndLightning() {
+    return this.address && this.lightning;
+  }
+
+  get effectiveOption() {
+    // If only one type of data is provided, force that option
+    if (this.address && !this.lightning) return 'onchain';
+    if (this.lightning && !this.address) return 'lightning';
+    // If both are provided, use the selected option
+    return this.option;
+  }
+
+  get shouldShowSelector() {
+    return this.hasBothAddressAndLightning;
+  }
+
   get unifiedString() {
     if (!this.address || !this.lightning) return '';
     return `bitcoin:${this.address}?lightning=${this.lightning}`;
   }
 
   cycleOption() {
+    if (!this.shouldShowSelector) return;
+    
     const order = ['unified', 'onchain', 'lightning'];
     const idx = order.indexOf(this.option);
     const next = order[(idx + 1) % order.length];
@@ -100,10 +118,13 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   setOption(newOption) {
+    if (!this.shouldShowSelector) return;
     this.option = newOption;
   }
 
   renderDotsSelector() {
+    if (!this.shouldShowSelector) return null;
+
     const unifiedActive = this.option === 'unified';
     const onchainActive = this.option === 'onchain';
     const lightningActive = this.option === 'lightning';
@@ -130,6 +151,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   renderToggleSelector() {
+    if (!this.shouldShowSelector) return null;
+
     return html`
       <div class="selector-row">
         <bui-button
@@ -147,6 +170,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   renderSelector() {
+    if (!this.shouldShowSelector) return null;
+    
     if (this.selector === 'toggle') return this.renderToggleSelector();
     return html`
       ${this.renderDotsSelector()}
@@ -156,16 +181,17 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   renderQr() {
     const styleVars = `--qr-size: ${this.size}px;`;
+    const effectiveOption = this.effectiveOption;
 
-    // Render according to option
+    // Render according to effective option
     return html`
       <div class="frame" style="${styleVars}">
         <div class="qr">
-          ${this.option === 'unified' && this.address && this.lightning
+          ${effectiveOption === 'unified' && this.address && this.lightning
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" lightning="${this.lightning}" type="svg"></bitcoin-qr>`
-            : this.option === 'onchain' && this.address
+            : effectiveOption === 'onchain' && this.address
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" type="svg"></bitcoin-qr>`
-            : this.option === 'lightning' && this.lightning
+            : effectiveOption === 'lightning' && this.lightning
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" lightning="${this.lightning}" type="svg"></bitcoin-qr>`
             : html`<div class="helper-text">No data provided</div>`}
         </div>
@@ -178,9 +204,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
       <div class="container">
         <div class="helper-text">Scan with any Bitcoin on-chain or Lightning wallet</div>
         ${this.renderQr()}
-        <div class="options">
-          ${this.renderSelector()}
-        </div>
+        ${this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null}
       </div>
     `;
   }
