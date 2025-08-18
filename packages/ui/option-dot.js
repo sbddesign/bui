@@ -19,6 +19,7 @@ export class BuiOptionDot extends LitElement {
         display: inline-block;
         width: var(--size-2);
         height: var(--size-2);
+        cursor: pointer;
       }
 
       .option-dot {
