@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    dependencies:
+      bitcoin-qr:
+        specifier: ^1.4.1
+        version: 1.5.0
 
   packages/demo-react:
     dependencies:
@@ -85,6 +89,9 @@ importers:
       '@bui/icons':
         specifier: workspace:*
         version: link:../icons
+      bitcoin-qr:
+        specifier: ^1.4.1
+        version: 1.5.0
       lit:
         specifier: ^3.3.0
         version: 3.3.0
@@ -865,6 +872,9 @@ packages:
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
+
+  bitcoin-qr@1.5.0:
+    resolution: {integrity: sha512-fnreUorEgB1Mk6psV9epr2yqeG5lzSqzlq3wfVa4+Pt+ORy84bvZUAj+4gQFnNIQd0rwOBSk5YWxm8Bii/L6TA==}
 
   brace-expansion@1.1.12:
     resolution: {integrity: sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==}
@@ -2490,6 +2500,8 @@ snapshots:
       open: 8.4.2
 
   binary-extensions@2.3.0: {}
+
+  bitcoin-qr@1.5.0: {}
 
   brace-expansion@1.1.12:
     dependencies:

@@ -7,3 +7,4 @@ export * from './input.js';
 export * from './money-value.js';
 export * from './bitcoin-value.js';
 export * from './option-dot.js';
+export * from './bitcoin-qr-display.js';
