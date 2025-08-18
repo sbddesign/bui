@@ -205,7 +205,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" click-behavior="none" type="svg"></bitcoin-qr>`
             : effectiveOption === 'lightning' && this.lightning
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
-            : html`<div class="helper-text">No data provided</div>`}
+            : html`<div class="helper-text">Failed to render QR code 😭</div>`}
         </div>
       </div>
     `;
