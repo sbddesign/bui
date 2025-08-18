@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import './option-dot.js';
 import './button.js';
+import '../icons/dist/cycle/lg.js';
 import '../icons/dist/cycle/md.js';
 
 const OPTION_LABELS = {
@@ -168,14 +169,14 @@ export class BuiBitcoinQrDisplay extends LitElement {
       <div class="selector-row">
         <bui-button
           style-type="free"
-          size="small"
-          content="icon"
+          size="default"
+          content="label+icon"
+          label="${OPTION_LABELS[this.option]}"
           aria-label="Cycle QR format"
           @click=${() => this.cycleOption()}
         >
           <bui-cycle-md slot="icon"></bui-cycle-md>
         </bui-button>
-        <div class="helper-text" aria-live="polite">${OPTION_LABELS[this.option]}</div>
       </div>
     `;
   }
