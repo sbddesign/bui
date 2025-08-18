@@ -9,6 +9,12 @@ const OPTION_LABELS = {
   lightning: 'Lightning',
 };
 
+const HELPER_TEXTS = {
+  unified: 'Scan with any Bitcoin on-chain or Lightning wallet',
+  onchain: 'Scan with any Bitcoin on-chain wallet',
+  lightning: 'Scan with any Bitcoin Lightning wallet',
+};
+
 export class BuiBitcoinQrDisplay extends LitElement {
   static properties = {
     address: { type: String },
@@ -101,6 +107,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   get shouldShowSelector() {
     return this.hasBothAddressAndLightning;
+  }
+
+  get helperText() {
+    const effectiveOption = this.effectiveOption;
+    return HELPER_TEXTS[effectiveOption] || HELPER_TEXTS.unified;
   }
 
   get unifiedString() {
@@ -202,7 +213,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   render() {
     return html`
       <div class="container">
-        <div class="helper-text">Scan with any Bitcoin on-chain or Lightning wallet</div>
+        <div class="helper-text">${this.helperText}</div>
         ${this.renderQr()}
         ${this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null}
       </div>
