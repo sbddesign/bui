@@ -7,7 +7,9 @@
           "bui.themes.bitcoindesign-light.tokens.json",
           "bui.themes.bitcoindesign-dark.tokens.json",
           "bui.themes.conduit-light.tokens.json",
-          "bui.themes.conduit-dark.tokens.json"
+          "bui.themes.conduit-dark.tokens.json",
+          "bui.themes.nuclearcandy-light.tokens.json",
+          "bui.themes.nuclearcandy-dark.tokens.json"
         ],
         "primitives": [
           "bui.primitives.tokens.json"
