@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "lit": "^3.3.0",
-    "@bui/icons": "workspace:*"
+    "@bui/icons": "workspace:*",
+    "bitcoin-qr": "^1.4.1"
   },
   "type": "module",
   "module": "dist/index.js",
@@ -27,6 +28,8 @@
     "./input.js": "./input.js",
     "./money-value.js": "./money-value.js",
     "./bitcoin-value.js": "./bitcoin-value.js",
+    "./option-dot.js": "./option-dot.js",
+    "./bitcoin-qr-display.js": "./bitcoin-qr-display.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
