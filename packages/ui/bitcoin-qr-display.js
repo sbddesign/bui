@@ -200,11 +200,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
       <div class="frame" style="${styleVars}">
         <div class="qr">
           ${effectiveOption === 'unified' && this.address && this.lightning
-            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" lightning="${this.lightning}" type="svg"></bitcoin-qr>`
+            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
             : effectiveOption === 'onchain' && this.address
-            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" type="svg"></bitcoin-qr>`
+            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" click-behavior="none" type="svg"></bitcoin-qr>`
             : effectiveOption === 'lightning' && this.lightning
-            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" lightning="${this.lightning}" type="svg"></bitcoin-qr>`
+            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
             : html`<div class="helper-text">No data provided</div>`}
         </div>
       </div>
