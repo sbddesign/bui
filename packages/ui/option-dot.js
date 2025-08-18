@@ -17,16 +17,15 @@ export class BuiOptionDot extends LitElement {
     css`
       :host {
         display: inline-block;
-        width: var(--size-4);
-        height: var(--size-4);
+        width: var(--size-2);
+        height: var(--size-2);
       }
 
       .option-dot {
         width: 100%;
         height: 100%;
-        border-radius: var(--size-4);
+        border-radius: var(--size-2);
         position: relative;
-        overflow: hidden;
         transition: background-color 0.2s ease;
       }
 
@@ -43,7 +42,7 @@ export class BuiOptionDot extends LitElement {
         position: absolute;
         inset: -2px;
         border: 2px solid;
-        border-radius: calc(var(--size-4) + 2px);
+        border-radius: calc(var(--size-2) + 2px);
         pointer-events: none;
       }
 
