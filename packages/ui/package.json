@@ -6,21 +6,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit": "^3.3.0",
     "@bui/icons": "workspace:*",
-    "bitcoin-qr": "^1.4.1"
+    "bitcoin-qr": "^1.4.1",
+    "lit": "^3.3.0"
   },
   "type": "module",
   "module": "dist/index.js",
+  "files": [
+    "dist",
+    "types",
+    "*.ts",
+    "*.js",
+    "*.css"
+  ],
   "exports": {
     ".": "./index.js",
-    "./button.js": "./button.js",
+    "./button.js": "./dist/button.js",
     "./toggle.js": "./toggle.js",
     "./message.js": "./message.js",
     "./numpad-button.js": "./numpad-button.js",
@@ -40,10 +50,12 @@
     "@storybook/addon-vitest": "^9.0.16",
     "@storybook/web-components": "^9.0.16",
     "@storybook/web-components-vite": "^9.0.16",
-    "storybook": "^9.0.16",
-    "vitest": "^3.2.4",
+    "@types/node": "^24.3.0",
     "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "playwright": "^1.54.1",
-    "@vitest/coverage-v8": "^3.2.4"
+    "storybook": "^9.0.16",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }

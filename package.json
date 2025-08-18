@@ -6,6 +6,8 @@
   "scripts": {
     "build:tokens": "pnpm --filter @bui/tokens build",
     "build:icons": "pnpm --filter @bui/icons build",
+    "build:ui": "pnpm --filter @bui/ui build",
+    "build:all": "pnpm build:tokens && pnpm build:icons && pnpm build:ui",
     "storybook": "pnpm --filter @bui/ui storybook dev",
     "storybook:build": "pnpm --filter @bui/ui build-storybook",
     "demo:react": "pnpm --filter @bui/demo-react dev",
