@@ -4,6 +4,6 @@ globs:
 alwaysApply: false
 ---
 
-- This rule is only revelevant when you are asked to implement a design from Figma
-- If the Figma MCP server does not respond, stop working and ask for assistance form the user
-- If the Figma MCP server gives you a bad response, stop working and ask for assistance form the user
+- This rule is only relevant when you are asked to implement a design from Figma
+- If the Figma MCP server does not respond, stop working and ask for assistance from the user
+- If the Figma MCP server gives you a bad response, stop working and ask for assistance from the user
