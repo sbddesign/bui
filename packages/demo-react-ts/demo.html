@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUI Button TypeScript Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .demo-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            align-items: center;
+        }
+        .typescript-demo {
+            background: #f0f8ff;
+            border-left: 4px solid #007acc;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>BUI Button TypeScript Demo</h1>
+    
+    <div class="demo-section">
+        <h2>TypeScript Button Component Test</h2>
+        <p>This demo shows the TypeScript button component with type validation.</p>
+        
+        <div class="typescript-demo">
+            <h3>TypeScript Types Used:</h3>
+            <pre><code>type ButtonStyleType = 'filled' | 'outline' | 'free';
+type ButtonSize = 'default' | 'small' | 'large';</code></pre>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Button Styles (TypeScript Validated)</h3>
+        <div class="button-row">
+            <bui-button style-type="filled" label="Filled Button"></bui-button>
+            <bui-button style-type="outline" label="Outline Button"></bui-button>
+            <bui-button style-type="free" label="Free Button"></bui-button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Button Sizes (TypeScript Validated)</h3>
+        <div class="button-row">
+            <bui-button size="small" label="Small"></bui-button>
+            <bui-button size="default" label="Default"></bui-button>
+            <bui-button size="large" label="Large"></bui-button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Button States</h3>
+        <div class="button-row">
+            <bui-button label="Normal"></bui-button>
+            <bui-button disabled label="Disabled"></bui-button>
+            <bui-button wide label="Wide Button"></bui-button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Content Types</h3>
+        <div class="button-row">
+            <bui-button content="label" label="Label Only"></bui-button>
+            <bui-button content="icon" label="Icon Only">
+                <span slot="icon">🔍</span>
+            </bui-button>
+            <bui-button content="label+icon" label="Label + Icon">
+                <span slot="icon">🔍</span>
+            </bui-button>
+            <bui-button content="icon+label" label="Icon + Label">
+                <span slot="icon">🔍</span>
+            </bui-button>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>TypeScript Validation Test</h3>
+        <p>Open the browser console and try setting invalid values:</p>
+        <button onclick="testTypeScriptValidation()">Test TypeScript Validation</button>
+        <div id="validation-output"></div>
+    </div>
+
+    <script type="module">
+        // Import the TypeScript button component
+        import '@bui/ui/button.js';
+        
+        console.log('✅ BUI Button TypeScript component loaded successfully!');
+        
+        // Test that the component is registered
+        if (customElements.get('bui-button')) {
+            console.log('✅ bui-button custom element is registered');
+        } else {
+            console.error('❌ bui-button custom element is not registered');
+        }
+
+        // Test TypeScript validation
+        window.testTypeScriptValidation = function() {
+            const button = document.querySelector('bui-button');
+            if (!button) {
+                document.getElementById('validation-output').innerHTML = 
+                    '<div style="color: red;">❌ No button found</div>';
+                return;
+            }
+
+            const output = document.getElementById('validation-output');
+            output.innerHTML = '<div style="color: blue;">Testing validation...</div>';
+
+            // Test invalid values (these should trigger console warnings)
+            setTimeout(() => {
+                button.setAttribute('style-type', 'invalid');
+                output.innerHTML += '<div style="color: orange;">⚠️ Set invalid style-type: "invalid"</div>';
+            }, 500);
+
+            setTimeout(() => {
+                button.setAttribute('size', 'huge');
+                output.innerHTML += '<div style="color: orange;">⚠️ Set invalid size: "huge"</div>';
+            }, 1000);
+
+            setTimeout(() => {
+                button.setAttribute('content', 'invalid');
+                output.innerHTML += '<div style="color: orange;">⚠️ Set invalid content: "invalid"</div>';
+            }, 1500);
+
+            setTimeout(() => {
+                output.innerHTML += '<div style="color: green;">✅ Check console for validation warnings</div>';
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
