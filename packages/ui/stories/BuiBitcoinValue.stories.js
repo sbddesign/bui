@@ -16,6 +16,15 @@ export default {
       options: ['left', 'right', undefined] 
     },
     satcomma: { control: 'boolean' },
+    size: { 
+      control: { type: 'select' }, 
+      options: ['small', 'default', 'large', 'xlarge'] 
+    },
+    showEstimate: { control: 'boolean' },
+    textSize: { 
+      control: { type: 'select' }, 
+      options: ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] 
+    },
   },
   args: {
     format: 'bip177',
@@ -23,6 +32,9 @@ export default {
     amount: 123456789, // 1.23456789 BTC
     symbolPosition: undefined,
     satcomma: false,
+    size: 'default',
+    showEstimate: false,
+    textSize: 'base',
   },
 };
 
@@ -68,6 +80,67 @@ export const BTC = {
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
     return bitcoinValue;
+  },
+};
+
+// Show estimate symbol
+export const WithEstimate = {
+  args: {
+    showEstimate: true,
+    amount: 123456789,
+  },
+  render: (args) => {
+    const bitcoinValue = document.createElement('bui-bitcoin-value');
+    bitcoinValue.showEstimate = args.showEstimate;
+    bitcoinValue.amount = args.amount;
+    return bitcoinValue;
+  },
+};
+
+// Text size variants
+export const TextSizes = {
+  render: () => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '1rem';
+    
+    const sizes = [
+      { size: 'base', label: 'Base (16px)' },
+      { size: 'lg', label: 'Large (18px)' },
+      { size: 'xl', label: 'XL (20px)' },
+      { size: '2xl', label: '2XL (24px)' },
+      { size: '3xl', label: '3XL (30px)' },
+      { size: '4xl', label: '4XL (36px)' },
+      { size: '5xl', label: '5XL (48px)' },
+      { size: '6xl', label: '6XL (60px)' },
+      { size: '7xl', label: '7XL (72px)' },
+      { size: '8xl', label: '8XL (96px)' },
+      { size: '9xl', label: '9XL (128px)' },
+    ];
+    
+    sizes.forEach(item => {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.gap = '1rem';
+      
+      const label = document.createElement('span');
+      label.textContent = item.label;
+      label.style.minWidth = '120px';
+      label.style.fontSize = '0.875rem';
+      label.style.color = 'var(--text-secondary)';
+      
+      const bitcoinValue = document.createElement('bui-bitcoin-value');
+      bitcoinValue.textSize = item.size;
+      bitcoinValue.amount = 123456789;
+      
+      wrapper.appendChild(label);
+      wrapper.appendChild(bitcoinValue);
+      container.appendChild(wrapper);
+    });
+    
+    return container;
   },
 };
 
@@ -312,6 +385,9 @@ export const Interactive = {
     truncated: false,
     symbolPosition: undefined,
     satcomma: false,
+    size: 'default',
+    showEstimate: false,
+    textSize: 'base',
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
@@ -319,6 +395,9 @@ export const Interactive = {
     bitcoinValue.amount = args.amount;
     bitcoinValue.truncated = args.truncated;
     bitcoinValue.satcomma = args.satcomma;
+    bitcoinValue.size = args.size;
+    bitcoinValue.showEstimate = args.showEstimate;
+    bitcoinValue.textSize = args.textSize;
     if (args.symbolPosition) {
       bitcoinValue.symbolPosition = args.symbolPosition;
     }

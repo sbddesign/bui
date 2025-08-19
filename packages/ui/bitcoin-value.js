@@ -8,6 +8,9 @@ export class BuiBitcoinValue extends LitElement {
     amount: { type: Number, reflect: true }, // amount in sats (integer)
     symbolPosition: { type: String, attribute: 'symbol-position', reflect: true }, // 'left', 'right', undefined
     satcomma: { type: Boolean, reflect: true }, // format with spaces in decimal places
+    size: { type: String, reflect: true }, // 'small', 'default', 'large', 'xlarge'
+    showEstimate: { type: Boolean, attribute: 'show-estimate', reflect: true }, // show estimated symbol (~)
+    textSize: { type: String, attribute: 'text-size', reflect: true }, // 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'
   };
 
   static styles = [
@@ -25,6 +28,9 @@ export class BuiBitcoinValue extends LitElement {
     this.amount = 0;
     this.symbolPosition = undefined;
     this.satcomma = false;
+    this.size = 'default';
+    this.showEstimate = false;
+    this.textSize = 'base';
   }
 
   // Convert sats to BTC
@@ -70,6 +76,9 @@ export class BuiBitcoinValue extends LitElement {
         symbol-position="${symbolPosition}"
         .truncation="${this.truncated}"
         .satcomma="${this.satcomma}"
+        size="${this.size}"
+        .showEstimate="${this.showEstimate}"
+        text-size="${this.textSize}"
       ></bui-money-value>
     `;
   }
