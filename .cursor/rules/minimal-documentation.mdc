@@ -1,0 +1,8 @@
+---
+description: Only document important things
+globs:
+alwaysApply: false
+---
+
+- Keep documentation simple and concise
+- Do not create extra documentation files outside of a main README.md for every package

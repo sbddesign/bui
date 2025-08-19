@@ -8,6 +8,8 @@ export class BuiMoneyValue extends LitElement {
     truncation: { type: Boolean, reflect: true }, // whether to truncate numbers
     size: { type: String, reflect: true }, // 'small', 'default', 'large', 'xlarge'
     satcomma: { type: Boolean, reflect: true }, // format with spaces in decimal places
+    showEstimate: { type: Boolean, attribute: 'show-estimate', reflect: true }, // show estimated symbol (~)
+    textSize: { type: String, attribute: 'text-size', reflect: true }, // 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'
   };
 
   static styles = [
@@ -19,13 +21,16 @@ export class BuiMoneyValue extends LitElement {
       
       .money-value {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: var(--size-1);
         font-weight: 500;
         line-height: 1.2;
       }
       
-
+      .estimate {
+        font-weight: 400;
+        color: var(--text-primary);
+      }
       
       .symbol {
         opacity: 0.8;
@@ -34,6 +39,62 @@ export class BuiMoneyValue extends LitElement {
       
       .amount {
         font-weight: 500;
+      }
+
+      /* Text size variants */
+      .text-base {
+        font-size: 16px;
+        gap: var(--size-1);
+      }
+      
+      .text-lg {
+        font-size: 18px;
+        gap: var(--size-1);
+      }
+      
+      .text-xl {
+        font-size: 20px;
+        gap: var(--size-1);
+      }
+      
+      .text-2xl {
+        font-size: 24px;
+        gap: var(--size-1);
+      }
+      
+      .text-3xl {
+        font-size: 30px;
+        gap: var(--size-1);
+      }
+      
+      .text-4xl {
+        font-size: 36px;
+        gap: var(--size-2);
+      }
+      
+      .text-5xl {
+        font-size: 48px;
+        gap: var(--size-2);
+      }
+      
+      .text-6xl {
+        font-size: 60px;
+        gap: var(--size-3);
+      }
+      
+      .text-7xl {
+        font-size: 72px;
+        gap: var(--size-3);
+      }
+      
+      .text-8xl {
+        font-size: 96px;
+        gap: var(--size-4);
+      }
+      
+      .text-9xl {
+        font-size: 128px;
+        gap: var(--size-4);
       }
     `
   ];
@@ -46,6 +107,8 @@ export class BuiMoneyValue extends LitElement {
     this.truncation = false;
     this.size = 'default';
     this.satcomma = false;
+    this.showEstimate = false; // Default to false as requested
+    this.textSize = 'base';
   }
 
   formatAmount(amount) {
@@ -123,12 +186,32 @@ export class BuiMoneyValue extends LitElement {
     }
   }
 
+  getTextSizeClass(textSize) {
+    // Map textSize values to valid CSS class names
+    const sizeMap = {
+      'base': 'text-base',
+      'lg': 'text-lg',
+      'xl': 'text-xl',
+      '2xl': 'text-2xl',
+      '3xl': 'text-3xl',
+      '4xl': 'text-4xl',
+      '5xl': 'text-5xl',
+      '6xl': 'text-6xl',
+      '7xl': 'text-7xl',
+      '8xl': 'text-8xl',
+      '9xl': 'text-9xl'
+    };
+    return sizeMap[textSize] || 'text-base';
+  }
+
   render() {
     const sizeClass = this.size;
+    const textSizeClass = this.getTextSizeClass(this.textSize);
     const formattedAmount = this.formatAmount(this.amount);
     
     return html`
-      <div class="money-value ${sizeClass}">
+      <div class="money-value ${sizeClass} ${textSizeClass}">
+        ${this.showEstimate ? html`<span class="estimate">~</span>` : ''}
         ${this.symbolPosition === 'left' 
           ? html`
             <span class="symbol">${this.symbol}</span>

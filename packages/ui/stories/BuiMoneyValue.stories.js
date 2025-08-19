@@ -17,14 +17,21 @@ export default {
       control: { type: 'select' }, 
       options: ['small', 'default', 'large', 'xlarge'] 
     },
+    showEstimate: { control: 'boolean' },
+    textSize: { 
+      control: { type: 'select' }, 
+      options: ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] 
+    },
   },
   args: {
     symbolPosition: 'left',
     symbol: '₿',
-    amount: 1234.56,
+    amount: 1234,
     truncation: false,
     satcomma: false,
     size: 'default',
+    showEstimate: false,
+    textSize: 'base',
   },
 };
 
@@ -69,6 +76,67 @@ export const SymbolRight = {
     moneyValue.symbol = args.symbol;
     moneyValue.amount = args.amount;
     return moneyValue;
+  },
+};
+
+// Show estimate symbol
+export const WithEstimate = {
+  args: {
+    showEstimate: true,
+    amount: 1234,
+  },
+  render: (args) => {
+    const moneyValue = document.createElement('bui-money-value');
+    moneyValue.showEstimate = args.showEstimate;
+    moneyValue.amount = args.amount;
+    return moneyValue;
+  },
+};
+
+// Text size variants
+export const TextSizes = {
+  render: () => {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '1rem';
+    
+    const sizes = [
+      { size: 'base', label: 'Base (16px)' },
+      { size: 'lg', label: 'Large (18px)' },
+      { size: 'xl', label: 'XL (20px)' },
+      { size: '2xl', label: '2XL (24px)' },
+      { size: '3xl', label: '3XL (30px)' },
+      { size: '4xl', label: '4XL (36px)' },
+      { size: '5xl', label: '5XL (48px)' },
+      { size: '6xl', label: '6XL (60px)' },
+      { size: '7xl', label: '7XL (72px)' },
+      { size: '8xl', label: '8XL (96px)' },
+      { size: '9xl', label: '9XL (128px)' },
+    ];
+    
+    sizes.forEach(item => {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.gap = '1rem';
+      
+      const label = document.createElement('span');
+      label.textContent = item.label;
+      label.style.minWidth = '120px';
+      label.style.fontSize = '0.875rem';
+      label.style.color = 'var(--text-secondary)';
+      
+      const moneyValue = document.createElement('bui-money-value');
+      moneyValue.textSize = item.size;
+      moneyValue.amount = 1234;
+      
+      wrapper.appendChild(label);
+      wrapper.appendChild(moneyValue);
+      container.appendChild(wrapper);
+    });
+    
+    return container;
   },
 };
 
