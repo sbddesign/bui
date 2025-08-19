@@ -1,0 +1,9 @@
+---
+description: Do not litter the codebase with test HTML files
+globs:
+alwaysApply: false
+---
+
+- When creating new components, do not create test HTML files to demonstrate usage
+- Component usage should be demonstrated inside of storybook stories
+- It is OK to create a test HTML file if absolutely necessary for troubleshooting and debugging, but remove it when you are done
