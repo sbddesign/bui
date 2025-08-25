@@ -8,3 +8,4 @@ export * from './money-value.js';
 export * from './bitcoin-value.js';
 export * from './option-dot.js';
 export * from './bitcoin-qr-display.js';
+export * from './amount-option-tile.js';

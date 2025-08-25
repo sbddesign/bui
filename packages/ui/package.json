@@ -30,6 +30,7 @@
     "./bitcoin-value.js": "./bitcoin-value.js",
     "./option-dot.js": "./option-dot.js",
     "./bitcoin-qr-display.js": "./bitcoin-qr-display.js",
+    "./amount-option-tile.js": "./amount-option-tile.js",
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",

@@ -29,11 +29,9 @@ export class BuiMoneyValue extends LitElement {
       
       .estimate {
         font-weight: 400;
-        color: var(--text-primary);
       }
       
       .symbol {
-        opacity: 0.8;
         font-weight: 400;
       }
       
