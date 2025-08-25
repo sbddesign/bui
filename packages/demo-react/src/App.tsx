@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
 import '@bui/ui/button.js'
+import '@bui/ui/message.js'
 
 // TypeScript types for the button component
 type ButtonStyleType = 'filled' | 'outline' | 'free';
@@ -50,6 +51,7 @@ function App() {
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>
         <div>
+          <bui-message text="This is a message" />
           <bui-button
             style-type={primaryButtonStyle} 
             size={primaryButtonSize} 

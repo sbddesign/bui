@@ -1,6 +1,6 @@
 export * from './dist/button.js';
 export * from './toggle.js';
-export * from './message.js';
+export * from './dist/message.js';
 export * from './numpad-button.js';
 export * from './button-cluster.js';
 export * from './input.js';
