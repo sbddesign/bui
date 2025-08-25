@@ -19,7 +19,10 @@ pnpm install
 # Start development server
 pnpm dev
 
-# Build for production
+# Type check
+pnpm type-check
+
+# Build
 pnpm build
 
 # Preview production build
@@ -44,6 +47,6 @@ import '../../tokens/lib/tailwindcss/tailwind-theme.css'
 
 ## Notes
 
-- Web components work seamlessly with React 19
-- CSS variables from the tokens package are imported for styling
-- Inter font is loaded for consistent typography
+- The React app currently uses `@ts-ignore` for web component JSX types
+- The HTML demo provides a cleaner way to test the TypeScript functionality
+- Focus is on demonstrating the TypeScript button component, not complex React patterns

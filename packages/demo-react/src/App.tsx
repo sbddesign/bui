@@ -3,6 +3,10 @@ import './App.css'
 import '@bui/ui/tokens.css'
 import '@bui/ui/button.js'
 
+// TypeScript types for the button component
+type ButtonStyleType = 'filled' | 'outline' | 'free';
+type ButtonSize = 'default' | 'small' | 'large';
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -31,6 +35,12 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
 
+  // TypeScript validation - these would cause errors if invalid
+  const primaryButtonStyle: ButtonStyleType = 'filled';
+  const primaryButtonSize: ButtonSize = 'large';
+  const secondaryButtonStyle: ButtonStyleType = 'outline';
+  const secondaryButtonSize: ButtonSize = 'large';
+
   return (
     <div className="app" data-theme="bitcoindesign" data-mode={isDarkMode ? "dark" : "light"}>
       <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -41,16 +51,16 @@ function App() {
         <p>A simple bitcoin wallet</p>
         <div>
           <bui-button
-            style-type="filled" 
-            size="large" 
+            style-type={primaryButtonStyle} 
+            size={primaryButtonSize} 
             label="Get Started"
             wide
           ></bui-button>
-          </div>
-          <div>
+        </div>
+        <div>
           <bui-button
-            style-type="outline" 
-            size="large" 
+            style-type={secondaryButtonStyle} 
+            size={secondaryButtonSize} 
             label="Restore Wallet"
             wide
           ></bui-button>
