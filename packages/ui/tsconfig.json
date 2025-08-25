@@ -14,7 +14,10 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false
   },
   "include": [
     "*.ts",
