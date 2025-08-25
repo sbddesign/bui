@@ -1,9 +1,15 @@
 import { LitElement, html, css, PropertyValues } from 'lit';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
-// Type definitions for button properties
-type ButtonContent = 'label' | 'icon' | 'label+icon' | 'icon+label';
-type ButtonStyleType = 'filled' | 'outline' | 'free';
-type ButtonSize = 'default' | 'small' | 'large';
+// Single source of truth: define the values once, derive everything else
+const BUTTON_CONTENTS = ['label', 'icon', 'label+icon', 'icon+label'] as const;
+const BUTTON_STYLE_TYPES = ['filled', 'outline', 'free'] as const;
+const BUTTON_SIZES = ['default', 'small', 'large'] as const;
+
+// Type definitions automatically derived from the const arrays
+type ButtonContent = typeof BUTTON_CONTENTS[number];
+type ButtonStyleType = typeof BUTTON_STYLE_TYPES[number];
+type ButtonSize = typeof BUTTON_SIZES[number];
 type ButtonCluster = 'top' | 'bottom' | 'left' | 'right' | 'middle-horizontal' | 'middle-vertical';
 
 export class BuiButton extends LitElement {
@@ -26,6 +32,13 @@ export class BuiButton extends LitElement {
   declare label: string;
   declare cluster?: ButtonCluster;
   declare wide: boolean;
+
+  // Validation rules - automatically derived from the const arrays
+  private validationRules = [
+    createStringLiteralValidationRule(BUTTON_CONTENTS, 'content'),
+    createStringLiteralValidationRule(BUTTON_STYLE_TYPES, 'styleType'),
+    createStringLiteralValidationRule(BUTTON_SIZES, 'size'),
+  ];
 
   static styles = [
     css`
@@ -211,29 +224,7 @@ export class BuiButton extends LitElement {
    * Validates property values when they change
    */
   protected willUpdate(changedProperties: PropertyValues<this>): void {
-    // Validate content property
-    if (changedProperties.has('content') && this.content) {
-      const validContents: ButtonContent[] = ['label', 'icon', 'label+icon', 'icon+label'];
-      if (!validContents.includes(this.content as ButtonContent)) {
-        console.warn(`Invalid content value: ${this.content}. Valid values are: ${validContents.join(', ')}`);
-      }
-    }
-
-    // Validate styleType property
-    if (changedProperties.has('styleType') && this.styleType) {
-      const validStyleTypes: ButtonStyleType[] = ['filled', 'outline', 'free'];
-      if (!validStyleTypes.includes(this.styleType as ButtonStyleType)) {
-        console.warn(`Invalid styleType value: ${this.styleType}. Valid values are: ${validStyleTypes.join(', ')}`);
-      }
-    }
-
-    // Validate size property
-    if (changedProperties.has('size') && this.size) {
-      const validSizes: ButtonSize[] = ['default', 'small', 'large'];
-      if (!validSizes.includes(this.size as ButtonSize)) {
-        console.warn(`Invalid size value: ${this.size}. Valid values are: ${validSizes.join(', ')}`);
-      }
-    }
+    validateProperties(this, changedProperties, this.validationRules);
   }
 
   render() {

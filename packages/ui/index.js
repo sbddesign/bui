@@ -1,4 +1,4 @@
-export * from './button.js';
+export * from './dist/button.js';
 export * from './toggle.js';
 export * from './message.js';
 export * from './numpad-button.js';
