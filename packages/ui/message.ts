@@ -148,6 +148,8 @@ export class BuiMessage extends LitElement {
   }
 }
 
-customElements.define('bui-message', BuiMessage);
+if (!customElements.get('bui-message')) {
+  customElements.define('bui-message', BuiMessage);
+}
 
 

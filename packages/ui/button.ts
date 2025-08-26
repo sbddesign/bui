@@ -246,4 +246,6 @@ export class BuiButton extends LitElement {
   }
 }
 
-customElements.define('bui-button', BuiButton);
+if (!customElements.get('bui-button')) {
+  customElements.define('bui-button', BuiButton);
+}

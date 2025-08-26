@@ -21,3 +21,6 @@ declare module 'react' {
     }
   }
 }
+
+export {};
+
