@@ -20,6 +20,9 @@
   },
   "exports": {
     ".": "./dist/index.js",
+    "./cycle/lg": "./dist/cycle/lg.js",
+    "./cycle/md": "./dist/cycle/md.js",
+    "./cycle/sm": "./dist/cycle/sm.js",
     "./arrowLeft/lg": "./dist/arrowLeft/lg.js",
     "./arrowLeft/md": "./dist/arrowLeft/md.js",
     "./arrowLeft/sm": "./dist/arrowLeft/sm.js",

@@ -1,8 +1,8 @@
 import { LitElement, html, css, PropertyValues } from 'lit';
-import './dist/option-dot.js';
-import './dist/button.js';
-import '../icons/dist/cycle/lg.js';
-import '../icons/dist/cycle/md.js';
+import './option-dot.js';
+import './button.js';
+import '@bui/icons/cycle/lg';
+import '@bui/icons/cycle/md';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
