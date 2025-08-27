@@ -5,6 +5,6 @@ export * from './dist/numpad-button.js';
 export * from './button-cluster.js';
 export * from './input.js';
 export * from './dist/money-value.js';
-export * from './bitcoin-value.js';
+export * from './dist/bitcoin-value.js';
 export * from './dist/option-dot.js';
 export * from './bitcoin-qr-display.js';
