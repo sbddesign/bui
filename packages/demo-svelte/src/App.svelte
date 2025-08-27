@@ -4,7 +4,7 @@
   // Import the button component and CSS
   import '@bui/ui/tokens.css';
   import '@bui/ui/button.js';
-  import { BuiMessage } from '@bui/ui/message.js';
+  import '@bui/ui/message.js';
   
   onMount(() => {
     // Add Inter font if not already loaded
