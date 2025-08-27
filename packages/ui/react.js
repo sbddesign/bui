@@ -7,12 +7,20 @@ export const BuiButtonReact = createComponent({
   tagName: 'bui-button',
   elementClass: BuiButton,
   react: React,
+  // Map common DOM events if needed (React prop -> DOM event)
+  // Example: 'onclick' would map to standard 'click'
+  events: {
+    onclick: 'click',
+  },
 });
 
 export const BuiMessageReact = createComponent({
   tagName: 'bui-message',
   elementClass: BuiMessage,
   react: React,
+  events: {
+    onclick: 'click',
+  },
 });
 
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BuiButton } from './dist/button.js';
 import { BuiMessage } from './dist/message.js';
+import { type EventName } from '@lit/react';
 
 export declare const BuiButtonReact: React.ComponentType<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
@@ -11,6 +12,7 @@ export declare const BuiButtonReact: React.ComponentType<
     disabled?: boolean;
     wide?: boolean;
     cluster?: 'top' | 'bottom' | 'left' | 'right' | 'middle-horizontal' | 'middle-vertical';
+    onclick?: (e: MouseEvent) => void;
   }
 >;
 
@@ -20,6 +22,7 @@ export declare const BuiMessageReact: React.ComponentType<
     mood?: 'neutral' | 'success' | 'caution' | 'danger';
     'show-icon'?: boolean;
     icon?: string;
+    onclick?: (e: MouseEvent) => void;
   }
 >;
 

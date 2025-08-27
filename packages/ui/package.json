@@ -17,7 +17,8 @@
   "dependencies": {
     "@bui/icons": "workspace:*",
     "bitcoin-qr": "^1.4.1",
-    "lit": "^3.3.0"
+    "lit": "^3.3.0",
+    "@lit/react": "^1.0.6"
   },
   "type": "module",
   "module": "dist/index.js",

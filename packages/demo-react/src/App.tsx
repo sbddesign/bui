@@ -56,6 +56,7 @@ function App() {
             size={primaryButtonSize}
             label="Get Started"
             wide
+            onclick={(e: MouseEvent) => console.log('primary click', e.type)}
           />
         </div>
         <div>
@@ -64,6 +65,7 @@ function App() {
             size={secondaryButtonSize}
             label="Restore Wallet"
             wide
+            onclick={(e: MouseEvent) => console.log('secondary click', e.type)}
           />
         </div>
       </main>
