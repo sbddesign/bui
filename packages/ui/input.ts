@@ -1,4 +1,11 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, PropertyValues } from 'lit';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+const INPUT_MOODS = ['neutral', 'caution', 'danger', 'success'] as const;
+type InputMood = typeof INPUT_MOODS[number];
+
+const INPUT_SIZES = ['large', 'small'] as const;
+type InputSize = typeof INPUT_SIZES[number];
 
 export class BuiInput extends LitElement {
   static properties = {
@@ -10,8 +17,23 @@ export class BuiInput extends LitElement {
     showLabel: { type: Boolean, reflect: true, attribute: 'show-label' },
     showIconLeft: { type: Boolean, reflect: true, attribute: 'show-icon-left' },
     showIconRight: { type: Boolean, reflect: true, attribute: 'show-icon-right' },
-    iconRightAction: { type: String, attribute: 'icon-right-action' }, // function name to call
+    iconRightAction: { type: String, attribute: 'icon-right-action' },
   };
+
+  declare mood: InputMood;
+  declare size: InputSize;
+  declare label: string;
+  declare value: string;
+  declare placeholder: string;
+  declare showLabel: boolean;
+  declare showIconLeft: boolean;
+  declare showIconRight: boolean;
+  declare iconRightAction: string;
+
+  private validationRules = [
+    createStringLiteralValidationRule(INPUT_MOODS, 'mood'),
+    createStringLiteralValidationRule(INPUT_SIZES, 'size'),
+  ];
 
   static styles = [
     css`
@@ -140,94 +162,36 @@ export class BuiInput extends LitElement {
         width: 100%;
       }
       
-      .message-container.large .message {
-        font-size: 18px;
-      }
-      
-      .message-container.small .message {
-        font-size: var(--size-4);
-      }
+      .message-container.large .message { font-size: 18px; }
+      .message-container.small .message { font-size: var(--size-4); }
       
       /* Mood-specific styles */
-      .input-field.neutral {
-        border-color: var(--system-mood-neutral);
-      }
+      .input-field.neutral { border-color: var(--system-mood-neutral); }
+      .message-container.neutral { border-color: var(--system-mood-neutral); }
+      .message-container.neutral .message { color: var(--system-mood-neutral-text); }
       
-      .message-container.neutral {
-        border-color: var(--system-mood-neutral);
-      }
+      .input-field.caution { border-color: var(--system-mood-caution); }
+      .message-container.caution { border-color: var(--system-mood-caution); }
+      .message-container.caution .message { color: var(--system-mood-caution-text); }
       
-      .message-container.neutral .message {
-        color: var(--system-mood-neutral-text);
-      }
+      .input-field.danger { border-color: var(--system-mood-danger); }
+      .message-container.danger { border-color: var(--system-mood-danger); }
+      .message-container.danger .message { color: var(--system-mood-danger-text); }
       
-      .input-field.caution {
-        border-color: var(--system-mood-caution);
-      }
+      .input-field.success { border-color: var(--system-mood-success); }
+      .message-container.success { border-color: var(--system-mood-success); }
+      .message-container.success .message { color: var(--system-mood-success-text); }
       
-      .message-container.caution {
-        border-color: var(--system-mood-caution);
-      }
+      /* Focus styles */
+      .input-field:focus-within { outline: 3px solid; outline-offset: 0; }
+      .input-field.neutral:focus-within { outline-color: var(--system-mood-neutral-active); }
+      .input-field.caution:focus-within { outline-color: var(--system-mood-caution-active); }
+      .input-field.danger:focus-within { outline-color: var(--system-mood-danger-active); }
+      .input-field.success:focus-within { outline-color: var(--system-mood-success-active); }
       
-      .message-container.caution .message {
-        color: var(--system-mood-caution-text);
-      }
-      
-      .input-field.danger {
-        border-color: var(--system-mood-danger);
-      }
-      
-      .message-container.danger {
-        border-color: var(--system-mood-danger);
-      }
-      
-      .message-container.danger .message {
-        color: var(--system-mood-danger-text);
-      }
-      
-      .input-field.success {
-        border-color: var(--system-mood-success);
-      }
-      
-      .message-container.success {
-        border-color: var(--system-mood-success);
-      }
-      
-      .message-container.success .message {
-        color: var(--system-mood-success-text);
-      }
-      
-    /* Focus styles */
-    .input-field:focus-within {
-    outline: 3px solid;
-    outline-offset: 0;
-    }
-    
-    .input-field.neutral:focus-within {
-    outline-color: var(--system-mood-neutral-active);
-    }
-    
-    .input-field.caution:focus-within {
-    outline-color: var(--system-mood-caution-active);
-    }
-    
-    .input-field.danger:focus-within {
-    outline-color: var(--system-mood-danger-active);
-    }
-    
-    .input-field.success:focus-within {
-    outline-color: var(--system-mood-success-active);
-    }
-
-    /* Disabled state */
-    .input-field:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-    
-    input:disabled {
-        cursor: not-allowed;
-    }
+      /* Disabled state */
+      .input-field:disabled { opacity: 0.5; cursor: not-allowed; }
+      input:disabled { cursor: not-allowed; }
     `
   ];
 
@@ -244,41 +208,44 @@ export class BuiInput extends LitElement {
     this.iconRightAction = '';
   }
 
-  handleInput(e) {
-    this.value = e.target.value;
+  protected willUpdate(changed: PropertyValues<this>): void {
+    validateProperties(this, changed, this.validationRules);
+  }
+
+  private handleInput = (e: Event) => {
+    const target = e.currentTarget as HTMLInputElement | null;
+    if (target) {
+      this.value = target.value;
+    }
     this.dispatchEvent(new CustomEvent('input', {
       detail: { value: this.value },
       bubbles: true,
-      composed: true
+      composed: true,
     }));
   }
 
-  handleIconRightClick() {
+  private handleIconRightClick = () => {
     if (this.iconRightAction) {
       this.dispatchEvent(new CustomEvent('icon-right-click', {
         detail: { action: this.iconRightAction },
         bubbles: true,
-        composed: true
+        composed: true,
       }));
     }
   }
 
-  updated(changedProperties) {
-    super.updated(changedProperties);
-    
-    // Check if message slot has content and show/hide accordingly
-    const messageSlot = this.shadowRoot.querySelector('slot[name="message"]');
-    const messageContainer = this.shadowRoot.querySelector('.message-container');
-    
+  updated(changedProperties: Map<string | number | symbol, unknown>): void {
+    super.updated(changedProperties as any);
+    const messageSlot = this.shadowRoot?.querySelector('slot[name="message"]');
+    const messageContainer = this.shadowRoot?.querySelector('.message-container') as HTMLElement | null;
     if (messageSlot && messageContainer) {
-      const assignedNodes = messageSlot.assignedNodes();
+      const assignedNodes = (messageSlot as HTMLSlotElement).assignedNodes();
       const hasContent = assignedNodes.length > 0 && assignedNodes.some(node => {
         if (node.nodeType === Node.TEXT_NODE) {
-          return node.textContent.trim().length > 0;
+          return (node.textContent || '').trim().length > 0;
         }
-        return true; // Element nodes have content
+        return true;
       });
-      
       messageContainer.style.display = hasContent ? 'block' : 'none';
     }
   }
@@ -331,4 +298,8 @@ export class BuiInput extends LitElement {
   }
 }
 
-customElements.define('bui-input', BuiInput); 
+if (!customElements.get('bui-input')) {
+  customElements.define('bui-input', BuiInput);
+}
+
+
