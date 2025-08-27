@@ -4,4 +4,4 @@ storybook-static
 .DS_Store
 design-tokens.zip
 packages/ui/dist
-packages/ui/types/defs
+packages/ui/types/
