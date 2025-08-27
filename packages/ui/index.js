@@ -2,7 +2,7 @@ export * from './dist/button.js';
 export * from './dist/toggle.js';
 export * from './dist/message.js';
 export * from './dist/numpad-button.js';
-export * from './button-cluster.js';
+export * from './dist/button-cluster.js';
 export * from './dist/input.js';
 export * from './dist/money-value.js';
 export * from './dist/bitcoin-value.js';
