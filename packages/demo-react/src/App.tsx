@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
-import '@bui/ui/button.js'
-import '@bui/ui/message.js'
+import { BuiButtonReact as BuiButton, BuiMessageReact as BuiMessage } from '@bui/ui/react'
 
 // TypeScript types for the button component
 type ButtonStyleType = 'filled' | 'outline' | 'free';
@@ -51,21 +50,21 @@ function App() {
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>
         <div>
-          <bui-message text="This is a message" />
-          <bui-button
-            style-type={primaryButtonStyle} 
-            size={primaryButtonSize} 
+          <BuiMessage text="This is a message" />
+          <BuiButton
+            style-type={primaryButtonStyle}
+            size={primaryButtonSize}
             label="Get Started"
             wide
-          ></bui-button>
+          />
         </div>
         <div>
-          <bui-button
-            style-type={secondaryButtonStyle} 
-            size={secondaryButtonSize} 
+          <BuiButton
+            style-type={secondaryButtonStyle}
+            size={secondaryButtonSize}
             label="Restore Wallet"
             wide
-          ></bui-button>
+          />
         </div>
       </main>
     </div>
