@@ -1,5 +1,5 @@
 export * from './dist/button.js';
-export * from './toggle.js';
+export * from './dist/toggle.js';
 export * from './dist/message.js';
 export * from './dist/numpad-button.js';
 export * from './button-cluster.js';

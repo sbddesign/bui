@@ -1,4 +1,8 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, PropertyValues } from 'lit';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+const TOGGLE_SIZES = ['big', 'small'] as const;
+type ToggleSize = typeof TOGGLE_SIZES[number];
 
 export class BuiToggle extends LitElement {
   static properties = {
@@ -6,6 +10,14 @@ export class BuiToggle extends LitElement {
     size: { type: String }, // 'big', 'small'
     disabled: { type: Boolean, reflect: true },
   };
+
+  declare active: boolean;
+  declare size: ToggleSize;
+  declare disabled: boolean;
+
+  private validationRules = [
+    createStringLiteralValidationRule(TOGGLE_SIZES, 'size'),
+  ];
 
   static styles = [
     css`
@@ -42,64 +54,24 @@ export class BuiToggle extends LitElement {
       }
       
       /* Big size */
-      .toggle.big {
-        width: 60px;
-        height: 36px;
-      }
-      
-      .toggle.big .toggle-track {
-        width: 100%;
-        height: 100%;
-      }
-      
-      .toggle.big .toggle-switch {
-        width: 28px;
-        height: 28px;
-        top: 4px;
-      }
-      
-      .toggle.big:not(.active) .toggle-switch {
-        left: 4px;
-      }
-      
-      .toggle.big.active .toggle-switch {
-        left: 28px;
-      }
+      .toggle.big { width: 60px; height: 36px; }
+      .toggle.big .toggle-track { width: 100%; height: 100%; }
+      .toggle.big .toggle-switch { width: 28px; height: 28px; top: 4px; }
+      .toggle.big:not(.active) .toggle-switch { left: 4px; }
+      .toggle.big.active .toggle-switch { left: 28px; }
       
       /* Small size */
-      .toggle.small {
-        width: 45px;
-        height: 28px;
-      }
-      
-      .toggle.small .toggle-track {
-        width: 100%;
-        height: 100%;
-      }
-      
-      .toggle.small .toggle-switch {
-        width: 20px;
-        height: 20px;
-        top: 4px;
-      }
-      
-      .toggle.small:not(.active) .toggle-switch {
-        left: 4px;
-      }
-      
-      .toggle.small.active .toggle-switch {
-        left: 21px;
-      }
+      .toggle.small { width: 45px; height: 28px; }
+      .toggle.small .toggle-track { width: 100%; height: 100%; }
+      .toggle.small .toggle-switch { width: 20px; height: 20px; top: 4px; }
+      .toggle.small:not(.active) .toggle-switch { left: 4px; }
+      .toggle.small.active .toggle-switch { left: 21px; }
       
       /* Active state */
-      .toggle.active .toggle-track {
-        background: var(--component-toggle-active-bg);
-      }
+      .toggle.active .toggle-track { background: var(--component-toggle-active-bg); }
       
       /* Inactive state */
-      .toggle:not(.active) .toggle-track {
-        background: var(--component-toggle-bg);
-      }
+      .toggle:not(.active) .toggle-track { background: var(--component-toggle-bg); }
       
       /* Focus styles for accessibility */
       .toggle:focus-visible {
@@ -116,13 +88,17 @@ export class BuiToggle extends LitElement {
     this.disabled = false;
   }
 
-  toggle() {
+  protected willUpdate(changed: PropertyValues<this>): void {
+    validateProperties(this, changed, this.validationRules);
+  }
+
+  private onToggle = () => {
     if (!this.disabled) {
       this.active = !this.active;
       this.dispatchEvent(new CustomEvent('toggle', {
         detail: { active: this.active },
         bubbles: true,
-        composed: true
+        composed: true,
       }));
     }
   }
@@ -138,7 +114,7 @@ export class BuiToggle extends LitElement {
       <button 
         class="${classes}" 
         ?disabled="${this.disabled}"
-        @click="${this.toggle}"
+        @click="${this.onToggle}"
         role="switch"
         aria-checked="${this.active}"
         aria-label="Toggle ${this.active ? 'on' : 'off'}"
@@ -150,4 +126,8 @@ export class BuiToggle extends LitElement {
   }
 }
 
-customElements.define('bui-toggle', BuiToggle); 
+if (!customElements.get('bui-toggle')) {
+  customElements.define('bui-toggle', BuiToggle);
+}
+
+
