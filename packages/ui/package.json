@@ -57,7 +57,7 @@
     "./money-value.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/money-value.js" },
     "./bitcoin-value.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/bitcoin-value.js" },
     "./option-dot.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/option-dot.js" },
-    "./bitcoin-qr-display.js": { "types": "./types/react-jsx.d.ts", "default": "./bitcoin-qr-display.js" },
+    "./bitcoin-qr-display.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/bitcoin-qr-display.js" },
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
