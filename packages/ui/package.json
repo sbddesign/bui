@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "tsc && node ./scripts/generate-react-jsx-types.js",
+    "build": "tsc && node ./scripts/generate-react-jsx-types.js && node ./scripts/generate-react-wrappers.js",
     "build:watch": "tsc --watch",
     "type-check": "tsc --noEmit"
   },
