@@ -3,6 +3,7 @@ import './option-dot.js';
 import './button.js';
 import '@bui/icons/cycle/lg';
 import '@bui/icons/cycle/md';
+import 'bitcoin-qr/dist/bitcoin-qr/index.esm.js';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
@@ -149,11 +150,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   private renderQr() {
-    const styleVars = `--qr-size: ${this.size}px;`;
+    const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
     const effectiveOption = this.effectiveOption;
     return html`
-      <div class="frame" style="${styleVars}">
-        <div class="qr">
+      <div class="frame">
+        <div class="qr" style="${qrInlineStyle}">
           ${effectiveOption === 'unified' && this.address && this.lightning
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
             : effectiveOption === 'onchain' && this.address
