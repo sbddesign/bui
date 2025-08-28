@@ -73,25 +73,6 @@ importers:
         specifier: ^7.0.4
         version: 7.0.4(@types/node@24.3.0)
 
-  packages/demo-svelte-ts:
-    dependencies:
-      '@bui/ui':
-        specifier: workspace:*
-        version: link:../ui
-    devDependencies:
-      '@sveltejs/vite-plugin-svelte':
-        specifier: ^6.0.0
-        version: 6.0.0(svelte@5.36.0)(vite@7.0.4(@types/node@24.3.0))
-      svelte:
-        specifier: ^5.36.0
-        version: 5.36.0
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.2
-      vite:
-        specifier: ^7.0.4
-        version: 7.0.4(@types/node@24.3.0)
-
   packages/icons:
     dependencies:
       lit:
@@ -113,6 +94,9 @@ importers:
       '@bui/icons':
         specifier: workspace:*
         version: link:../icons
+      '@lit/react':
+        specifier: ^1.0.6
+        version: 1.0.8(@types/react@19.1.8)
       bitcoin-qr:
         specifier: ^1.4.1
         version: 1.5.0
@@ -503,6 +487,11 @@ packages:
 
   '@lit-labs/ssr-dom-shim@1.3.0':
     resolution: {integrity: sha512-nQIWonJ6eFAvUUrSlwyHDm/aE8PBDu5kRpL0vHMg6K8fK3Diq1xdPjTnsJSwxABhaZ+5eBi1btQB5ShUTKo4nQ==}
+
+  '@lit/react@1.0.8':
+    resolution: {integrity: sha512-p2+YcF+JE67SRX3mMlJ1TKCSTsgyOVdAwd/nxp3NuV1+Cb6MWALbN6nT7Ld4tpmYofcE5kcaSY1YBB9erY+6fw==}
+    peerDependencies:
+      '@types/react': 17 || 18 || 19
 
   '@lit/reactive-element@2.1.0':
     resolution: {integrity: sha512-L2qyoZSQClcBmq0qajBVbhYEcG6iK0XfLn66ifLe/RfC0/ihpc+pl0Wdn8bJ8o+hj38cG0fGXRgSS20MuXn7qA==}
@@ -2258,6 +2247,10 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.4
 
   '@lit-labs/ssr-dom-shim@1.3.0': {}
+
+  '@lit/react@1.0.8(@types/react@19.1.8)':
+    dependencies:
+      '@types/react': 19.1.8
 
   '@lit/reactive-element@2.1.0':
     dependencies:
