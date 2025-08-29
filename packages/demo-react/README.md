@@ -31,22 +31,22 @@ pnpm preview
 
 ## Component Usage
 
-This demo shows how to use BUI web components in a React application:
+This demo shows how to use BUI React wrappers (built with `@lit/react`) for BUI web components in a React application:
 
 ```jsx
-import '@bui/ui/button.js'
-import '../../tokens/lib/tailwindcss/tailwind-theme.css'
+import { BuiButtonReact as BuiButton } from '@bui/ui/react'
+import '@bui/ui/tokens.css'
 
-// Use the button component
-<bui-button 
+// Use the typed React wrapper
+<BuiButton 
   style-type="filled" 
   size="large" 
   label="Get Started"
-></bui-button>
+/>
 ```
 
 ## Notes
 
-- The React app currently uses `@ts-ignore` for web component JSX types
-- The HTML demo provides a cleaner way to test the TypeScript functionality
-- Focus is on demonstrating the TypeScript button component, not complex React patterns
+- The React app uses typed React wrappers, so no `@ts-ignore` is needed for JSX types.
+- The wrappers provide proper TypeScript typings for components (e.g., the button props and events).
+- Focus is on demonstrating the components themselves, not complex React patterns.
