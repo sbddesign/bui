@@ -1,7 +1,7 @@
 ---
 description: Do not litter the codebase with test HTML files
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 
 - When creating new components, do not create test HTML files to demonstrate usage

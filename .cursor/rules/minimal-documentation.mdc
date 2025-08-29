@@ -1,7 +1,7 @@
 ---
 description: Only document important things
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 
 - Keep documentation simple and concise
