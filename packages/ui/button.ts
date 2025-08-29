@@ -1,4 +1,4 @@
-import { LitElement, html, css, PropertyValues } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
 // Single source of truth: define the values once, derive everything else

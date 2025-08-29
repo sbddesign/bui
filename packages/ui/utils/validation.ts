@@ -1,4 +1,4 @@
-import { PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
 
 // Type for validation rules
 export interface ValidationRule {

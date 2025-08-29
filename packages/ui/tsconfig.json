@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -11,7 +11,8 @@
     "outDir": "./dist",
     "declarationDir": "./types/defs",
     "rootDir": "./",
-    "types": ["node"],
+    "declarationMap": true,
+    "verbatimModuleSyntax": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
@@ -28,6 +29,9 @@
   "exclude": [
     "node_modules",
     "dist",
-    "types/defs"
+    "types/defs",
+    "**/*.stories.*",
+    "**/*.stories.tsx",
+    "**/*.stories.ts"
   ]
 }
