@@ -16,10 +16,13 @@ A React demo application showcasing the BUI design system components.
 # Install dependencies
 pnpm install
 
-# Start development server
+# Build UI wrappers/types first (ensures @bui/ui/react is generated)
+pnpm -w build:ui
+
+# Start development server for this demo
 pnpm dev
 
-# Type check
+# Type check (after UI build so generated types are available)
 pnpm type-check
 
 # Build
