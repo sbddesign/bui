@@ -16,10 +16,16 @@ A React demo application showcasing the BUI design system components.
 # Install dependencies
 pnpm install
 
-# Start development server
+# Build UI wrappers/types first (ensures @bui/ui/react is generated)
+pnpm -w build:ui
+
+# Start development server for this demo
 pnpm dev
 
-# Build for production
+# Type check (after UI build so generated types are available)
+pnpm type-check
+
+# Build
 pnpm build
 
 # Preview production build
@@ -28,22 +34,22 @@ pnpm preview
 
 ## Component Usage
 
-This demo shows how to use BUI web components in a React application:
+This demo shows how to use BUI React wrappers (built with `@lit/react`) for BUI web components in a React application:
 
 ```jsx
-import '@bui/ui/button.js'
-import '../../tokens/lib/tailwindcss/tailwind-theme.css'
+import { BuiButtonReact as BuiButton } from '@bui/ui/react'
+import '@bui/ui/tokens.css'
 
-// Use the button component
-<bui-button 
-  style-type="filled" 
+// Use the typed React wrapper
+<BuiButton 
+  styleType="filled" 
   size="large" 
   label="Get Started"
-></bui-button>
+/>
 ```
 
 ## Notes
 
-- Web components work seamlessly with React 19
-- CSS variables from the tokens package are imported for styling
-- Inter font is loaded for consistent typography
+- The React app uses typed React wrappers, so no `@ts-ignore` is needed for JSX types.
+- The wrappers provide proper TypeScript typings for components (e.g., the button props and events).
+- Focus is on demonstrating the components themselves, not complex React patterns.

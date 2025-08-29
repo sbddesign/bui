@@ -1,6 +1,19 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+// Single source of truth: define the values once, derive everything else
+const BUTTON_CONTENTS = ['label', 'icon', 'label+icon', 'icon+label'] as const;
+const BUTTON_STYLE_TYPES = ['filled', 'outline', 'free'] as const;
+const BUTTON_SIZES = ['default', 'small', 'large'] as const;
+
+// Type definitions automatically derived from the const arrays
+type ButtonContent = typeof BUTTON_CONTENTS[number];
+type ButtonStyleType = typeof BUTTON_STYLE_TYPES[number];
+type ButtonSize = typeof BUTTON_SIZES[number];
+type ButtonCluster = 'top' | 'bottom' | 'left' | 'right' | 'middle-horizontal' | 'middle-vertical';
 
 export class BuiButton extends LitElement {
+  // Property declarations with types
   static properties = {
     content: { type: String }, // 'label', 'icon', 'label+icon', etc.
     styleType: { type: String, attribute: 'style-type' }, // 'filled', 'outline', 'free'
@@ -10,6 +23,22 @@ export class BuiButton extends LitElement {
     cluster: { type: String }, // 'top', 'bottom', 'left', 'right', 'middle'
     wide: { type: Boolean, reflect: true }, // expands to fill available space
   };
+
+  // TypeScript property declarations
+  declare content: ButtonContent;
+  declare styleType: ButtonStyleType;
+  declare size: ButtonSize;
+  declare disabled: boolean;
+  declare label: string;
+  declare cluster?: ButtonCluster;
+  declare wide: boolean;
+
+  // Validation rules - automatically derived from the const arrays
+  private validationRules = [
+    createStringLiteralValidationRule(BUTTON_CONTENTS, 'content'),
+    createStringLiteralValidationRule(BUTTON_STYLE_TYPES, 'styleType'),
+    createStringLiteralValidationRule(BUTTON_SIZES, 'size'),
+  ];
 
   static styles = [
     css`
@@ -191,6 +220,13 @@ export class BuiButton extends LitElement {
     this.wide = false;
   }
 
+  /**
+   * Validates property values when they change
+   */
+  protected willUpdate(changedProperties: PropertyValues<this>): void {
+    validateProperties(this, changedProperties, this.validationRules);
+  }
+
   render() {
     const classes = [this.size, this.styleType].join(' ');
     const isIconOnly = this.content === 'icon';
@@ -210,4 +246,6 @@ export class BuiButton extends LitElement {
   }
 }
 
-customElements.define('bui-button', BuiButton); 
+if (!customElements.get('bui-button')) {
+  customElements.define('bui-button', BuiButton);
+}

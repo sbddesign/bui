@@ -6,31 +6,59 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "tsc && node ./scripts/generate-react-jsx-types.js && node ./scripts/generate-react-wrappers.js",
+    "build:watch": "tsc --watch",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit": "^3.3.0",
     "@bui/icons": "workspace:*",
-    "bitcoin-qr": "^1.4.1"
+    "bitcoin-qr": "^1.4.1",
+    "lit": "^3.3.0",
+    "@lit/react": "^1.0.6"
   },
   "type": "module",
   "module": "dist/index.js",
+  "types": "./index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "types/react-jsx.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "types",
+    "react.d.ts",
+    "*.ts",
+    "*.js",
+    "*.d.ts",
+    "*.css"
+  ],
   "exports": {
-    ".": "./index.js",
-    "./button.js": "./button.js",
-    "./toggle.js": "./toggle.js",
-    "./message.js": "./message.js",
-    "./numpad-button.js": "./numpad-button.js",
-    "./button-cluster.js": "./button-cluster.js",
-    "./input.js": "./input.js",
-    "./money-value.js": "./money-value.js",
-    "./bitcoin-value.js": "./bitcoin-value.js",
-    "./option-dot.js": "./option-dot.js",
-    "./bitcoin-qr-display.js": "./bitcoin-qr-display.js",
-    "./amount-option-tile.js": "./amount-option-tile.js",
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./react": {
+      "types": "./react.d.ts",
+      "default": "./react.js"
+    },
+    "./button.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/button.js" },
+    "./toggle.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/toggle.js" },
+    "./message.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/message.js" },
+    "./numpad-button.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/numpad-button.js" },
+    "./button-cluster.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/button-cluster.js" },
+    "./input.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/input.js" },
+    "./money-value.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/money-value.js" },
+    "./bitcoin-value.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/bitcoin-value.js" },
+    "./option-dot.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/option-dot.js" },
+    "./bitcoin-qr-display.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/bitcoin-qr-display.js" },
+    "./amount-option-tile.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/amount-option-tile.js" },
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
@@ -41,10 +69,12 @@
     "@storybook/addon-vitest": "^9.0.16",
     "@storybook/web-components": "^9.0.16",
     "@storybook/web-components-vite": "^9.0.16",
-    "storybook": "^9.0.16",
-    "vitest": "^3.2.4",
+    "@types/node": "^24.3.0",
     "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "playwright": "^1.54.1",
-    "@vitest/coverage-v8": "^3.2.4"
+    "storybook": "^9.0.16",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }

@@ -1,17 +1,21 @@
 import { LitElement, html, css } from 'lit';
 
+type BooleanString = 'true' | 'false';
+
 export class BuiOptionDot extends LitElement {
   static properties = {
-    active: { 
-      type: Boolean, 
-      reflect: true, 
+    active: {
+      type: Boolean,
+      reflect: true,
       attribute: 'active',
       converter: {
-        fromAttribute: (value) => value === 'true' || value === '',
-        toAttribute: (value) => value ? 'true' : 'false'
-      }
+        fromAttribute: (value: string | null): boolean => value === 'true' || value === '',
+        toAttribute: (value: boolean): BooleanString => (value ? 'true' : 'false'),
+      },
     },
   };
+
+  declare active: boolean;
 
   static styles = [
     css`
@@ -54,7 +58,7 @@ export class BuiOptionDot extends LitElement {
       .option-dot:not(.active)::before {
         border-color: var(--transparent);
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -69,4 +73,8 @@ export class BuiOptionDot extends LitElement {
   }
 }
 
-customElements.define('bui-option-dot', BuiOptionDot);
+if (!customElements.get('bui-option-dot')) {
+  customElements.define('bui-option-dot', BuiOptionDot);
+}
+
+

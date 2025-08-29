@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import '@bui/ui/tokens.css'
-import '@bui/ui/button.js'
+import { BuiButtonReact as BuiButton, BuiMessageReact as BuiMessage } from '@bui/ui/react'
+
+// TypeScript types for the button component
+type ButtonStyleType = 'filled' | 'outline' | 'free';
+type ButtonSize = 'default' | 'small' | 'large';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,6 +35,12 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
 
+  // TypeScript validation - these would cause errors if invalid
+  const primaryButtonStyle: ButtonStyleType = 'filled';
+  const primaryButtonSize: ButtonSize = 'large';
+  const secondaryButtonStyle: ButtonStyleType = 'outline';
+  const secondaryButtonSize: ButtonSize = 'large';
+
   return (
     <div className="app" data-theme="bitcoindesign" data-mode={isDarkMode ? "dark" : "light"}>
       <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -40,20 +50,23 @@ function App() {
         <h1>Bitcoin Wallet</h1>
         <p>A simple bitcoin wallet</p>
         <div>
-          <bui-button
-            style-type="filled" 
-            size="large" 
+          <BuiMessage text="This is a message" />
+          <BuiButton
+            styleType={primaryButtonStyle}
+            size={primaryButtonSize}
             label="Get Started"
             wide
-          ></bui-button>
-          </div>
-          <div>
-          <bui-button
-            style-type="outline" 
-            size="large" 
+            onClick={(e: Event) => console.log('primary click', e.type)}
+          />
+        </div>
+        <div>
+          <BuiButton
+            styleType={secondaryButtonStyle}
+            size={secondaryButtonSize}
             label="Restore Wallet"
             wide
-          ></bui-button>
+            onClick={(e: Event) => console.log('secondary click', e.type)}
+          />
         </div>
       </main>
     </div>

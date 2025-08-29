@@ -1,11 +1,22 @@
 import { LitElement, html, css } from 'lit';
 
+type NumPadContent = 'number' | 'icon';
+
+export interface NumPadClickDetail {
+  number: string;
+  content: NumPadContent;
+}
+
 export class BuiNumPadButton extends LitElement {
   static properties = {
     number: { type: String },
     content: { type: String }, // 'number' or 'icon'
     disabled: { type: Boolean, reflect: true },
   };
+
+  declare number: string;
+  declare content: NumPadContent;
+  declare disabled: boolean;
 
   static styles = [
     css`
@@ -89,18 +100,22 @@ export class BuiNumPadButton extends LitElement {
     `;
   }
 
-  handleClick() {
+  private handleClick = () => {
     if (!this.disabled) {
-      this.dispatchEvent(new CustomEvent('numpad-click', {
+      this.dispatchEvent(new CustomEvent<NumPadClickDetail>('numpad-click', {
         detail: {
           number: this.number,
-          content: this.content
+          content: this.content,
         },
         bubbles: true,
-        composed: true
+        composed: true,
       }));
     }
   }
 }
 
-customElements.define('bui-numpad-button', BuiNumPadButton); 
+if (!customElements.get('bui-numpad-button')) {
+  customElements.define('bui-numpad-button', BuiNumPadButton);
+}
+
+

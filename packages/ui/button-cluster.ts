@@ -1,9 +1,19 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+const DIRECTIONS = ['horizontal', 'vertical'] as const;
+type Direction = typeof DIRECTIONS[number];
 
 export class BuiButtonCluster extends LitElement {
   static properties = {
-    direction: { type: String }, // 'horizontal' or 'vertical'
+    direction: { type: String }, // 'horizontal' | 'vertical'
   };
+
+  declare direction: Direction;
+
+  private validationRules = [
+    createStringLiteralValidationRule(DIRECTIONS, 'direction'),
+  ];
 
   static styles = [
     css`
@@ -16,15 +26,8 @@ export class BuiButtonCluster extends LitElement {
         gap: 0;
       }
       
-      .cluster.horizontal {
-        flex-direction: row;
-      }
-      
-      .cluster.vertical {
-        flex-direction: column;
-      }
-      
-
+      .cluster.horizontal { flex-direction: row; }
+      .cluster.vertical { flex-direction: column; }
     `
   ];
 
@@ -33,27 +36,29 @@ export class BuiButtonCluster extends LitElement {
     this.direction = 'horizontal';
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback();
     this.updateClusterProps();
   }
 
-  updated(changedProperties) {
+  protected willUpdate(changed: PropertyValues<this>): void {
+    validateProperties(this, changed, this.validationRules);
+  }
+
+  protected updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
     if (changedProperties.has('direction')) {
       this.updateClusterProps();
     }
   }
 
-  updateClusterProps() {
-    // Wait for slot content to be available
+  private updateClusterProps = (): void => {
     setTimeout(() => {
       const buttons = this.querySelectorAll('bui-button');
       if (buttons.length === 0) return;
 
       buttons.forEach((button, index) => {
         if (buttons.length === 1) {
-          // Single button - no cluster prop needed
           button.removeAttribute('cluster');
         } else if (this.direction === 'horizontal') {
           if (index === 0) {
@@ -87,4 +92,8 @@ export class BuiButtonCluster extends LitElement {
   }
 }
 
-customElements.define('bui-button-cluster', BuiButtonCluster); 
+if (!customElements.get('bui-button-cluster')) {
+  customElements.define('bui-button-cluster', BuiButtonCluster);
+}
+
+

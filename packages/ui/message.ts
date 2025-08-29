@@ -1,12 +1,26 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+// Allowed moods
+const MESSAGE_MOODS = ['neutral', 'success', 'caution', 'danger'] as const;
+type MessageMood = typeof MESSAGE_MOODS[number];
 
 export class BuiMessage extends LitElement {
   static properties = {
     text: { type: String },
     mood: { type: String }, // 'neutral', 'success', 'caution', 'danger'
-    showIcon: { type: Boolean, reflect: true },
-    icon: { type: String }, // custom icon slot
+    showIcon: { type: Boolean, reflect: true, attribute: 'show-icon' },
+    icon: { type: String },
   };
+
+  declare text: string;
+  declare mood: MessageMood;
+  declare showIcon: boolean;
+  declare icon: string;
+
+  private validationRules = [
+    createStringLiteralValidationRule(MESSAGE_MOODS, 'mood'),
+  ];
 
   static styles = [
     css`
@@ -100,7 +114,11 @@ export class BuiMessage extends LitElement {
     this.icon = '';
   }
 
-  renderIcon() {
+  protected willUpdate(changedProperties: PropertyValues<this>): void {
+    validateProperties(this, changedProperties, this.validationRules);
+  }
+
+  private renderIcon() {
     if (!this.showIcon) return null;
     
     if (this.icon) {
@@ -108,7 +126,7 @@ export class BuiMessage extends LitElement {
     }
     
     // Default icons for each mood
-    const iconMap = {
+    const iconMap: Record<MessageMood, unknown> = {
       neutral: html`<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>`,
       success: html`<svg viewBox="0 0 16 16"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
       caution: html`<svg viewBox="0 0 16 16"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r="0.5" fill="currentColor"/></svg>`,
@@ -130,4 +148,8 @@ export class BuiMessage extends LitElement {
   }
 }
 
-customElements.define('bui-message', BuiMessage); 
+if (!customElements.get('bui-message')) {
+  customElements.define('bui-message', BuiMessage);
+}
+
+
