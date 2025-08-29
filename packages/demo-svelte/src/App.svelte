@@ -4,6 +4,7 @@
   // Import the button component and CSS
   import '@bui/ui/tokens.css';
   import '@bui/ui/button.js';
+  import '@bui/ui/message.js';
   
   onMount(() => {
     // Add Inter font if not already loaded
@@ -33,6 +34,7 @@
       <h1>Bitcoin Wallet</h1>
       <p>A simple bitcoin wallet</p>
       <div>
+        <bui-message text="This is a message"></bui-message>
         <bui-button
           style-type="filled" 
           size="large" 

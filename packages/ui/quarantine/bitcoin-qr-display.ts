@@ -1,16 +1,25 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, PropertyValues } from 'lit';
 import './option-dot.js';
 import './button.js';
-import '../icons/dist/cycle/lg.js';
-import '../icons/dist/cycle/md.js';
+import '@bui/icons/cycle/lg';
+import '@bui/icons/cycle/md';
+import 'bitcoin-qr/dist/bitcoin-qr/index.esm.js';
 
-const OPTION_LABELS = {
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+const OPTIONS = ['unified', 'onchain', 'lightning'] as const;
+type QrOption = typeof OPTIONS[number];
+
+const SELECTORS = ['dots', 'toggle'] as const;
+type SelectorType = typeof SELECTORS[number];
+
+const OPTION_LABELS: Record<QrOption, string> = {
   unified: 'Bitcoin QR',
   onchain: 'On-chain',
   lightning: 'Lightning',
 };
 
-const HELPER_TEXTS = {
+const HELPER_TEXTS: Record<QrOption, string> = {
   unified: 'Scan with any Bitcoin on-chain or Lightning wallet',
   onchain: 'Scan with any Bitcoin on-chain wallet',
   lightning: 'Scan with any Bitcoin Lightning wallet',
@@ -25,63 +34,27 @@ export class BuiBitcoinQrDisplay extends LitElement {
     size: { type: Number }, // QR inner size in px (square)
   };
 
+  declare address: string;
+  declare lightning: string;
+  declare option: QrOption;
+  declare selector: SelectorType;
+  declare size: number;
+
+  private validationRules = [
+    createStringLiteralValidationRule(OPTIONS, 'option'),
+    createStringLiteralValidationRule(SELECTORS, 'selector'),
+  ];
+
   static styles = [
     css`
-      :host {
-        display: block;
-      }
-
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--size-4);
-        border-radius: 10px;
-      }
-
-      .helper-text {
-        color: var(--text-secondary);
-        font-size: 16px;
-        text-align: center;
-      }
-
-      .frame {
-        background: var(--white);
-        border: 1px solid var(--system-divider);
-        border-radius: 10px;
-        padding: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .qr {
-        width: var(--qr-size);
-        height: var(--qr-size);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .options {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--size-3);
-        padding: var(--size-3) 0;
-      }
-
-      .dots-row {
-        display: flex;
-        gap: var(--size-4);
-        align-items: center;
-      }
-
-      .selector-row {
-        display: flex;
-        gap: var(--size-4);
-        align-items: center;
-      }
+      :host { display: block; }
+      .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-4); border-radius: 10px; }
+      .helper-text { color: var(--text-secondary); font-size: 16px; text-align: center; }
+      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: 10px; padding: 28px; display: flex; align-items: center; justify-content: center; }
+      .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; }
+      .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
+      .dots-row { display: flex; gap: var(--size-4); align-items: center; }
+      .selector-row { display: flex; gap: var(--size-4); align-items: center; }
     `,
   ];
 
@@ -94,77 +67,63 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.size = 332;
   }
 
-  get hasBothAddressAndLightning() {
-    return this.address && this.lightning;
+  protected willUpdate(changed: PropertyValues<this>): void {
+    validateProperties(this, changed, this.validationRules);
   }
 
-  get effectiveOption() {
-    // If only one type of data is provided, force that option
+  private get hasBothAddressAndLightning(): boolean {
+    return Boolean(this.address && this.lightning);
+  }
+
+  private get effectiveOption(): QrOption {
     if (this.address && !this.lightning) return 'onchain';
     if (this.lightning && !this.address) return 'lightning';
-    // If both are provided, use the selected option
     return this.option;
   }
 
-  get shouldShowSelector() {
+  private get shouldShowSelector(): boolean {
     return this.hasBothAddressAndLightning;
   }
 
-  get helperText() {
-    const effectiveOption = this.effectiveOption;
-    return HELPER_TEXTS[effectiveOption] || HELPER_TEXTS.unified;
+  private get helperText(): string {
+    const effective = this.effectiveOption;
+    return HELPER_TEXTS[effective] || HELPER_TEXTS.unified;
   }
 
-  get unifiedString() {
+  private get unifiedString(): string {
     if (!this.address || !this.lightning) return '';
     return `bitcoin:${this.address}?lightning=${this.lightning}`;
   }
 
-  cycleOption() {
+  private cycleOption(): void {
     if (!this.shouldShowSelector) return;
-    
-    const order = ['unified', 'onchain', 'lightning'];
+    const order: QrOption[] = ['unified', 'onchain', 'lightning'];
     const idx = order.indexOf(this.option);
     const next = order[(idx + 1) % order.length];
     this.option = next;
   }
 
-  setOption(newOption) {
+  private setOption(newOption: QrOption): void {
     if (!this.shouldShowSelector) return;
     this.option = newOption;
   }
 
-  renderDotsSelector() {
+  private renderDotsSelector() {
     if (!this.shouldShowSelector) return null;
-
     const unifiedActive = this.option === 'unified';
     const onchainActive = this.option === 'onchain';
     const lightningActive = this.option === 'lightning';
-
     return html`
       <div class="dots-row">
-        <bui-option-dot
-          .active=${unifiedActive}
-          @click=${() => this.setOption('unified')}
-          title="${OPTION_LABELS.unified}"
-        ></bui-option-dot>
-        <bui-option-dot
-          .active=${onchainActive}
-          @click=${() => this.setOption('onchain')}
-          title="${OPTION_LABELS.onchain}"
-        ></bui-option-dot>
-        <bui-option-dot
-          .active=${lightningActive}
-          @click=${() => this.setOption('lightning')}
-          title="${OPTION_LABELS.lightning}"
-        ></bui-option-dot>
+        <bui-option-dot .active=${unifiedActive} @click=${() => this.setOption('unified')} title="${OPTION_LABELS.unified}"></bui-option-dot>
+        <bui-option-dot .active=${onchainActive} @click=${() => this.setOption('onchain')} title="${OPTION_LABELS.onchain}"></bui-option-dot>
+        <bui-option-dot .active=${lightningActive} @click=${() => this.setOption('lightning')} title="${OPTION_LABELS.lightning}"></bui-option-dot>
       </div>
     `;
   }
 
-  renderToggleSelector() {
+  private renderToggleSelector() {
     if (!this.shouldShowSelector) return null;
-
     return html`
       <div class="selector-row">
         <bui-button
@@ -181,9 +140,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
     `;
   }
 
-  renderSelector() {
+  private renderSelector() {
     if (!this.shouldShowSelector) return null;
-    
     if (this.selector === 'toggle') return this.renderToggleSelector();
     return html`
       ${this.renderDotsSelector()}
@@ -191,14 +149,12 @@ export class BuiBitcoinQrDisplay extends LitElement {
     `;
   }
 
-  renderQr() {
-    const styleVars = `--qr-size: ${this.size}px;`;
+  private renderQr() {
+    const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
     const effectiveOption = this.effectiveOption;
-
-    // Render according to effective option
     return html`
-      <div class="frame" style="${styleVars}">
-        <div class="qr">
+      <div class="frame">
+        <div class="qr" style="${qrInlineStyle}">
           ${effectiveOption === 'unified' && this.address && this.lightning
             ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
             : effectiveOption === 'onchain' && this.address
@@ -222,4 +178,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 }
 
-customElements.define('bui-bitcoin-qr-display', BuiBitcoinQrDisplay);
+if (!customElements.get('bui-bitcoin-qr-display')) {
+  customElements.define('bui-bitcoin-qr-display', BuiBitcoinQrDisplay);
+}
+
+

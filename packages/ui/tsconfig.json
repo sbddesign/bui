@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "declarationDir": "./types/defs",
+    "rootDir": "./",
+    "declarationMap": true,
+    "verbatimModuleSyntax": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false
+  },
+  "include": [
+    "*.ts",
+    "stories/**/*.ts",
+    "stories/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "types/defs",
+    "**/*.stories.*",
+    "**/*.stories.tsx",
+    "**/*.stories.ts"
+  ]
+}

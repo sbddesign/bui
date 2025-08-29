@@ -26,6 +26,8 @@ The `ui` package includes web components representing items in the Bitcoin UI Ki
 
 The `ui` lib relies upon the CSS variables from `tokens` and can use icons from the `icons` package. It uses [Lit](https://lit.dev/) for the web components.
 
+To build the UI components, run `pnpm build:ui`. This will transpile the TypeScript into JavaScript web components, generate types, and also create wrapper components for easier usage in React.
+
 ### storybook
 
 To interact with the components via [storybook](https://storybook.js.org/), run `pnpm storybook`.
