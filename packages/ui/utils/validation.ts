@@ -27,7 +27,7 @@ export function validateProperties(
 
 // Helper function to create validation rules from type arrays
 export function createValidationRule<T>(
-  property: keyof T,
+  property: PropertyKey,
   validValues: readonly any[],
   message?: string
 ): ValidationRule {
@@ -43,11 +43,11 @@ export function validateEnum<T extends Record<string, any>>(
   component: any,
   changedProperties: PropertyValues<any>,
   enumType: T,
-  property: keyof T,
+  property: PropertyKey,
   message?: string
 ): void {
   if (changedProperties.has(String(property))) {
-    const value = component[property];
+    const value = component[property as keyof typeof component];
     const validValues = Object.values(enumType);
     if (value && !validValues.includes(value)) {
       const errorMessage = message || 
@@ -60,7 +60,7 @@ export function validateEnum<T extends Record<string, any>>(
 // NEW: Create validation rule from enum type
 export function createEnumValidationRule<T extends Record<string, any>>(
   enumType: T,
-  property: keyof T,
+  property: PropertyKey,
   message?: string
 ): ValidationRule {
   return {
