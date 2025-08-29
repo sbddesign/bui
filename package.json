@@ -12,12 +12,12 @@
     "storybook:build": "pnpm --filter @bui/ui build-storybook",
     "demo:react": "pnpm --filter @bui/demo-react dev",
     "demo:svelte": "pnpm --filter @bui/demo-svelte dev",
-    "demo:svelte-ts": "pnpm --filter @bui/demo-svelte-ts dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "design-system",
-    "monorepo"
+    "monorepo",
+    "bitcoin"
   ],
   "author": "",
   "license": "ISC",
