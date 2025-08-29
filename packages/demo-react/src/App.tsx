@@ -52,7 +52,7 @@ function App() {
         <div>
           <BuiMessage text="This is a message" />
           <BuiButton
-            style-type={primaryButtonStyle}
+            styleType={primaryButtonStyle}
             size={primaryButtonSize}
             label="Get Started"
             wide
@@ -61,7 +61,7 @@ function App() {
         </div>
         <div>
           <BuiButton
-            style-type={secondaryButtonStyle}
+            styleType={secondaryButtonStyle}
             size={secondaryButtonSize}
             label="Restore Wallet"
             wide

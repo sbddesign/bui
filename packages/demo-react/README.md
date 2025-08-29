@@ -42,7 +42,7 @@ import '@bui/ui/tokens.css'
 
 // Use the typed React wrapper
 <BuiButton 
-  style-type="filled" 
+  styleType="filled" 
   size="large" 
   label="Get Started"
 />
