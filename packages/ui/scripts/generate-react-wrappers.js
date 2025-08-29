@@ -67,7 +67,7 @@ function generate() {
     dtsImportLines.push(`import { ${className} } from './dist/${base}.js';`);
 
     const reactName = `${pascalCase(tag)}React`;
-    const events = (manifest.events && manifest.events[tag]) || { onclick: 'click' };
+    const events = (manifest.events && manifest.events[tag]) || { onClick: 'click', onclick: 'click' };
     const eventsJs = Object.entries(events).map(([k, v]) => `${k}: '${v}'`).join(', ');
 
     wrapperExports.push(
