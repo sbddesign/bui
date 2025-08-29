@@ -16,7 +16,7 @@ export function validateProperties(
   for (const rule of validationRules) {
     if (changedProperties.has(rule.property)) {
       const value = component[rule.property];
-      if (value && !rule.validValues.includes(value)) {
+      if (value !== undefined && value !== null && !rule.validValues.includes(value)) {
         const message = rule.message || 
           `Invalid ${rule.property} value: ${value}. Valid values are: ${rule.validValues.join(', ')}`;
         console.warn(message);
@@ -49,7 +49,7 @@ export function validateEnum<T extends Record<string, any>>(
   if (changedProperties.has(String(property))) {
     const value = component[property as keyof typeof component];
     const validValues = Object.values(enumType);
-    if (value && !validValues.includes(value)) {
+    if (value !== undefined && value !== null && !validValues.includes(value)) {
       const errorMessage = message || 
         `Invalid ${String(property)} value: ${value}. Valid values are: ${validValues.join(', ')}`;
       console.warn(errorMessage);
@@ -80,7 +80,7 @@ export function validateStringLiteral<T extends readonly string[]>(
 ): void {
   if (changedProperties.has(String(property))) {
     const value = component[property];
-    if (value && !validValues.includes(value as T[number])) {
+    if (value !== undefined && value !== null && !validValues.includes(value as T[number])) {
       const errorMessage = message || 
         `Invalid ${String(property)} value: ${value}. Valid values are: ${validValues.join(', ')}`;
       console.warn(errorMessage);
