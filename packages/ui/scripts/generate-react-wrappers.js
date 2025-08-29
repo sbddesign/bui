@@ -60,11 +60,14 @@ function generate() {
   const wrapperExports = [];
   const dtsExports = [];
 
-  for (const { tag, className } of defines) {
-    // Assume class is exported from dist/<tagbase>.js
-    const base = tag.replace('bui-', '');
-    importLines.push(`import { ${className} } from './dist/${base}.js';`);
-    dtsImportLines.push(`import { ${className} } from './dist/${base}.js';`);
+  defines.forEach(({ tag, className, srcFile }, idx) => {
+    const fileName = srcFile && srcFile.endsWith('.js') ? srcFile : `${tag.replace('bui-', '')}.js`;
+    const importPath = `./dist/${fileName}`;
+    const nsVar = `__mod_${idx}`;
+    const resolvedVar = `__${className}_resolved_${idx}`;
+    importLines.push(`import * as ${nsVar} from '${importPath}';`);
+    importLines.push(`const ${resolvedVar} = (${nsVar} && (${nsVar}.${className} ?? ${nsVar}.default));`);
+    dtsImportLines.push(`import type { ${className} } from '${importPath}';`);
 
     const reactName = `${pascalCase(tag)}React`;
     const events = (manifest.events && manifest.events[tag]) || { onClick: 'click', onclick: 'click' };
@@ -73,7 +76,7 @@ function generate() {
     wrapperExports.push(
 `export const ${reactName} = createComponent({
   tagName: '${tag}',
-  elementClass: ${className},
+  elementClass: ${resolvedVar},
   react: React,
   events: { ${eventsJs} },
 });`
@@ -87,7 +90,7 @@ function generate() {
   }
 >;`
     );
-  }
+  });
 
   const jsOut = importLines.join('\n') + '\n\n' + wrapperExports.join('\n\n') + '\n';
   const dtsOut = dtsImportLines.join('\n') + '\n\n' + dtsExports.join('\n\n') + '\n' + 'export {}\n';
