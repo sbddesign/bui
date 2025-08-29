@@ -17,6 +17,9 @@ export default defineConfig([
       ecmaVersion: 'latest',
       globals: globals.browser,
       sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
     },
     linterOptions: {
       reportUnusedDisableDirectives: true,
