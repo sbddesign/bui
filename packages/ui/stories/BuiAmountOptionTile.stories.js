@@ -126,7 +126,7 @@ export const RowOfFourTiles = {
       border-radius: 12px;
     `;
 
-    // First tile: $10
+    // First tile
     const tile1 = document.createElement('bui-amount-option-tile');
     tile1.setAttribute('primary-amount', 10);
     tile1.setAttribute('primary-symbol', '$');
@@ -136,7 +136,7 @@ export const RowOfFourTiles = {
     tile1.setAttribute('emoji', '💎');
     tile1.setAttribute('selected', true);
 
-    // Second tile: $25
+    // Second tile
     const tile2 = document.createElement('bui-amount-option-tile');
     tile2.setAttribute('primary-amount', 25);
     tile2.setAttribute('primary-symbol', '$');
@@ -145,7 +145,7 @@ export const RowOfFourTiles = {
     tile2.setAttribute('message', 'Medium');
     tile2.setAttribute('emoji', '🚀');
 
-    // Third tile: $50
+    // Third tile
     const tile3 = document.createElement('bui-amount-option-tile');
     tile3.setAttribute('primary-amount', 50);
     tile3.setAttribute('primary-symbol', '$');
@@ -154,7 +154,7 @@ export const RowOfFourTiles = {
     tile3.setAttribute('message', 'Large');
     tile3.setAttribute('emoji', '🔥');
 
-    // Fourth tile: Custom (as requested)
+    // Fourth tile
     const tile4 = document.createElement('bui-amount-option-tile');
     tile4.setAttribute('custom', true);
     tile4.setAttribute('amount-defined', false);
@@ -181,7 +181,7 @@ export const BitcoinFirstRow = {
       border-radius: 12px;
     `;
 
-    // First tile: 0.0001 ₿
+    // First tile
     const tile1 = document.createElement('bui-amount-option-tile');
     tile1.setAttribute('bitcoin-first', true);
     tile1.setAttribute('primary-amount', 1000);
@@ -190,32 +190,37 @@ export const BitcoinFirstRow = {
     tile1.setAttribute('secondary-symbol', '$');
     tile1.setAttribute('message', 'Tiny');
     tile1.setAttribute('emoji', '💎');
-    tile1.setAttribute('selected', false);
+    tile1.setAttribute('selected', true);
 
-    // Second tile: 0.0005 ₿
+    // Second tile
     const tile2 = document.createElement('bui-amount-option-tile');
     tile2.setAttribute('bitcoin-first', true);
-    tile2.setAttribute('primary-amount', 50000);
+    tile2.setAttribute('primary-amount', 5000);
     tile2.setAttribute('primary-symbol', '₿');
     tile2.setAttribute('secondary-amount', 15);
     tile2.setAttribute('secondary-symbol', '$');
     tile2.setAttribute('message', 'Small');
     tile2.setAttribute('emoji', '🚀');
 
-    // Third tile: 0.001 ₿
+    // Third tile
     const tile3 = document.createElement('bui-amount-option-tile');
     tile3.setAttribute('bitcoin-first', true);
-    tile3.setAttribute('primary-amount', 100000);
+    tile3.setAttribute('primary-amount', 30000);
     tile3.setAttribute('primary-symbol', '₿');
     tile3.setAttribute('secondary-amount', 30);
     tile3.setAttribute('secondary-symbol', '$');
     tile3.setAttribute('message', 'Medium');
     tile3.setAttribute('emoji', '🔥');
 
-    // Fourth tile: Custom
+    // Fourth tile
     const tile4 = document.createElement('bui-amount-option-tile');
     tile4.setAttribute('custom', true);
-    tile4.setAttribute('amount-defined', false);
+    tile4.setAttribute('amount-defined', true);
+    tile4.setAttribute('bitcoin-first', true);
+    tile4.setAttribute('primary-amount', 1337);
+    tile4.setAttribute('primary-symbol', '₿');
+    tile4.setAttribute('secondary-amount', 3.30);
+    tile4.setAttribute('secondary-symbol', '$');
 
     container.appendChild(tile1);
     container.appendChild(tile2);
