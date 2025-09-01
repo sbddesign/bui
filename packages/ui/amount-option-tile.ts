@@ -1,6 +1,7 @@
 import { LitElement, html, css, type PropertyValues } from 'lit';
 import './money-value.js';
 import './bitcoin-value.js';
+import './button.js';
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
 const TEXT_SIZES = ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] as const;
@@ -68,15 +69,13 @@ export class BuiAmountOptionTile extends LitElement {
     css`
       :host {
         display: block;
-        height: 200px;
         width: 100%;
       }
 
       .tile {
         background: var(--background);
-        border-radius: 24px;
+        border-radius: var(--size-6);
         padding: var(--size-6);
-        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -85,22 +84,19 @@ export class BuiAmountOptionTile extends LitElement {
         position: relative;
         box-sizing: border-box;
         border: 1px solid var(--system-divider, #d4d4d8);
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.03);
-        transition: all 0.2s ease;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+        transition: all 0.1s ease;
         cursor: pointer;
+        min-height:224px;
       }
 
       .tile:hover {
-        transform: translateY(-2px);
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+        box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.08);
       }
 
       .tile.selected {
         border-color: var(--system-interactive-active);
-      }
-
-      .tile.custom {
-        border-color: var(--button-outline-outline);
       }
 
       .amounts {
@@ -135,24 +131,6 @@ export class BuiAmountOptionTile extends LitElement {
         line-height: 1;
         color: var(--text-primary);
         font-weight: 500;
-      }
-
-      .custom-button {
-        border: 2px solid var(--button-outline-outline);
-        border-radius: 4px;
-        padding: var(--size-2) var(--size-4);
-        background: transparent;
-        color: var(--button-outline-text);
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .custom-button:hover {
-        background: var(--button-outline-hover-bg);
-        border-color: var(--button-outline-hover-outline);
-        color: var(--button-outline-hover-text);
       }
     `,
   ];
@@ -205,7 +183,7 @@ export class BuiAmountOptionTile extends LitElement {
           ${this.renderPrimaryAmount()}
           ${this.showSecondaryCurrency ? this.renderSecondaryAmount() : ''}
         </div>
-        <button class="custom-button">Edit</button>
+        <bui-button style-type="outline" label="Edit"></bui-button>
       `;
     }
 

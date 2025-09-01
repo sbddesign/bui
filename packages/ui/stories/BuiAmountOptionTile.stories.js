@@ -10,10 +10,10 @@ export default {
     showEmoji: { control: 'boolean' },
     showMessage: { control: 'boolean' },
     showSecondaryCurrency: { control: 'boolean' },
-    bitcoinFirst: { control: { type: 'select' }, options: ['true', 'false'] },
-    custom: { control: { type: 'select' }, options: ['true', 'false'] },
-    amountDefined: { control: { type: 'select' }, options: ['true', 'false'] },
-    selected: { control: { type: 'select' }, options: ['true', 'false'] },
+    bitcoinFirst: { control: 'boolean' },
+    custom: { control: 'boolean' },
+    amountDefined: { control: 'boolean' },
+    selected: { control: 'boolean' },
     primaryAmount: { control: 'number' },
     primarySymbol: { control: 'text' },
     secondaryAmount: { control: 'number' },
@@ -34,13 +34,13 @@ export default {
     showEmoji: true,
     showMessage: true,
     showSecondaryCurrency: true,
-    bitcoinFirst: 'false',
-    custom: 'false',
-    amountDefined: 'true',
-    selected: 'false',
-    primaryAmount: '30',
+    bitcoinFirst: false,
+    custom: false,
+    amountDefined: false,
+    selected: false,
+    primaryAmount: 30,
     primarySymbol: '$',
-    secondaryAmount: '0.001',
+    secondaryAmount: 100000,
     secondarySymbol: '₿',
     showEstimate: true,
     primaryTextSize: '6xl',
@@ -51,65 +51,69 @@ export default {
 // Basic tile with default settings
 export const Default = {
   args: {
-    primaryAmount: '30',
     primarySymbol: '$',
-    secondaryAmount: '0.001',
     secondarySymbol: '₿',
     message: 'Incredible',
-    emoji: '🔥'
+    emoji: '🔥',
+    selected: false
   },
 };
+
+
 
 // Bitcoin first (bitcoin amount shown larger)
 export const BitcoinFirst = {
   args: {
-    bitcoinFirst: 'true',
-    primaryAmount: '0.001',
+    bitcoinFirst: true,
+    primaryAmount: '10000',
     primarySymbol: '₿',
     secondaryAmount: '30',
     secondarySymbol: '$',
-    message: 'Incredible',
-    emoji: '🔥'
+    message: 'Fantabulous',
+    emoji: '🎉'
   },
 };
+
+
 
 // Selected state
 export const Selected = {
   args: {
-    selected: 'true',
-    primaryAmount: '50',
-    primarySymbol: '$',
-    secondaryAmount: '0.002',
+    selected: true,
+    primaryAmount: 50,
+    primarySymbol: '€',
+    secondaryAmount: 20000,
     secondarySymbol: '₿',
     message: 'Amazing',
     emoji: '⚡'
   },
 };
 
+
+
 // Custom amount tile
 export const CustomAmount = {
   args: {
-    custom: 'true',
-    amountDefined: 'false',
-    showSecondaryCurrency: false,
-    showMessage: false,
-    showEmoji: false
+    custom: true,
+    amountDefined: false
   },
 };
+
+
 
 // Custom amount with defined value
 export const CustomAmountWithValue = {
   args: {
-    custom: 'true',
-    amountDefined: 'true',
-    primaryAmount: '75',
-    primarySymbol: '$',
-    secondaryAmount: '0.003',
-    secondarySymbol: '₿',
-    showMessage: false,
-    showEmoji: false
+    custom: true,
+    amountDefined: true,
+    primaryAmount: 75000,
+    primarySymbol: '₤',
+    secondaryAmount: 300000,
+    secondarySymbol: '₿'
   },
 };
+
+
 
 // Row of 4 amount option tiles (as requested)
 export const RowOfFourTiles = {
@@ -119,45 +123,41 @@ export const RowOfFourTiles = {
       display: flex;
       gap: 16px;
       padding: 20px;
-      background: #f5f5f5;
       border-radius: 12px;
     `;
 
     // First tile: $10
     const tile1 = document.createElement('bui-amount-option-tile');
-    tile1.setAttribute('primary-amount', '10');
+    tile1.setAttribute('primary-amount', 10);
     tile1.setAttribute('primary-symbol', '$');
-    tile1.setAttribute('secondary-amount', '0.0003');
+    tile1.setAttribute('secondary-amount', 30000);
     tile1.setAttribute('secondary-symbol', '₿');
     tile1.setAttribute('message', 'Small');
     tile1.setAttribute('emoji', '💎');
-    tile1.setAttribute('selected', 'true');
+    tile1.setAttribute('selected', true);
 
     // Second tile: $25
     const tile2 = document.createElement('bui-amount-option-tile');
-    tile2.setAttribute('primary-amount', '25');
+    tile2.setAttribute('primary-amount', 25);
     tile2.setAttribute('primary-symbol', '$');
-    tile2.setAttribute('secondary-amount', '0.0008');
+    tile2.setAttribute('secondary-amount', 80000);
     tile2.setAttribute('secondary-symbol', '₿');
     tile2.setAttribute('message', 'Medium');
     tile2.setAttribute('emoji', '🚀');
 
     // Third tile: $50
     const tile3 = document.createElement('bui-amount-option-tile');
-    tile3.setAttribute('primary-amount', '50');
+    tile3.setAttribute('primary-amount', 50);
     tile3.setAttribute('primary-symbol', '$');
-    tile3.setAttribute('secondary-amount', '0.0016');
+    tile3.setAttribute('secondary-amount', 160000);
     tile3.setAttribute('secondary-symbol', '₿');
     tile3.setAttribute('message', 'Large');
     tile3.setAttribute('emoji', '🔥');
 
     // Fourth tile: Custom (as requested)
     const tile4 = document.createElement('bui-amount-option-tile');
-    tile4.setAttribute('custom', 'true');
-    tile4.setAttribute('amount-defined', 'false');
-    tile4.setAttribute('show-secondary-currency', 'false');
-    tile4.setAttribute('show-message', 'false');
-    tile4.setAttribute('show-emoji', 'false');
+    tile4.setAttribute('custom', true);
+    tile4.setAttribute('amount-defined', false);
 
     container.appendChild(tile1);
     container.appendChild(tile2);
@@ -167,6 +167,8 @@ export const RowOfFourTiles = {
     return container;
   },
 };
+
+
 
 // Bitcoin first row
 export const BitcoinFirstRow = {
@@ -176,48 +178,44 @@ export const BitcoinFirstRow = {
       display: flex;
       gap: 16px;
       padding: 20px;
-      background: #f5f5f5;
       border-radius: 12px;
     `;
 
     // First tile: 0.0001 ₿
     const tile1 = document.createElement('bui-amount-option-tile');
-    tile1.setAttribute('bitcoin-first', 'true');
-    tile1.setAttribute('primary-amount', '0.0001');
+    tile1.setAttribute('bitcoin-first', true);
+    tile1.setAttribute('primary-amount', 1000);
     tile1.setAttribute('primary-symbol', '₿');
-    tile1.setAttribute('secondary-amount', '3');
+    tile1.setAttribute('secondary-amount', 3);
     tile1.setAttribute('secondary-symbol', '$');
     tile1.setAttribute('message', 'Tiny');
     tile1.setAttribute('emoji', '💎');
-    tile1.setAttribute('selected', 'true');
+    tile1.setAttribute('selected', false);
 
     // Second tile: 0.0005 ₿
     const tile2 = document.createElement('bui-amount-option-tile');
-    tile2.setAttribute('bitcoin-first', 'true');
-    tile2.setAttribute('primary-amount', '0.0005');
+    tile2.setAttribute('bitcoin-first', true);
+    tile2.setAttribute('primary-amount', 50000);
     tile2.setAttribute('primary-symbol', '₿');
-    tile2.setAttribute('secondary-amount', '15');
+    tile2.setAttribute('secondary-amount', 15);
     tile2.setAttribute('secondary-symbol', '$');
     tile2.setAttribute('message', 'Small');
     tile2.setAttribute('emoji', '🚀');
 
     // Third tile: 0.001 ₿
     const tile3 = document.createElement('bui-amount-option-tile');
-    tile3.setAttribute('bitcoin-first', 'true');
-    tile3.setAttribute('primary-amount', '0.001');
+    tile3.setAttribute('bitcoin-first', true);
+    tile3.setAttribute('primary-amount', 100000);
     tile3.setAttribute('primary-symbol', '₿');
-    tile3.setAttribute('secondary-amount', '30');
+    tile3.setAttribute('secondary-amount', 30);
     tile3.setAttribute('secondary-symbol', '$');
     tile3.setAttribute('message', 'Medium');
     tile3.setAttribute('emoji', '🔥');
 
     // Fourth tile: Custom
     const tile4 = document.createElement('bui-amount-option-tile');
-    tile4.setAttribute('custom', 'true');
-    tile4.setAttribute('amount-defined', 'false');
-    tile4.setAttribute('show-secondary-currency', 'false');
-    tile4.setAttribute('show-message', 'false');
-    tile4.setAttribute('show-emoji', 'false');
+    tile4.setAttribute('custom', true);
+    tile4.setAttribute('amount-defined', false);
 
     container.appendChild(tile1);
     container.appendChild(tile2);
@@ -227,6 +225,9 @@ export const BitcoinFirstRow = {
     return container;
   },
 };
+
+
+/*
 
 // Different text sizes
 export const TextSizeVariants = {
@@ -330,3 +331,5 @@ export const InteractiveExample = {
     return container;
   },
 };
+
+*/
