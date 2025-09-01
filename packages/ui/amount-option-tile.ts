@@ -1,6 +1,26 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
 import './money-value.js';
 import './bitcoin-value.js';
+import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+
+const TEXT_SIZES = ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] as const;
+type TextSize = typeof TEXT_SIZES[number];
+
+export interface AmountTileClickDetail {
+  emoji: string;
+  message: string;
+  primaryAmount: number;
+  primarySymbol: string;
+  secondaryAmount: number;
+  secondarySymbol: string;
+  custom: boolean;
+  selected: boolean;
+}
+
+const booleanStringConverter = {
+  fromAttribute: (value: string | null) => value === 'true' || value === '',
+  toAttribute: (value: boolean) => (value ? 'true' : 'false'),
+};
 
 export class BuiAmountOptionTile extends LitElement {
   static properties = {
@@ -9,25 +29,47 @@ export class BuiAmountOptionTile extends LitElement {
     showEmoji: { type: Boolean, attribute: 'show-emoji', reflect: true },
     showMessage: { type: Boolean, attribute: 'show-message', reflect: true },
     showSecondaryCurrency: { type: Boolean, attribute: 'show-secondary-currency', reflect: true },
-    bitcoinFirst: { type: String, attribute: 'bitcoin-first', reflect: true }, // 'true' or 'false'
-    custom: { type: String, attribute: 'custom', reflect: true }, // 'true' or 'false'
-    amountDefined: { type: String, attribute: 'amount-defined', reflect: true }, // 'true' or 'false'
-    selected: { type: String, attribute: 'selected', reflect: true }, // 'true' or 'false'
+    bitcoinFirst: { type: Boolean, attribute: 'bitcoin-first', reflect: true, converter: booleanStringConverter },
+    custom: { type: Boolean, attribute: 'custom', reflect: true, converter: booleanStringConverter },
+    amountDefined: { type: Boolean, attribute: 'amount-defined', reflect: true, converter: booleanStringConverter },
+    selected: { type: Boolean, attribute: 'selected', reflect: true, converter: booleanStringConverter },
     primaryAmount: { type: Number, reflect: true },
     primarySymbol: { type: String, attribute: 'primary-symbol', reflect: true },
     secondaryAmount: { type: Number, reflect: true },
     secondarySymbol: { type: String, attribute: 'secondary-symbol', reflect: true },
     showEstimate: { type: Boolean, attribute: 'show-estimate', reflect: true },
     primaryTextSize: { type: String, attribute: 'primary-text-size', reflect: true },
-    secondaryTextSize: { type: String, attribute: 'secondary-text-size', reflect: true }
-  };
+    secondaryTextSize: { type: String, attribute: 'secondary-text-size', reflect: true },
+  } as const;
+
+  declare emoji: string;
+  declare message: string;
+  declare showEmoji: boolean;
+  declare showMessage: boolean;
+  declare showSecondaryCurrency: boolean;
+  declare bitcoinFirst: boolean;
+  declare custom: boolean;
+  declare amountDefined: boolean;
+  declare selected: boolean;
+  declare primaryAmount: number;
+  declare primarySymbol: string;
+  declare secondaryAmount: number;
+  declare secondarySymbol: string;
+  declare showEstimate: boolean;
+  declare primaryTextSize: TextSize;
+  declare secondaryTextSize: TextSize;
+
+  private validationRules = [
+    createStringLiteralValidationRule(TEXT_SIZES, 'primaryTextSize'),
+    createStringLiteralValidationRule(TEXT_SIZES, 'secondaryTextSize'),
+  ];
 
   static styles = [
     css`
       :host {
         display: block;
-        height: 200px; /* Fixed height as requested */
-        width: 100%; /* Expand to fill container width */
+        height: 200px;
+        width: 100%;
       }
 
       .tile {
@@ -112,7 +154,7 @@ export class BuiAmountOptionTile extends LitElement {
         border-color: var(--button-outline-hover-outline);
         color: var(--button-outline-hover-text);
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -122,10 +164,10 @@ export class BuiAmountOptionTile extends LitElement {
     this.showEmoji = true;
     this.showMessage = true;
     this.showSecondaryCurrency = true;
-    this.bitcoinFirst = 'false';
-    this.custom = 'false';
-    this.amountDefined = 'true';
-    this.selected = 'false';
+    this.bitcoinFirst = false;
+    this.custom = false;
+    this.amountDefined = true;
+    this.selected = false;
     this.primaryAmount = 30;
     this.primarySymbol = '$';
     this.secondaryAmount = 0.001;
@@ -135,31 +177,33 @@ export class BuiAmountOptionTile extends LitElement {
     this.secondaryTextSize = '2xl';
   }
 
+  protected willUpdate(changed: PropertyValues<this>): void {
+    validateProperties(this, changed, this.validationRules);
+  }
+
   render() {
-    const isSelected = this.selected === 'true';
-    const isCustom = this.custom === 'true';
-    const hasAmount = this.amountDefined === 'true';
-    const isBitcoinFirst = this.bitcoinFirst === 'true';
+    const isSelected = this.selected;
+    const isCustom = this.custom;
+    const hasAmount = this.amountDefined;
+    const isBitcoinFirst = this.bitcoinFirst;
 
     return html`
-      <div class="tile ${isSelected ? 'selected' : ''} ${isCustom ? 'custom' : ''}" @click=${this._handleClick}>
-        ${this._renderContent(isSelected, isCustom, hasAmount, isBitcoinFirst)}
+      <div class="tile ${isSelected ? 'selected' : ''} ${isCustom ? 'custom' : ''}" @click=${this.handleClick}>
+        ${this.renderContent(isSelected, isCustom, hasAmount, isBitcoinFirst)}
       </div>
     `;
   }
 
-  _renderContent(isSelected, isCustom, hasAmount, isBitcoinFirst) {
+  private renderContent(isSelected: boolean, isCustom: boolean, hasAmount: boolean, isBitcoinFirst: boolean) {
     if (isCustom && !hasAmount) {
-      return html`
-        <div class="custom-text">Custom Amount</div>
-      `;
+      return html`<div class="custom-text">Custom Amount</div>`;
     }
 
     if (isCustom && hasAmount) {
       return html`
         <div class="amounts">
-          ${this._renderPrimaryAmount()}
-          ${this.showSecondaryCurrency ? this._renderSecondaryAmount() : ''}
+          ${this.renderPrimaryAmount()}
+          ${this.showSecondaryCurrency ? this.renderSecondaryAmount() : ''}
         </div>
         <button class="custom-button">Edit</button>
       `;
@@ -167,56 +211,54 @@ export class BuiAmountOptionTile extends LitElement {
 
     return html`
       <div class="amounts">
-        ${this._renderPrimaryAmount()}
-        ${this.showSecondaryCurrency ? this._renderSecondaryAmount() : ''}
+        ${this.renderPrimaryAmount()}
+        ${this.showSecondaryCurrency ? this.renderSecondaryAmount() : ''}
       </div>
-      ${this.showMessage ? this._renderMessage() : ''}
+      ${this.showMessage ? this.renderMessage() : ''}
     `;
   }
 
-  _renderPrimaryAmount() {
-    // Primary amount: use bitcoin-value if bitcoinFirst is true, otherwise use money-value
-    if (this.bitcoinFirst === 'true') {
+  private renderPrimaryAmount() {
+    if (this.bitcoinFirst) {
       return html`
         <bui-bitcoin-value
           format="bip177"
-          .amount="${this.primaryAmount}"
+          .amount=${this.primaryAmount}
           symbol-position="left"
-          .showEstimate="${false}"
+          .showEstimate=${false}
           text-size="${this.primaryTextSize}"
-          .truncated="${false}"
-          .satcomma="${false}">
-        </bui-bitcoin-value>
+          .truncated=${false}
+          .satcomma=${false}
+        ></bui-bitcoin-value>
       `;
     } else {
       return html`
         <bui-money-value
           symbol="${this.primarySymbol}"
-          .amount="${this.primaryAmount}"
+          .amount=${this.primaryAmount}
           symbol-position="left"
-          .showEstimate="${false}"
+          .showEstimate=${false}
           text-size="${this.primaryTextSize}"
-          .truncation="${false}"
-          .satcomma="${false}">
-        </bui-money-value>
+          .truncation=${false}
+          .satcomma=${false}
+        ></bui-money-value>
       `;
     }
   }
 
-  _renderSecondaryAmount() {
-    // Secondary amount: use money-value if bitcoinFirst is true, otherwise use bitcoin-value
-    if (this.bitcoinFirst === 'true') {
+  private renderSecondaryAmount() {
+    if (this.bitcoinFirst) {
       return html`
         <div style="color: var(--text-secondary);">
           <bui-money-value
             symbol="${this.secondarySymbol}"
-            .amount="${this.secondaryAmount}"
+            .amount=${this.secondaryAmount}
             symbol-position="left"
-            .showEstimate="${this.showEstimate}"
+            .showEstimate=${this.showEstimate}
             text-size="${this.secondaryTextSize}"
-            .truncation="${false}"
-            .satcomma="${false}">
-          </bui-money-value>
+            .truncation=${false}
+            .satcomma=${false}
+          ></bui-money-value>
         </div>
       `;
     } else {
@@ -224,19 +266,19 @@ export class BuiAmountOptionTile extends LitElement {
         <div style="color: var(--text-secondary);">
           <bui-bitcoin-value
             format="bip177"
-            .amount="${this.secondaryAmount}"
+            .amount=${this.secondaryAmount}
             symbol-position="left"
-            .showEstimate="${this.showEstimate}"
+            .showEstimate=${this.showEstimate}
             text-size="${this.secondaryTextSize}"
-            .truncated="${false}"
-            .satcomma="${false}">
-          </bui-bitcoin-value>
+            .truncated=${false}
+            .satcomma=${false}
+          ></bui-bitcoin-value>
         </div>
       `;
     }
   }
 
-  _renderMessage() {
+  private renderMessage() {
     return html`
       <div class="message-container">
         ${this.showEmoji ? html`<span class="emoji">${this.emoji}</span>` : ''}
@@ -245,8 +287,8 @@ export class BuiAmountOptionTile extends LitElement {
     `;
   }
 
-  _handleClick() {
-    this.dispatchEvent(new CustomEvent('amount-tile-click', {
+  private handleClick = () => {
+    this.dispatchEvent(new CustomEvent<AmountTileClickDetail>('amount-tile-click', {
       detail: {
         emoji: this.emoji,
         message: this.message,
@@ -254,13 +296,17 @@ export class BuiAmountOptionTile extends LitElement {
         primarySymbol: this.primarySymbol,
         secondaryAmount: this.secondaryAmount,
         secondarySymbol: this.secondarySymbol,
-        custom: this.custom === 'true',
-        selected: this.selected === 'true'
+        custom: this.custom,
+        selected: this.selected,
       },
       bubbles: true,
-      composed: true
+      composed: true,
     }));
-  }
+  };
 }
 
-customElements.define('bui-amount-option-tile', BuiAmountOptionTile);
+if (!customElements.get('bui-amount-option-tile')) {
+  customElements.define('bui-amount-option-tile', BuiAmountOptionTile);
+}
+
+
