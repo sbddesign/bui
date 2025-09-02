@@ -1,10 +1,5 @@
 import { LitElement, html, css } from 'lit';
 
-export interface NumPadClickDetail {
-  value: string;
-  type: 'number' | 'backspace';
-}
-
 export class BuiNumPad extends LitElement {
   static properties = {
     disabled: { type: Boolean, reflect: true },
@@ -106,8 +101,7 @@ export class BuiNumPad extends LitElement {
       <bui-numpad-button
         number="${number}"
         content="number"
-        ?disabled="${this.disabled}"
-        @numpad-click="${this.handleNumberClick}">
+        ?disabled="${this.disabled}">
       </bui-numpad-button>
     `;
   }
@@ -116,38 +110,11 @@ export class BuiNumPad extends LitElement {
     return html`
       <bui-numpad-button
         content="icon"
-        ?disabled="${this.disabled}"
-        @numpad-click="${this.handleBackspaceClick}">
+        ?disabled="${this.disabled}">
         <bui-angle-left-lg slot="icon"></bui-angle-left-lg>
       </bui-numpad-button>
     `;
   }
-
-  private handleNumberClick = (event: CustomEvent<{ number: string; content: string }>) => {
-    if (!this.disabled) {
-      this.dispatchEvent(new CustomEvent<NumPadClickDetail>('numpad-click', {
-        detail: {
-          value: event.detail.number,
-          type: 'number',
-        },
-        bubbles: true,
-        composed: true,
-      }));
-    }
-  };
-
-  private handleBackspaceClick = () => {
-    if (!this.disabled) {
-      this.dispatchEvent(new CustomEvent<NumPadClickDetail>('numpad-click', {
-        detail: {
-          value: 'backspace',
-          type: 'backspace',
-        },
-        bubbles: true,
-        composed: true,
-      }));
-    }
-  };
 }
 
 if (!customElements.get('bui-numpad')) {
