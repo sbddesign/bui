@@ -24,27 +24,9 @@ export class BuiNumPad extends LitElement {
       
       /* Ensure minimum 3 columns */
       .numpad {
-        grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+        grid-template-columns: repeat(3, 0fr);
         min-width: 372px; /* 3 * 124px */
-      }
-      
-      /* Responsive behavior */
-      @media (min-width: 400px) {
-        .numpad {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-      
-      @media (min-width: 600px) {
-        .numpad {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      
-      @media (min-width: 800px) {
-        .numpad {
-          grid-template-columns: repeat(5, 1fr);
-        }
+        justify-content: center;
       }
       
       /* Ensure buttons maintain their size */
