@@ -52,6 +52,7 @@
     "./toggle.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/toggle.js" },
     "./message.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/message.js" },
     "./numpad-button.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/numpad-button.js" },
+    "./numpad.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/numpad.js" },
     "./button-cluster.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/button-cluster.js" },
     "./input.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/input.js" },
     "./money-value.js": { "types": "./types/react-jsx.d.ts", "default": "./dist/money-value.js" },
