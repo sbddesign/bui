@@ -1,7 +1,7 @@
 ---
 description: Stop if Figma MCP is unavailable
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 
 - This rule is only relevant when you are asked to implement a design from Figma

@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 type NumPadContent = 'number' | 'icon';
 
@@ -12,11 +13,13 @@ export class BuiNumPadButton extends LitElement {
     number: { type: String },
     content: { type: String }, // 'number' or 'icon'
     disabled: { type: Boolean, reflect: true },
+    ariaLabel: { type: String, attribute: 'aria-label', reflect: true },
   };
 
   declare number: string;
   declare content: NumPadContent;
   declare disabled: boolean;
+  declare ariaLabel: string | null;
 
   static styles = [
     css`
@@ -85,12 +88,14 @@ export class BuiNumPadButton extends LitElement {
     this.number = '1';
     this.content = 'number';
     this.disabled = false;
+    this.ariaLabel = null;
   }
 
   render() {
     return html`
       <button 
         ?disabled="${this.disabled}"
+        aria-label="${ifDefined(this.ariaLabel ?? undefined)}"
         @click="${this.handleClick}">
         ${this.content === 'icon' 
           ? html`<div class="icon"><slot name="icon"></slot></div>`

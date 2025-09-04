@@ -103,6 +103,12 @@ importers:
       lit:
         specifier: ^3.3.0
         version: 3.3.0
+      react:
+        specifier: ^19.0.0
+        version: 19.1.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.1.0(react@19.1.0)
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^4.0.1

@@ -4,6 +4,7 @@ storybook-static
 .DS_Store
 design-tokens.zip
 packages/ui/dist
-packages/ui/types/
 packages/ui/react.d.ts
 packages/ui/react.js
+packages/ui/types/defs
+packages/ui/types/react-jsx.d.ts

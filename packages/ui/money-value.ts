@@ -50,7 +50,6 @@ export class BuiMoneyValue extends LitElement {
         gap: var(--size-1);
         font-weight: 500;
         line-height: 1.2;
-        color: var(--text-primary);
       }
       
       .estimate {
