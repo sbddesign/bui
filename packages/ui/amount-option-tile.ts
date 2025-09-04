@@ -146,9 +146,9 @@ export class BuiAmountOptionTile extends LitElement {
     this.custom = false;
     this.amountDefined = true;
     this.selected = false;
-    this.primaryAmount = 30;
+    this.primaryAmount = 1;
     this.primarySymbol = '$';
-    this.secondaryAmount = 0.001;
+    this.secondaryAmount = 1000;
     this.secondarySymbol = '₿';
     this.showEstimate = true;
     this.primaryTextSize = '6xl';
