@@ -93,6 +93,7 @@ export class BuiNumPad extends LitElement {
     return html`
       <bui-numpad-button
         content="icon"
+        aria-label="Backspace"
         ?disabled="${this.disabled}">
         <bui-angle-left-lg slot="icon"></bui-angle-left-lg>
       </bui-numpad-button>
