@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import './numpad-button.js';
 
 export class BuiNumPad extends LitElement {
   static properties = {
