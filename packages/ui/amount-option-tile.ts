@@ -95,6 +95,11 @@ export class BuiAmountOptionTile extends LitElement {
         box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.08);
       }
 
+      .tile:focus-visible {
+        outline: 2px solid var(--system-interactive-active);
+        outline-offset: 3px;
+      }
+
       .tile.selected {
         border-color: var(--system-interactive-active);
       }
@@ -166,7 +171,14 @@ export class BuiAmountOptionTile extends LitElement {
     const isBitcoinFirst = this.bitcoinFirst;
 
     return html`
-      <div class="tile ${isSelected ? 'selected' : ''} ${isCustom ? 'custom' : ''}" @click=${this.handleClick}>
+      <div
+        class="tile ${isSelected ? 'selected' : ''} ${isCustom ? 'custom' : ''}"
+        role="button"
+        tabindex="0"
+        aria-pressed="${isSelected ? 'true' : 'false'}"
+        @click=${this.handleClick}
+        @keydown=${this.handleKeydown}
+      >
         ${this.renderContent(isSelected, isCustom, hasAmount, isBitcoinFirst)}
       </div>
     `;
@@ -280,6 +292,13 @@ export class BuiAmountOptionTile extends LitElement {
       bubbles: true,
       composed: true,
     }));
+  };
+
+  private handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      this.handleClick();
+    }
   };
 }
 
