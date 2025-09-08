@@ -8,7 +8,7 @@ import QRCodeStyling from 'qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
-const OPTIONS = ['unified', 'onchain', 'lightning'] as const;
+const OPTIONS = ['unified', 'lightning', 'onchain'] as const;
 type QrOption = typeof OPTIONS[number];
 
 const SELECTORS = ['dots', 'toggle'] as const;
@@ -137,14 +137,14 @@ export class BuiBitcoinQrDisplay extends LitElement {
         <rect width="64" height="64" fill="#FF8904" rx="32"/>
         <path stroke="#fff" stroke-linecap="square" stroke-linejoin="round" stroke-width="5.333" d="m19.58 43.986 6.88-27.608m-8.94 27.099s8.016 1.992 15.499 3.861c15.311 3.817 16.628-11.564 3.687-14.791C48.517 35.49 50.987 22.495 39.9 19.73l-15.92-3.971m1.646 14.028 10.849 2.703m-.516-13.743 1.476-5.914M27.98 52.366l1.476-5.918"/>
       </svg>`;
-    } else if (effectiveOption === 'onchain') {
-      // Black Bitcoin icon for on-chain
+    } else if (effectiveOption === 'lightning') {
+      // Yellow Lightning icon for lightning
       svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
         <rect width="64" height="64" fill="#FDC700" rx="32"/>
         <path fill="#fff" d="m14.5 37.095 11.143-24.762h20.614l-6.128 13.62H53.5L21.186 55.666l4.785-18.572H14.5Z"/>
       </svg>`;
-    } else if (effectiveOption === 'lightning') {
-      // Yellow Lightning icon for lightning
+    } else if (effectiveOption === 'onchain') {
+      // Black Bitcoin icon for on-chain
       svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
         <rect width="64" height="64" fill="#000" rx="32"/>
         <path stroke="#fff" stroke-linecap="square" stroke-linejoin="round" stroke-width="5.333" d="m19.58 43.986 6.88-27.608m-8.94 27.099s8.016 1.992 15.499 3.861c15.311 3.817 16.628-11.564 3.687-14.791C48.517 35.49 50.987 22.495 39.9 19.73l-15.92-3.971m1.646 14.028 10.849 2.703m-.516-13.743 1.476-5.914M27.98 52.366l1.476-5.918"/>
@@ -215,7 +215,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private cycleOption(): void {
     if (!this.shouldShowSelector) return;
-    const order: QrOption[] = ['unified', 'onchain', 'lightning'];
+    const order: QrOption[] = ['unified', 'lightning', 'onchain'];
     const idx = order.indexOf(this.option);
     const next = order[(idx + 1) % order.length];
     this.option = next;
@@ -229,13 +229,13 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private renderDotsSelector() {
     if (!this.shouldShowSelector) return null;
     const unifiedActive = this.option === 'unified';
-    const onchainActive = this.option === 'onchain';
     const lightningActive = this.option === 'lightning';
+    const onchainActive = this.option === 'onchain';
     return html`
       <div class="dots-row">
         <bui-option-dot .active=${unifiedActive} @click=${() => this.setOption('unified')} title="${OPTION_LABELS.unified}"></bui-option-dot>
-        <bui-option-dot .active=${onchainActive} @click=${() => this.setOption('onchain')} title="${OPTION_LABELS.onchain}"></bui-option-dot>
         <bui-option-dot .active=${lightningActive} @click=${() => this.setOption('lightning')} title="${OPTION_LABELS.lightning}"></bui-option-dot>
+        <bui-option-dot .active=${onchainActive} @click=${() => this.setOption('onchain')} title="${OPTION_LABELS.onchain}"></bui-option-dot>
       </div>
     `;
   }
