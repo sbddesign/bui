@@ -132,13 +132,13 @@ export const WithoutImages = {
   }
 };
 
-export const RoundedStyle = {
+export const OtherStyles = {
   args: {
     option: 'unified',
     selector: 'dots',
     showImage: true,
     dotType: 'rounded',
-    dotColor: '#FF8904',
+    dotColor: '#173ea3',
   },
   parameters: {
     docs: {

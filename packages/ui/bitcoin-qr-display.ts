@@ -192,11 +192,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
         color: '#ffffff'
       },
       cornersSquareOptions: {
-        color: '#000000',
+        color: this.dotColor,
         type: 'extra-rounded'
       },
       cornersDotOptions: {
-        color: '#000000',
+        color: this.dotColor,
         type: 'dot'
       }
     });
