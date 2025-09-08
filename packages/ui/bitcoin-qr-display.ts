@@ -1,4 +1,5 @@
-import { LitElement, html, css, PropertyValues } from 'lit';
+import { LitElement, html, css } from 'lit';
+import type { PropertyValues } from 'lit';
 import './option-dot.js';
 import './button.js';
 import '@bui/icons/cycle/lg';
