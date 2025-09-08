@@ -4,7 +4,7 @@ import './option-dot.js';
 import './button.js';
 import '@bui/icons/cycle/lg';
 import '@bui/icons/cycle/md';
-import 'bitcoin-qr/dist/bitcoin-qr/index.esm.js';
+import QRCodeStyling from 'qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
@@ -41,6 +41,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare selector: SelectorType;
   declare size: number;
 
+  private qrCodeInstance: QRCodeStyling | null = null;
+  private qrContainer: HTMLElement | null = null;
+
   private validationRules = [
     createStringLiteralValidationRule(OPTIONS, 'option'),
     createStringLiteralValidationRule(SELECTORS, 'selector'),
@@ -72,6 +75,17 @@ export class BuiBitcoinQrDisplay extends LitElement {
     validateProperties(this, changed, this.validationRules);
   }
 
+  protected async updated(changed: PropertyValues<this>): Promise<void> {
+    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size')) {
+      await this.updateQRCode();
+    }
+  }
+
+  protected firstUpdated(): void {
+    this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
+    this.updateQRCode();
+  }
+
   private get hasBothAddressAndLightning(): boolean {
     return Boolean(this.address && this.lightning);
   }
@@ -94,6 +108,65 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private get unifiedString(): string {
     if (!this.address || !this.lightning) return '';
     return `bitcoin:${this.address}?lightning=${this.lightning}`;
+  }
+
+  private getQrData(): string {
+    const effectiveOption = this.effectiveOption;
+    if (effectiveOption === 'unified' && this.address && this.lightning) {
+      return this.unifiedString;
+    } else if (effectiveOption === 'onchain' && this.address) {
+      return this.address;
+    } else if (effectiveOption === 'lightning' && this.lightning) {
+      return this.lightning;
+    }
+    return '';
+  }
+
+  private createQRCode(): QRCodeStyling {
+    const qrData = this.getQrData();
+    return new QRCodeStyling({
+      width: this.size,
+      height: this.size,
+      data: qrData,
+      type: 'svg',
+      image: '',
+      dotsOptions: {
+        color: '#000000',
+        type: 'rounded'
+      },
+      backgroundOptions: {
+        color: '#ffffff'
+      },
+      cornersSquareOptions: {
+        color: '#000000',
+        type: 'extra-rounded'
+      },
+      cornersDotOptions: {
+        color: '#000000',
+        type: 'dot'
+      }
+    });
+  }
+
+  private async updateQRCode(): Promise<void> {
+    if (!this.qrContainer) return;
+    
+    // Clear existing QR code
+    this.qrContainer.innerHTML = '';
+    
+    const qrData = this.getQrData();
+    if (!qrData) {
+      this.qrContainer.innerHTML = '<div class="helper-text">Failed to render QR code 😭</div>';
+      return;
+    }
+
+    try {
+      this.qrCodeInstance = this.createQRCode();
+      await this.qrCodeInstance.append(this.qrContainer);
+    } catch (error) {
+      console.error('Failed to generate QR code:', error);
+      this.qrContainer.innerHTML = '<div class="helper-text">Failed to render QR code 😭</div>';
+    }
   }
 
   private cycleOption(): void {
@@ -152,17 +225,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private renderQr() {
     const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
-    const effectiveOption = this.effectiveOption;
     return html`
       <div class="frame">
-        <div class="qr" style="${qrInlineStyle}">
-          ${effectiveOption === 'unified' && this.address && this.lightning
-            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
-            : effectiveOption === 'onchain' && this.address
-            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" bitcoin="${this.address}" click-behavior="none" type="svg"></bitcoin-qr>`
-            : effectiveOption === 'lightning' && this.lightning
-            ? html`<bitcoin-qr width="${this.size}" height="${this.size}" lightning="${this.lightning}" click-behavior="none" type="svg"></bitcoin-qr>`
-            : html`<div class="helper-text">Failed to render QR code 😭</div>`}
+        <div class="qr qr-container" style="${qrInlineStyle}">
+          <!-- QR code will be rendered here by qr-code-styling -->
         </div>
       </div>
     `;

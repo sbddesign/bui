@@ -1,11 +1,5 @@
 import '../bitcoin-qr-display.js';
 
-// Load bitcoin-qr component
-const script = document.createElement('script');
-script.type = 'module';
-script.src = 'https://unpkg.com/bitcoin-qr@1.4.1/dist/bitcoin-qr/bitcoin-qr.esm.js';
-document.head.appendChild(script);
-
 export default {
   title: 'BUI/BitcoinQrDisplay',
   component: 'bui-bitcoin-qr-display',
