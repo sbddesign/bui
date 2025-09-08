@@ -171,8 +171,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
       margin: 0, // Remove all margin/padding
       imageOptions: {
         hideBackgroundDots: true,
-        imageSize: 0.4, // Icon takes up 40% of QR code size
-        margin: 0
+        imageSize: 0.3, 
+        margin: 8
       },
       dotsOptions: {
         color: '#000000',
