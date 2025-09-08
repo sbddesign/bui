@@ -39,6 +39,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
     showImage: { type: Boolean, reflect: true }, // Show icon overlay on QR code
     dotType: { type: String, reflect: true }, // QR dot style: 'rounded' | 'square' | 'dots' | 'classy' | 'classy-rounded' | 'extra-rounded'
     dotColor: { type: String, reflect: true }, // QR dot color
+    unifiedImage: { type: String }, // Custom image URL for unified QR codes
+    lightningImage: { type: String }, // Custom image URL for lightning QR codes
+    onchainImage: { type: String }, // Custom image URL for on-chain QR codes
   };
 
   declare address: string;
@@ -49,6 +52,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare showImage: boolean;
   declare dotType: string;
   declare dotColor: string;
+  declare unifiedImage: string;
+  declare lightningImage: string;
+  declare onchainImage: string;
 
   private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
@@ -82,6 +88,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.showImage = true;
     this.dotType = 'dots';
     this.dotColor = '#000000';
+    this.unifiedImage = '';
+    this.lightningImage = '';
+    this.onchainImage = '';
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -89,7 +98,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected async updated(changed: PropertyValues<this>): Promise<void> {
-    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage') || changed.has('dotType') || changed.has('dotColor')) {
+    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage') || changed.has('dotType') || changed.has('dotColor') || changed.has('unifiedImage') || changed.has('lightningImage') || changed.has('onchainImage')) {
       await this.updateQRCode();
     }
   }
@@ -139,6 +148,17 @@ export class BuiBitcoinQrDisplay extends LitElement {
     if (!this.showImage) return '';
     
     const effectiveOption = this.effectiveOption;
+    
+    // Check for custom images first
+    if (effectiveOption === 'unified' && this.unifiedImage) {
+      return this.unifiedImage;
+    } else if (effectiveOption === 'lightning' && this.lightningImage) {
+      return this.lightningImage;
+    } else if (effectiveOption === 'onchain' && this.onchainImage) {
+      return this.onchainImage;
+    }
+    
+    // Fall back to default SVG icons
     let svgContent = '';
     
     if (effectiveOption === 'unified') {
