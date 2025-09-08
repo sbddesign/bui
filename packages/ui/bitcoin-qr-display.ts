@@ -14,6 +14,9 @@ type QrOption = typeof OPTIONS[number];
 const SELECTORS = ['dots', 'toggle'] as const;
 type SelectorType = typeof SELECTORS[number];
 
+const DOT_TYPES = ['rounded', 'square', 'dots', 'classy', 'classy-rounded', 'extra-rounded'] as const;
+type DotType = typeof DOT_TYPES[number];
+
 const OPTION_LABELS: Record<QrOption, string> = {
   unified: 'Bitcoin QR',
   onchain: 'On-chain',
@@ -34,6 +37,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
     selector: { type: String, reflect: true }, // 'dots' | 'toggle'
     size: { type: Number }, // QR inner size in px (square)
     showImage: { type: Boolean, reflect: true }, // Show icon overlay on QR code
+    dotType: { type: String, reflect: true }, // QR dot style: 'rounded' | 'square' | 'dots' | 'classy' | 'classy-rounded' | 'extra-rounded'
+    dotColor: { type: String, reflect: true }, // QR dot color
   };
 
   declare address: string;
@@ -42,6 +47,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare selector: SelectorType;
   declare size: number;
   declare showImage: boolean;
+  declare dotType: string;
+  declare dotColor: string;
 
   private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
@@ -49,6 +56,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private validationRules = [
     createStringLiteralValidationRule(OPTIONS, 'option'),
     createStringLiteralValidationRule(SELECTORS, 'selector'),
+    createStringLiteralValidationRule(DOT_TYPES, 'dotType'),
   ];
 
   static styles = [
@@ -72,6 +80,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.selector = 'dots';
     this.size = 332;
     this.showImage = true;
+    this.dotType = 'dots';
+    this.dotColor = '#000000';
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -79,7 +89,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected async updated(changed: PropertyValues<this>): Promise<void> {
-    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage')) {
+    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage') || changed.has('dotType') || changed.has('dotColor')) {
       await this.updateQRCode();
     }
   }
@@ -175,8 +185,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
         margin: 8
       },
       dotsOptions: {
-        color: '#000000',
-        type: 'rounded'
+        color: this.dotColor,
+        type: this.dotType as any
       },
       backgroundOptions: {
         color: '#ffffff'

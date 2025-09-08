@@ -11,6 +11,8 @@ export default {
     selector: { control: { type: 'select' }, options: ['dots', 'toggle'] },
     size: { control: { type: 'number', min: 160, max: 512, step: 4 } },
     showImage: { control: 'boolean' },
+    dotType: { control: { type: 'select' }, options: ['rounded', 'square', 'dots', 'classy', 'classy-rounded', 'extra-rounded'] },
+    dotColor: { control: 'color' },
   },
   args: {
     address: 'BC1QYLH3U67J673H6Y6ALV70M0PL2YZ53TZHVXGG7U',
@@ -19,6 +21,8 @@ export default {
     selector: 'dots',
     size: 332,
     showImage: true,
+    dotType: 'dots',
+    dotColor: '#000000',
   },
 };
 
@@ -123,6 +127,23 @@ export const WithoutImages = {
     docs: {
       description: {
         story: 'QR codes without icon overlays for a cleaner look when images are not desired.'
+      }
+    }
+  }
+};
+
+export const RoundedStyle = {
+  args: {
+    option: 'unified',
+    selector: 'dots',
+    showImage: true,
+    dotType: 'rounded',
+    dotColor: '#000000',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates otherQR code dot styles. Use the dotType control to switch between: rounded, square, dots, classy, classy-rounded, and extra-rounded. Use dotColor to change the color.'
       }
     }
   }
