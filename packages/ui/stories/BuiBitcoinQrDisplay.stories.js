@@ -10,6 +10,7 @@ export default {
     option: { control: { type: 'select' }, options: ['unified', 'onchain', 'lightning'] },
     selector: { control: { type: 'select' }, options: ['dots', 'toggle'] },
     size: { control: { type: 'number', min: 160, max: 512, step: 4 } },
+    showImage: { control: 'boolean' },
   },
   args: {
     address: 'BC1QYLH3U67J673H6Y6ALV70M0PL2YZ53TZHVXGG7U',
@@ -17,6 +18,7 @@ export default {
     option: 'unified',
     selector: 'dots',
     size: 332,
+    showImage: true,
   },
 };
 
@@ -91,6 +93,36 @@ export const NoData = {
     docs: {
       description: {
         story: 'When no data is provided, shows an error message and no selector. This helps developers identify when required data is missing.'
+      }
+    }
+  }
+};
+
+export const WithImages = {
+  args: {
+    option: 'unified',
+    selector: 'dots',
+    showImage: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'QR codes with icon overlays. Orange Bitcoin icon for unified, black Bitcoin for on-chain, and yellow Lightning for Lightning payments.'
+      }
+    }
+  }
+};
+
+export const WithoutImages = {
+  args: {
+    option: 'unified',
+    selector: 'dots',
+    showImage: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'QR codes without icon overlays for a cleaner look when images are not desired.'
       }
     }
   }

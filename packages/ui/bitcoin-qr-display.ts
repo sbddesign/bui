@@ -33,6 +33,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     option: { type: String, reflect: true }, // 'unified' | 'onchain' | 'lightning'
     selector: { type: String, reflect: true }, // 'dots' | 'toggle'
     size: { type: Number }, // QR inner size in px (square)
+    showImage: { type: Boolean, reflect: true }, // Show icon overlay on QR code
   };
 
   declare address: string;
@@ -40,6 +41,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare option: QrOption;
   declare selector: SelectorType;
   declare size: number;
+  declare showImage: boolean;
 
   private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
@@ -69,6 +71,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.option = 'unified';
     this.selector = 'dots';
     this.size = 332;
+    this.showImage = true;
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -76,7 +79,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected async updated(changed: PropertyValues<this>): Promise<void> {
-    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size')) {
+    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage')) {
       await this.updateQRCode();
     }
   }
@@ -122,15 +125,52 @@ export class BuiBitcoinQrDisplay extends LitElement {
     return '';
   }
 
+  private getIconDataUrl(): string {
+    if (!this.showImage) return '';
+    
+    const effectiveOption = this.effectiveOption;
+    let svgContent = '';
+    
+    if (effectiveOption === 'unified') {
+      // Orange Bitcoin icon for unified
+      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="#F7931A" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="m6.337 16.672 2.8-11.23M5.5 16.465s3.26.81 6.304 1.57c6.229 1.553 6.764-4.703 1.5-6.016 4.805 1.197 5.81-4.089 1.3-5.213L8.127 5.19m.67 5.706 4.413 1.1M13 6.406 13.6 4M9.755 20.081l.6-2.407"/>
+      </svg>`;
+    } else if (effectiveOption === 'onchain') {
+      // Black Bitcoin icon for on-chain
+      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="#000000" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="m6.337 16.672 2.8-11.23M5.5 16.465s3.26.81 6.304 1.57c6.229 1.553 6.764-4.703 1.5-6.016 4.805 1.197 5.81-4.089 1.3-5.213L8.127 5.19m.67 5.706 4.413 1.1M13 6.406 13.6 4M9.755 20.081l.6-2.407"/>
+      </svg>`;
+    } else if (effectiveOption === 'lightning') {
+      // Yellow Lightning icon for lightning
+      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFD700" viewBox="0 0 24 24">
+        <path d="M3 13.429 8.143 2h9.514L14.83 8.286H21L6.086 22l2.208-8.571H3Z"/>
+      </svg>`;
+    }
+    
+    if (svgContent) {
+      return `data:image/svg+xml;base64,${btoa(svgContent)}`;
+    }
+    
+    return '';
+  }
+
   private createQRCode(): QRCodeStyling {
     const qrData = this.getQrData();
+    const iconDataUrl = this.getIconDataUrl();
+    
     return new QRCodeStyling({
       width: this.size,
       height: this.size,
       data: qrData,
       type: 'svg',
-      image: '',
+      image: iconDataUrl,
       margin: 0, // Remove all margin/padding
+      imageOptions: {
+        hideBackgroundDots: true,
+        imageSize: 0.4, // Icon takes up 40% of QR code size
+        margin: 0
+      },
       dotsOptions: {
         color: '#000000',
         type: 'rounded'
