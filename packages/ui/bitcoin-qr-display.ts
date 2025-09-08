@@ -133,18 +133,21 @@ export class BuiBitcoinQrDisplay extends LitElement {
     
     if (effectiveOption === 'unified') {
       // Orange Bitcoin icon for unified
-      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="#F7931A" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="m6.337 16.672 2.8-11.23M5.5 16.465s3.26.81 6.304 1.57c6.229 1.553 6.764-4.703 1.5-6.016 4.805 1.197 5.81-4.089 1.3-5.213L8.127 5.19m.67 5.706 4.413 1.1M13 6.406 13.6 4M9.755 20.081l.6-2.407"/>
+      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
+        <rect width="64" height="64" fill="#FF8904" rx="32"/>
+        <path stroke="#fff" stroke-linecap="square" stroke-linejoin="round" stroke-width="5.333" d="m19.58 43.986 6.88-27.608m-8.94 27.099s8.016 1.992 15.499 3.861c15.311 3.817 16.628-11.564 3.687-14.791C48.517 35.49 50.987 22.495 39.9 19.73l-15.92-3.971m1.646 14.028 10.849 2.703m-.516-13.743 1.476-5.914M27.98 52.366l1.476-5.918"/>
       </svg>`;
     } else if (effectiveOption === 'onchain') {
       // Black Bitcoin icon for on-chain
-      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="#000000" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="m6.337 16.672 2.8-11.23M5.5 16.465s3.26.81 6.304 1.57c6.229 1.553 6.764-4.703 1.5-6.016 4.805 1.197 5.81-4.089 1.3-5.213L8.127 5.19m.67 5.706 4.413 1.1M13 6.406 13.6 4M9.755 20.081l.6-2.407"/>
+      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
+        <rect width="64" height="64" fill="#FDC700" rx="32"/>
+        <path fill="#fff" d="m14.5 37.095 11.143-24.762h20.614l-6.128 13.62H53.5L21.186 55.666l4.785-18.572H14.5Z"/>
       </svg>`;
     } else if (effectiveOption === 'lightning') {
       // Yellow Lightning icon for lightning
-      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFD700" viewBox="0 0 24 24">
-        <path d="M3 13.429 8.143 2h9.514L14.83 8.286H21L6.086 22l2.208-8.571H3Z"/>
+      svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
+        <rect width="64" height="64" fill="#000" rx="32"/>
+        <path stroke="#fff" stroke-linecap="square" stroke-linejoin="round" stroke-width="5.333" d="m19.58 43.986 6.88-27.608m-8.94 27.099s8.016 1.992 15.499 3.861c15.311 3.817 16.628-11.564 3.687-14.791C48.517 35.49 50.987 22.495 39.9 19.73l-15.92-3.971m1.646 14.028 10.849 2.703m-.516-13.743 1.476-5.914M27.98 52.366l1.476-5.918"/>
       </svg>`;
     }
     
