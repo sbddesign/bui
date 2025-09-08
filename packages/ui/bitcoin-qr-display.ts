@@ -42,6 +42,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     unifiedImage: { type: String }, // Custom image URL for unified QR codes
     lightningImage: { type: String }, // Custom image URL for lightning QR codes
     onchainImage: { type: String }, // Custom image URL for on-chain QR codes
+    copyOnTap: { type: Boolean, reflect: true }, // Enable tap-to-copy functionality
   };
 
   declare address: string;
@@ -55,6 +56,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare unifiedImage: string;
   declare lightningImage: string;
   declare onchainImage: string;
+  declare copyOnTap: boolean;
 
   private qrCodeInstance: QRCodeStyling.default | null = null;
   private qrContainer: HTMLElement | null = null;
@@ -91,6 +93,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.unifiedImage = '';
     this.lightningImage = '';
     this.onchainImage = '';
+    this.copyOnTap = true;
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -237,9 +240,51 @@ export class BuiBitcoinQrDisplay extends LitElement {
     try {
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
+      
+      // Add click handler for copy functionality
+      if (this.copyOnTap) {
+        this.qrContainer.style.cursor = 'pointer';
+        this.qrContainer.addEventListener('click', this.handleQrClick.bind(this));
+      }
     } catch (error) {
       console.error('Failed to generate QR code:', error);
       this.qrContainer.innerHTML = '<div class="helper-text">Failed to render QR code 😭</div>';
+    }
+  }
+
+  private async handleQrClick(): Promise<void> {
+    if (!this.copyOnTap) return;
+    
+    const qrData = this.getQrData();
+    if (!qrData) return;
+    
+    try {
+      await navigator.clipboard.writeText(qrData);
+      
+      // Emit custom copy event
+      this.dispatchEvent(new CustomEvent('bui-copy', {
+        detail: {
+          copiedText: qrData,
+          source: 'qr-code',
+          component: 'bui-bitcoin-qr-display'
+        },
+        bubbles: true,
+        composed: true
+      }));
+    } catch (error) {
+      console.error('Failed to copy QR data to clipboard:', error);
+      
+      // Emit error event
+      this.dispatchEvent(new CustomEvent('bui-copy-error', {
+        detail: {
+          error: error,
+          attemptedText: qrData,
+          source: 'qr-code',
+          component: 'bui-bitcoin-qr-display'
+        },
+        bubbles: true,
+        composed: true
+      }));
     }
   }
 
@@ -299,9 +344,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private renderQr() {
     const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
+    const title = this.copyOnTap ? 'Click to copy QR code data' : '';
     return html`
       <div class="frame">
-        <div class="qr qr-container" style="${qrInlineStyle}">
+        <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
           <!-- QR code will be rendered here by qr-code-styling -->
         </div>
       </div>

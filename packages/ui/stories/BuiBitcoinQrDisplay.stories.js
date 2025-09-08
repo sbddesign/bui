@@ -16,6 +16,7 @@ export default {
     unifiedImage: { control: 'text' },
     lightningImage: { control: 'text' },
     onchainImage: { control: 'text' },
+    copyOnTap: { control: 'boolean' },
   },
   args: {
     address: 'BC1QYLH3U67J673H6Y6ALV70M0PL2YZ53TZHVXGG7U',
@@ -29,6 +30,7 @@ export default {
     unifiedImage: '',
     lightningImage: '',
     onchainImage: '',
+    copyOnTap: true,
   },
 };
 
