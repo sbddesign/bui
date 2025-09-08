@@ -130,6 +130,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
       data: qrData,
       type: 'svg',
       image: '',
+      margin: 0, // Remove all margin/padding
       dotsOptions: {
         color: '#000000',
         type: 'rounded'
