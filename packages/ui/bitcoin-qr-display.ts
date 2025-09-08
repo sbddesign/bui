@@ -4,7 +4,7 @@ import './option-dot.js';
 import './button.js';
 import '@bui/icons/cycle/lg';
 import '@bui/icons/cycle/md';
-import QRCodeStyling from 'qr-code-styling';
+import * as QRCodeStyling from 'qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
@@ -56,7 +56,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare lightningImage: string;
   declare onchainImage: string;
 
-  private qrCodeInstance: QRCodeStyling | null = null;
+  private qrCodeInstance: QRCodeStyling.default | null = null;
   private qrContainer: HTMLElement | null = null;
 
   private validationRules = [
@@ -188,11 +188,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
     return '';
   }
 
-  private createQRCode(): QRCodeStyling {
+  private createQRCode(): QRCodeStyling.default {
     const qrData = this.getQrData();
     const iconDataUrl = this.getIconDataUrl();
     
-    return new QRCodeStyling({
+    return new QRCodeStyling.default({
       width: this.size,
       height: this.size,
       data: qrData,
@@ -236,7 +236,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
     try {
       this.qrCodeInstance = this.createQRCode();
-      await this.qrCodeInstance.append(this.qrContainer);
+      this.qrCodeInstance.append(this.qrContainer);
     } catch (error) {
       console.error('Failed to generate QR code:', error);
       this.qrContainer.innerHTML = '<div class="helper-text">Failed to render QR code 😭</div>';
