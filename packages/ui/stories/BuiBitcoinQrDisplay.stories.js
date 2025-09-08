@@ -138,7 +138,7 @@ export const RoundedStyle = {
     selector: 'dots',
     showImage: true,
     dotType: 'rounded',
-    dotColor: '#000000',
+    dotColor: '#FF8904',
   },
   parameters: {
     docs: {
