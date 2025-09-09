@@ -108,11 +108,12 @@ export class BuiBitcoinQrDisplay extends LitElement {
         color: var(--text-secondary); 
         font-size: 14px; 
         text-align: center; 
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
       }
     `,
   ];
