@@ -78,8 +78,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
       :host { display: block; }
       .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); border-radius: 8.909px; }
       .helper-text { color: var(--text-secondary); font-size: 16px; text-align: center; }
-      .frame { background: var(--white); border: 1.188px solid var(--system-divider); border-radius: 9.503px; padding: 28.509px; display: flex; align-items: center; justify-content: center; width: 392px; }
-      .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; }
+      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; }
+      .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
       .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
       .dots-row { display: flex; gap: var(--size-4); align-items: center; }
       .selector-row { display: flex; gap: var(--size-4); align-items: center; }
@@ -111,8 +111,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         padding: var(--size-4);
         box-sizing: border-box;
       }
