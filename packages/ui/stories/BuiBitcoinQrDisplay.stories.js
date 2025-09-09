@@ -100,21 +100,6 @@ export const OnchainOnly = {
   }
 };
 
-export const NoData = {
-  args: {
-    error: true,
-    errorMessage: 'No Bitcoin address or Lightning invoice provided',
-    selector: 'dots',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'When no data is provided, shows an error message. This is the same as the error state but with a specific message for missing data.'
-      }
-    }
-  }
-};
-
 export const WithImages = {
   args: {
     option: 'unified',
