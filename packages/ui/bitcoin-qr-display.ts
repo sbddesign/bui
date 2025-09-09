@@ -108,12 +108,13 @@ export class BuiBitcoinQrDisplay extends LitElement {
         color: var(--text-secondary); 
         font-size: 14px; 
         text-align: center; 
-        white-space: nowrap;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
         width: 100%;
+        padding: var(--size-4);
+        box-sizing: border-box;
       }
     `,
   ];
@@ -279,7 +280,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     
     // Handle error state
     if (this.error) {
-      this.qrContainer.innerHTML = `<div class="error-message">${this.errorMessage}</div>`;
+      this.qrContainer.innerHTML = `<div class="error-message"><p>${this.errorMessage}</p></div>`;
       return;
     }
     
