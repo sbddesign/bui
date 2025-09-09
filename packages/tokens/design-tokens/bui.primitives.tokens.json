@@ -78,5 +78,9 @@
   "Number": {
     "$type": "dimension",
     "$value": "0px"
+  },
+  "Label": {
+    "$type": "string",
+    "$value": "Label"
   }
 }
