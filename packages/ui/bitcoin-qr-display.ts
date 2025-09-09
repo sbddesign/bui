@@ -89,7 +89,21 @@ export class BuiBitcoinQrDisplay extends LitElement {
       .placeholder-qr { background: var(--system-placeholder); border-radius: 12px; width: 332.606px; height: 332.606px; }
       .placeholder-options { background: var(--system-placeholder); height: 48px; border-radius: 12px; width: 100px; }
       
-      /* Error styles */
+      /* Error state styles */
+      .error-helper-placeholder { 
+        background: var(--tailwind-stone-100); 
+        height: 20px; 
+        border-radius: 28px; 
+        width: 240px; 
+        opacity: 0; 
+      }
+      .error-options-placeholder { 
+        background: var(--tailwind-stone-100); 
+        height: 48px; 
+        border-radius: 12px; 
+        width: 100px; 
+        opacity: 0; 
+      }
       .error-message { 
         color: var(--text-secondary); 
         font-size: 14px; 
@@ -407,9 +421,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   render() {
     return html`
       <div class="container">
-        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : html`<div class="helper-text">${this.helperText}</div>`}
+        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : html`<div class="helper-text">${this.helperText}</div>`)}
         ${this.renderQr()}
-        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)}
+        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.error ? html`<div class="error-options-placeholder"></div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null))}
       </div>
     `;
   }
