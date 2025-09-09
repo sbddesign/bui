@@ -43,6 +43,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
     lightningImage: { type: String }, // Custom image URL for lightning QR codes
     onchainImage: { type: String }, // Custom image URL for on-chain QR codes
     copyOnTap: { type: Boolean, reflect: true }, // Enable tap-to-copy functionality
+    placeholder: { type: Boolean, reflect: true }, // Show placeholder/loading state
+    error: { type: Boolean, reflect: true }, // Show error state
+    errorMessage: { type: String }, // Custom error message
   };
 
   declare address: string;
@@ -57,6 +60,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare lightningImage: string;
   declare onchainImage: string;
   declare copyOnTap: boolean;
+  declare placeholder: boolean;
+  declare error: boolean;
+  declare errorMessage: string;
 
   private qrCodeInstance: QRCodeStyling.default | null = null;
   private qrContainer: HTMLElement | null = null;
@@ -70,13 +76,30 @@ export class BuiBitcoinQrDisplay extends LitElement {
   static styles = [
     css`
       :host { display: block; }
-      .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-4); border-radius: 10px; }
+      .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); border-radius: 8.909px; }
       .helper-text { color: var(--text-secondary); font-size: 16px; text-align: center; }
-      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: 10px; padding: 28px; display: flex; align-items: center; justify-content: center; }
+      .frame { background: var(--white); border: 1.188px solid var(--system-divider); border-radius: 9.503px; padding: 28.509px; display: flex; align-items: center; justify-content: center; width: 392px; }
       .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; }
       .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
       .dots-row { display: flex; gap: var(--size-4); align-items: center; }
       .selector-row { display: flex; gap: var(--size-4); align-items: center; }
+      
+      /* Placeholder styles */
+      .placeholder-helper { background: var(--system-placeholder); height: 20px; border-radius: 28px; width: 240px; }
+      .placeholder-qr { background: var(--system-placeholder); border-radius: 12px; width: 332.606px; height: 332.606px; }
+      .placeholder-options { background: var(--system-placeholder); height: 48px; border-radius: 12px; width: 100px; }
+      
+      /* Error styles */
+      .error-message { 
+        color: var(--text-secondary); 
+        font-size: 14px; 
+        text-align: center; 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+      }
     `,
   ];
 
@@ -94,6 +117,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.lightningImage = '';
     this.onchainImage = '';
     this.copyOnTap = true;
+    this.placeholder = false;
+    this.error = false;
+    this.errorMessage = 'Sorry, an error occurred. Try again later.';
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -101,7 +127,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected async updated(changed: PropertyValues<this>): Promise<void> {
-    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage') || changed.has('dotType') || changed.has('dotColor') || changed.has('unifiedImage') || changed.has('lightningImage') || changed.has('onchainImage')) {
+    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage') || changed.has('dotType') || changed.has('dotColor') || changed.has('unifiedImage') || changed.has('lightningImage') || changed.has('onchainImage') || changed.has('placeholder') || changed.has('error')) {
       await this.updateQRCode();
     }
   }
@@ -231,9 +257,21 @@ export class BuiBitcoinQrDisplay extends LitElement {
     // Clear existing QR code
     this.qrContainer.innerHTML = '';
     
+    // Handle placeholder state
+    if (this.placeholder) {
+      return; // Placeholder will be rendered in the template
+    }
+    
+    // Handle error state
+    if (this.error) {
+      this.qrContainer.innerHTML = `<div class="error-message">${this.errorMessage}</div>`;
+      return;
+    }
+    
     const qrData = this.getQrData();
     if (!qrData) {
-      this.qrContainer.innerHTML = '<div class="helper-text">Failed to render QR code 😭</div>';
+      // No data provided - show error state
+      this.qrContainer.innerHTML = '<div class="error-message">No Bitcoin address or Lightning invoice provided</div>';
       return;
     }
 
@@ -248,7 +286,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
       }
     } catch (error) {
       console.error('Failed to generate QR code:', error);
-      this.qrContainer.innerHTML = '<div class="helper-text">Failed to render QR code 😭</div>';
+      this.qrContainer.innerHTML = '<div class="error-message">Failed to render QR code 😭</div>';
     }
   }
 
@@ -344,7 +382,19 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private renderQr() {
     const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
-    const title = this.copyOnTap ? 'Click to copy QR code data' : '';
+    const title = this.copyOnTap && !this.placeholder && !this.error ? 'Click to copy QR code data' : '';
+    
+    // Handle placeholder state
+    if (this.placeholder) {
+      return html`
+        <div class="frame">
+          <div class="qr qr-container placeholder-qr" style="${qrInlineStyle}">
+            <!-- Placeholder QR area -->
+          </div>
+        </div>
+      `;
+    }
+    
     return html`
       <div class="frame">
         <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
@@ -357,9 +407,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   render() {
     return html`
       <div class="container">
-        <div class="helper-text">${this.helperText}</div>
+        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : html`<div class="helper-text">${this.helperText}</div>`}
         ${this.renderQr()}
-        ${this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null}
+        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)}
       </div>
     `;
   }

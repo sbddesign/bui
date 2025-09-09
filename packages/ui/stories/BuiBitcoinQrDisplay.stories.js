@@ -17,6 +17,9 @@ export default {
     lightningImage: { control: 'text' },
     onchainImage: { control: 'text' },
     copyOnTap: { control: 'boolean' },
+    placeholder: { control: 'boolean' },
+    error: { control: 'boolean' },
+    errorMessage: { control: 'text' },
   },
   args: {
     address: 'BC1QYLH3U67J673H6Y6ALV70M0PL2YZ53TZHVXGG7U',
@@ -31,6 +34,9 @@ export default {
     lightningImage: '',
     onchainImage: '',
     copyOnTap: true,
+    placeholder: false,
+    error: false,
+    errorMessage: 'Sorry, an error occurred. Try again later.',
   },
 };
 
@@ -96,15 +102,14 @@ export const OnchainOnly = {
 
 export const NoData = {
   args: {
-    address: '',
-    lightning: '',
-    option: 'unified',
+    error: true,
+    errorMessage: 'No Bitcoin address or Lightning invoice provided',
     selector: 'dots',
   },
   parameters: {
     docs: {
       description: {
-        story: 'When no data is provided, shows an error message and no selector. This helps developers identify when required data is missing.'
+        story: 'When no data is provided, shows an error message. This is the same as the error state but with a specific message for missing data.'
       }
     }
   }
@@ -171,6 +176,50 @@ export const CustomImages = {
     docs: {
       description: {
         story: 'Demonstrates custom image overlays. Use unifiedImage, lightningImage, or onchainImage props to provide custom image URLs for each QR code type. This example shows the Satoshi 2010 image for on-chain QR codes.'
+      }
+    }
+  }
+};
+
+export const Placeholder = {
+  args: {
+    placeholder: true,
+    selector: 'dots',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Placeholder state for loading QR data. Shows skeleton UI with gray placeholder elements while data is being fetched. Use this state when loading Bitcoin addresses or Lightning invoices.'
+      }
+    }
+  }
+};
+
+export const Error = {
+  args: {
+    error: true,
+    errorMessage: 'Sorry, an error occurred. Try again later.',
+    selector: 'dots',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Error state for general failures (network issues, invalid data, etc.). Shows a centered error message in the QR area. Customize the error message using the errorMessage prop.'
+      }
+    }
+  }
+};
+
+export const CustomError = {
+  args: {
+    error: true,
+    errorMessage: 'Unable to generate QR code. Please check your Bitcoin address.',
+    selector: 'dots',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Custom error message example. Use the errorMessage prop to provide specific error information to users.'
       }
     }
   }
