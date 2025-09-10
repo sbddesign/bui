@@ -12,7 +12,15 @@
     "storybook:build": "pnpm --filter @bui/ui build-storybook",
     "demo:react": "pnpm --filter @bui/demo-react dev",
     "demo:svelte": "pnpm --filter @bui/demo-svelte dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish:all": "pnpm build:all && pnpm --filter @bui/tokens publish && pnpm --filter @bui/icons publish && pnpm --filter @bui/ui publish",
+    "publish:tokens": "pnpm --filter @bui/tokens publish",
+    "publish:icons": "pnpm --filter @bui/icons publish", 
+    "publish:ui": "pnpm --filter @bui/ui publish",
+    "version:patch": "pnpm --filter @bui/tokens version patch && pnpm --filter @bui/icons version patch && pnpm --filter @bui/ui version patch",
+    "version:minor": "pnpm --filter @bui/tokens version minor && pnpm --filter @bui/icons version minor && pnpm --filter @bui/ui version minor",
+    "version:major": "pnpm --filter @bui/tokens version major && pnpm --filter @bui/icons version major && pnpm --filter @bui/ui version major",
+    "publish:dry-run": "pnpm build:all && pnpm --filter @bui/tokens publish --dry-run && pnpm --filter @bui/icons publish --dry-run && pnpm --filter @bui/ui publish --dry-run"
   },
   "keywords": [
     "design-system",
