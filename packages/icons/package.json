@@ -1,6 +1,6 @@
 {
   "name": "@bui/icons",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Icon web components for BUI Design System",
   "main": "dist/index.js",
   "type": "module",

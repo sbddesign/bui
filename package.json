@@ -1,8 +1,8 @@
 {
   "name": "bui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "BUI Design System Monorepo",
-  "private": true,
+  "private": false,
   "scripts": {
     "build:tokens": "pnpm --filter @bui/tokens build",
     "build:icons": "pnpm --filter @bui/icons build",
