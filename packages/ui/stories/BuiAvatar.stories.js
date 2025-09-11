@@ -152,38 +152,6 @@ export const DifferentSizes = {
   ])
 };
 
-export const ResponsiveSizing = {
-  render: () => {
-    const container = document.createElement('div');
-    container.style.display = 'grid';
-    container.style.gridTemplateColumns = 'repeat(auto-fit, minmax(100px, 1fr))';
-    container.style.gap = '1rem';
-    container.style.maxWidth = '500px';
-    
-    const sizes = [
-      { size: '50px', text: '50px' },
-      { size: '75px', text: '75px' },
-      { size: '100px', text: '100px' },
-      { size: '150px', text: '150px' }
-    ];
-    
-    sizes.forEach(({ size, text }) => {
-      const wrapper = document.createElement('div');
-      wrapper.style.width = size;
-      wrapper.style.height = size;
-      
-      const avatar = document.createElement('bui-avatar');
-      avatar.setAttribute('text', text);
-      avatar.setAttribute('show-initial', '');
-      
-      wrapper.appendChild(avatar);
-      container.appendChild(wrapper);
-    });
-    
-    return container;
-  }
-};
-
 export const WithImages = {
   render: () => createAvatarGrid([
     { imageUrl: './stories/assets/avatars/Dog.png', imageUrl2x: './stories/assets/avatars/Dog@2x.png', size: 'small', containerSize: '48px' },
