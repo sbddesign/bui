@@ -117,8 +117,8 @@ export const TextWithoutInitial = {
 
 export const WithImage = {
   args: {
-    imageUrl: './stories/assets/avatars/Cat.png',
-    imageUrl2x: './stories/assets/avatars/Cat@2x.png',
+    imageUrl: './assets/avatars/Cat.png',
+    imageUrl2x: './assets/avatars/Cat@2x.png',
     size: 'medium'
   },
   render: (args) => createAvatarWithContainer(args)
@@ -154,16 +154,16 @@ export const DifferentSizes = {
 
 export const WithImages = {
   render: () => createAvatarGrid([
-    { imageUrl: './stories/assets/avatars/Dog.png', imageUrl2x: './stories/assets/avatars/Dog@2x.png', size: 'small', containerSize: '48px' },
-    { imageUrl: './stories/assets/avatars/Robot.png', imageUrl2x: './stories/assets/avatars/Robot@2x.png', size: 'medium', containerSize: '64px' },
-    { imageUrl: './stories/assets/avatars/Dinosaur.png', imageUrl2x: './stories/assets/avatars/Dinosaur@2x.png', size: 'large', containerSize: '80px' }
+    { imageUrl: './assets/avatars/Dog.png', imageUrl2x: './assets/avatars/Dog@2x.png', size: 'small', containerSize: '48px' },
+    { imageUrl: './assets/avatars/Robot.png', imageUrl2x: './assets/avatars/Robot@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './assets/avatars/Dinosaur.png', imageUrl2x: './assets/avatars/Dinosaur@2x.png', size: 'large', containerSize: '80px' }
   ])
 };
 
 export const MixedContent = {
   render: () => createAvatarGrid([
     { text: 'Bitcoin', showInitial: true, size: 'medium' },
-    { imageUrl: './stories/assets/avatars/Bird.png', imageUrl2x: './stories/assets/avatars/Bird@2x.png', size: 'medium' },
+    { imageUrl: './assets/avatars/Bird.png', imageUrl2x: './assets/avatars/Bird@2x.png', size: 'medium' },
     { text: 'Ethereum', showInitial: true, size: 'medium' },
     { text: 'Litecoin', showInitial: true, size: 'medium' }
   ])
@@ -171,11 +171,11 @@ export const MixedContent = {
 
 export const AllAvatarImages = {
   render: () => createAvatarGrid([
-    { imageUrl: './stories/assets/avatars/Cat.png', imageUrl2x: './stories/assets/avatars/Cat@2x.png', size: 'medium', containerSize: '64px' },
-    { imageUrl: './stories/assets/avatars/Dog.png', imageUrl2x: './stories/assets/avatars/Dog@2x.png', size: 'medium', containerSize: '64px' },
-    { imageUrl: './stories/assets/avatars/Bird.png', imageUrl2x: './stories/assets/avatars/Bird@2x.png', size: 'medium', containerSize: '64px' },
-    { imageUrl: './stories/assets/avatars/Robot.png', imageUrl2x: './stories/assets/avatars/Robot@2x.png', size: 'medium', containerSize: '64px' },
-    { imageUrl: './stories/assets/avatars/Dinosaur.png', imageUrl2x: './stories/assets/avatars/Dinosaur@2x.png', size: 'medium', containerSize: '64px' },
-    { imageUrl: './stories/assets/avatars/Alligator.png', imageUrl2x: './stories/assets/avatars/Alligator@2x.png', size: 'medium', containerSize: '64px' }
+    { imageUrl: './assets/avatars/Cat.png', imageUrl2x: './assets/avatars/Cat@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './assets/avatars/Dog.png', imageUrl2x: './assets/avatars/Dog@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './assets/avatars/Bird.png', imageUrl2x: './assets/avatars/Bird@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './assets/avatars/Robot.png', imageUrl2x: './assets/avatars/Robot@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './assets/avatars/Dinosaur.png', imageUrl2x: './assets/avatars/Dinosaur@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './assets/avatars/Alligator.png', imageUrl2x: './assets/avatars/Alligator@2x.png', size: 'medium', containerSize: '64px' }
   ])
 };

@@ -16,6 +16,9 @@ const config = {
     "name": "@storybook/web-components-vite",
     "options": {}
   },
+  "staticDirs": [
+    "../stories/assets"
+  ],
   "viteFinal": async (config) => {
     // Ensure CSS files are handled properly
     if (config.css) {
