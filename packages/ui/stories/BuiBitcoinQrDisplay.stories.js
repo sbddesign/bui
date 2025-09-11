@@ -20,6 +20,7 @@ export default {
     placeholder: { control: 'boolean' },
     error: { control: 'boolean' },
     errorMessage: { control: 'text' },
+    complete: { control: 'boolean' },
   },
   args: {
     address: 'BC1QYLH3U67J673H6Y6ALV70M0PL2YZ53TZHVXGG7U',
@@ -37,6 +38,7 @@ export default {
     placeholder: false,
     error: false,
     errorMessage: 'Sorry, an error occurred. Try again later.',
+    complete: false,
   },
 };
 
@@ -190,6 +192,20 @@ export const CustomError = {
     docs: {
       description: {
         story: 'Custom error message example. Use the errorMessage prop to provide specific error information to users.'
+      }
+    }
+  }
+};
+
+export const Complete = {
+  args: {
+    complete: true,
+    selector: 'dots',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Complete/success state showing payment received confirmation. Displays a green background with check circle icon and "Payment Received" text. Use this state to indicate successful payment completion.'
       }
     }
   }

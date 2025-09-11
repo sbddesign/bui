@@ -4,6 +4,7 @@ import './option-dot.js';
 import './button.js';
 import '@sbddesign/bui-icons/cycle/lg';
 import '@sbddesign/bui-icons/cycle/md';
+import '@sbddesign/bui-icons/checkCircle/lg';
 import { QRCodeStyling } from '@liquid-js/qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
@@ -46,6 +47,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     placeholder: { type: Boolean, reflect: true }, // Show placeholder/loading state
     error: { type: Boolean, reflect: true }, // Show error state
     errorMessage: { type: String }, // Custom error message
+    complete: { type: Boolean, reflect: true }, // Show complete/success state
   };
 
   declare address: string;
@@ -63,6 +65,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare placeholder: boolean;
   declare error: boolean;
   declare errorMessage: string;
+  declare complete: boolean;
 
   private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
@@ -143,6 +146,37 @@ export class BuiBitcoinQrDisplay extends LitElement {
         padding: var(--size-4);
         box-sizing: border-box;
       }
+      .complete-qr {
+        background: var(--system-mood-success);
+        border-radius: 12px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .complete-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--size-2);
+        text-align: center;
+      }
+      .complete-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+      }
+      .complete-text {
+        color: var(--white);
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1;
+        margin: 0;
+      }
     `,
   ];
 
@@ -163,6 +197,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.placeholder = false;
     this.error = false;
     this.errorMessage = 'Sorry, an error occurred. Try again later.';
+    this.complete = false;
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -468,6 +503,22 @@ export class BuiBitcoinQrDisplay extends LitElement {
       `;
     }
     
+    // Handle complete state
+    if (this.complete) {
+      return html`
+        <div class="frame">
+          <div class="qr complete-qr" style="${qrInlineStyle}">
+            <div class="complete-content">
+              <div class="complete-icon">
+                <bui-check-circle-lg></bui-check-circle-lg>
+              </div>
+              <p class="complete-text">Payment Received</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
     return html`
       <div class="frame">
         <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
@@ -485,9 +536,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   render() {
     return html`
       <div class="container">
-        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : html`<div class="helper-text">${this.helperText}</div>`)}
+        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : (this.complete ? html`<div class="helper-text" style="opacity: 0;">${this.helperText}</div>` : html`<div class="helper-text">${this.helperText}</div>`))}
         ${this.renderQr()}
-        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.error ? html`<div class="error-options-placeholder"></div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null))}
+        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.error ? html`<div class="error-options-placeholder"></div>` : (this.complete ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)))}
       </div>
     `;
   }
