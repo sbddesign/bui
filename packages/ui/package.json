@@ -99,6 +99,10 @@
       "types": "./types/react-jsx.d.ts",
       "default": "./dist/amount-option-tile.js"
     },
+    "./avatar.js": {
+      "types": "./types/react-jsx.d.ts",
+      "default": "./dist/avatar.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "style": "../tokens/lib/tailwindcss/tailwind-theme.css",
