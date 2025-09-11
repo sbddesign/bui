@@ -14,15 +14,16 @@ export class BuiAvatar extends LitElement {
     imageUrl: { type: String, attribute: 'image-url' },
     imageUrl2x: { type: String, attribute: 'image-url-2x' },
     text: { type: String },
-    showInitial: { 
-      type: Boolean, 
+    showInitial: {
+      type: Boolean,
       attribute: 'show-initial',
+      reflect: true,
       converter: {
         fromAttribute: (value: string | null) => value !== null,
-        toAttribute: (value: boolean) => value ? '' : null
-      }
+        toAttribute: (value: boolean) => (value ? '' : null),
+      },
     },
-    size: { type: String },
+    size: { type: String, reflect: true },
   };
 
   // TypeScript property declarations
