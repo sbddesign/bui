@@ -77,7 +77,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     css`
       :host { display: block; }
       .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); border-radius: 8.909px; }
-      .helper-text { color: var(--text-secondary); font-size: 16px; text-align: center; }
+      .helper-text { color: var(--text-secondary); font-size: 14px; text-align: center; }
       .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; }
       .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
       .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
