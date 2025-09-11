@@ -14,7 +14,7 @@ type QrOption = typeof OPTIONS[number];
 const SELECTORS = ['dots', 'toggle'] as const;
 type SelectorType = typeof SELECTORS[number];
 
-const DOT_TYPES = ['rounded', 'square', 'dots', 'classy', 'classy-rounded', 'extra-rounded'] as const;
+const DOT_TYPES = ['dot', 'square', 'rounded', 'extra-rounded', 'classy', 'classy-rounded', 'random-dot', 'vertical-line', 'horizontal-line', 'small-square', 'tiny-square', 'diamond'] as const;
 type DotType = typeof DOT_TYPES[number];
 
 const OPTION_LABELS: Record<QrOption, string> = {
@@ -154,7 +154,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.selector = 'dots';
     this.size = 332;
     this.showImage = true;
-    this.dotType = 'dots';
+    this.dotType = 'dot';
     this.dotColor = '#000000';
     this.unifiedImage = '';
     this.lightningImage = '';
@@ -283,7 +283,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
       type: 'canvas',
       dotsOptions: {
         color: this.dotColor,
-        type: this.dotType as any
+        type: this.dotType,
+        size: 10
       },
       backgroundOptions: {
         color: '#ffffff',
@@ -292,6 +293,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
     };
 
     // Images will be handled manually with CSS overlay
+    
+    console.log('QR Code config dotsOptions:', config.dotsOptions);
     
     return new QRCodeStyling(config);
   }
@@ -453,7 +456,6 @@ export class BuiBitcoinQrDisplay extends LitElement {
     const title = this.copyOnTap && !this.placeholder && !this.error ? 'Click to copy QR code data' : '';
     const iconDataUrl = this.getIconDataUrl();
     
-    console.log('Rendering QR with showImage:', this.showImage, 'iconDataUrl:', iconDataUrl ? 'present' : 'missing');
     
     // Handle placeholder state
     if (this.placeholder) {

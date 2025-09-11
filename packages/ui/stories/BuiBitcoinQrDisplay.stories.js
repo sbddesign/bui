@@ -11,7 +11,7 @@ export default {
     selector: { control: { type: 'select' }, options: ['dots', 'toggle'] },
     size: { control: { type: 'number', min: 160, max: 512, step: 4 } },
     showImage: { control: 'boolean' },
-    dotType: { control: { type: 'select' }, options: ['rounded', 'square', 'dots', 'classy', 'classy-rounded', 'extra-rounded'] },
+    dotType: { control: { type: 'select' }, options: ['dot', 'rounded', 'square', 'classy', 'classy-rounded', 'extra-rounded'] },
     dotColor: { control: 'color' },
     unifiedImage: { control: 'text' },
     lightningImage: { control: 'text' },
@@ -28,7 +28,7 @@ export default {
     selector: 'dots',
     size: 332,
     showImage: true,
-    dotType: 'dots',
+    dotType: 'dot',
     dotColor: '#000000',
     unifiedImage: '',
     lightningImage: '',
@@ -141,7 +141,7 @@ export const OtherStyles = {
   parameters: {
     docs: {
       description: {
-        story: 'Demonstrates otherQR code dot styles. Use the dotType control to switch between: rounded, square, dots, classy, classy-rounded, and extra-rounded. Use dotColor to change the color.'
+        story: 'Demonstrates other QR code dot styles. Use the dotType control to switch between: dot, rounded, square, classy, classy-rounded, and extra-rounded. Use dotColor to change the color.'
       }
     }
   }
