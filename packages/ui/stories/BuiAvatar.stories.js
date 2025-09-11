@@ -1,5 +1,47 @@
 import '../avatar.js';
 
+// Helper function to create avatar with container
+const createAvatarWithContainer = (args, containerSize = '64px') => {
+  const container = document.createElement('div');
+  container.style.width = containerSize;
+  container.style.height = containerSize;
+  
+  const avatar = document.createElement('bui-avatar');
+  if (args.imageUrl) avatar.setAttribute('image-url', args.imageUrl);
+  if (args.text) avatar.setAttribute('text', args.text);
+  if (args.size) avatar.setAttribute('size', args.size);
+  if (args.showInitial) avatar.setAttribute('show-initial', '');
+  
+  container.appendChild(avatar);
+  return container;
+};
+
+// Helper function to create multiple avatars in a flex container
+const createAvatarGrid = (avatarConfigs, containerSize = '64px') => {
+  const container = document.createElement('div');
+  container.style.display = 'flex';
+  container.style.gap = '1rem';
+  container.style.alignItems = 'center';
+  container.style.flexWrap = 'wrap';
+  
+  avatarConfigs.forEach(config => {
+    const wrapper = document.createElement('div');
+    wrapper.style.width = config.containerSize || containerSize;
+    wrapper.style.height = config.containerSize || containerSize;
+    
+    const avatar = document.createElement('bui-avatar');
+    if (config.imageUrl) avatar.setAttribute('image-url', config.imageUrl);
+    if (config.text) avatar.setAttribute('text', config.text);
+    if (config.size) avatar.setAttribute('size', config.size);
+    if (config.showInitial) avatar.setAttribute('show-initial', '');
+    
+    wrapper.appendChild(avatar);
+    container.appendChild(wrapper);
+  });
+  
+  return container;
+};
+
 export default {
   title: 'BUI/Avatar',
   component: 'bui-avatar',
@@ -43,20 +85,7 @@ export const Default = {
     showInitial: true,
     size: 'medium'
   },
-  render: (args) => {
-    const container = document.createElement('div');
-    container.style.width = '64px';
-    container.style.height = '64px';
-    
-    const avatar = document.createElement('bui-avatar');
-    avatar.setAttribute('text', args.text || '');
-    avatar.setAttribute('size', args.size || 'medium');
-    if (args.showInitial) avatar.setAttribute('show-initial', '');
-    if (args.imageUrl) avatar.setAttribute('image-url', args.imageUrl);
-    
-    container.appendChild(avatar);
-    return container;
-  }
+  render: (args) => createAvatarWithContainer(args)
 };
 
 export const WithImage = {
@@ -64,18 +93,7 @@ export const WithImage = {
     imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     size: 'medium'
   },
-  render: (args) => {
-    const container = document.createElement('div');
-    container.style.width = '64px';
-    container.style.height = '64px';
-    
-    const avatar = document.createElement('bui-avatar');
-    avatar.setAttribute('image-url', args.imageUrl);
-    avatar.setAttribute('size', args.size || 'medium');
-    
-    container.appendChild(avatar);
-    return container;
-  }
+  render: (args) => createAvatarWithContainer(args)
 };
 
 export const TextOnly = {
@@ -84,19 +102,7 @@ export const TextOnly = {
     showInitial: true,
     size: 'medium'
   },
-  render: (args) => {
-    const container = document.createElement('div');
-    container.style.width = '64px';
-    container.style.height = '64px';
-    
-    const avatar = document.createElement('bui-avatar');
-    avatar.setAttribute('text', args.text || '');
-    avatar.setAttribute('size', args.size || 'medium');
-    if (args.showInitial) avatar.setAttribute('show-initial', '');
-    
-    container.appendChild(avatar);
-    return container;
-  }
+  render: (args) => createAvatarWithContainer(args)
 };
 
 export const TextWithoutInitial = {
@@ -105,78 +111,26 @@ export const TextWithoutInitial = {
     showInitial: false,
     size: 'medium'
   },
-  render: (args) => {
-    const container = document.createElement('div');
-    container.style.width = '64px';
-    container.style.height = '64px';
-    
-    const avatar = document.createElement('bui-avatar');
-    avatar.setAttribute('text', args.text || '');
-    avatar.setAttribute('size', args.size || 'medium');
-    if (args.showInitial) avatar.setAttribute('show-initial', '');
-    
-    container.appendChild(avatar);
-    return container;
-  }
+  render: (args) => createAvatarWithContainer(args)
 };
 
 export const DifferentNames = {
-  render: () => {
-    const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.gap = '1rem';
-    container.style.alignItems = 'center';
-    container.style.flexWrap = 'wrap';
-    
-    const names = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'];
-    
-    names.forEach(name => {
-      const wrapper = document.createElement('div');
-      wrapper.style.width = '48px';
-      wrapper.style.height = '48px';
-      
-      const avatar = document.createElement('bui-avatar');
-      avatar.setAttribute('text', name);
-      avatar.setAttribute('show-initial', '');
-      avatar.setAttribute('size', 'small');
-      
-      wrapper.appendChild(avatar);
-      container.appendChild(wrapper);
-    });
-    
-    return container;
-  }
+  render: () => createAvatarGrid(
+    ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'].map(name => ({
+      text: name,
+      showInitial: true,
+      size: 'small',
+      containerSize: '48px'
+    }))
+  )
 };
 
 export const DifferentSizes = {
-  render: () => {
-    const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.gap = '1rem';
-    container.style.alignItems = 'center';
-    
-    const sizes = [
-      { size: 'small', containerSize: '48px' },
-      { size: 'medium', containerSize: '64px' },
-      { size: 'large', containerSize: '80px' }
-    ];
-    
-    sizes.forEach(({ size, containerSize }) => {
-      const wrapper = document.createElement('div');
-      wrapper.style.width = containerSize;
-      wrapper.style.height = containerSize;
-      
-      const avatar = document.createElement('bui-avatar');
-      avatar.setAttribute('text', size.charAt(0).toUpperCase() + size.slice(1));
-      avatar.setAttribute('show-initial', '');
-      avatar.setAttribute('size', size);
-      
-      wrapper.appendChild(avatar);
-      container.appendChild(wrapper);
-    });
-    
-    return container;
-  }
+  render: () => createAvatarGrid([
+    { text: 'Small', showInitial: true, size: 'small', containerSize: '48px' },
+    { text: 'Medium', showInitial: true, size: 'medium', containerSize: '64px' },
+    { text: 'Large', showInitial: true, size: 'large', containerSize: '80px' }
+  ])
 };
 
 export const ResponsiveSizing = {
@@ -212,72 +166,18 @@ export const ResponsiveSizing = {
 };
 
 export const WithImages = {
-  render: () => {
-    const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.gap = '1rem';
-    container.style.alignItems = 'center';
-    container.style.flexWrap = 'wrap';
-    
-    const images = [
-      { url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'small', containerSize: '48px' },
-      { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', size: 'medium', containerSize: '64px' },
-      { url: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face', size: 'large', containerSize: '80px' }
-    ];
-    
-    images.forEach(({ url, size, containerSize }) => {
-      const wrapper = document.createElement('div');
-      wrapper.style.width = containerSize;
-      wrapper.style.height = containerSize;
-      
-      const avatar = document.createElement('bui-avatar');
-      avatar.setAttribute('image-url', url);
-      avatar.setAttribute('size', size);
-      
-      wrapper.appendChild(avatar);
-      container.appendChild(wrapper);
-    });
-    
-    return container;
-  }
+  render: () => createAvatarGrid([
+    { imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'small', containerSize: '48px' },
+    { imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', size: 'medium', containerSize: '64px' },
+    { imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face', size: 'large', containerSize: '80px' }
+  ])
 };
 
 export const MixedContent = {
-  render: () => {
-    const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.gap = '1rem';
-    container.style.alignItems = 'center';
-    container.style.flexWrap = 'wrap';
-    
-    const items = [
-      { type: 'text', text: 'Bitcoin', showInitial: true },
-      { type: 'image', imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face' },
-      { type: 'text', text: 'Ethereum', showInitial: true },
-      { type: 'text', text: 'Litecoin', showInitial: true }
-    ];
-    
-    items.forEach(item => {
-      const wrapper = document.createElement('div');
-      wrapper.style.width = '64px';
-      wrapper.style.height = '64px';
-      
-      const avatar = document.createElement('bui-avatar');
-      avatar.setAttribute('size', 'medium');
-      
-      if (item.type === 'image') {
-        avatar.setAttribute('image-url', item.imageUrl);
-      } else {
-        avatar.setAttribute('text', item.text);
-        if (item.showInitial) {
-          avatar.setAttribute('show-initial', '');
-        }
-      }
-      
-      wrapper.appendChild(avatar);
-      container.appendChild(wrapper);
-    });
-    
-    return container;
-  }
+  render: () => createAvatarGrid([
+    { text: 'Bitcoin', showInitial: true, size: 'medium' },
+    { imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'medium' },
+    { text: 'Ethereum', showInitial: true, size: 'medium' },
+    { text: 'Litecoin', showInitial: true, size: 'medium' }
+  ])
 };
