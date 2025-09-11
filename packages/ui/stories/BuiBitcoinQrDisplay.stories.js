@@ -100,21 +100,6 @@ export const OnchainOnly = {
   }
 };
 
-export const WithImages = {
-  args: {
-    option: 'unified',
-    selector: 'dots',
-    showImage: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'QR codes with icon overlays. Orange Bitcoin icon for unified, black Bitcoin for on-chain, and yellow Lightning for Lightning payments.'
-      }
-    }
-  }
-};
-
 export const WithoutImages = {
   args: {
     option: 'unified',
