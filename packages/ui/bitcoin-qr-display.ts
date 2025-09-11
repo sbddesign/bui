@@ -79,11 +79,30 @@ export class BuiBitcoinQrDisplay extends LitElement {
       :host { display: block; }
       .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); border-radius: 8.909px; }
       .helper-text { color: var(--text-secondary); font-size: 14px; text-align: center; }
-      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; }
+      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; position: relative; }
       .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
-      .qr-container svg {
+      .qr-container { position: relative; }
+      .qr-container canvas, .qr-container svg {
         width: 100%;
         height: auto;
+      }
+      .qr-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        padding: var(--size-3);
+        background: var(--white);
+        border-radius: 80px;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .qr-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
       .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
       .dots-row { display: flex; gap: var(--size-4); align-items: center; }
@@ -272,36 +291,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
       }
     };
 
-    // Add image configuration if we have an image and showImage is true
-    if (this.showImage && iconDataUrl) {
-      config.image = iconDataUrl;
-      config.imageOptions = {
-        margin: 2,
-        imageSize: 0.3,
-        mode: 'center'
-      };
-    }
+    // Images will be handled manually with CSS overlay
     
     return new QRCodeStyling(config);
   }
 
-  private async preloadImage(imageUrl: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      
-      img.onload = () => {
-        resolve(imageUrl);
-      };
-      
-      img.onerror = () => {
-        console.warn('Failed to preload image:', imageUrl);
-        resolve(imageUrl); // Still try to use the URL even if preload fails
-      };
-      
-      img.src = imageUrl;
-    });
-  }
 
   private async updateQRCode(): Promise<void> {
     if (!this.qrContainer || this.isUpdatingQR) return;
@@ -334,12 +328,6 @@ export class BuiBitcoinQrDisplay extends LitElement {
         return;
       }
 
-      // Preload image if we have one
-      const iconDataUrl = this.getIconDataUrl();
-      if (this.showImage && iconDataUrl) {
-        await this.preloadImage(iconDataUrl);
-      }
-      
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
       
@@ -365,13 +353,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
     }
     
     // Clear container completely
-    this.qrContainer!.innerHTML = '';
-    
-    // Remove any existing event listeners by cloning the container
     if (this.qrContainer) {
-      const newContainer = this.qrContainer.cloneNode(false) as HTMLElement;
-      this.qrContainer.parentNode?.replaceChild(newContainer, this.qrContainer);
-      this.qrContainer = newContainer;
+      this.qrContainer.innerHTML = '';
     }
   }
 
@@ -468,6 +451,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private renderQr() {
     const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
     const title = this.copyOnTap && !this.placeholder && !this.error ? 'Click to copy QR code data' : '';
+    const iconDataUrl = this.getIconDataUrl();
+    
+    console.log('Rendering QR with showImage:', this.showImage, 'iconDataUrl:', iconDataUrl ? 'present' : 'missing');
     
     // Handle placeholder state
     if (this.placeholder) {
@@ -485,6 +471,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
         <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
           <!-- QR code will be rendered here by qr-code-styling -->
         </div>
+        ${this.showImage && iconDataUrl ? html`
+          <div class="qr-overlay">
+            <img src="${iconDataUrl}" alt="QR code icon" />
+          </div>
+        ` : ''}
       </div>
     `;
   }
