@@ -4,7 +4,7 @@ import './option-dot.js';
 import './button.js';
 import '@sbddesign/bui-icons/cycle/lg';
 import '@sbddesign/bui-icons/cycle/md';
-import * as QRCodeStyling from 'qr-code-styling';
+import { QRCodeStyling } from '@liquid-js/qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
@@ -64,7 +64,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare error: boolean;
   declare errorMessage: string;
 
-  private qrCodeInstance: QRCodeStyling.default | null = null;
+  private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
 
   private validationRules = [
@@ -80,6 +80,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
       .helper-text { color: var(--text-secondary); font-size: 14px; text-align: center; }
       .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; }
       .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+      .qr-container svg {
+        width: 100%;
+        height: auto;
+      }
       .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
       .dots-row { display: flex; gap: var(--size-4); align-items: center; }
       .selector-row { display: flex; gap: var(--size-4); align-items: center; }
@@ -236,28 +240,32 @@ export class BuiBitcoinQrDisplay extends LitElement {
     return '';
   }
 
-  private createQRCode(): QRCodeStyling.default {
+  private createQRCode(): QRCodeStyling {
     const qrData = this.getQrData();
     const iconDataUrl = this.getIconDataUrl();
     
-    return new QRCodeStyling.default({
+    return new QRCodeStyling({
+      data: qrData,
       width: this.size,
       height: this.size,
-      data: qrData,
-      type: 'svg',
       image: iconDataUrl,
-      margin: 0, // Remove all margin/padding
-      imageOptions: {
-        hideBackgroundDots: true,
-        imageSize: 0.3, 
-        margin: 8
-      },
       dotsOptions: {
         color: this.dotColor,
         type: this.dotType as any
       },
       backgroundOptions: {
-        color: '#ffffff'
+        color: '#ffffff',
+        margin: 0 // Remove all margin/padding
+      },
+      imageOptions: {
+        crossOrigin: 'anonymous',
+        margin: 8,
+        imageSize: 0.3
+      },
+      qrOptions: {
+        typeNumber: 0,
+        mode: 'byte',
+        errorCorrectionLevel: 'M'
       },
       cornersSquareOptions: {
         color: this.dotColor,
