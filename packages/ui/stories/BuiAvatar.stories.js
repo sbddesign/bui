@@ -42,6 +42,20 @@ export const Default = {
     text: 'Bitcoin',
     showInitial: true,
     size: 'medium'
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.width = '64px';
+    container.style.height = '64px';
+    
+    const avatar = document.createElement('bui-avatar');
+    avatar.setAttribute('text', args.text || '');
+    avatar.setAttribute('size', args.size || 'medium');
+    if (args.showInitial) avatar.setAttribute('show-initial', '');
+    if (args.imageUrl) avatar.setAttribute('image-url', args.imageUrl);
+    
+    container.appendChild(avatar);
+    return container;
   }
 };
 
@@ -49,6 +63,18 @@ export const WithImage = {
   args: {
     imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     size: 'medium'
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.width = '64px';
+    container.style.height = '64px';
+    
+    const avatar = document.createElement('bui-avatar');
+    avatar.setAttribute('image-url', args.imageUrl);
+    avatar.setAttribute('size', args.size || 'medium');
+    
+    container.appendChild(avatar);
+    return container;
   }
 };
 
@@ -57,6 +83,19 @@ export const TextOnly = {
     text: 'Alice',
     showInitial: true,
     size: 'medium'
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.width = '64px';
+    container.style.height = '64px';
+    
+    const avatar = document.createElement('bui-avatar');
+    avatar.setAttribute('text', args.text || '');
+    avatar.setAttribute('size', args.size || 'medium');
+    if (args.showInitial) avatar.setAttribute('show-initial', '');
+    
+    container.appendChild(avatar);
+    return container;
   }
 };
 
@@ -65,6 +104,19 @@ export const TextWithoutInitial = {
     text: 'Bob',
     showInitial: false,
     size: 'medium'
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.style.width = '64px';
+    container.style.height = '64px';
+    
+    const avatar = document.createElement('bui-avatar');
+    avatar.setAttribute('text', args.text || '');
+    avatar.setAttribute('size', args.size || 'medium');
+    if (args.showInitial) avatar.setAttribute('show-initial', '');
+    
+    container.appendChild(avatar);
+    return container;
   }
 };
 
@@ -79,11 +131,17 @@ export const DifferentNames = {
     const names = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'];
     
     names.forEach(name => {
+      const wrapper = document.createElement('div');
+      wrapper.style.width = '48px';
+      wrapper.style.height = '48px';
+      
       const avatar = document.createElement('bui-avatar');
       avatar.setAttribute('text', name);
       avatar.setAttribute('show-initial', '');
       avatar.setAttribute('size', 'small');
-      container.appendChild(avatar);
+      
+      wrapper.appendChild(avatar);
+      container.appendChild(wrapper);
     });
     
     return container;
@@ -97,14 +155,24 @@ export const DifferentSizes = {
     container.style.gap = '1rem';
     container.style.alignItems = 'center';
     
-    const sizes = ['small', 'medium', 'large'];
+    const sizes = [
+      { size: 'small', containerSize: '48px' },
+      { size: 'medium', containerSize: '64px' },
+      { size: 'large', containerSize: '80px' }
+    ];
     
-    sizes.forEach(size => {
+    sizes.forEach(({ size, containerSize }) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.width = containerSize;
+      wrapper.style.height = containerSize;
+      
       const avatar = document.createElement('bui-avatar');
       avatar.setAttribute('text', size.charAt(0).toUpperCase() + size.slice(1));
       avatar.setAttribute('show-initial', '');
       avatar.setAttribute('size', size);
-      container.appendChild(avatar);
+      
+      wrapper.appendChild(avatar);
+      container.appendChild(wrapper);
     });
     
     return container;
@@ -152,16 +220,22 @@ export const WithImages = {
     container.style.flexWrap = 'wrap';
     
     const images = [
-      { url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'small' },
-      { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', size: 'medium' },
-      { url: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face', size: 'large' }
+      { url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'small', containerSize: '48px' },
+      { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', size: 'medium', containerSize: '64px' },
+      { url: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face', size: 'large', containerSize: '80px' }
     ];
     
-    images.forEach(({ url, size }) => {
+    images.forEach(({ url, size, containerSize }) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.width = containerSize;
+      wrapper.style.height = containerSize;
+      
       const avatar = document.createElement('bui-avatar');
       avatar.setAttribute('image-url', url);
       avatar.setAttribute('size', size);
-      container.appendChild(avatar);
+      
+      wrapper.appendChild(avatar);
+      container.appendChild(wrapper);
     });
     
     return container;
@@ -184,6 +258,10 @@ export const MixedContent = {
     ];
     
     items.forEach(item => {
+      const wrapper = document.createElement('div');
+      wrapper.style.width = '64px';
+      wrapper.style.height = '64px';
+      
       const avatar = document.createElement('bui-avatar');
       avatar.setAttribute('size', 'medium');
       
@@ -196,7 +274,8 @@ export const MixedContent = {
         }
       }
       
-      container.appendChild(avatar);
+      wrapper.appendChild(avatar);
+      container.appendChild(wrapper);
     });
     
     return container;
