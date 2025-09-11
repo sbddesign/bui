@@ -66,6 +66,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
+  private isUpdatingQR: boolean = false;
 
   private validationRules = [
     createStringLiteralValidationRule(OPTIONS, 'option'),
@@ -157,7 +158,18 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   protected firstUpdated(): void {
     this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
-    this.updateQRCode();
+    // Use requestAnimationFrame to ensure DOM is fully ready
+    requestAnimationFrame(() => {
+      this.updateQRCode();
+    });
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    // Clean up QR code instance when component is removed
+    if (this.qrCodeInstance) {
+      this.qrCodeInstance = null;
+    }
   }
 
   private get hasBothAddressAndLightning(): boolean {
@@ -234,7 +246,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
     }
     
     if (svgContent) {
-      return `data:image/svg+xml;base64,${btoa(svgContent)}`;
+      // Ensure proper SVG formatting
+      const cleanSvg = svgContent.replace(/\s+/g, ' ').trim();
+      return `data:image/svg+xml;base64,${btoa(cleanSvg)}`;
     }
     
     return '';
@@ -244,11 +258,11 @@ export class BuiBitcoinQrDisplay extends LitElement {
     const qrData = this.getQrData();
     const iconDataUrl = this.getIconDataUrl();
     
-    return new QRCodeStyling({
+    const config: any = {
       data: qrData,
       width: this.size,
       height: this.size,
-      image: iconDataUrl,
+      type: 'canvas', // Use canvas to avoid SVG ID conflicts
       dotsOptions: {
         color: this.dotColor,
         type: this.dotType as any
@@ -257,15 +271,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
         color: '#ffffff',
         margin: 0 // Remove all margin/padding
       },
-      imageOptions: {
-        crossOrigin: 'anonymous',
-        margin: 8,
-        imageSize: 0.3
-      },
       qrOptions: {
         typeNumber: 0,
         mode: 'byte',
-        errorCorrectionLevel: 'M'
+        errorCorrectionLevel: 'H' // High error correction for image overlays
       },
       cornersSquareOptions: {
         color: this.dotColor,
@@ -275,34 +284,82 @@ export class BuiBitcoinQrDisplay extends LitElement {
         color: this.dotColor,
         type: 'dot'
       }
+    };
+
+    // Only add image configuration if we have an image and showImage is true
+    if (this.showImage && iconDataUrl) {
+      config.image = iconDataUrl;
+      config.imageOptions = {
+        crossOrigin: 'anonymous',
+        margin: 2,
+        imageSize: 0.4,
+        mode: 'center'
+      };
+    }
+    
+    return new QRCodeStyling(config);
+  }
+
+  private async preloadImage(imageUrl: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      
+      img.onload = () => {
+        resolve(imageUrl);
+      };
+      
+      img.onerror = () => {
+        console.warn('Failed to preload image:', imageUrl);
+        resolve(imageUrl); // Still try to use the URL even if preload fails
+      };
+      
+      img.src = imageUrl;
     });
   }
 
   private async updateQRCode(): Promise<void> {
-    if (!this.qrContainer) return;
+    if (!this.qrContainer || this.isUpdatingQR) return;
     
-    // Clear existing QR code
-    this.qrContainer.innerHTML = '';
+    this.isUpdatingQR = true;
     
-    // Handle placeholder state
-    if (this.placeholder) {
-      return; // Placeholder will be rendered in the template
-    }
+    console.log('updateQRCode called', { 
+      hasInstance: !!this.qrCodeInstance, 
+      containerChildren: this.qrContainer.children.length 
+    });
     
-    // Handle error state
-    if (this.error) {
-      this.qrContainer.innerHTML = `<div class="error-message"><p>${this.errorMessage}</p></div>`;
-      return;
-    }
+    // More thorough cleanup
+    this.cleanupQRCode();
     
-    const qrData = this.getQrData();
-    if (!qrData) {
-      // No data provided - show error state
-      this.qrContainer.innerHTML = '<div class="error-message">No Bitcoin address or Lightning invoice provided</div>';
-      return;
-    }
-
     try {
+      // Handle placeholder state
+      if (this.placeholder) {
+        this.isUpdatingQR = false;
+        return; // Placeholder will be rendered in the template
+      }
+      
+      // Handle error state
+      if (this.error) {
+        this.qrContainer.innerHTML = `<div class="error-message"><p>${this.errorMessage}</p></div>`;
+        this.isUpdatingQR = false;
+        return;
+      }
+      
+      const qrData = this.getQrData();
+      if (!qrData) {
+        // No data provided - show error state
+        this.qrContainer.innerHTML = '<div class="error-message">No Bitcoin address or Lightning invoice provided</div>';
+        this.isUpdatingQR = false;
+        return;
+      }
+
+      // Preload image if we have one
+      const iconDataUrl = this.getIconDataUrl();
+      if (this.showImage && iconDataUrl) {
+        await this.preloadImage(iconDataUrl);
+      }
+      
+      console.log('Creating new QR code instance');
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
       
@@ -311,9 +368,31 @@ export class BuiBitcoinQrDisplay extends LitElement {
         this.qrContainer.style.cursor = 'pointer';
         this.qrContainer.addEventListener('click', this.handleQrClick.bind(this));
       }
+      
+      console.log('QR code created, container children:', this.qrContainer.children.length);
     } catch (error) {
       console.error('Failed to generate QR code:', error);
       this.qrContainer.innerHTML = '<div class="error-message">Failed to render QR code 😭</div>';
+    } finally {
+      this.isUpdatingQR = false;
+    }
+  }
+
+  private cleanupQRCode(): void {
+    // Clear existing QR code instance
+    if (this.qrCodeInstance) {
+      console.log('Cleaning up existing QR code instance');
+      this.qrCodeInstance = null;
+    }
+    
+    // Clear container completely
+    this.qrContainer!.innerHTML = '';
+    
+    // Remove any existing event listeners by cloning the container
+    if (this.qrContainer) {
+      const newContainer = this.qrContainer.cloneNode(false) as HTMLElement;
+      this.qrContainer.parentNode?.replaceChild(newContainer, this.qrContainer);
+      this.qrContainer = newContainer;
     }
   }
 
