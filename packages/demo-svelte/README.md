@@ -1,4 +1,4 @@
-# @bui/demo-svelte
+# @sbddesign/bui-demo-svelte
 
 A Svelte demo application showcasing the BUI design system components.
 
@@ -32,8 +32,8 @@ This demo shows how to use BUI web components in a Svelte application:
 
 ```svelte
 <script>
-  import '@bui/ui/tokens.css';
-  import '@bui/ui/button.js';
+  import '@sbddesign/bui-ui/tokens.css';
+  import '@sbddesign/bui-ui/button.js';
 </script>
 
 <!-- Use the button component -->

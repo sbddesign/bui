@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@bui/ui': '../../ui',
-      '@bui/tokens': '../../tokens'
+      '@sbddesign/bui-ui': '../../ui',
+      '@sbddesign/bui-tokens': '../../tokens'
     }
   },
   optimizeDeps: {

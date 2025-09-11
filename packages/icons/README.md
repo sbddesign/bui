@@ -1,4 +1,4 @@
-# @bui/icons
+# @sbddesign/bui-icons
 
 Icon web components for the BUI Design System. This package automatically generates web components from SVG files in the `src/svg` directory.
 
@@ -7,7 +7,7 @@ Icon web components for the BUI Design System. This package automatically genera
 ### Import and use in web components
 
 ```javascript
-import { BuiIconArrowLeftLg } from '@bui/icons';
+import { BuiIconArrowLeftLg } from '@sbddesign/bui-icons';
 
 // The component is automatically registered as <bui-arrow-left-lg>
 // You can use it directly in your templates:
@@ -22,7 +22,7 @@ render() {
 ### Direct import of specific icons
 
 ```javascript
-import arrowLeftLg from '@bui/icons/arrowLeft/lg';
+import arrowLeftLg from '@sbddesign/bui-icons/arrowLeft/lg';
 
 // This imports the BuiIconArrowLeftLg class
 // The component is automatically registered as <bui-arrow-left-lg>
@@ -32,7 +32,7 @@ import arrowLeftLg from '@bui/icons/arrowLeft/lg';
 
 ```javascript
 import { LitElement, html } from 'lit';
-import '@bui/icons/arrowLeft/lg.js';
+import '@sbddesign/bui-icons/arrowLeft/lg.js';
 
 export class MyComponent extends LitElement {
   render() {

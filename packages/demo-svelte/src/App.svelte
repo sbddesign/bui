@@ -2,9 +2,9 @@
   import { onMount } from 'svelte';
   
   // Import the button component and CSS
-  import '@bui/ui/tokens.css';
-  import '@bui/ui/button.js';
-  import '@bui/ui/message.js';
+  import '@sbddesign/bui-ui/tokens.css';
+  import '@sbddesign/bui-ui/button.js';
+  import '@sbddesign/bui-ui/message.js';
   
   onMount(() => {
     // Add Inter font if not already loaded

@@ -1,11 +1,11 @@
-# @bui/ui
+# @sbddesign/bui-ui
 
 This package provides Web Components for the Bitcoin UI Kit, built with [Lit](https://lit.dev/).
 
 ## Usage
 
 - Components are implemented as Lit-based Web Components.
-- Design tokens (colors, sizes, etc.) are imported as CSS variables from the `@bui/tokens` package.
+- Design tokens (colors, sizes, etc.) are imported as CSS variables from the `@sbddesign/bui-tokens` package.
 - Components use the Inter font family for consistent typography.
 - To use the components, ensure you also include the CSS variables from `../tokens/lib/tailwindcss/tailwind-theme.css` in your project.
 
@@ -28,7 +28,7 @@ Or via CSS:
 ## Example
 
 ```js
-import '@bui/ui/button.js';
+import '@sbddesign/bui-ui/button.js';
 ```
 
 ## Development

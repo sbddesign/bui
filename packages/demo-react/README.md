@@ -1,4 +1,4 @@
-# @bui/demo-react
+# @sbddesign/bui-demo-react
 
 A React demo application showcasing the BUI design system components.
 
@@ -16,7 +16,7 @@ A React demo application showcasing the BUI design system components.
 # Install dependencies
 pnpm install
 
-# Build UI wrappers/types first (ensures @bui/ui/react is generated)
+# Build UI wrappers/types first (ensures @sbddesign/bui-ui/react is generated)
 pnpm -w build:ui
 
 # Start development server for this demo
@@ -37,8 +37,8 @@ pnpm preview
 This demo shows how to use BUI React wrappers (built with `@lit/react`) for BUI web components in a React application:
 
 ```jsx
-import { BuiButtonReact as BuiButton } from '@bui/ui/react'
-import '@bui/ui/tokens.css'
+import { BuiButtonReact as BuiButton } from '@sbddesign/bui-ui/react'
+import '@sbddesign/bui-ui/tokens.css'
 
 // Use the typed React wrapper
 <BuiButton 

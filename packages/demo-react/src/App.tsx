@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import '@bui/ui/tokens.css'
-import { BuiButtonReact as BuiButton, BuiMessageReact as BuiMessage } from '@bui/ui/react'
+import '@sbddesign/bui-ui/tokens.css'
+import { BuiButtonReact as BuiButton, BuiMessageReact as BuiMessage } from '@sbddesign/bui-ui/react'
 
 // TypeScript types for the button component
 type ButtonStyleType = 'filled' | 'outline' | 'free';

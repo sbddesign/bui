@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "@bui/ui/react"],
+    "types": ["vite/client", "@sbddesign/bui-ui/react"],
 
     /* Linting */
     "strict": true,

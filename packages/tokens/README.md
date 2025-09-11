@@ -1,4 +1,4 @@
-# @bui/tokens
+# @sbddesign/bui-tokens
 
 Design tokens for the BUI design system, including color palettes, spacing, typography, and other design values.
 

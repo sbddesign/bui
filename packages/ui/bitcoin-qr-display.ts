@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit';
 import type { PropertyValues } from 'lit';
 import './option-dot.js';
 import './button.js';
-import '@bui/icons/cycle/lg';
-import '@bui/icons/cycle/md';
+import '@sbddesign/bui-icons/cycle/lg';
+import '@sbddesign/bui-icons/cycle/md';
 import * as QRCodeStyling from 'qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
