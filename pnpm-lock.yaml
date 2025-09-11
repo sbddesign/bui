@@ -10,7 +10,7 @@ importers:
 
   packages/demo-react:
     dependencies:
-      '@bui/ui':
+      '@sbddesign/bui-ui':
         specifier: workspace:*
         version: link:../ui
       react:
@@ -59,7 +59,7 @@ importers:
 
   packages/demo-svelte:
     dependencies:
-      '@bui/ui':
+      '@sbddesign/bui-ui':
         specifier: workspace:*
         version: link:../ui
     devDependencies:
@@ -91,12 +91,12 @@ importers:
 
   packages/ui:
     dependencies:
-      '@bui/icons':
-        specifier: workspace:*
-        version: link:../icons
       '@lit/react':
         specifier: ^1.0.6
         version: 1.0.8(@types/react@19.1.8)
+      '@sbddesign/bui-icons':
+        specifier: workspace:*
+        version: link:../icons
       lit:
         specifier: ^3.3.0
         version: 3.3.0
