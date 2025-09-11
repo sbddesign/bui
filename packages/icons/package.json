@@ -1,6 +1,6 @@
 {
   "name": "@sbddesign/bui-icons",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Icon web components for BUI Design System",
   "main": "dist/index.js",
   "type": "module",
@@ -12,7 +12,11 @@
     "dev": "node build.js --watch",
     "clean": "rm -rf dist"
   },
-  "keywords": ["icons", "web-components", "svg"],
+  "keywords": [
+    "icons",
+    "web-components",
+    "svg"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -54,4 +58,4 @@
   "files": [
     "dist"
   ]
-} 
+}
