@@ -12,7 +12,14 @@ export class BuiAvatar extends LitElement {
   static properties = {
     imageUrl: { type: String, attribute: 'image-url' },
     text: { type: String },
-    showInitial: { type: Boolean, attribute: 'show-initial' },
+    showInitial: { 
+      type: Boolean, 
+      attribute: 'show-initial',
+      converter: {
+        fromAttribute: (value: string | null) => value !== null,
+        toAttribute: (value: boolean) => value ? '' : null
+      }
+    },
     size: { type: String },
   };
 
@@ -112,7 +119,7 @@ export class BuiAvatar extends LitElement {
 
   constructor() {
     super();
-    this.showInitial = true;
+    this.showInitial = false; // Default to false, will be overridden by attribute if present
     this.size = 'medium';
   }
 
@@ -121,6 +128,15 @@ export class BuiAvatar extends LitElement {
    */
   protected willUpdate(changedProperties: PropertyValues<this>): void {
     validateProperties(this, changedProperties, this.validationRules);
+    
+    // Debug property changes
+    if (changedProperties.has('showInitial')) {
+      console.log('showInitial changed:', {
+        oldValue: changedProperties.get('showInitial'),
+        newValue: this.showInitial,
+        hasAttribute: this.hasAttribute('show-initial')
+      });
+    }
   }
 
   /**
@@ -161,6 +177,15 @@ export class BuiAvatar extends LitElement {
     const hasImage = !!this.imageUrl;
     const hasText = !!this.text;
     const shouldShowInitial = !hasImage && hasText && this.showInitial;
+
+    // Debug logging
+    console.log('Avatar render:', {
+      hasImage,
+      hasText,
+      showInitial: this.showInitial,
+      shouldShowInitial,
+      text: this.text
+    });
 
     // Generate gradient colors if we have text but no image
     const gradientColors = !hasImage && hasText && this.text ? this.generateGradientColors(this.text) : null;

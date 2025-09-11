@@ -10,7 +10,13 @@ const createAvatarWithContainer = (args, containerSize = '64px') => {
   if (args.imageUrl) avatar.setAttribute('image-url', args.imageUrl);
   if (args.text) avatar.setAttribute('text', args.text);
   if (args.size) avatar.setAttribute('size', args.size);
-  if (args.showInitial) avatar.setAttribute('show-initial', '');
+  
+  // Handle boolean attribute properly
+  if (args.showInitial === true) {
+    avatar.setAttribute('show-initial', '');
+  } else if (args.showInitial === false) {
+    avatar.removeAttribute('show-initial');
+  }
   
   container.appendChild(avatar);
   return container;
@@ -33,7 +39,13 @@ const createAvatarGrid = (avatarConfigs, containerSize = '64px') => {
     if (config.imageUrl) avatar.setAttribute('image-url', config.imageUrl);
     if (config.text) avatar.setAttribute('text', config.text);
     if (config.size) avatar.setAttribute('size', config.size);
-    if (config.showInitial) avatar.setAttribute('show-initial', '');
+    
+    // Handle boolean attribute properly
+    if (config.showInitial === true) {
+      avatar.setAttribute('show-initial', '');
+    } else if (config.showInitial === false) {
+      avatar.removeAttribute('show-initial');
+    }
     
     wrapper.appendChild(avatar);
     container.appendChild(wrapper);
@@ -112,6 +124,15 @@ export const TextWithoutInitial = {
     size: 'medium'
   },
   render: (args) => createAvatarWithContainer(args)
+};
+
+export const ShowInitialComparison = {
+  render: () => createAvatarGrid([
+    { text: 'Alice', showInitial: true, size: 'medium', containerSize: '64px' },
+    { text: 'Alice', showInitial: false, size: 'medium', containerSize: '64px' },
+    { text: 'Bob', showInitial: true, size: 'medium', containerSize: '64px' },
+    { text: 'Bob', showInitial: false, size: 'medium', containerSize: '64px' }
+  ])
 };
 
 export const DifferentNames = {
