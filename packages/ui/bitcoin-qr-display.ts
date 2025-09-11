@@ -473,7 +473,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
         <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
           <!-- QR code will be rendered here by qr-code-styling -->
         </div>
-        ${this.showImage && iconDataUrl ? html`
+        ${this.showImage && iconDataUrl && !this.error ? html`
           <div class="qr-overlay">
             <img src="${iconDataUrl}" alt="QR code icon" />
           </div>
