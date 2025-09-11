@@ -246,9 +246,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     }
     
     if (svgContent) {
-      // Ensure proper SVG formatting
-      const cleanSvg = svgContent.replace(/\s+/g, ' ').trim();
-      return `data:image/svg+xml;base64,${btoa(cleanSvg)}`;
+      return `data:image/svg+xml;base64,${btoa(svgContent)}`;
     }
     
     return '';
@@ -258,41 +256,28 @@ export class BuiBitcoinQrDisplay extends LitElement {
     const qrData = this.getQrData();
     const iconDataUrl = this.getIconDataUrl();
     
+    // Start with minimal configuration
     const config: any = {
       data: qrData,
       width: this.size,
       height: this.size,
-      type: 'canvas', // Use canvas to avoid SVG ID conflicts
+      type: 'canvas',
       dotsOptions: {
         color: this.dotColor,
         type: this.dotType as any
       },
       backgroundOptions: {
         color: '#ffffff',
-        margin: 0 // Remove all margin/padding
-      },
-      qrOptions: {
-        typeNumber: 0,
-        mode: 'byte',
-        errorCorrectionLevel: 'H' // High error correction for image overlays
-      },
-      cornersSquareOptions: {
-        color: this.dotColor,
-        type: 'extra-rounded'
-      },
-      cornersDotOptions: {
-        color: this.dotColor,
-        type: 'dot'
+        margin: 0
       }
     };
 
-    // Only add image configuration if we have an image and showImage is true
+    // Add image configuration if we have an image and showImage is true
     if (this.showImage && iconDataUrl) {
       config.image = iconDataUrl;
       config.imageOptions = {
-        crossOrigin: 'anonymous',
         margin: 2,
-        imageSize: 0.4,
+        imageSize: 0.3,
         mode: 'center'
       };
     }
@@ -323,10 +308,6 @@ export class BuiBitcoinQrDisplay extends LitElement {
     
     this.isUpdatingQR = true;
     
-    console.log('updateQRCode called', { 
-      hasInstance: !!this.qrCodeInstance, 
-      containerChildren: this.qrContainer.children.length 
-    });
     
     // More thorough cleanup
     this.cleanupQRCode();
@@ -359,7 +340,6 @@ export class BuiBitcoinQrDisplay extends LitElement {
         await this.preloadImage(iconDataUrl);
       }
       
-      console.log('Creating new QR code instance');
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
       
@@ -368,10 +348,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
         this.qrContainer.style.cursor = 'pointer';
         this.qrContainer.addEventListener('click', this.handleQrClick.bind(this));
       }
-      
-      console.log('QR code created, container children:', this.qrContainer.children.length);
     } catch (error) {
       console.error('Failed to generate QR code:', error);
+      console.error('QR Data:', this.getQrData());
+      console.error('Image URL:', this.getIconDataUrl());
       this.qrContainer.innerHTML = '<div class="error-message">Failed to render QR code 😭</div>';
     } finally {
       this.isUpdatingQR = false;
@@ -381,7 +361,6 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private cleanupQRCode(): void {
     // Clear existing QR code instance
     if (this.qrCodeInstance) {
-      console.log('Cleaning up existing QR code instance');
       this.qrCodeInstance = null;
     }
     
