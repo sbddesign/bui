@@ -1,5 +1,5 @@
 {
-  "name": "@bui/icons",
+  "name": "@sbddesign/bui-icons",
   "version": "0.0.1",
   "description": "Icon web components for BUI Design System",
   "main": "dist/index.js",

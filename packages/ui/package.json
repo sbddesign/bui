@@ -1,5 +1,5 @@
 {
-  "name": "@bui/ui",
+  "name": "@sbddesign/bui-ui",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@bui/icons": "workspace:*",
+    "@sbddesign/bui-icons": "workspace:*",
     "@lit/react": "^1.0.6",
     "lit": "^3.3.0",
     "qr-code-styling": "^1.9.2"
