@@ -1,4 +1,5 @@
 import { LitElement, html, css, type PropertyValues } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
 // Single source of truth: define the values once, derive everything else
@@ -11,6 +12,7 @@ export class BuiAvatar extends LitElement {
   // Property declarations with types
   static properties = {
     imageUrl: { type: String, attribute: 'image-url' },
+    imageUrl2x: { type: String, attribute: 'image-url-2x' },
     text: { type: String },
     showInitial: { 
       type: Boolean, 
@@ -25,6 +27,7 @@ export class BuiAvatar extends LitElement {
 
   // TypeScript property declarations
   declare imageUrl?: string;
+  declare imageUrl2x?: string;
   declare text?: string;
   declare showInitial: boolean;
   declare size: AvatarSize;
@@ -61,10 +64,13 @@ export class BuiAvatar extends LitElement {
         transform: translate(-50%, -50%);
         width: 100%;
         height: 100%;
+      }
+
+      .avatar-image img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        border-radius: 50%;
       }
 
       .avatar-gradient {
@@ -128,15 +134,6 @@ export class BuiAvatar extends LitElement {
    */
   protected willUpdate(changedProperties: PropertyValues<this>): void {
     validateProperties(this, changedProperties, this.validationRules);
-    
-    // Debug property changes
-    if (changedProperties.has('showInitial')) {
-      console.log('showInitial changed:', {
-        oldValue: changedProperties.get('showInitial'),
-        newValue: this.showInitial,
-        hasAttribute: this.hasAttribute('show-initial')
-      });
-    }
   }
 
   /**
@@ -178,22 +175,18 @@ export class BuiAvatar extends LitElement {
     const hasText = !!this.text;
     const shouldShowInitial = !hasImage && hasText && this.showInitial;
 
-    // Debug logging
-    console.log('Avatar render:', {
-      hasImage,
-      hasText,
-      showInitial: this.showInitial,
-      shouldShowInitial,
-      text: this.text
-    });
-
     // Generate gradient colors if we have text but no image
     const gradientColors = !hasImage && hasText && this.text ? this.generateGradientColors(this.text) : null;
 
     return html`
       <div class="avatar-container">
         ${hasImage
-          ? html`<div class="avatar-image" style="background-image: url('${this.imageUrl}')"></div>`
+          ? html`
+              <picture class="avatar-image">
+                ${this.imageUrl2x ? html`<source media="(min-resolution: 2dppx)" srcset="${this.imageUrl2x}">` : ''}
+                <img src="${ifDefined(this.imageUrl)}" alt="Avatar" />
+              </picture>
+            `
           : hasText
             ? html`
                 <div class="avatar-gradient" style="--gradient-color-1: ${gradientColors?.color1}; --gradient-color-2: ${gradientColors?.color2};"></div>

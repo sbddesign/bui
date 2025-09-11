@@ -8,6 +8,7 @@ const createAvatarWithContainer = (args, containerSize = '64px') => {
   
   const avatar = document.createElement('bui-avatar');
   if (args.imageUrl) avatar.setAttribute('image-url', args.imageUrl);
+  if (args.imageUrl2x) avatar.setAttribute('image-url-2x', args.imageUrl2x);
   if (args.text) avatar.setAttribute('text', args.text);
   if (args.size) avatar.setAttribute('size', args.size);
   
@@ -37,6 +38,7 @@ const createAvatarGrid = (avatarConfigs, containerSize = '64px') => {
     
     const avatar = document.createElement('bui-avatar');
     if (config.imageUrl) avatar.setAttribute('image-url', config.imageUrl);
+    if (config.imageUrl2x) avatar.setAttribute('image-url-2x', config.imageUrl2x);
     if (config.text) avatar.setAttribute('text', config.text);
     if (config.size) avatar.setAttribute('size', config.size);
     
@@ -70,6 +72,10 @@ export default {
       control: 'text',
       description: 'URL of the image to display in the avatar'
     },
+    imageUrl2x: {
+      control: 'text',
+      description: 'URL of the 2x resolution image for high-DPI displays'
+    },
     text: {
       control: 'text',
       description: 'Text string used to generate gradient colors and optional initial letter'
@@ -100,27 +106,19 @@ export const Default = {
   render: (args) => createAvatarWithContainer(args)
 };
 
-export const WithImage = {
-  args: {
-    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-    size: 'medium'
-  },
-  render: (args) => createAvatarWithContainer(args)
-};
-
-export const TextOnly = {
-  args: {
-    text: 'Alice',
-    showInitial: true,
-    size: 'medium'
-  },
-  render: (args) => createAvatarWithContainer(args)
-};
-
 export const TextWithoutInitial = {
   args: {
     text: 'Bob',
     showInitial: false,
+    size: 'medium'
+  },
+  render: (args) => createAvatarWithContainer(args)
+};
+
+export const WithImage = {
+  args: {
+    imageUrl: './stories/assets/avatars/Cat.png',
+    imageUrl2x: './stories/assets/avatars/Cat@2x.png',
     size: 'medium'
   },
   render: (args) => createAvatarWithContainer(args)
@@ -188,17 +186,28 @@ export const ResponsiveSizing = {
 
 export const WithImages = {
   render: () => createAvatarGrid([
-    { imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'small', containerSize: '48px' },
-    { imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', size: 'medium', containerSize: '64px' },
-    { imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face', size: 'large', containerSize: '80px' }
+    { imageUrl: './stories/assets/avatars/Dog.png', imageUrl2x: './stories/assets/avatars/Dog@2x.png', size: 'small', containerSize: '48px' },
+    { imageUrl: './stories/assets/avatars/Robot.png', imageUrl2x: './stories/assets/avatars/Robot@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './stories/assets/avatars/Dinosaur.png', imageUrl2x: './stories/assets/avatars/Dinosaur@2x.png', size: 'large', containerSize: '80px' }
   ])
 };
 
 export const MixedContent = {
   render: () => createAvatarGrid([
     { text: 'Bitcoin', showInitial: true, size: 'medium' },
-    { imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', size: 'medium' },
+    { imageUrl: './stories/assets/avatars/Bird.png', imageUrl2x: './stories/assets/avatars/Bird@2x.png', size: 'medium' },
     { text: 'Ethereum', showInitial: true, size: 'medium' },
     { text: 'Litecoin', showInitial: true, size: 'medium' }
+  ])
+};
+
+export const AllAvatarImages = {
+  render: () => createAvatarGrid([
+    { imageUrl: './stories/assets/avatars/Cat.png', imageUrl2x: './stories/assets/avatars/Cat@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './stories/assets/avatars/Dog.png', imageUrl2x: './stories/assets/avatars/Dog@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './stories/assets/avatars/Bird.png', imageUrl2x: './stories/assets/avatars/Bird@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './stories/assets/avatars/Robot.png', imageUrl2x: './stories/assets/avatars/Robot@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './stories/assets/avatars/Dinosaur.png', imageUrl2x: './stories/assets/avatars/Dinosaur@2x.png', size: 'medium', containerSize: '64px' },
+    { imageUrl: './stories/assets/avatars/Alligator.png', imageUrl2x: './stories/assets/avatars/Alligator@2x.png', size: 'medium', containerSize: '64px' }
   ])
 };

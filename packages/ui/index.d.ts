@@ -20,6 +20,7 @@ declare module 'react' {
       };
       'bui-avatar': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
         'image-url'?: string;
+        'image-url-2x'?: string;
         text?: string;
         'show-initial'?: boolean;
         size?: 'small' | 'medium' | 'large';
