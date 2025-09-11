@@ -162,10 +162,10 @@ export const WithImages = {
 
 export const MixedContent = {
   render: () => createAvatarGrid([
-    { text: 'Bitcoin', showInitial: true, size: 'medium' },
+    { text: 'Alice', showInitial: true, size: 'medium' },
     { imageUrl: './assets/avatars/Bird.png', imageUrl2x: './assets/avatars/Bird@2x.png', size: 'medium' },
-    { text: 'Ethereum', showInitial: true, size: 'medium' },
-    { text: 'Litecoin', showInitial: true, size: 'medium' }
+    { text: 'Charlie', showInitial: true, size: 'medium' },
+    { text: 'Dina', showInitial: true, size: 'medium' }
   ])
 };
 
