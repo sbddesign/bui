@@ -85,7 +85,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
       .selector-row { display: flex; gap: var(--size-4); align-items: center; }
       
       /* Placeholder styles */
-      .placeholder-helper { background: var(--system-placeholder); height: 20px; border-radius: 28px; width: 240px; }
+      .placeholder-helper { background: var(--system-placeholder); height: 17px; border-radius: 28px; width: 240px; }
       .placeholder-qr { background: var(--system-placeholder); border-radius: 12px; width: 332.606px; height: 332.606px; }
       .placeholder-options { background: var(--system-placeholder); height: 48px; border-radius: 12px; width: 100px; }
       
