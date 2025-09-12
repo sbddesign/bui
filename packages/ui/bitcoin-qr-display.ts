@@ -212,7 +212,6 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected firstUpdated(): void {
-    this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
     // Use requestAnimationFrame to ensure DOM is fully ready
     requestAnimationFrame(() => {
       this.updateQRCode();
@@ -335,6 +334,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
 
   private async updateQRCode(): Promise<void> {
+    // Re-query the DOM for the current .qr-container element
+    this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
+    
     if (!this.qrContainer || this.isUpdatingQR) return;
     
     this.isUpdatingQR = true;
