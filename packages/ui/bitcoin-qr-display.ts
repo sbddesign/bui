@@ -386,7 +386,12 @@ export class BuiBitcoinQrDisplay extends LitElement {
       console.error('Failed to generate QR code:', error);
       console.error('QR Data:', this.getQrData());
       console.error('Image URL:', this.getIconDataUrl());
-      this.qrContainer.innerHTML = '<div class="error-message">Failed to render QR code 😭</div>';
+      const err = document.createElement('div');
+      err.className = 'error-message';
+      const p = document.createElement('p');
+      p.textContent = 'Failed to render QR code 😭';
+      err.appendChild(p);
+      this.qrContainer.replaceChildren(err);
     } finally {
       this.isUpdatingQR = false;
     }
