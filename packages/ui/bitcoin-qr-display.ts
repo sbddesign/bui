@@ -538,7 +538,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
       <div class="container">
         ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : (this.complete ? html`<div class="helper-text" style="opacity: 0;">${this.helperText}</div>` : html`<div class="helper-text">${this.helperText}</div>`))}
         ${this.renderQr()}
-        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.error ? html`<div class="error-options-placeholder"></div>` : (this.complete ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)))}
+        ${this.placeholder ? (this.shouldShowSelector ? html`<div class="placeholder-options"></div>` : null) : (this.error ? (this.shouldShowSelector ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : null) : (this.complete ? (this.shouldShowSelector ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : null) : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)))}
       </div>
     `;
   }
