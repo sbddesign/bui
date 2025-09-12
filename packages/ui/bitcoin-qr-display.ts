@@ -4,7 +4,8 @@ import './option-dot.js';
 import './button.js';
 import '@sbddesign/bui-icons/cycle/lg';
 import '@sbddesign/bui-icons/cycle/md';
-import * as QRCodeStyling from 'qr-code-styling';
+import '@sbddesign/bui-icons/checkCircle/lg';
+import { QRCodeStyling } from '@liquid-js/qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
@@ -14,7 +15,7 @@ type QrOption = typeof OPTIONS[number];
 const SELECTORS = ['dots', 'toggle'] as const;
 type SelectorType = typeof SELECTORS[number];
 
-const DOT_TYPES = ['rounded', 'square', 'dots', 'classy', 'classy-rounded', 'extra-rounded'] as const;
+const DOT_TYPES = ['dot', 'square', 'rounded', 'extra-rounded', 'classy', 'classy-rounded', 'random-dot', 'vertical-line', 'horizontal-line', 'small-square', 'tiny-square', 'diamond'] as const;
 type DotType = typeof DOT_TYPES[number];
 
 const OPTION_LABELS: Record<QrOption, string> = {
@@ -46,6 +47,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     placeholder: { type: Boolean, reflect: true }, // Show placeholder/loading state
     error: { type: Boolean, reflect: true }, // Show error state
     errorMessage: { type: String }, // Custom error message
+    complete: { type: Boolean, reflect: true }, // Show complete/success state
   };
 
   declare address: string;
@@ -63,9 +65,12 @@ export class BuiBitcoinQrDisplay extends LitElement {
   declare placeholder: boolean;
   declare error: boolean;
   declare errorMessage: string;
+  declare complete: boolean;
 
-  private qrCodeInstance: QRCodeStyling.default | null = null;
+  private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
+  private isUpdatingQR: boolean = false;
+  private boundHandleQrClick: (() => Promise<void>) | null = null;
 
   private validationRules = [
     createStringLiteralValidationRule(OPTIONS, 'option'),
@@ -78,8 +83,31 @@ export class BuiBitcoinQrDisplay extends LitElement {
       :host { display: block; }
       .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); border-radius: 8.909px; }
       .helper-text { color: var(--text-secondary); font-size: 14px; text-align: center; }
-      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; }
+      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; position: relative; }
       .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+      .qr-container { position: relative; }
+      .qr-container canvas, .qr-container svg {
+        width: 100%;
+        height: auto;
+      }
+      .qr-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        padding: var(--size-3);
+        background: var(--white);
+        border-radius: 80px;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .qr-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
       .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
       .dots-row { display: flex; gap: var(--size-4); align-items: center; }
       .selector-row { display: flex; gap: var(--size-4); align-items: center; }
@@ -119,6 +147,37 @@ export class BuiBitcoinQrDisplay extends LitElement {
         padding: var(--size-4);
         box-sizing: border-box;
       }
+      .complete-qr {
+        background: var(--system-mood-success);
+        border-radius: 12px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .complete-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--size-2);
+        text-align: center;
+      }
+      .complete-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+      }
+      .complete-text {
+        color: var(--white);
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1;
+        margin: 0;
+      }
     `,
   ];
 
@@ -130,7 +189,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.selector = 'dots';
     this.size = 332;
     this.showImage = true;
-    this.dotType = 'dots';
+    this.dotType = 'dot';
     this.dotColor = '#000000';
     this.unifiedImage = '';
     this.lightningImage = '';
@@ -139,6 +198,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     this.placeholder = false;
     this.error = false;
     this.errorMessage = 'Sorry, an error occurred. Try again later.';
+    this.complete = false;
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -152,8 +212,17 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected firstUpdated(): void {
-    this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
-    this.updateQRCode();
+    // Use requestAnimationFrame to ensure DOM is fully ready
+    requestAnimationFrame(() => {
+      this.updateQRCode();
+    });
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    // Clean up when component is removed
+    this.cleanupQRCode();
+    this.qrCodeInstance = null;
   }
 
   private get hasBothAddressAndLightning(): boolean {
@@ -236,77 +305,115 @@ export class BuiBitcoinQrDisplay extends LitElement {
     return '';
   }
 
-  private createQRCode(): QRCodeStyling.default {
+  private createQRCode(): QRCodeStyling {
     const qrData = this.getQrData();
-    const iconDataUrl = this.getIconDataUrl();
     
-    return new QRCodeStyling.default({
-      width: this.size,
-      height: this.size,
+    // Start with minimal configuration
+    const config: any = {
       data: qrData,
-      type: 'svg',
-      image: iconDataUrl,
-      margin: 0, // Remove all margin/padding
-      imageOptions: {
-        hideBackgroundDots: true,
-        imageSize: 0.3, 
-        margin: 8
-      },
       dotsOptions: {
         color: this.dotColor,
-        type: this.dotType as any
+        type: this.dotType,
+        size: 10
       },
       backgroundOptions: {
-        color: '#ffffff'
+        color: '#ffffff',
+        margin: 0
       },
-      cornersSquareOptions: {
-        color: this.dotColor,
-        type: 'extra-rounded'
-      },
-      cornersDotOptions: {
-        color: this.dotColor,
-        type: 'dot'
+      qrOptions: {
+        typeNumber: 0,
+        mode: 'byte',
+        errorCorrectionLevel: this.showImage ? 'H' : 'Q'
       }
-    });
+    };
+
+    // Images will be handled manually with CSS overlay
+    
+    return new QRCodeStyling(config);
   }
 
-  private async updateQRCode(): Promise<void> {
-    if (!this.qrContainer) return;
-    
-    // Clear existing QR code
-    this.qrContainer.innerHTML = '';
-    
-    // Handle placeholder state
-    if (this.placeholder) {
-      return; // Placeholder will be rendered in the template
-    }
-    
-    // Handle error state
-    if (this.error) {
-      this.qrContainer.innerHTML = `<div class="error-message"><p>${this.errorMessage}</p></div>`;
-      return;
-    }
-    
-    const qrData = this.getQrData();
-    if (!qrData) {
-      // No data provided - show error state
-      this.qrContainer.innerHTML = '<div class="error-message">No Bitcoin address or Lightning invoice provided</div>';
-      return;
-    }
 
+  private async updateQRCode(): Promise<void> {
+    // Re-query the DOM for the current .qr-container element
+    this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
+    
+    if (!this.qrContainer || this.isUpdatingQR) return;
+    
+    this.isUpdatingQR = true;
+    
+    
+    // More thorough cleanup
+    this.cleanupQRCode();
+    
     try {
+      // Handle placeholder state
+      if (this.placeholder) {
+        this.isUpdatingQR = false;
+        return; // Placeholder will be rendered in the template
+      }
+      
+      // Handle error state
+      if (this.error) {
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        const p = document.createElement('p');
+        p.textContent = this.errorMessage;
+        err.appendChild(p);
+        this.qrContainer.replaceChildren(err);
+        this.isUpdatingQR = false;
+        return;
+      }
+      
+      const qrData = this.getQrData();
+      if (!qrData) {
+        // No data provided - show error state
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        const p = document.createElement('p');
+        p.textContent = 'No Bitcoin address or Lightning invoice provided';
+        err.appendChild(p);
+        this.qrContainer.replaceChildren(err);
+        this.isUpdatingQR = false;
+        return;
+      }
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
       
       // Add click handler for copy functionality
       if (this.copyOnTap) {
         this.qrContainer.style.cursor = 'pointer';
-        this.qrContainer.addEventListener('click', this.handleQrClick.bind(this));
+        this.boundHandleQrClick = this.handleQrClick.bind(this);
+        this.qrContainer.addEventListener('click', this.boundHandleQrClick);
       }
     } catch (error) {
       console.error('Failed to generate QR code:', error);
-      this.qrContainer.innerHTML = '<div class="error-message">Failed to render QR code 😭</div>';
+      console.error('QR Data:', this.getQrData());
+      console.error('Image URL:', this.getIconDataUrl());
+      const err = document.createElement('div');
+      err.className = 'error-message';
+      const p = document.createElement('p');
+      p.textContent = 'Failed to render QR code 😭';
+      err.appendChild(p);
+      this.qrContainer.replaceChildren(err);
+    } finally {
+      this.isUpdatingQR = false;
     }
+  }
+
+  private cleanupQRCode(): void {
+    // Clear existing QR code instance
+    if (this.qrCodeInstance) {
+      this.qrCodeInstance = null;
+    }
+    
+      // Clear container completely
+      if (this.qrContainer) {
+        if (this.boundHandleQrClick) {
+          this.qrContainer.removeEventListener('click', this.boundHandleQrClick);
+          this.boundHandleQrClick = null;
+        }
+        this.qrContainer.replaceChildren();
+      }
   }
 
   private async handleQrClick(): Promise<void> {
@@ -402,6 +509,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private renderQr() {
     const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
     const title = this.copyOnTap && !this.placeholder && !this.error ? 'Click to copy QR code data' : '';
+    const iconDataUrl = this.getIconDataUrl();
+    
     
     // Handle placeholder state
     if (this.placeholder) {
@@ -414,11 +523,32 @@ export class BuiBitcoinQrDisplay extends LitElement {
       `;
     }
     
+    // Handle complete state
+    if (this.complete) {
+      return html`
+        <div class="frame">
+          <div class="qr complete-qr" style="${qrInlineStyle}">
+            <div class="complete-content">
+              <div class="complete-icon">
+                <bui-check-circle-lg></bui-check-circle-lg>
+              </div>
+              <p class="complete-text">Payment Received</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
     return html`
       <div class="frame">
         <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
           <!-- QR code will be rendered here by qr-code-styling -->
         </div>
+        ${this.showImage && iconDataUrl && !this.error ? html`
+          <div class="qr-overlay">
+            <img src="${iconDataUrl}" alt="QR code icon" />
+          </div>
+        ` : ''}
       </div>
     `;
   }
@@ -426,9 +556,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
   render() {
     return html`
       <div class="container">
-        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : html`<div class="helper-text">${this.helperText}</div>`)}
+        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : (this.complete ? html`<div class="helper-text" style="opacity: 0;">${this.helperText}</div>` : html`<div class="helper-text">${this.helperText}</div>`))}
         ${this.renderQr()}
-        ${this.placeholder ? html`<div class="placeholder-options"></div>` : (this.error ? html`<div class="error-options-placeholder"></div>` : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null))}
+        ${this.placeholder ? (this.shouldShowSelector ? html`<div class="placeholder-options"></div>` : null) : (this.error ? (this.shouldShowSelector ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : null) : (this.complete ? (this.shouldShowSelector ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : null) : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)))}
       </div>
     `;
   }

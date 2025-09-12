@@ -18,10 +18,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sbddesign/bui-icons": "workspace:*",
+    "@liquid-js/qr-code-styling": "^4.0.8",
     "@lit/react": "^1.0.6",
-    "lit": "^3.3.0",
-    "qr-code-styling": "^1.9.2"
+    "@sbddesign/bui-icons": "workspace:*",
+    "lit": "^3.3.0"
   },
   "type": "module",
   "module": "dist/index.js",
