@@ -353,7 +353,12 @@ export class BuiBitcoinQrDisplay extends LitElement {
       
       // Handle error state
       if (this.error) {
-        this.qrContainer.innerHTML = `<div class="error-message"><p>${this.errorMessage}</p></div>`;
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        const p = document.createElement('p');
+        p.textContent = this.errorMessage;
+        err.appendChild(p);
+        this.qrContainer.replaceChildren(err);
         this.isUpdatingQR = false;
         return;
       }
