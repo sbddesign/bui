@@ -366,11 +366,15 @@ export class BuiBitcoinQrDisplay extends LitElement {
       const qrData = this.getQrData();
       if (!qrData) {
         // No data provided - show error state
-        this.qrContainer.innerHTML = '<div class="error-message">No Bitcoin address or Lightning invoice provided</div>';
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        const p = document.createElement('p');
+        p.textContent = 'No Bitcoin address or Lightning invoice provided';
+        err.appendChild(p);
+        this.qrContainer.replaceChildren(err);
         this.isUpdatingQR = false;
         return;
       }
-
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
       
