@@ -405,7 +405,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
     
     // Clear container completely
     if (this.qrContainer) {
-      this.qrContainer.innerHTML = '';
+      this.qrContainer.removeEventListener('click', this.boundHandleQrClick);
+      this.qrContainer.replaceChildren();
     }
   }
 
