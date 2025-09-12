@@ -70,6 +70,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
   private qrCodeInstance: QRCodeStyling | null = null;
   private qrContainer: HTMLElement | null = null;
   private isUpdatingQR: boolean = false;
+  private boundHandleQrClick: (() => Promise<void>) | null = null;
 
   private validationRules = [
     createStringLiteralValidationRule(OPTIONS, 'option'),
@@ -307,14 +308,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private createQRCode(): QRCodeStyling {
     const qrData = this.getQrData();
-    const iconDataUrl = this.getIconDataUrl();
     
     // Start with minimal configuration
     const config: any = {
       data: qrData,
-      width: this.size,
-      height: this.size,
-      type: 'canvas',
       dotsOptions: {
         color: this.dotColor,
         type: this.dotType,
@@ -323,12 +320,15 @@ export class BuiBitcoinQrDisplay extends LitElement {
       backgroundOptions: {
         color: '#ffffff',
         margin: 0
+      },
+      qrOptions: {
+        typeNumber: 0,
+        mode: 'byte',
+        errorCorrectionLevel: this.showImage ? 'H' : 'Q'
       }
     };
 
     // Images will be handled manually with CSS overlay
-    
-    console.log('QR Code config dotsOptions:', config.dotsOptions);
     
     return new QRCodeStyling(config);
   }
@@ -380,7 +380,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
       // Add click handler for copy functionality
       if (this.copyOnTap) {
         this.qrContainer.style.cursor = 'pointer';
-        this.qrContainer.addEventListener('click', this.handleQrClick.bind(this));
+        this.boundHandleQrClick = this.handleQrClick.bind(this);
+        this.qrContainer.addEventListener('click', this.boundHandleQrClick);
       }
     } catch (error) {
       console.error('Failed to generate QR code:', error);
@@ -403,11 +404,14 @@ export class BuiBitcoinQrDisplay extends LitElement {
       this.qrCodeInstance = null;
     }
     
-    // Clear container completely
-    if (this.qrContainer) {
-      this.qrContainer.removeEventListener('click', this.boundHandleQrClick);
-      this.qrContainer.replaceChildren();
-    }
+      // Clear container completely
+      if (this.qrContainer) {
+        if (this.boundHandleQrClick) {
+          this.qrContainer.removeEventListener('click', this.boundHandleQrClick);
+          this.boundHandleQrClick = null;
+        }
+        this.qrContainer.replaceChildren();
+      }
   }
 
   private async handleQrClick(): Promise<void> {
