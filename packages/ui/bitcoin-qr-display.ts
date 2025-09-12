@@ -220,10 +220,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    // Clean up QR code instance when component is removed
-    if (this.qrCodeInstance) {
-      this.qrCodeInstance = null;
-    }
+    // Clean up when component is removed
+    this.cleanupQRCode();
+    this.qrCodeInstance = null;
   }
 
   private get hasBothAddressAndLightning(): boolean {
