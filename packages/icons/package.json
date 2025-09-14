@@ -1,6 +1,6 @@
 {
   "name": "@sbddesign/bui-icons",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Icon web components for BUI Design System",
   "main": "dist/index.js",
   "type": "module",
