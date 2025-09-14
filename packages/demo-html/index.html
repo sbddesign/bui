@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" data-theme="bitcoindesign" data-mode="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BUI Demo (HTML)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      :root { font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; }
+      body { margin: 0; padding: 2rem; background: var(--background); color: var(--text-primary); }
+      .container { max-width: 720px; margin: 0 auto; display: grid; gap: 1rem; }
+      header { display: flex; justify-content: space-between; align-items: center; }
+      .stack { display: grid; gap: 0.75rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bitcoin UI Kit — HTML Demo</h1>
+        <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+      </header>
+      <section class="stack">
+        <bui-message text="This is a message"></bui-message>
+        <bui-button id="primaryBtn" label="Get Started"></bui-button>
+        <bui-button id="secondaryBtn" style-type="outline" label="Restore Wallet"></bui-button>
+      </section>
+    </div>
+  </body>
+  </html>
+
+

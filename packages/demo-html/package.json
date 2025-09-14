@@ -1,0 +1,19 @@
+{
+  "name": "@sbddesign/bui-demo-html",
+  "private": true,
+  "version": "0.0.2",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@sbddesign/bui-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^7.0.4"
+  }
+}
+
+
