@@ -8,6 +8,16 @@ importers:
 
   .: {}
 
+  packages/demo-html:
+    dependencies:
+      '@sbddesign/bui-ui':
+        specifier: workspace:*
+        version: link:../ui
+    devDependencies:
+      vite:
+        specifier: ^7.0.4
+        version: 7.0.4(@types/node@24.3.0)
+
   packages/demo-react:
     dependencies:
       '@sbddesign/bui-ui':
@@ -100,6 +110,9 @@ importers:
       '@sbddesign/bui-icons':
         specifier: workspace:*
         version: link:../icons
+      '@sbddesign/bui-tokens':
+        specifier: workspace:*
+        version: link:../tokens
       lit:
         specifier: ^3.3.0
         version: 3.3.0
