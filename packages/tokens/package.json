@@ -1,6 +1,6 @@
 {
   "name": "@sbddesign/bui-tokens",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Design tokens for BUI design system",
   "main": "dist/variables.css",
   "publishConfig": {
