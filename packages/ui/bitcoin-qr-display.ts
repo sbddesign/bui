@@ -148,6 +148,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
         padding: var(--size-4);
         box-sizing: border-box;
       }
+      .frame.complete { background: var(--background); }
       .complete-qr {
         background: var(--system-mood-success);
         border-radius: 12px;
@@ -527,7 +528,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     // Handle complete state
     if (this.complete) {
       return html`
-        <div class="frame">
+        <div class="frame complete">
           <div class="qr complete-qr" style="${qrInlineStyle}">
             <div class="complete-content">
               <div class="complete-icon">
