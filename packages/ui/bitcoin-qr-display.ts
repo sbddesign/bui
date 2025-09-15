@@ -116,7 +116,8 @@ export class BuiBitcoinQrDisplay extends LitElement {
       .placeholder-helper { background: var(--system-placeholder); height: 17px; border-radius: 28px; width: 240px; }
       .placeholder-qr { background: var(--system-placeholder); border-radius: 12px; width: 332.606px; height: 332.606px; }
       .placeholder-options { background: var(--system-placeholder); height: 48px; border-radius: 12px; width: 100px; }
-      
+      .frame.placeholder { background: var(--background); }
+
       /* Error state styles */
       .error-helper-placeholder { 
         background: var(--tailwind-stone-100); 
@@ -515,7 +516,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
     // Handle placeholder state
     if (this.placeholder) {
       return html`
-        <div class="frame">
+        <div class="frame placeholder">
           <div class="qr qr-container placeholder-qr" style="${qrInlineStyle}">
             <!-- Placeholder QR area -->
           </div>
