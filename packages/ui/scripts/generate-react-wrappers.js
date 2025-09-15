@@ -11,6 +11,7 @@ const outJs = path.join(rootDir, 'react.js');
 const outDts = path.join(rootDir, 'react.d.ts');
 const manifestPathJson = path.join(rootDir, 'wrappers.manifest.json');
 const manifestPathTs = path.join(rootDir, 'wrappers.manifest.ts');
+const dtsDir = path.join(rootDir, 'types', 'defs');
 
 function read(file) {
   try { return fs.readFileSync(file, 'utf8'); } catch { return ''; }
@@ -30,6 +31,52 @@ function findDefines() {
   return map;
 }
 
+function parsePropsFromDts(content) {
+  // Extract props from class instance fields (not static, not methods)
+  const classRegex = /export\s+declare\s+class\s+(\w+)\s+extends\s+LitElement\s*\{([\s\S]*?)\n\}/g;
+  const results = [];
+  let classMatch;
+  while ((classMatch = classRegex.exec(content)) !== null) {
+    const className = classMatch[1];
+    const body = classMatch[2];
+    const props = [];
+    const propRegex = /\n\s{2,}(\w+)\??:\s*([^;]+);/g;
+    let propMatch;
+    while ((propMatch = propRegex.exec(body)) !== null) {
+      const name = propMatch[1];
+      const type = propMatch[2].trim();
+      // Skip obvious non-props and static property subfields
+      if (['validationRules', 'styles', 'type', 'attribute', 'reflect'].includes(name)) continue;
+      if (type.includes('TemplateResult') || type.startsWith('(')) continue;
+      props.push({ name, type });
+    }
+    if (props.length) results.push({ className, props });
+  }
+  return results;
+}
+
+function loadPropsFromDefs() {
+  const classToProps = new Map();
+  if (!fs.existsSync(dtsDir)) return classToProps;
+  const files = fs.readdirSync(dtsDir).filter(f => f.endsWith('.d.ts'));
+  for (const f of files) {
+    const content = read(path.join(dtsDir, f));
+    const classes = parsePropsFromDts(content);
+    for (const cls of classes) {
+      classToProps.set(cls.className, cls.props);
+    }
+  }
+  return classToProps;
+}
+
+function mapType(t) {
+  if (/\bboolean\b/.test(t)) return 'boolean';
+  if (/\bnumber\b/.test(t)) return 'number';
+  if (/\bstring\b/.test(t)) return 'string';
+  // Fallback to string to be permissive for unions and custom types
+  return 'string';
+}
+
 function loadManifest() {
   // optional; supports JSON only for simplicity
   try {
@@ -47,14 +94,14 @@ function pascalCase(tag) {
 function generate() {
   const defines = findDefines();
   const manifest = loadManifest();
+  const classToProps = loadPropsFromDefs();
 
   const importLines = [
     `import React from 'react';`,
     `import {createComponent} from '@lit/react';`
   ];
   const dtsImportLines = [
-    `import * as React from 'react';`,
-    `import { type EventName } from '@lit/react';`
+    `import * as React from 'react';`
   ];
 
   const wrapperExports = [];
@@ -67,7 +114,7 @@ function generate() {
     const resolvedVar = `__${className}_resolved_${idx}`;
     importLines.push(`import * as ${nsVar} from '${importPath}';`);
     importLines.push(`const ${resolvedVar} = (${nsVar} && (${nsVar}.${className} ?? ${nsVar}.default));`);
-    dtsImportLines.push(`import type { ${className} } from '${importPath}';`);
+    // No type import required; we emit primitive mapped types for props for portability
 
     const reactName = `${pascalCase(tag)}React`;
     const events = (manifest.events && manifest.events[tag]) || { onClick: 'click', onclick: 'click' };
@@ -83,10 +130,13 @@ function generate() {
     );
 
     const typedEvents = Object.keys(events).map(k => `${k}?: (e: Event) => void;`).join('\n    ');
+    const props = classToProps.get(className) || [];
+    const propLines = props.map(p => `${p.name}?: ${mapType(p.type)};`).join('\n    ');
+    const propBlock = propLines ? `\n    ${propLines}\n  ` : '';
     dtsExports.push(
 `export declare const ${reactName}: React.ComponentType<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-    ${typedEvents}
+    ${typedEvents}${propBlock}
   }
 >;`
     );

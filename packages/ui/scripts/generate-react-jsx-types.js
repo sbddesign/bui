@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.join(rootDir, 'dist');
+const dtsDir = path.join(rootDir, 'types', 'defs');
 const typesDir = path.join(rootDir, 'types');
 const outTypesFile = path.join(typesDir, 'react-jsx.d.ts');
 const outRootFile = path.join(rootDir, 'react.d.ts');
@@ -81,12 +82,14 @@ function mapType(t) {
 function generate() {
   ensureDir(typesDir);
   const classToTag = buildClassToTagMap();
-  const dtsFiles = fs.readdirSync(distDir).filter(f => f.endsWith('.d.ts'));
+  const dtsFiles = fs.existsSync(dtsDir)
+    ? fs.readdirSync(dtsDir).filter(f => f.endsWith('.d.ts'))
+    : [];
 
   const tagToProps = new Map();
 
   for (const file of dtsFiles) {
-    const content = readFileSafe(path.join(distDir, file));
+    const content = readFileSafe(path.join(dtsDir, file));
     const classes = parsePropsFromDts(content);
     for (const cls of classes) {
       const tag = classToTag[cls.className];
@@ -115,7 +118,6 @@ function generate() {
 
   const out = header + open + parts.join('') + close;
   fs.writeFileSync(outTypesFile, out, 'utf8');
-  fs.writeFileSync(outRootFile, out + '\nexport {};\n', 'utf8');
 }
 
 generate();
