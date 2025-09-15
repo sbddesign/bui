@@ -4,12 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@sbddesign/bui-ui': '../../ui',
-      '@sbddesign/bui-tokens': '../../tokens'
-    }
-  },
+  // No aliases needed; rely on PNPM workspace resolution for local packages
   optimizeDeps: {
     include: ['lit']
   }
