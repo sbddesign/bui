@@ -9,8 +9,10 @@ export class BuiOptionDot extends LitElement {
       reflect: true,
       attribute: 'active',
       converter: {
-        fromAttribute: (value: string | null): boolean => value === 'true' || value === '',
-        toAttribute: (value: boolean): BooleanString => (value ? 'true' : 'false'),
+        fromAttribute: (value: string | null): boolean =>
+          value === 'true' || value === '',
+        toAttribute: (value: boolean): BooleanString =>
+          value ? 'true' : 'false',
       },
     },
   };
@@ -76,5 +78,3 @@ export class BuiOptionDot extends LitElement {
 if (!customElements.get('bui-option-dot')) {
   customElements.define('bui-option-dot', BuiOptionDot);
 }
-
-

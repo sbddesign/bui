@@ -19,14 +19,26 @@ export default {
     secondaryAmount: { control: 'number' },
     secondarySymbol: { control: 'text' },
     showEstimate: { control: 'boolean' },
-    primaryTextSize: { 
-      control: { type: 'select' }, 
-      options: ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] 
+    primaryTextSize: {
+      control: { type: 'select' },
+      options: [
+        'base',
+        'lg',
+        'xl',
+        '2xl',
+        '3xl',
+        '4xl',
+        '5xl',
+        '6xl',
+        '7xl',
+        '8xl',
+        '9xl',
+      ],
     },
-    secondaryTextSize: { 
-      control: { type: 'select' }, 
-      options: ['base', 'lg', 'xl', '2xl'] 
-    }
+    secondaryTextSize: {
+      control: { type: 'select' },
+      options: ['base', 'lg', 'xl', '2xl'],
+    },
   },
   args: {
     emoji: '🔥',
@@ -44,7 +56,7 @@ export default {
     secondarySymbol: '₿',
     showEstimate: true,
     primaryTextSize: '6xl',
-    secondaryTextSize: '2xl'
+    secondaryTextSize: '2xl',
   },
 };
 
@@ -55,11 +67,9 @@ export const Default = {
     secondarySymbol: '₿',
     message: 'Incredible',
     emoji: '🔥',
-    selected: false
+    selected: false,
   },
 };
-
-
 
 // Bitcoin first (bitcoin amount shown larger)
 export const BitcoinFirst = {
@@ -70,11 +80,9 @@ export const BitcoinFirst = {
     secondaryAmount: '30',
     secondarySymbol: '$',
     message: 'Fantabulous',
-    emoji: '🎉'
+    emoji: '🎉',
   },
 };
-
-
 
 // Selected state
 export const Selected = {
@@ -85,21 +93,17 @@ export const Selected = {
     secondaryAmount: 20000,
     secondarySymbol: '₿',
     message: 'Amazing',
-    emoji: '⚡'
+    emoji: '⚡',
   },
 };
-
-
 
 // Custom amount tile
 export const CustomAmount = {
   args: {
     custom: true,
-    amountDefined: false
+    amountDefined: false,
   },
 };
-
-
 
 // Custom amount with defined value
 export const CustomAmountWithValue = {
@@ -109,11 +113,9 @@ export const CustomAmountWithValue = {
     primaryAmount: 75000,
     primarySymbol: '₤',
     secondaryAmount: 300000,
-    secondarySymbol: '₿'
+    secondarySymbol: '₿',
   },
 };
-
-
 
 // Row of 4 amount option tiles (as requested)
 export const RowOfFourTiles = {
@@ -168,8 +170,6 @@ export const RowOfFourTiles = {
   },
 };
 
-
-
 // Bitcoin first row
 export const BitcoinFirstRow = {
   render: () => {
@@ -219,7 +219,7 @@ export const BitcoinFirstRow = {
     tile4.setAttribute('bitcoin-first', true);
     tile4.setAttribute('primary-amount', 1337);
     tile4.setAttribute('primary-symbol', '₿');
-    tile4.setAttribute('secondary-amount', 3.30);
+    tile4.setAttribute('secondary-amount', 3.3);
     tile4.setAttribute('secondary-symbol', '$');
 
     container.appendChild(tile1);

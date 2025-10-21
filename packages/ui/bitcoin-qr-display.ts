@@ -7,16 +7,32 @@ import '@sbddesign/bui-icons/cycle/md';
 import '@sbddesign/bui-icons/checkCircle/lg';
 import { QRCodeStyling } from '@liquid-js/qr-code-styling';
 
-import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+import {
+  validateProperties,
+  createStringLiteralValidationRule,
+} from './utils/validation.js';
 
 const OPTIONS = ['unified', 'lightning', 'onchain'] as const;
-type QrOption = typeof OPTIONS[number];
+type QrOption = (typeof OPTIONS)[number];
 
 const SELECTORS = ['dots', 'toggle'] as const;
-type SelectorType = typeof SELECTORS[number];
+type SelectorType = (typeof SELECTORS)[number];
 
-const DOT_TYPES = ['dot', 'square', 'rounded', 'extra-rounded', 'classy', 'classy-rounded', 'random-dot', 'vertical-line', 'horizontal-line', 'small-square', 'tiny-square', 'diamond'] as const;
-type DotType = typeof DOT_TYPES[number];
+const DOT_TYPES = [
+  'dot',
+  'square',
+  'rounded',
+  'extra-rounded',
+  'classy',
+  'classy-rounded',
+  'random-dot',
+  'vertical-line',
+  'horizontal-line',
+  'small-square',
+  'tiny-square',
+  'diamond',
+] as const;
+type DotType = (typeof DOT_TYPES)[number];
 
 const OPTION_LABELS: Record<QrOption, string> = {
   unified: 'Bitcoin QR',
@@ -80,13 +96,45 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   static styles = [
     css`
-      :host { display: block; }
-      .container { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); border-radius: 8.909px; }
-      .helper-text { color: var(--text-secondary); font-size: 14px; text-align: center; }
-      .frame { background: var(--white); border: 1px solid var(--system-divider); border-radius: var(--size-2); padding: var(--size-6); display: flex; align-items: center; justify-content: center; position: relative; }
-      .qr { width: var(--qr-size); height: var(--qr-size); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
-      .qr-container { position: relative; }
-      .qr-container canvas, .qr-container svg {
+      :host {
+        display: block;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--size-3);
+        border-radius: 8.909px;
+      }
+      .helper-text {
+        color: var(--text-secondary);
+        font-size: 14px;
+        text-align: center;
+      }
+      .frame {
+        background: var(--white);
+        border: 1px solid var(--system-divider);
+        border-radius: var(--size-2);
+        padding: var(--size-6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .qr {
+        width: var(--qr-size);
+        height: var(--qr-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .qr-container {
+        position: relative;
+      }
+      .qr-container canvas,
+      .qr-container svg {
         width: 100%;
         height: auto;
       }
@@ -108,35 +156,66 @@ export class BuiBitcoinQrDisplay extends LitElement {
         height: 100%;
         object-fit: contain;
       }
-      .options { display: flex; flex-direction: column; align-items: center; gap: var(--size-3); padding: var(--size-3) 0; }
-      .dots-row { display: flex; gap: var(--size-4); align-items: center; }
-      .selector-row { display: flex; gap: var(--size-4); align-items: center; }
-      
+      .options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--size-3);
+        padding: var(--size-3) 0;
+      }
+      .dots-row {
+        display: flex;
+        gap: var(--size-4);
+        align-items: center;
+      }
+      .selector-row {
+        display: flex;
+        gap: var(--size-4);
+        align-items: center;
+      }
+
       /* Placeholder styles */
-      .placeholder-helper { background: var(--system-placeholder); height: 17px; border-radius: 28px; width: 240px; }
-      .placeholder-qr { background: var(--system-placeholder); border-radius: 12px; width: 332.606px; height: 332.606px; }
-      .placeholder-options { background: var(--system-placeholder); height: 48px; border-radius: 12px; width: 100px; }
-      .frame.placeholder { background: var(--background); }
+      .placeholder-helper {
+        background: var(--system-placeholder);
+        height: 17px;
+        border-radius: 28px;
+        width: 240px;
+      }
+      .placeholder-qr {
+        background: var(--system-placeholder);
+        border-radius: 12px;
+        width: 332.606px;
+        height: 332.606px;
+      }
+      .placeholder-options {
+        background: var(--system-placeholder);
+        height: 48px;
+        border-radius: 12px;
+        width: 100px;
+      }
+      .frame.placeholder {
+        background: var(--background);
+      }
 
       /* Error state styles */
-      .error-helper-placeholder { 
-        background: var(--tailwind-stone-100); 
-        height: 20px; 
-        border-radius: 28px; 
-        width: 240px; 
-        opacity: 0; 
+      .error-helper-placeholder {
+        background: var(--tailwind-stone-100);
+        height: 20px;
+        border-radius: 28px;
+        width: 240px;
+        opacity: 0;
       }
-      .error-options-placeholder { 
-        background: var(--tailwind-stone-100); 
-        height: 48px; 
-        border-radius: 12px; 
-        width: 100px; 
-        opacity: 0; 
+      .error-options-placeholder {
+        background: var(--tailwind-stone-100);
+        height: 48px;
+        border-radius: 12px;
+        width: 100px;
+        opacity: 0;
       }
-      .error-message { 
-        color: var(--text-secondary); 
-        font-size: 14px; 
-        text-align: center; 
+      .error-message {
+        color: var(--text-secondary);
+        font-size: 14px;
+        text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -148,7 +227,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
         padding: var(--size-4);
         box-sizing: border-box;
       }
-      .frame.complete { background: var(--background); }
+      .frame.complete {
+        background: var(--background);
+      }
       .complete-qr {
         background: var(--system-mood-success);
         border-radius: 12px;
@@ -208,7 +289,20 @@ export class BuiBitcoinQrDisplay extends LitElement {
   }
 
   protected async updated(changed: PropertyValues<this>): Promise<void> {
-    if (changed.has('address') || changed.has('lightning') || changed.has('option') || changed.has('size') || changed.has('showImage') || changed.has('dotType') || changed.has('dotColor') || changed.has('unifiedImage') || changed.has('lightningImage') || changed.has('onchainImage') || changed.has('placeholder') || changed.has('error')) {
+    if (
+      changed.has('address') ||
+      changed.has('lightning') ||
+      changed.has('option') ||
+      changed.has('size') ||
+      changed.has('showImage') ||
+      changed.has('dotType') ||
+      changed.has('dotColor') ||
+      changed.has('unifiedImage') ||
+      changed.has('lightningImage') ||
+      changed.has('onchainImage') ||
+      changed.has('placeholder') ||
+      changed.has('error')
+    ) {
       await this.updateQRCode();
     }
   }
@@ -265,9 +359,9 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private getIconDataUrl(): string {
     if (!this.showImage) return '';
-    
+
     const effectiveOption = this.effectiveOption;
-    
+
     // Check for custom images first
     if (effectiveOption === 'unified' && this.unifiedImage) {
       return this.unifiedImage;
@@ -276,10 +370,10 @@ export class BuiBitcoinQrDisplay extends LitElement {
     } else if (effectiveOption === 'onchain' && this.onchainImage) {
       return this.onchainImage;
     }
-    
+
     // Fall back to default SVG icons
     let svgContent = '';
-    
+
     if (effectiveOption === 'unified') {
       // Orange Bitcoin icon for unified
       svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
@@ -299,61 +393,61 @@ export class BuiBitcoinQrDisplay extends LitElement {
         <path stroke="#fff" stroke-linecap="square" stroke-linejoin="round" stroke-width="5.333" d="m19.58 43.986 6.88-27.608m-8.94 27.099s8.016 1.992 15.499 3.861c15.311 3.817 16.628-11.564 3.687-14.791C48.517 35.49 50.987 22.495 39.9 19.73l-15.92-3.971m1.646 14.028 10.849 2.703m-.516-13.743 1.476-5.914M27.98 52.366l1.476-5.918"/>
       </svg>`;
     }
-    
+
     if (svgContent) {
       return `data:image/svg+xml;base64,${btoa(svgContent)}`;
     }
-    
+
     return '';
   }
 
   private createQRCode(): QRCodeStyling {
     const qrData = this.getQrData();
-    
+
     // Start with minimal configuration
     const config: any = {
       data: qrData,
       dotsOptions: {
         color: this.dotColor,
         type: this.dotType,
-        size: 10
+        size: 10,
       },
       backgroundOptions: {
         color: '#ffffff',
-        margin: 0
+        margin: 0,
       },
       qrOptions: {
         typeNumber: 0,
         mode: 'byte',
-        errorCorrectionLevel: this.showImage ? 'H' : 'Q'
-      }
+        errorCorrectionLevel: this.showImage ? 'H' : 'Q',
+      },
     };
 
     // Images will be handled manually with CSS overlay
-    
+
     return new QRCodeStyling(config);
   }
 
-
   private async updateQRCode(): Promise<void> {
     // Re-query the DOM for the current .qr-container element
-    this.qrContainer = this.shadowRoot?.querySelector('.qr-container') as HTMLElement;
-    
+    this.qrContainer = this.shadowRoot?.querySelector(
+      '.qr-container'
+    ) as HTMLElement;
+
     if (!this.qrContainer || this.isUpdatingQR) return;
-    
+
     this.isUpdatingQR = true;
-    
-    
+
     // More thorough cleanup
     this.cleanupQRCode();
-    
+
     try {
       // Handle placeholder state
       if (this.placeholder) {
         this.isUpdatingQR = false;
         return; // Placeholder will be rendered in the template
       }
-      
+
       // Handle error state
       if (this.error) {
         const err = document.createElement('div');
@@ -365,7 +459,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
         this.isUpdatingQR = false;
         return;
       }
-      
+
       const qrData = this.getQrData();
       if (!qrData) {
         // No data provided - show error state
@@ -380,7 +474,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
       }
       this.qrCodeInstance = this.createQRCode();
       this.qrCodeInstance.append(this.qrContainer);
-      
+
       // Add click handler for copy functionality
       if (this.copyOnTap) {
         this.qrContainer.style.cursor = 'pointer';
@@ -407,50 +501,54 @@ export class BuiBitcoinQrDisplay extends LitElement {
     if (this.qrCodeInstance) {
       this.qrCodeInstance = null;
     }
-    
-      // Clear container completely
-      if (this.qrContainer) {
-        if (this.boundHandleQrClick) {
-          this.qrContainer.removeEventListener('click', this.boundHandleQrClick);
-          this.boundHandleQrClick = null;
-        }
-        this.qrContainer.replaceChildren();
+
+    // Clear container completely
+    if (this.qrContainer) {
+      if (this.boundHandleQrClick) {
+        this.qrContainer.removeEventListener('click', this.boundHandleQrClick);
+        this.boundHandleQrClick = null;
       }
+      this.qrContainer.replaceChildren();
+    }
   }
 
   private async handleQrClick(): Promise<void> {
     if (!this.copyOnTap) return;
-    
+
     const qrData = this.getQrData();
     if (!qrData) return;
-    
+
     try {
       await navigator.clipboard.writeText(qrData);
-      
+
       // Emit custom copy event
-      this.dispatchEvent(new CustomEvent('bui-copy', {
-        detail: {
-          copiedText: qrData,
-          source: 'qr-code',
-          component: 'bui-bitcoin-qr-display'
-        },
-        bubbles: true,
-        composed: true
-      }));
+      this.dispatchEvent(
+        new CustomEvent('bui-copy', {
+          detail: {
+            copiedText: qrData,
+            source: 'qr-code',
+            component: 'bui-bitcoin-qr-display',
+          },
+          bubbles: true,
+          composed: true,
+        })
+      );
     } catch (error) {
       console.error('Failed to copy QR data to clipboard:', error);
-      
+
       // Emit error event
-      this.dispatchEvent(new CustomEvent('bui-copy-error', {
-        detail: {
-          error: error,
-          attemptedText: qrData,
-          source: 'qr-code',
-          component: 'bui-bitcoin-qr-display'
-        },
-        bubbles: true,
-        composed: true
-      }));
+      this.dispatchEvent(
+        new CustomEvent('bui-copy-error', {
+          detail: {
+            error: error,
+            attemptedText: qrData,
+            source: 'qr-code',
+            component: 'bui-bitcoin-qr-display',
+          },
+          bubbles: true,
+          composed: true,
+        })
+      );
     }
   }
 
@@ -474,9 +572,21 @@ export class BuiBitcoinQrDisplay extends LitElement {
     const onchainActive = this.option === 'onchain';
     return html`
       <div class="dots-row">
-        <bui-option-dot .active=${unifiedActive} @click=${() => this.setOption('unified')} title="${OPTION_LABELS.unified}"></bui-option-dot>
-        <bui-option-dot .active=${lightningActive} @click=${() => this.setOption('lightning')} title="${OPTION_LABELS.lightning}"></bui-option-dot>
-        <bui-option-dot .active=${onchainActive} @click=${() => this.setOption('onchain')} title="${OPTION_LABELS.onchain}"></bui-option-dot>
+        <bui-option-dot
+          .active=${unifiedActive}
+          @click=${() => this.setOption('unified')}
+          title="${OPTION_LABELS.unified}"
+        ></bui-option-dot>
+        <bui-option-dot
+          .active=${lightningActive}
+          @click=${() => this.setOption('lightning')}
+          title="${OPTION_LABELS.lightning}"
+        ></bui-option-dot>
+        <bui-option-dot
+          .active=${onchainActive}
+          @click=${() => this.setOption('onchain')}
+          title="${OPTION_LABELS.onchain}"
+        ></bui-option-dot>
       </div>
     `;
   }
@@ -510,10 +620,12 @@ export class BuiBitcoinQrDisplay extends LitElement {
 
   private renderQr() {
     const qrInlineStyle = `width: ${this.size}px; height: ${this.size}px;`;
-    const title = this.copyOnTap && !this.placeholder && !this.error ? 'Click to copy QR code data' : '';
+    const title =
+      this.copyOnTap && !this.placeholder && !this.error
+        ? 'Click to copy QR code data'
+        : '';
     const iconDataUrl = this.getIconDataUrl();
-    
-    
+
     // Handle placeholder state
     if (this.placeholder) {
       return html`
@@ -524,7 +636,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
         </div>
       `;
     }
-    
+
     // Handle complete state
     if (this.complete) {
       return html`
@@ -540,17 +652,19 @@ export class BuiBitcoinQrDisplay extends LitElement {
         </div>
       `;
     }
-    
+
     return html`
       <div class="frame">
         <div class="qr qr-container" style="${qrInlineStyle}" title="${title}">
           <!-- QR code will be rendered here by qr-code-styling -->
         </div>
-        ${this.showImage && iconDataUrl && !this.error ? html`
-          <div class="qr-overlay">
-            <img src="${iconDataUrl}" alt="QR code icon" />
-          </div>
-        ` : ''}
+        ${this.showImage && iconDataUrl && !this.error
+          ? html`
+              <div class="qr-overlay">
+                <img src="${iconDataUrl}" alt="QR code icon" />
+              </div>
+            `
+          : ''}
       </div>
     `;
   }
@@ -558,9 +672,35 @@ export class BuiBitcoinQrDisplay extends LitElement {
   render() {
     return html`
       <div class="container">
-        ${this.placeholder ? html`<div class="placeholder-helper"></div>` : (this.error ? html`<div class="error-helper-placeholder"></div>` : (this.complete ? html`<div class="helper-text" style="opacity: 0;">${this.helperText}</div>` : html`<div class="helper-text">${this.helperText}</div>`))}
+        ${this.placeholder
+          ? html`<div class="placeholder-helper"></div>`
+          : this.error
+            ? html`<div class="error-helper-placeholder"></div>`
+            : this.complete
+              ? html`<div class="helper-text" style="opacity: 0;">
+                  ${this.helperText}
+                </div>`
+              : html`<div class="helper-text">${this.helperText}</div>`}
         ${this.renderQr()}
-        ${this.placeholder ? (this.shouldShowSelector ? html`<div class="placeholder-options"></div>` : null) : (this.error ? (this.shouldShowSelector ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : null) : (this.complete ? (this.shouldShowSelector ? html`<div class="options" style="opacity: 0;">${this.renderSelector()}</div>` : null) : (this.shouldShowSelector ? html`<div class="options">${this.renderSelector()}</div>` : null)))}
+        ${this.placeholder
+          ? this.shouldShowSelector
+            ? html`<div class="placeholder-options"></div>`
+            : null
+          : this.error
+            ? this.shouldShowSelector
+              ? html`<div class="options" style="opacity: 0;">
+                  ${this.renderSelector()}
+                </div>`
+              : null
+            : this.complete
+              ? this.shouldShowSelector
+                ? html`<div class="options" style="opacity: 0;">
+                    ${this.renderSelector()}
+                  </div>`
+                : null
+              : this.shouldShowSelector
+                ? html`<div class="options">${this.renderSelector()}</div>`
+                : null}
       </div>
     `;
   }
@@ -569,5 +709,3 @@ export class BuiBitcoinQrDisplay extends LitElement {
 if (!customElements.get('bui-bitcoin-qr-display')) {
   customElements.define('bui-bitcoin-qr-display', BuiBitcoinQrDisplay);
 }
-
-

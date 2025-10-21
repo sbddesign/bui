@@ -6,7 +6,10 @@ export default {
   component: 'bui-message',
   tags: ['autodocs'],
   argTypes: {
-    mood: { control: { type: 'select' }, options: ['neutral', 'success', 'caution', 'danger'] },
+    mood: {
+      control: { type: 'select' },
+      options: ['neutral', 'success', 'caution', 'danger'],
+    },
     text: { control: 'text' },
     showIcon: { control: 'boolean' },
   },
@@ -18,7 +21,8 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'A message component that displays information with different mood states. Supports neutral, success, caution, and danger moods with appropriate colors and icons.',
+        component:
+          'A message component that displays information with different mood states. Supports neutral, success, caution, and danger moods with appropriate colors and icons.',
       },
     },
   },
@@ -70,7 +74,8 @@ export const Interactive = {
   parameters: {
     docs: {
       description: {
-        story: 'Use the controls to change the mood and see how the message adapts with different colors and icons.',
+        story:
+          'Use the controls to change the mood and see how the message adapts with different colors and icons.',
       },
     },
   },

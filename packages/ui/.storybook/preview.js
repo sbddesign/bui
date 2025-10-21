@@ -6,8 +6,8 @@ const preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 
@@ -15,8 +15,8 @@ const preview = {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: "todo"
-    }
+      test: 'todo',
+    },
   },
   globalTypes: {
     theme: {
@@ -27,7 +27,7 @@ const preview = {
         icon: 'circlehollow',
         items: [
           { value: 'light', title: 'Light', icon: 'sun' },
-          { value: 'dark', title: 'Dark', icon: 'moon' }
+          { value: 'dark', title: 'Dark', icon: 'moon' },
         ],
         dynamicTitle: true,
       },
@@ -41,7 +41,7 @@ const preview = {
         items: [
           { value: 'bitcoindesign', title: 'Bitcoin Design' },
           { value: 'conduit', title: 'Conduit' },
-          { value: 'nuclearcandy', title: 'Nuclear Candy' }
+          { value: 'nuclearcandy', title: 'Nuclear Candy' },
         ],
         dynamicTitle: true,
       },
@@ -50,12 +50,15 @@ const preview = {
   decorators: [
     (Story, context) => {
       const wrapper = document.createElement('div');
-      wrapper.setAttribute('data-theme', context.globals.designSystem || 'bitcoindesign');
+      wrapper.setAttribute(
+        'data-theme',
+        context.globals.designSystem || 'bitcoindesign'
+      );
       wrapper.setAttribute('data-mode', context.globals.theme || 'light');
       wrapper.style.padding = '24px';
       wrapper.style.backgroundColor = 'var(--background)';
       wrapper.style.color = 'var(--text-primary)';
-      
+
       wrapper.innerHTML = `
         <style>
           @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');

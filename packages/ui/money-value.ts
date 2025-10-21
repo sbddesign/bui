@@ -1,18 +1,37 @@
 import { LitElement, html, css, type PropertyValues } from 'lit';
-import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+import {
+  validateProperties,
+  createStringLiteralValidationRule,
+} from './utils/validation.js';
 
 const SYMBOL_POSITIONS = ['left', 'right'] as const;
-type SymbolPosition = typeof SYMBOL_POSITIONS[number];
+type SymbolPosition = (typeof SYMBOL_POSITIONS)[number];
 
 const MONEY_SIZES = ['small', 'default', 'large', 'xlarge'] as const;
-type MoneySize = typeof MONEY_SIZES[number];
+type MoneySize = (typeof MONEY_SIZES)[number];
 
-const TEXT_SIZES = ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] as const;
-type TextSize = typeof TEXT_SIZES[number];
+const TEXT_SIZES = [
+  'base',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl',
+  '8xl',
+  '9xl',
+] as const;
+type TextSize = (typeof TEXT_SIZES)[number];
 
 export class BuiMoneyValue extends LitElement {
   static properties = {
-    symbolPosition: { type: String, attribute: 'symbol-position', reflect: true }, // 'left' | 'right'
+    symbolPosition: {
+      type: String,
+      attribute: 'symbol-position',
+      reflect: true,
+    }, // 'left' | 'right'
     symbol: { type: String, reflect: true },
     amount: { type: Number, reflect: true },
     truncation: { type: Boolean, reflect: true },
@@ -41,9 +60,15 @@ export class BuiMoneyValue extends LitElement {
     css`
       :host {
         display: inline-block;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
       }
-      
+
       .money-value {
         display: flex;
         align-items: center;
@@ -51,32 +76,65 @@ export class BuiMoneyValue extends LitElement {
         font-weight: 500;
         line-height: 1.2;
       }
-      
+
       .estimate {
         font-weight: 400;
       }
-      
+
       .symbol {
         font-weight: 400;
       }
-      
+
       .amount {
         font-weight: 500;
       }
 
       /* Text size variants */
-      .text-base { font-size: 16px; gap: var(--size-1); }
-      .text-lg { font-size: 18px; gap: var(--size-1); }
-      .text-xl { font-size: 20px; gap: var(--size-1); }
-      .text-2xl { font-size: 24px; gap: var(--size-1); }
-      .text-3xl { font-size: 30px; gap: var(--size-1); }
-      .text-4xl { font-size: 36px; gap: var(--size-2); }
-      .text-5xl { font-size: 48px; gap: var(--size-2); }
-      .text-6xl { font-size: 60px; gap: var(--size-3); }
-      .text-7xl { font-size: 72px; gap: var(--size-3); }
-      .text-8xl { font-size: 96px; gap: var(--size-4); }
-      .text-9xl { font-size: 128px; gap: var(--size-4); }
-    `
+      .text-base {
+        font-size: 16px;
+        gap: var(--size-1);
+      }
+      .text-lg {
+        font-size: 18px;
+        gap: var(--size-1);
+      }
+      .text-xl {
+        font-size: 20px;
+        gap: var(--size-1);
+      }
+      .text-2xl {
+        font-size: 24px;
+        gap: var(--size-1);
+      }
+      .text-3xl {
+        font-size: 30px;
+        gap: var(--size-1);
+      }
+      .text-4xl {
+        font-size: 36px;
+        gap: var(--size-2);
+      }
+      .text-5xl {
+        font-size: 48px;
+        gap: var(--size-2);
+      }
+      .text-6xl {
+        font-size: 60px;
+        gap: var(--size-3);
+      }
+      .text-7xl {
+        font-size: 72px;
+        gap: var(--size-3);
+      }
+      .text-8xl {
+        font-size: 96px;
+        gap: var(--size-4);
+      }
+      .text-9xl {
+        font-size: 128px;
+        gap: var(--size-4);
+      }
+    `,
   ];
 
   constructor() {
@@ -171,20 +229,19 @@ export class BuiMoneyValue extends LitElement {
     const sizeClass = this.size;
     const textSizeClass = this.getTextSizeClass(this.textSize);
     const formattedAmount = this.formatAmount(this.amount);
-    
+
     return html`
       <div class="money-value ${sizeClass} ${textSizeClass}">
         ${this.showEstimate ? html`<span class="estimate">~</span>` : ''}
-        ${this.symbolPosition === 'left' 
+        ${this.symbolPosition === 'left'
           ? html`
-            <span class="symbol">${this.symbol}</span>
-            <span class="amount">${formattedAmount}</span>
-          `
+              <span class="symbol">${this.symbol}</span>
+              <span class="amount">${formattedAmount}</span>
+            `
           : html`
-            <span class="amount">${formattedAmount}</span>
-            <span class="symbol">${this.symbol}</span>
-          `
-        }
+              <span class="amount">${formattedAmount}</span>
+              <span class="symbol">${this.symbol}</span>
+            `}
       </div>
     `;
   }
@@ -193,5 +250,3 @@ export class BuiMoneyValue extends LitElement {
 if (!customElements.get('bui-money-value')) {
   customElements.define('bui-money-value', BuiMoneyValue);
 }
-
-

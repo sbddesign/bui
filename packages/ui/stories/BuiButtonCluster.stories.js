@@ -10,7 +10,10 @@ export default {
   component: 'bui-button-cluster',
   tags: ['autodocs'],
   argTypes: {
-    direction: { control: { type: 'select' }, options: ['horizontal', 'vertical'] },
+    direction: {
+      control: { type: 'select' },
+      options: ['horizontal', 'vertical'],
+    },
   },
   args: {
     direction: 'horizontal',
@@ -24,7 +27,7 @@ export const Horizontal = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     // Create buttons with different styles
     const button1 = document.createElement('bui-button');
     button1.setAttribute('style-type', 'filled');
@@ -34,13 +37,13 @@ export const Horizontal = {
     const icon1 = document.createElement('bui-arrow-left-lg');
     icon1.setAttribute('slot', 'icon');
     button1.appendChild(icon1);
-    
+
     const button2 = document.createElement('bui-button');
     button2.setAttribute('style-type', 'filled');
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Save');
     button2.setAttribute('cluster', 'middle-horizontal');
-    
+
     const button3 = document.createElement('bui-button');
     button3.setAttribute('style-type', 'filled');
     button3.setAttribute('content', 'label+icon');
@@ -49,11 +52,11 @@ export const Horizontal = {
     const icon3 = document.createElement('bui-arrow-right-lg');
     icon3.setAttribute('slot', 'icon');
     button3.appendChild(icon3);
-    
+
     cluster.appendChild(button1);
     cluster.appendChild(button2);
     cluster.appendChild(button3);
-    
+
     return cluster;
   },
 };
@@ -65,7 +68,7 @@ export const Vertical = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     // Create buttons with different styles
     const button1 = document.createElement('bui-button');
     button1.setAttribute('style-type', 'outline');
@@ -76,14 +79,14 @@ export const Vertical = {
     const icon1 = document.createElement('bui-search-lg');
     icon1.setAttribute('slot', 'icon');
     button1.appendChild(icon1);
-    
+
     const button2 = document.createElement('bui-button');
     button2.setAttribute('style-type', 'outline');
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Option 2');
     button2.setAttribute('cluster', 'middle-vertical');
     button2.setAttribute('wide', 'true');
-    
+
     const button3 = document.createElement('bui-button');
     button3.setAttribute('style-type', 'outline');
     button3.setAttribute('content', 'label+icon');
@@ -93,11 +96,11 @@ export const Vertical = {
     const icon3 = document.createElement('bui-check-circle-lg');
     icon3.setAttribute('slot', 'icon');
     button3.appendChild(icon3);
-    
+
     cluster.appendChild(button1);
     cluster.appendChild(button2);
     cluster.appendChild(button3);
-    
+
     return cluster;
   },
 };
@@ -109,7 +112,7 @@ export const MixedStyles = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     // Create buttons with different styles and sizes
     const button1 = document.createElement('bui-button');
     button1.setAttribute('style-type', 'filled');
@@ -119,14 +122,14 @@ export const MixedStyles = {
     const icon1 = document.createElement('bui-arrow-left-lg');
     icon1.setAttribute('slot', 'icon');
     button1.appendChild(icon1);
-    
+
     const button2 = document.createElement('bui-button');
     button2.setAttribute('style-type', 'outline');
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Center');
     button2.setAttribute('size', 'large');
     button2.setAttribute('cluster', 'middle-horizontal');
-    
+
     const button3 = document.createElement('bui-button');
     button3.setAttribute('style-type', 'filled');
     button3.setAttribute('content', 'icon');
@@ -135,11 +138,11 @@ export const MixedStyles = {
     const icon3 = document.createElement('bui-arrow-right-lg');
     icon3.setAttribute('slot', 'icon');
     button3.appendChild(icon3);
-    
+
     cluster.appendChild(button1);
     cluster.appendChild(button2);
     cluster.appendChild(button3);
-    
+
     return cluster;
   },
 };
@@ -151,7 +154,7 @@ export const SingleButton = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     const button = document.createElement('bui-button');
     button.setAttribute('style-type', 'filled');
     button.setAttribute('content', 'label+icon');
@@ -159,9 +162,9 @@ export const SingleButton = {
     const icon = document.createElement('bui-check-circle-lg');
     icon.setAttribute('slot', 'icon');
     button.appendChild(icon);
-    
+
     cluster.appendChild(button);
-    
+
     return cluster;
   },
 };
@@ -173,22 +176,22 @@ export const TwoButtons = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     const button1 = document.createElement('bui-button');
     button1.setAttribute('style-type', 'filled');
     button1.setAttribute('content', 'label');
     button1.setAttribute('label', 'Cancel');
     button1.setAttribute('cluster', 'left');
-    
+
     const button2 = document.createElement('bui-button');
     button2.setAttribute('style-type', 'filled');
     button2.setAttribute('content', 'label');
     button2.setAttribute('label', 'Confirm');
     button2.setAttribute('cluster', 'right');
-    
+
     cluster.appendChild(button1);
     cluster.appendChild(button2);
-    
+
     return cluster;
   },
 };
@@ -200,31 +203,31 @@ export const LargeCluster = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     const buttons = [
       { label: 'First', icon: 'bui-arrow-left-lg', cluster: 'left' },
       { label: 'Second', icon: null, cluster: 'middle-horizontal' },
       { label: 'Third', icon: null, cluster: 'middle-horizontal' },
       { label: 'Fourth', icon: null, cluster: 'middle-horizontal' },
-      { label: 'Last', icon: 'bui-arrow-right-lg', cluster: 'right' }
+      { label: 'Last', icon: 'bui-arrow-right-lg', cluster: 'right' },
     ];
-    
+
     buttons.forEach((btn, index) => {
       const button = document.createElement('bui-button');
       button.setAttribute('style-type', 'filled');
       button.setAttribute('content', btn.icon ? 'label+icon' : 'label');
       button.setAttribute('label', btn.label);
       button.setAttribute('cluster', btn.cluster);
-      
+
       if (btn.icon) {
         const icon = document.createElement(btn.icon);
         icon.setAttribute('slot', 'icon');
         button.appendChild(icon);
       }
-      
+
       cluster.appendChild(button);
     });
-    
+
     return cluster;
   },
 };
@@ -236,15 +239,15 @@ export const VerticalLarge = {
   render: (args) => {
     const cluster = document.createElement('bui-button-cluster');
     cluster.setAttribute('direction', args.direction);
-    
+
     const buttons = [
       { label: 'Top', icon: 'bui-arrow-up-lg', cluster: 'top' },
       { label: 'Middle 1', icon: null, cluster: 'middle-vertical' },
       { label: 'Middle 2', icon: null, cluster: 'middle-vertical' },
       { label: 'Middle 3', icon: null, cluster: 'middle-vertical' },
-      { label: 'Bottom', icon: 'bui-arrow-down-lg', cluster: 'bottom' }
+      { label: 'Bottom', icon: 'bui-arrow-down-lg', cluster: 'bottom' },
     ];
-    
+
     buttons.forEach((btn, index) => {
       const button = document.createElement('bui-button');
       button.setAttribute('style-type', 'outline');
@@ -252,16 +255,16 @@ export const VerticalLarge = {
       button.setAttribute('label', btn.label);
       button.setAttribute('cluster', btn.cluster);
       button.setAttribute('wide', 'true');
-      
+
       if (btn.icon) {
         const icon = document.createElement(btn.icon);
         icon.setAttribute('slot', 'icon');
         button.appendChild(icon);
       }
-      
+
       cluster.appendChild(button);
     });
-    
+
     return cluster;
   },
 };

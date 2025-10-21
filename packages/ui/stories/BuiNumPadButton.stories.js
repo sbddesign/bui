@@ -43,18 +43,18 @@ export const NumberButtons = {
     container.style.gridTemplateColumns = 'repeat(3, 1fr)';
     container.style.gap = '1rem';
     container.style.maxWidth = '450px';
-    
+
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    
-    numbers.forEach(number => {
+
+    numbers.forEach((number) => {
       const button = document.createElement('bui-numpad-button');
       button.setAttribute('number', number);
       button.setAttribute('content', args.content);
       if (args.disabled) button.setAttribute('disabled', '');
-      
+
       container.appendChild(button);
     });
-    
+
     return container;
   },
 };
@@ -67,10 +67,10 @@ export const WithIcon = {
     const button = document.createElement('bui-numpad-button');
     button.setAttribute('content', args.content);
     if (args.disabled) button.setAttribute('disabled', '');
-    
+
     const icon = document.createElement('bui-arrow-left-lg');
     icon.setAttribute('slot', 'icon');
-    
+
     button.appendChild(icon);
     return button;
   },
@@ -86,7 +86,7 @@ export const IconButtons = {
     container.style.gridTemplateColumns = 'repeat(3, 1fr)';
     container.style.gap = '1rem';
     container.style.maxWidth = '450px';
-    
+
     const icons = [
       'bui-arrow-left-lg',
       'bui-arrow-right-lg',
@@ -96,21 +96,21 @@ export const IconButtons = {
       'bui-check-circle-lg',
       'bui-cross-circle-lg',
       'bui-scan-lg',
-      'bui-clipboard-lg'
+      'bui-clipboard-lg',
     ];
-    
-    icons.forEach(iconName => {
+
+    icons.forEach((iconName) => {
       const button = document.createElement('bui-numpad-button');
       button.setAttribute('content', args.content);
       if (args.disabled) button.setAttribute('disabled', '');
-      
+
       const icon = document.createElement(iconName);
       icon.setAttribute('slot', 'icon');
-      
+
       button.appendChild(icon);
       container.appendChild(button);
     });
-    
+
     return container;
   },
 };
@@ -132,10 +132,10 @@ export const DisabledIcon = {
     const button = document.createElement('bui-numpad-button');
     button.setAttribute('content', args.content);
     button.setAttribute('disabled', '');
-    
+
     const icon = document.createElement('bui-arrow-left-lg');
     icon.setAttribute('slot', 'icon');
-    
+
     button.appendChild(icon);
     return button;
   },
@@ -151,34 +151,40 @@ export const AllStates = {
     container.style.gridTemplateColumns = 'repeat(4, 1fr)';
     container.style.gap = '1rem';
     container.style.maxWidth = '600px';
-    
+
     // Default state
     const defaultBtn = document.createElement('bui-numpad-button');
     defaultBtn.setAttribute('number', '1');
     defaultBtn.setAttribute('content', args.content);
     container.appendChild(defaultBtn);
-    
+
     // Hover state (simulated with CSS)
     const hoverBtn = document.createElement('bui-numpad-button');
     hoverBtn.setAttribute('number', '2');
     hoverBtn.setAttribute('content', args.content);
-    hoverBtn.style.setProperty('--component-numpad-bg', 'var(--component-numpad-hover-bg)');
+    hoverBtn.style.setProperty(
+      '--component-numpad-bg',
+      'var(--component-numpad-hover-bg)'
+    );
     container.appendChild(hoverBtn);
-    
+
     // Active state
     const activeBtn = document.createElement('bui-numpad-button');
     activeBtn.setAttribute('number', '3');
     activeBtn.setAttribute('content', args.content);
-    activeBtn.style.setProperty('--component-numpad-bg', 'var(--component-numpad-active-bg)');
+    activeBtn.style.setProperty(
+      '--component-numpad-bg',
+      'var(--component-numpad-active-bg)'
+    );
     container.appendChild(activeBtn);
-    
+
     // Disabled state
     const disabledBtn = document.createElement('bui-numpad-button');
     disabledBtn.setAttribute('number', '4');
     disabledBtn.setAttribute('content', args.content);
     disabledBtn.setAttribute('disabled', '');
     container.appendChild(disabledBtn);
-    
+
     return container;
   },
 };
@@ -197,16 +203,16 @@ export const FullNumPad = {
     container.style.background = 'var(--background)';
     container.style.borderRadius = '12px';
     container.style.border = '1px solid var(--system-divider)';
-    
+
     const layout = [
       ['1', '2', '3'],
       ['4', '5', '6'],
       ['7', '8', '9'],
-      ['', '', '0']
+      ['', '', '0'],
     ];
-    
-    layout.forEach(row => {
-      row.forEach(number => {
+
+    layout.forEach((row) => {
+      row.forEach((number) => {
         if (number) {
           const button = document.createElement('bui-numpad-button');
           button.setAttribute('number', number);
@@ -222,7 +228,7 @@ export const FullNumPad = {
         }
       });
     });
-    
+
     return container;
   },
-}; 
+};

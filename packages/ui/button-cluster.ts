@@ -1,8 +1,11 @@
 import { LitElement, html, css, type PropertyValues } from 'lit';
-import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+import {
+  validateProperties,
+  createStringLiteralValidationRule,
+} from './utils/validation.js';
 
 const DIRECTIONS = ['horizontal', 'vertical'] as const;
-type Direction = typeof DIRECTIONS[number];
+type Direction = (typeof DIRECTIONS)[number];
 
 export class BuiButtonCluster extends LitElement {
   static properties = {
@@ -20,15 +23,19 @@ export class BuiButtonCluster extends LitElement {
       :host {
         display: inline-flex;
       }
-      
+
       .cluster {
         display: flex;
         gap: 0;
       }
-      
-      .cluster.horizontal { flex-direction: row; }
-      .cluster.vertical { flex-direction: column; }
-    `
+
+      .cluster.horizontal {
+        flex-direction: row;
+      }
+      .cluster.vertical {
+        flex-direction: column;
+      }
+    `,
   ];
 
   constructor() {
@@ -79,11 +86,11 @@ export class BuiButtonCluster extends LitElement {
         }
       });
     }, 0);
-  }
+  };
 
   render() {
     const clusterClass = `cluster ${this.direction}`;
-    
+
     return html`
       <div class="${clusterClass}">
         <slot @slotchange="${this.updateClusterProps}"></slot>
@@ -95,5 +102,3 @@ export class BuiButtonCluster extends LitElement {
 if (!customElements.get('bui-button-cluster')) {
   customElements.define('bui-button-cluster', BuiButtonCluster);
 }
-
-

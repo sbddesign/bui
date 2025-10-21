@@ -33,7 +33,7 @@ function readFileSafe(filePath) {
 
 function buildClassToTagMap() {
   const map = {};
-  const jsFiles = fs.readdirSync(distDir).filter(f => f.endsWith('.js'));
+  const jsFiles = fs.readdirSync(distDir).filter((f) => f.endsWith('.js'));
   for (const file of jsFiles) {
     const content = readFileSafe(path.join(distDir, file));
     const regex = /customElements\.define\('(.*?)'\s*,\s*([A-Za-z0-9_]+)\)/g;
@@ -49,7 +49,8 @@ function buildClassToTagMap() {
 
 function parsePropsFromDts(content) {
   // Extract props from class instance fields (not static, not methods)
-  const classRegex = /export\s+declare\s+class\s+(\w+)\s+extends\s+LitElement\s*\{([\s\S]*?)\n\}/g;
+  const classRegex =
+    /export\s+declare\s+class\s+(\w+)\s+extends\s+LitElement\s*\{([\s\S]*?)\n\}/g;
   const results = [];
   let classMatch;
   while ((classMatch = classRegex.exec(content)) !== null) {
@@ -62,7 +63,12 @@ function parsePropsFromDts(content) {
       const name = propMatch[1];
       const type = propMatch[2].trim();
       // Skip obvious non-props and static property subfields
-      if (['validationRules', 'styles', 'type', 'attribute', 'reflect'].includes(name)) continue;
+      if (
+        ['validationRules', 'styles', 'type', 'attribute', 'reflect'].includes(
+          name
+        )
+      )
+        continue;
       if (type.includes('TemplateResult') || type.startsWith('(')) continue;
       props.push({ name, type });
     }
@@ -83,7 +89,7 @@ function generate() {
   ensureDir(typesDir);
   const classToTag = buildClassToTagMap();
   const dtsFiles = fs.existsSync(dtsDir)
-    ? fs.readdirSync(dtsDir).filter(f => f.endsWith('.d.ts'))
+    ? fs.readdirSync(dtsDir).filter((f) => f.endsWith('.d.ts'))
     : [];
 
   const tagToProps = new Map();
@@ -121,5 +127,3 @@ function generate() {
 }
 
 generate();
-
-

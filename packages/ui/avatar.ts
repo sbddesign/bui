@@ -1,12 +1,15 @@
 import { LitElement, html, css, type PropertyValues } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
+import {
+  validateProperties,
+  createStringLiteralValidationRule,
+} from './utils/validation.js';
 
 // Single source of truth: define the values once, derive everything else
 const AVATAR_SIZES = ['small', 'medium', 'large'] as const;
 
 // Type definitions automatically derived from the const arrays
-type AvatarSize = typeof AVATAR_SIZES[number];
+type AvatarSize = (typeof AVATAR_SIZES)[number];
 
 export class BuiAvatar extends LitElement {
   // Property declarations with types
@@ -80,7 +83,11 @@ export class BuiAvatar extends LitElement {
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, var(--gradient-color-1), var(--gradient-color-2));
+        background: linear-gradient(
+          135deg,
+          var(--gradient-color-1),
+          var(--gradient-color-2)
+        );
       }
 
       .avatar-initial {
@@ -88,7 +95,13 @@ export class BuiAvatar extends LitElement {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
         font-weight: 700;
         color: var(--white);
         text-align: center;
@@ -97,9 +110,15 @@ export class BuiAvatar extends LitElement {
       }
 
       /* Size variants */
-      .avatar-initial.small { font-size: 0.75rem; }
-      .avatar-initial.medium { font-size: 1rem; }
-      .avatar-initial.large { font-size: 1.5rem; }
+      .avatar-initial.small {
+        font-size: 0.75rem;
+      }
+      .avatar-initial.medium {
+        font-size: 1rem;
+      }
+      .avatar-initial.large {
+        font-size: 1.5rem;
+      }
 
       /* Responsive sizing */
       :host {
@@ -107,21 +126,21 @@ export class BuiAvatar extends LitElement {
         min-height: var(--size-8);
       }
 
-      :host([size="small"]) {
+      :host([size='small']) {
         min-width: var(--size-8);
         min-height: var(--size-8);
       }
 
-      :host([size="medium"]) {
+      :host([size='medium']) {
         min-width: var(--size-12);
         min-height: var(--size-12);
       }
 
-      :host([size="large"]) {
+      :host([size='large']) {
         min-width: var(--size-16);
         min-height: var(--size-16);
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -140,7 +159,10 @@ export class BuiAvatar extends LitElement {
   /**
    * Generates deterministic gradient colors based on input string
    */
-  private generateGradientColors(input: string): { color1: string; color2: string } {
+  private generateGradientColors(input: string): {
+    color1: string;
+    color2: string;
+  } {
     if (!input) {
       return { color1: '#00d5be', color2: '#e12afb' }; // Default colors from Figma
     }
@@ -149,7 +171,7 @@ export class BuiAvatar extends LitElement {
     let hash = 0;
     for (let i = 0; i < input.length; i++) {
       const char = input.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
 
@@ -177,27 +199,41 @@ export class BuiAvatar extends LitElement {
     const shouldShowInitial = !hasImage && hasText && this.showInitial;
 
     // Generate gradient colors if we have text but no image
-    const gradientColors = !hasImage && hasText && this.text ? this.generateGradientColors(this.text) : null;
+    const gradientColors =
+      !hasImage && hasText && this.text
+        ? this.generateGradientColors(this.text)
+        : null;
 
     return html`
       <div class="avatar-container">
         ${hasImage
           ? html`
               <picture class="avatar-image">
-                ${this.imageUrl2x ? html`<source media="(min-resolution: 2dppx)" srcset="${this.imageUrl2x}">` : ''}
+                ${this.imageUrl2x
+                  ? html`<source
+                      media="(min-resolution: 2dppx)"
+                      srcset="${this.imageUrl2x}"
+                    />`
+                  : ''}
                 <img src="${ifDefined(this.imageUrl)}" alt="Avatar" />
               </picture>
             `
           : hasText
             ? html`
-                <div class="avatar-gradient" style="--gradient-color-1: ${gradientColors?.color1}; --gradient-color-2: ${gradientColors?.color2};"></div>
+                <div
+                  class="avatar-gradient"
+                  style="--gradient-color-1: ${gradientColors?.color1}; --gradient-color-2: ${gradientColors?.color2};"
+                ></div>
                 ${shouldShowInitial
-                  ? html`<div class="avatar-initial ${this.size}">${this.getInitial(this.text)}</div>`
-                  : ''
-                }
+                  ? html`<div class="avatar-initial ${this.size}">
+                      ${this.getInitial(this.text)}
+                    </div>`
+                  : ''}
               `
-            : html`<div class="avatar-gradient" style="--gradient-color-1: #00d5be; --gradient-color-2: #e12afb;"></div>`
-        }
+            : html`<div
+                class="avatar-gradient"
+                style="--gradient-color-1: #00d5be; --gradient-color-2: #e12afb;"
+              ></div>`}
       </div>
     `;
   }
