@@ -9,8 +9,17 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 
 export default [
+  // Base configuration for all files
   {
     files: ['packages/**/*.{js,ts,tsx,svelte}'],
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/storybook-static/**',
+      '**/*.min.js',
+      '**/coverage/**',
+    ],
     languageOptions: {
       ecmaVersion: 12,
       sourceType: 'module',
@@ -26,26 +35,34 @@ export default [
     },
     plugins: {
       '@typescript-eslint': typescriptEslintPlugin,
-      react: reactPlugin,
-      'react-hooks': reactHooksPlugin,
       svelte: sveltePlugin,
       lit: litPlugin,
       prettier: prettierPlugin,
     },
-    settings: {
-      react: { version: 'detect' },
-    },
     rules: {
       ...js.configs.recommended.rules,
       ...typescriptEslintPlugin.configs.recommended.rules,
-      ...reactPlugin.configs.recommended.rules,
-      ...reactHooksPlugin.configs.recommended.rules,
       ...litPlugin.configs.recommended.rules,
       ...sveltePlugin.configs.recommended.rules,
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['error'],
+    },
+  },
+  // React-specific configuration
+  {
+    files: ['packages/**/*.{tsx,jsx}'],
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+    },
+    settings: {
+      react: { version: 'detect' },
+    },
+    rules: {
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
       'react/prop-types': 'off',
     },
   },
