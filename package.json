@@ -20,7 +20,10 @@
     "version:patch": "pnpm --filter @sbddesign/bui-tokens version patch && pnpm --filter @sbddesign/bui-icons version patch && pnpm --filter @sbddesign/bui-ui version patch",
     "version:minor": "pnpm --filter @sbddesign/bui-tokens version minor && pnpm --filter @sbddesign/bui-icons version minor && pnpm --filter @sbddesign/bui-ui version minor",
     "version:major": "pnpm --filter @sbddesign/bui-tokens version major && pnpm --filter @sbddesign/bui-icons version major && pnpm --filter @sbddesign/bui-ui version major",
-    "publish:dry-run": "pnpm build:all && pnpm --filter @sbddesign/bui-tokens publish --dry-run && pnpm --filter @sbddesign/bui-icons publish --dry-run && pnpm --filter @sbddesign/bui-ui publish --dry-run"
+    "publish:dry-run": "pnpm build:all && pnpm --filter @sbddesign/bui-tokens publish --dry-run && pnpm --filter @sbddesign/bui-icons publish --dry-run && pnpm --filter @sbddesign/bui-ui publish --dry-run",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,html,svelte}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx,json,css,html,svelte}\"",
+    "prepare": "husky"
   },
   "keywords": [
     "design-system",
@@ -29,5 +32,16 @@
   ],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-svelte": "^3.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,json,css,html,svelte}": [
+      "prettier --write"
+    ]
+  }
 }
