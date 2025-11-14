@@ -23,7 +23,7 @@
     "publish:dry-run": "pnpm build:all && pnpm --filter @sbddesign/bui-tokens publish --dry-run && pnpm --filter @sbddesign/bui-icons publish --dry-run && pnpm --filter @sbddesign/bui-ui publish --dry-run",
     "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,html,svelte}\"",
     "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx,json,css,html,svelte}\"",
-    "prepare": "husky"
+    "prepare": "node scripts/setup-husky.js"
   },
   "keywords": [
     "design-system",
