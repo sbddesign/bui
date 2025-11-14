@@ -9,6 +9,10 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "./dist/variables.css": "./dist/variables.css",
+    ".": "./dist/variables.css"
+  },
   "scripts": {
     "build": "node build.js",
     "convert:oklch": "node convert-oklch-to-hex.js",

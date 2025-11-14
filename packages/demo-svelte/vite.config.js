@@ -4,12 +4,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svelte()],
-  resolve: {
-    alias: {
-      '@sbddesign/bui-ui': '../../ui',
-      '@sbddesign/bui-tokens': '../../tokens'
-    }
-  },
+  // No aliases needed; rely on PNPM workspace resolution for local packages
   optimizeDeps: {
     include: ['lit']
   }
