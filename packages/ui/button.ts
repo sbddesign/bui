@@ -275,5 +275,3 @@ export class BuiButton extends LitElement {
 if (!customElements.get('bui-button')) {
   customElements.define('bui-button', BuiButton);
 }
-
-// Test commit hook
