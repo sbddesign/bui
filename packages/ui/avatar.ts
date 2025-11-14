@@ -6,7 +6,7 @@ import { validateProperties, createStringLiteralValidationRule } from './utils/v
 const AVATAR_SIZES = ['small', 'medium', 'large'] as const;
 
 // Type definitions automatically derived from the const arrays
-type AvatarSize = typeof AVATAR_SIZES[number];
+type AvatarSize = (typeof AVATAR_SIZES)[number];
 
 export class BuiAvatar extends LitElement {
   // Property declarations with types
@@ -34,9 +34,7 @@ export class BuiAvatar extends LitElement {
   declare size: AvatarSize;
 
   // Validation rules - automatically derived from the const arrays
-  private validationRules = [
-    createStringLiteralValidationRule(AVATAR_SIZES, 'size'),
-  ];
+  private validationRules = [createStringLiteralValidationRule(AVATAR_SIZES, 'size')];
 
   static styles = [
     css`
@@ -88,7 +86,13 @@ export class BuiAvatar extends LitElement {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
         font-weight: 700;
         color: var(--white);
         text-align: center;
@@ -97,9 +101,15 @@ export class BuiAvatar extends LitElement {
       }
 
       /* Size variants */
-      .avatar-initial.small { font-size: 0.75rem; }
-      .avatar-initial.medium { font-size: 1rem; }
-      .avatar-initial.large { font-size: 1.5rem; }
+      .avatar-initial.small {
+        font-size: 0.75rem;
+      }
+      .avatar-initial.medium {
+        font-size: 1rem;
+      }
+      .avatar-initial.large {
+        font-size: 1.5rem;
+      }
 
       /* Responsive sizing */
       :host {
@@ -107,21 +117,21 @@ export class BuiAvatar extends LitElement {
         min-height: var(--size-8);
       }
 
-      :host([size="small"]) {
+      :host([size='small']) {
         min-width: var(--size-8);
         min-height: var(--size-8);
       }
 
-      :host([size="medium"]) {
+      :host([size='medium']) {
         min-width: var(--size-12);
         min-height: var(--size-12);
       }
 
-      :host([size="large"]) {
+      :host([size='large']) {
         min-width: var(--size-16);
         min-height: var(--size-16);
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -149,7 +159,7 @@ export class BuiAvatar extends LitElement {
     let hash = 0;
     for (let i = 0; i < input.length; i++) {
       const char = input.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
 
@@ -177,27 +187,36 @@ export class BuiAvatar extends LitElement {
     const shouldShowInitial = !hasImage && hasText && this.showInitial;
 
     // Generate gradient colors if we have text but no image
-    const gradientColors = !hasImage && hasText && this.text ? this.generateGradientColors(this.text) : null;
+    const gradientColors =
+      !hasImage && hasText && this.text ? this.generateGradientColors(this.text) : null;
 
     return html`
       <div class="avatar-container">
         ${hasImage
           ? html`
               <picture class="avatar-image">
-                ${this.imageUrl2x ? html`<source media="(min-resolution: 2dppx)" srcset="${this.imageUrl2x}">` : ''}
+                ${this.imageUrl2x
+                  ? html`<source media="(min-resolution: 2dppx)" srcset="${this.imageUrl2x}" />`
+                  : ''}
                 <img src="${ifDefined(this.imageUrl)}" alt="Avatar" />
               </picture>
             `
           : hasText
             ? html`
-                <div class="avatar-gradient" style="--gradient-color-1: ${gradientColors?.color1}; --gradient-color-2: ${gradientColors?.color2};"></div>
+                <div
+                  class="avatar-gradient"
+                  style="--gradient-color-1: ${gradientColors?.color1}; --gradient-color-2: ${gradientColors?.color2};"
+                ></div>
                 ${shouldShowInitial
-                  ? html`<div class="avatar-initial ${this.size}">${this.getInitial(this.text)}</div>`
-                  : ''
-                }
+                  ? html`<div class="avatar-initial ${this.size}">
+                      ${this.getInitial(this.text)}
+                    </div>`
+                  : ''}
               `
-            : html`<div class="avatar-gradient" style="--gradient-color-1: #00d5be; --gradient-color-2: #e12afb;"></div>`
-        }
+            : html`<div
+                class="avatar-gradient"
+                style="--gradient-color-1: #00d5be; --gradient-color-2: #e12afb;"
+              ></div>`}
       </div>
     `;
   }
