@@ -12,6 +12,7 @@
     "storybook:build": "pnpm --filter @sbddesign/bui-ui build-storybook",
     "demo:react": "pnpm --filter @sbddesign/bui-demo-react dev",
     "demo:svelte": "pnpm --filter @sbddesign/bui-demo-svelte dev",
+    "demo:html": "pnpm --filter @sbddesign/bui-demo-html dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish:all": "pnpm build:all && pnpm --filter @sbddesign/bui-tokens publish && pnpm --filter @sbddesign/bui-icons publish && pnpm --filter @sbddesign/bui-ui publish",
     "publish:tokens": "pnpm --filter @sbddesign/bui-tokens publish",
