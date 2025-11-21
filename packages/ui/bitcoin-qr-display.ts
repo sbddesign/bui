@@ -2,9 +2,9 @@ import { LitElement, html, css } from 'lit';
 import type { PropertyValues } from 'lit';
 import './option-dot.js';
 import './button.js';
-import '@sbddesign/bui-icons/cycle/lg';
-import '@sbddesign/bui-icons/cycle/md';
-import '@sbddesign/bui-icons/checkCircle/lg';
+import '@sbddesign/bui-icons/cycle/lg.js';
+import '@sbddesign/bui-icons/cycle/md.js';
+import '@sbddesign/bui-icons/checkCircle/lg.js';
 import { QRCodeStyling } from '@liquid-js/qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';

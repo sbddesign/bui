@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sbddesign/bui-ui": "workspace:*"
+    "@sbddesign/bui-ui": "workspace:*",
+    "@sbddesign/bui-icons": "workspace:*"
   },
   "devDependencies": {
     "vite": "^7.0.4"
