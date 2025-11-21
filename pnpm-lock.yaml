@@ -23,6 +23,9 @@ importers:
 
   packages/demo-html:
     dependencies:
+      '@sbddesign/bui-icons':
+        specifier: workspace:*
+        version: link:../icons
       '@sbddesign/bui-ui':
         specifier: workspace:*
         version: link:../ui
@@ -33,6 +36,9 @@ importers:
 
   packages/demo-react:
     dependencies:
+      '@sbddesign/bui-icons':
+        specifier: workspace:*
+        version: link:../icons
       '@sbddesign/bui-ui':
         specifier: workspace:*
         version: link:../ui
@@ -82,6 +88,9 @@ importers:
 
   packages/demo-svelte:
     dependencies:
+      '@sbddesign/bui-icons':
+        specifier: workspace:*
+        version: link:../icons
       '@sbddesign/bui-ui':
         specifier: workspace:*
         version: link:../ui
