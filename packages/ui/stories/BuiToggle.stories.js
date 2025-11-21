@@ -18,7 +18,8 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'A toggle switch component that can be used to enable/disable features or settings. Supports two sizes and can be disabled.',
+        component:
+          'A toggle switch component that can be used to enable/disable features or settings. Supports two sizes and can be disabled.',
       },
     },
   },
@@ -78,7 +79,8 @@ export const Interactive = {
   parameters: {
     docs: {
       description: {
-        story: 'Click the toggle to see it switch between states. The component emits a "toggle" event when clicked.',
+        story:
+          'Click the toggle to see it switch between states. The component emits a "toggle" event when clicked.',
       },
     },
   },

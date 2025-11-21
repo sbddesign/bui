@@ -14,7 +14,7 @@ export class BuiNumPad extends LitElement {
         display: block;
         width: 100%;
       }
-      
+
       .numpad {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
@@ -22,28 +22,28 @@ export class BuiNumPad extends LitElement {
         width: 100%;
         max-width: 100%;
       }
-      
+
       /* Ensure minimum 3 columns */
       .numpad {
         grid-template-columns: repeat(3, 0fr);
         min-width: 372px; /* 3 * 124px */
         justify-content: center;
       }
-      
+
       /* Ensure buttons maintain their size */
       bui-numpad-button {
         width: 130px;
         height: 130px;
         justify-self: center;
       }
-      
+
       /* Container for responsive behavior */
       .numpad-container {
         display: flex;
         justify-content: center;
         width: 100%;
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -56,22 +56,18 @@ export class BuiNumPad extends LitElement {
       <div class="numpad-container">
         <div class="numpad">
           <!-- Number buttons 1-9 -->
-          ${this.renderNumberButton('1')}
-          ${this.renderNumberButton('2')}
-          ${this.renderNumberButton('3')}
-          ${this.renderNumberButton('4')}
-          ${this.renderNumberButton('5')}
-          ${this.renderNumberButton('6')}
-          ${this.renderNumberButton('7')}
-          ${this.renderNumberButton('8')}
+          ${this.renderNumberButton('1')} ${this.renderNumberButton('2')}
+          ${this.renderNumberButton('3')} ${this.renderNumberButton('4')}
+          ${this.renderNumberButton('5')} ${this.renderNumberButton('6')}
+          ${this.renderNumberButton('7')} ${this.renderNumberButton('8')}
           ${this.renderNumberButton('9')}
-          
+
           <!-- Period button -->
           ${this.renderNumberButton('.')}
-          
+
           <!-- Zero button -->
           ${this.renderNumberButton('0')}
-          
+
           <!-- Backspace button -->
           ${this.renderBackspaceButton()}
         </div>
@@ -81,20 +77,14 @@ export class BuiNumPad extends LitElement {
 
   private renderNumberButton(number: string) {
     return html`
-      <bui-numpad-button
-        number="${number}"
-        content="number"
-        ?disabled="${this.disabled}">
+      <bui-numpad-button number="${number}" content="number" ?disabled="${this.disabled}">
       </bui-numpad-button>
     `;
   }
 
   private renderBackspaceButton() {
     return html`
-      <bui-numpad-button
-        content="icon"
-        aria-label="Backspace"
-        ?disabled="${this.disabled}">
+      <bui-numpad-button content="icon" aria-label="Backspace" ?disabled="${this.disabled}">
         <bui-angle-left-lg slot="icon"></bui-angle-left-lg>
       </bui-numpad-button>
     `;

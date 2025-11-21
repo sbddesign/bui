@@ -1,11 +1,11 @@
 <script>
   import { onMount } from 'svelte';
-  
+
   // Import the button component and CSS
   import '@sbddesign/bui-ui/tokens.css';
   import '@sbddesign/bui-ui/button.js';
   import '@sbddesign/bui-ui/message.js';
-  
+
   onMount(() => {
     // Add Inter font if not already loaded
     if (!document.querySelector('link[href*="fonts.googleapis.com"]')) {
@@ -13,15 +13,16 @@
       link.rel = 'preconnect';
       link.href = 'https://fonts.googleapis.com';
       document.head.appendChild(link);
-      
+
       const link2 = document.createElement('link');
       link2.rel = 'preconnect';
       link2.href = 'https://fonts.gstatic.com';
       link2.crossOrigin = 'true';
       document.head.appendChild(link2);
-      
+
       const link3 = document.createElement('link');
-      link3.href = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
+      link3.href =
+        'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
       link3.rel = 'stylesheet';
       document.head.appendChild(link3);
     }
@@ -35,18 +36,10 @@
       <p>A simple bitcoin wallet</p>
       <div>
         <bui-message text="This is a message"></bui-message>
-        <bui-button
-          style-type="filled" 
-          size="large" 
-          label="Get Started"
-        ></bui-button>
+        <bui-button style-type="filled" size="large" label="Get Started"></bui-button>
       </div>
       <div>
-        <bui-button
-          style-type="outline" 
-          size="large" 
-          label="Restore Wallet"
-        ></bui-button>
+        <bui-button style-type="outline" size="large" label="Restore Wallet"></bui-button>
       </div>
     </div>
   </div>
@@ -60,7 +53,13 @@
   }
 
   :global(body) {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
@@ -86,14 +85,14 @@
   h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #2D2D2D;
+    color: #2d2d2d;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
   }
 
   p {
     font-size: 1.25rem;
-    color: #5C5C5C;
+    color: #5c5c5c;
     margin-bottom: 3rem;
     font-weight: 400;
     line-height: 1.6;
@@ -105,6 +104,12 @@
 
   /* Ensure web components inherit font */
   :global(bui-button) {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
   }
 </style>

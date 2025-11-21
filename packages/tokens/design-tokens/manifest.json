@@ -9,16 +9,12 @@
           "bui.themes.conduit-light.tokens.json",
           "bui.themes.conduit-dark.tokens.json"
         ],
-        "primitives": [
-          "bui.primitives.tokens.json"
-        ]
+        "primitives": ["bui.primitives.tokens.json"]
       }
     },
     "tailwind": {
       "modes": {
-        "primitives": [
-          "tailwind.primitives.Default.tokens.json"
-        ]
+        "primitives": ["tailwind.primitives.Default.tokens.json"]
       }
     }
   },

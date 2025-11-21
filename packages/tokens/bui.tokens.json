@@ -8,33 +8,33 @@
       "tailwind": {
         "color": {
           "white": {
-              "$value": "#ffffff",
-              "$type": "color"
+            "$value": "#ffffff",
+            "$type": "color"
           },
           "black": {
-              "$value": "#000000",
-              "$type": "color"
+            "$value": "#000000",
+            "$type": "color"
           },
           "orange": {
-              "$value": "#F89B2A",
-              "$type": "color"
+            "$value": "#F89B2A",
+            "$type": "color"
           },
           "neutral": {
             "2": {
-                "$value": "#2D2D2D",
-                "$type": "color"
+              "$value": "#2D2D2D",
+              "$type": "color"
             },
             "4": {
-                "$value": "#5C5C5C",
-                "$type": "color"
+              "$value": "#5C5C5C",
+              "$type": "color"
             },
             "5": {
-                "$value": "#787878",
-                "$type": "color"
+              "$value": "#787878",
+              "$type": "color"
             },
             "7": {
-                "$value": "#B0B0B0",
-                "$type": "color"
+              "$value": "#B0B0B0",
+              "$type": "color"
             }
           }
         }

@@ -21,11 +21,7 @@
     "inlineSourceMap": false,
     "inlineSources": false
   },
-  "include": [
-    "*.ts",
-    "stories/**/*.ts",
-    "stories/**/*.js"
-  ],
+  "include": ["*.ts", "stories/**/*.ts", "stories/**/*.js"],
   "exclude": [
     "node_modules",
     "dist",

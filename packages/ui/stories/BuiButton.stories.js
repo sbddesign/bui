@@ -9,7 +9,10 @@ export default {
   argTypes: {
     styleType: { control: { type: 'select' }, options: ['filled', 'outline', 'free'] },
     size: { control: { type: 'select' }, options: ['default', 'small', 'large'] },
-    content: { control: { type: 'select' }, options: ['label', 'icon', 'label+icon', 'icon+label'] },
+    content: {
+      control: { type: 'select' },
+      options: ['label', 'icon', 'label+icon', 'icon+label'],
+    },
     disabled: { control: 'boolean' },
     label: { control: 'text' },
     wide: { control: 'boolean' },
@@ -58,10 +61,10 @@ export const WithIcon = {
     button.setAttribute('label', args.label);
     button.setAttribute('size', args.size);
     if (args.disabled) button.setAttribute('disabled', '');
-    
+
     const icon = document.createElement('bui-arrow-left-lg');
     icon.setAttribute('slot', 'icon');
-    
+
     button.appendChild(icon);
     return button;
   },
@@ -78,10 +81,10 @@ export const IconOnly = {
     button.setAttribute('content', args.content);
     button.setAttribute('size', args.size);
     if (args.disabled) button.setAttribute('disabled', '');
-    
+
     const icon = document.createElement('bui-arrow-right-lg');
     icon.setAttribute('slot', 'icon');
-    
+
     button.appendChild(icon);
     return button;
   },
@@ -102,7 +105,6 @@ export const Small = {
     label: 'Small Button',
   },
 };
-
 
 export const Disabled = {
   args: {
@@ -139,23 +141,23 @@ export const AllStylesWithIcon = {
     container.style.display = 'flex';
     container.style.gap = '1rem';
     container.style.flexWrap = 'wrap';
-    
+
     const styles = ['filled', 'outline', 'free'];
-    
-    styles.forEach(styleType => {
+
+    styles.forEach((styleType) => {
       const button = document.createElement('bui-button');
       button.setAttribute('style-type', styleType);
       button.setAttribute('content', args.content);
       button.setAttribute('label', args.label);
       button.setAttribute('size', args.size);
-      
+
       const icon = document.createElement('bui-arrow-left-lg');
       icon.setAttribute('slot', 'icon');
-      
+
       button.appendChild(icon);
       container.appendChild(button);
     });
-    
+
     return container;
   },
 };
@@ -172,23 +174,23 @@ export const AllSizesWithIcon = {
     container.style.gap = '1rem';
     container.style.flexWrap = 'wrap';
     container.style.alignItems = 'center';
-    
+
     const sizes = ['small', 'default', 'large'];
-    
-    sizes.forEach(size => {
+
+    sizes.forEach((size) => {
       const button = document.createElement('bui-button');
       button.setAttribute('style-type', args.styleType);
       button.setAttribute('content', args.content);
       button.setAttribute('label', args.label);
       button.setAttribute('size', size);
-      
+
       const icon = document.createElement('bui-arrow-right-lg');
       icon.setAttribute('slot', 'icon');
-      
+
       button.appendChild(icon);
       container.appendChild(button);
     });
-    
+
     return container;
   },
 };
@@ -204,14 +206,14 @@ export const Wide = {
     container.style.width = '400px';
     container.style.border = '1px solid #ccc';
     container.style.padding = '1rem';
-    
+
     const button = document.createElement('bui-button');
     button.setAttribute('style-type', args.styleType);
     button.setAttribute('label', args.label);
     button.setAttribute('size', args.size);
     button.setAttribute('wide', args.wide);
     if (args.disabled) button.setAttribute('disabled', '');
-    
+
     container.appendChild(button);
     return container;
   },
@@ -229,7 +231,7 @@ export const WideWithIcon = {
     container.style.width = '400px';
     container.style.border = '1px solid #ccc';
     container.style.padding = '1rem';
-    
+
     const button = document.createElement('bui-button');
     button.setAttribute('style-type', args.styleType);
     button.setAttribute('content', args.content);
@@ -237,11 +239,11 @@ export const WideWithIcon = {
     button.setAttribute('size', args.size);
     button.setAttribute('wide', args.wide);
     if (args.disabled) button.setAttribute('disabled', '');
-    
+
     const icon = document.createElement('bui-arrow-right-lg');
     icon.setAttribute('slot', 'icon');
     button.appendChild(icon);
-    
+
     container.appendChild(button);
     return container;
   },

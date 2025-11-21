@@ -33,7 +33,7 @@ function readFileSafe(filePath) {
 
 function buildClassToTagMap() {
   const map = {};
-  const jsFiles = fs.readdirSync(distDir).filter(f => f.endsWith('.js'));
+  const jsFiles = fs.readdirSync(distDir).filter((f) => f.endsWith('.js'));
   for (const file of jsFiles) {
     const content = readFileSafe(path.join(distDir, file));
     const regex = /customElements\.define\('(.*?)'\s*,\s*([A-Za-z0-9_]+)\)/g;
@@ -83,7 +83,7 @@ function generate() {
   ensureDir(typesDir);
   const classToTag = buildClassToTagMap();
   const dtsFiles = fs.existsSync(dtsDir)
-    ? fs.readdirSync(dtsDir).filter(f => f.endsWith('.d.ts'))
+    ? fs.readdirSync(dtsDir).filter((f) => f.endsWith('.d.ts'))
     : [];
 
   const tagToProps = new Map();
@@ -121,5 +121,3 @@ function generate() {
 }
 
 generate();
-
-
