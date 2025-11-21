@@ -2,12 +2,7 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@sbddesign/bui-ui': '../../ui',
-      '@sbddesign/bui-tokens': '../../tokens',
-    },
-  },
+  // No aliases needed; rely on PNPM workspace resolution for local packages
   optimizeDeps: {
     include: ['lit'],
   },
