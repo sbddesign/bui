@@ -3,16 +3,28 @@ import './money-value.js';
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
 const FORMATS = ['sats', 'BTC', 'bip177'] as const;
-type BitcoinFormat = typeof FORMATS[number];
+type BitcoinFormat = (typeof FORMATS)[number];
 
 const SYMBOL_POSITIONS = ['left', 'right'] as const;
-type SymbolPosition = typeof SYMBOL_POSITIONS[number];
+type SymbolPosition = (typeof SYMBOL_POSITIONS)[number];
 
 const MONEY_SIZES = ['small', 'default', 'large', 'xlarge'] as const;
-type MoneySize = typeof MONEY_SIZES[number];
+type MoneySize = (typeof MONEY_SIZES)[number];
 
-const TEXT_SIZES = ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] as const;
-type TextSize = typeof TEXT_SIZES[number];
+const TEXT_SIZES = [
+  'base',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl',
+  '8xl',
+  '9xl',
+] as const;
+type TextSize = (typeof TEXT_SIZES)[number];
 
 export class BuiBitcoinValue extends LitElement {
   static properties = {
@@ -47,7 +59,7 @@ export class BuiBitcoinValue extends LitElement {
       :host {
         display: inline-block;
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -70,7 +82,11 @@ export class BuiBitcoinValue extends LitElement {
     return sats / 100000000;
   }
 
-  private getFormattedValue(): { symbol: string; amount: number; defaultSymbolPosition: SymbolPosition } {
+  private getFormattedValue(): {
+    symbol: string;
+    amount: number;
+    defaultSymbolPosition: SymbolPosition;
+  } {
     const sats = this.amount;
     switch (this.format) {
       case 'sats':
@@ -86,7 +102,7 @@ export class BuiBitcoinValue extends LitElement {
   render() {
     const formatted = this.getFormattedValue();
     const symbolPosition = this.symbolPosition || formatted.defaultSymbolPosition;
-    
+
     return html`
       <bui-money-value
         symbol="${formatted.symbol}"
@@ -105,5 +121,3 @@ export class BuiBitcoinValue extends LitElement {
 if (!customElements.get('bui-bitcoin-value')) {
   customElements.define('bui-bitcoin-value', BuiBitcoinValue);
 }
-
-
