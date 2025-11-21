@@ -28,7 +28,7 @@ export class BuiNumPadButton extends LitElement {
         width: 130px;
         height: 130px;
       }
-      
+
       button {
         width: 100%;
         height: 100%;
@@ -36,7 +36,13 @@ export class BuiNumPadButton extends LitElement {
         border-radius: 0;
         background: var(--component-numpad-bg, #ffffff);
         color: var(--text-secondary, #71717b);
-        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family:
+          'Outfit',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
         font-size: 48px;
         font-weight: bold;
         line-height: 1;
@@ -48,39 +54,39 @@ export class BuiNumPadButton extends LitElement {
         padding: 0;
         position: relative;
       }
-      
+
       button:hover {
         background: var(--component-numpad-hover-bg, #f4f4f5);
       }
-      
+
       button:active {
         background: var(--component-numpad-active-bg, #ffd6a7);
       }
-      
+
       button:disabled {
         opacity: 0.5;
         cursor: not-allowed;
       }
-      
+
       .number {
         font-size: 48px;
         font-weight: bold;
         line-height: 1;
         color: var(--text-secondary, #71717b);
       }
-      
+
       .icon {
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--text-secondary, #71717b);
       }
-      
+
       .icon ::slotted(*) {
         width: 36px;
         height: 36px;
       }
-    `
+    `,
   ];
 
   constructor() {
@@ -93,34 +99,34 @@ export class BuiNumPadButton extends LitElement {
 
   render() {
     return html`
-      <button 
+      <button
         ?disabled="${this.disabled}"
         aria-label="${ifDefined(this.ariaLabel ?? undefined)}"
-        @click="${this.handleClick}">
-        ${this.content === 'icon' 
+        @click="${this.handleClick}"
+      >
+        ${this.content === 'icon'
           ? html`<div class="icon"><slot name="icon"></slot></div>`
-          : html`<div class="number">${this.number}</div>`
-        }
+          : html`<div class="number">${this.number}</div>`}
       </button>
     `;
   }
 
   private handleClick = () => {
     if (!this.disabled) {
-      this.dispatchEvent(new CustomEvent<NumPadClickDetail>('numpad-click', {
-        detail: {
-          number: this.number,
-          content: this.content,
-        },
-        bubbles: true,
-        composed: true,
-      }));
+      this.dispatchEvent(
+        new CustomEvent<NumPadClickDetail>('numpad-click', {
+          detail: {
+            number: this.number,
+            content: this.content,
+          },
+          bubbles: true,
+          composed: true,
+        })
+      );
     }
-  }
+  };
 }
 
 if (!customElements.get('bui-numpad-button')) {
   customElements.define('bui-numpad-button', BuiNumPadButton);
 }
-
-

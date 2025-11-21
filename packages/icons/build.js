@@ -16,10 +16,10 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const createIconComponent = (iconName, size, svgContent) => {
   const className = `BuiIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}${size.charAt(0).toUpperCase() + size.slice(1)}`;
   const tagName = `bui-${iconName.replace(/([A-Z])/g, '-$1').toLowerCase()}-${size}`;
-  
+
   // Extract the inner content of the SVG (everything between <svg> tags)
   const innerContent = svgContent.replace(/<svg[^>]*>([\s\S]*)<\/svg>/i, '$1');
-  
+
   return `import { LitElement, html, css } from 'lit';
 
 export class ${className} extends LitElement {
@@ -54,13 +54,13 @@ export default ${className};
 const createIndexFile = (icons) => {
   const imports = [];
   const exports = [];
-  
+
   icons.forEach(({ iconName, size, className }) => {
     const importPath = `./${iconName}/${size}.js`;
     imports.push(`import { ${className} } from '${importPath}';`);
     exports.push(`export { ${className} };`);
   });
-  
+
   return `${imports.join('\n')}
 
 ${exports.join('\n')}
@@ -76,48 +76,48 @@ async function buildIcons() {
   try {
     // Ensure dist directory exists
     await fs.mkdir(DIST_DIR, { recursive: true });
-    
+
     const icons = [];
-    
+
     // Read all icon directories
     const iconDirs = await fs.readdir(SRC_DIR);
-    
+
     for (const iconDir of iconDirs) {
       const iconPath = path.join(SRC_DIR, iconDir);
       const stat = await fs.stat(iconPath);
-      
+
       if (!stat.isDirectory()) continue;
-      
+
       const iconName = iconDir;
       const iconDistDir = path.join(DIST_DIR, iconName);
       await fs.mkdir(iconDistDir, { recursive: true });
-      
+
       // Read all SVG files in the icon directory
       const files = await fs.readdir(iconPath);
-      const svgFiles = files.filter(file => file.endsWith('.svg'));
-      
+      const svgFiles = files.filter((file) => file.endsWith('.svg'));
+
       for (const svgFile of svgFiles) {
         const size = path.basename(svgFile, '.svg');
         const svgPath = path.join(iconPath, svgFile);
         const svgContent = await fs.readFile(svgPath, 'utf-8');
-        
+
         const className = `BuiIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}${size.charAt(0).toUpperCase() + size.slice(1)}`;
-        
+
         // Create the web component
         const componentCode = createIconComponent(iconName, size, svgContent);
         const componentPath = path.join(iconDistDir, `${size}.js`);
         await fs.writeFile(componentPath, componentCode);
-        
+
         icons.push({ iconName, size, className });
-        
+
         console.log(`✓ Generated ${iconName}/${size}.js`);
       }
     }
-    
+
     // Create index file
     const indexContent = createIndexFile(icons);
     await fs.writeFile(path.join(DIST_DIR, 'index.js'), indexContent);
-    
+
     console.log(`\n✓ Built ${icons.length} icon components`);
     console.log(`✓ Generated index.js with ${icons.length} exports`);
     
@@ -134,22 +134,22 @@ async function buildIcons() {
 // Watch mode
 async function watchIcons() {
   console.log('Watching for changes in src/svg...');
-  
+
   const watcher = chokidar.watch(SRC_DIR, {
     ignored: /(^|[\/\\])\../, // ignore dotfiles
-    persistent: true
+    persistent: true,
   });
-  
+
   watcher
-    .on('add', path => {
+    .on('add', (path) => {
       console.log(`File ${path} has been added`);
       buildIcons();
     })
-    .on('change', path => {
+    .on('change', (path) => {
       console.log(`File ${path} has been changed`);
       buildIcons();
     })
-    .on('unlink', path => {
+    .on('unlink', (path) => {
       console.log(`File ${path} has been removed`);
       buildIcons();
     });
@@ -164,4 +164,4 @@ if (isWatchMode) {
   watchIcons();
 } else {
   await buildIcons();
-} 
+}

@@ -4,8 +4,20 @@ import './bitcoin-value.js';
 import './button.js';
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
 
-const TEXT_SIZES = ['base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] as const;
-type TextSize = typeof TEXT_SIZES[number];
+const TEXT_SIZES = [
+  'base',
+  'lg',
+  'xl',
+  '2xl',
+  '3xl',
+  '4xl',
+  '5xl',
+  '6xl',
+  '7xl',
+  '8xl',
+  '9xl',
+] as const;
+type TextSize = (typeof TEXT_SIZES)[number];
 
 export interface AmountTileClickDetail {
   emoji: string;
@@ -30,10 +42,30 @@ export class BuiAmountOptionTile extends LitElement {
     showEmoji: { type: Boolean, attribute: 'show-emoji', reflect: true },
     showMessage: { type: Boolean, attribute: 'show-message', reflect: true },
     showSecondaryCurrency: { type: Boolean, attribute: 'show-secondary-currency', reflect: true },
-    bitcoinFirst: { type: Boolean, attribute: 'bitcoin-first', reflect: true, converter: booleanStringConverter },
-    custom: { type: Boolean, attribute: 'custom', reflect: true, converter: booleanStringConverter },
-    amountDefined: { type: Boolean, attribute: 'amount-defined', reflect: true, converter: booleanStringConverter },
-    selected: { type: Boolean, attribute: 'selected', reflect: true, converter: booleanStringConverter },
+    bitcoinFirst: {
+      type: Boolean,
+      attribute: 'bitcoin-first',
+      reflect: true,
+      converter: booleanStringConverter,
+    },
+    custom: {
+      type: Boolean,
+      attribute: 'custom',
+      reflect: true,
+      converter: booleanStringConverter,
+    },
+    amountDefined: {
+      type: Boolean,
+      attribute: 'amount-defined',
+      reflect: true,
+      converter: booleanStringConverter,
+    },
+    selected: {
+      type: Boolean,
+      attribute: 'selected',
+      reflect: true,
+      converter: booleanStringConverter,
+    },
     primaryAmount: { type: Number, attribute: 'primary-amount', reflect: true },
     primarySymbol: { type: String, attribute: 'primary-symbol', reflect: true },
     secondaryAmount: { type: Number, attribute: 'secondary-amount', reflect: true },
@@ -87,7 +119,7 @@ export class BuiAmountOptionTile extends LitElement {
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
         transition: all 0.1s ease;
         cursor: pointer;
-        min-height:224px;
+        min-height: 224px;
       }
 
       .tile:hover {
@@ -184,7 +216,12 @@ export class BuiAmountOptionTile extends LitElement {
     `;
   }
 
-  private renderContent(isSelected: boolean, isCustom: boolean, hasAmount: boolean, isBitcoinFirst: boolean) {
+  private renderContent(
+    isSelected: boolean,
+    isCustom: boolean,
+    hasAmount: boolean,
+    isBitcoinFirst: boolean
+  ) {
     if (isCustom && !hasAmount) {
       return html`<div class="custom-text">Custom Amount</div>`;
     }
@@ -278,20 +315,22 @@ export class BuiAmountOptionTile extends LitElement {
   }
 
   private handleClick = () => {
-    this.dispatchEvent(new CustomEvent<AmountTileClickDetail>('amount-tile-click', {
-      detail: {
-        emoji: this.emoji,
-        message: this.message,
-        primaryAmount: this.primaryAmount,
-        primarySymbol: this.primarySymbol,
-        secondaryAmount: this.secondaryAmount,
-        secondarySymbol: this.secondarySymbol,
-        custom: this.custom,
-        selected: this.selected,
-      },
-      bubbles: true,
-      composed: true,
-    }));
+    this.dispatchEvent(
+      new CustomEvent<AmountTileClickDetail>('amount-tile-click', {
+        detail: {
+          emoji: this.emoji,
+          message: this.message,
+          primaryAmount: this.primaryAmount,
+          primarySymbol: this.primarySymbol,
+          secondaryAmount: this.secondaryAmount,
+          secondarySymbol: this.secondarySymbol,
+          custom: this.custom,
+          selected: this.selected,
+        },
+        bubbles: true,
+        composed: true,
+      })
+    );
   };
 
   private handleKeydown = (e: KeyboardEvent) => {
@@ -305,5 +344,3 @@ export class BuiAmountOptionTile extends LitElement {
 if (!customElements.get('bui-amount-option-tile')) {
   customElements.define('bui-amount-option-tile', BuiAmountOptionTile);
 }
-
-

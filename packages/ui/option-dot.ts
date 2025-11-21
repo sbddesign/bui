@@ -67,14 +67,10 @@ export class BuiOptionDot extends LitElement {
   }
 
   render() {
-    return html`
-      <div class="option-dot ${this.active ? 'active' : ''}"></div>
-    `;
+    return html` <div class="option-dot ${this.active ? 'active' : ''}"></div> `;
   }
 }
 
 if (!customElements.get('bui-option-dot')) {
   customElements.define('bui-option-dot', BuiOptionDot);
 }
-
-

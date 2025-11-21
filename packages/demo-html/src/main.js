@@ -32,5 +32,3 @@ import '@sbddesign/bui-icons/angleLeft/lg.js'
 // secondary?.addEventListener('click', (e) => {
 //   console.log('secondary click', e.type)
 // })
-
-
