@@ -5,6 +5,7 @@ import {
   BuiButtonReact as BuiButton,
   BuiMessageReact as BuiMessage,
 } from '@sbddesign/bui-ui/react';
+import { BuiAngleLeftLgReact } from '@sbddesign/bui-icons/react';
 
 // TypeScript types for the button component
 type ButtonStyleType = 'filled' | 'outline' | 'free';
@@ -55,6 +56,9 @@ function App() {
         <p>A simple bitcoin wallet</p>
         <div>
           <BuiMessage text="This is a message" />
+          <BuiAngleLeftLgReact
+            style={{ width: '48px', height: '48px', color: 'var(--text-primary)' }}
+          />
           <BuiButton
             styleType={primaryButtonStyle}
             size={primaryButtonSize}
