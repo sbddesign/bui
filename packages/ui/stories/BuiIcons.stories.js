@@ -122,6 +122,7 @@ function createIconGrid(icons, size) {
     iconItem.style.display = 'flex';
     iconItem.style.flexDirection = 'column';
     iconItem.style.alignItems = 'center';
+    iconItem.style.justifyContent = 'center';
     iconItem.style.gap = '8px';
     iconItem.style.padding = '16px';
     iconItem.style.border = '1px solid var(--border-subtle, #e0e0e0)';
@@ -130,8 +131,15 @@ function createIconGrid(icons, size) {
 
     const kebabName = camelToKebab(iconName);
     const icon = document.createElement(`bui-${kebabName}-${size}`);
-    icon.style.width = '48px';
-    icon.style.height = '48px';
+
+    // Set icon size based on size variant
+    const iconSizes = {
+      sm: '12px',
+      md: '16px',
+      lg: '24px',
+    };
+    icon.style.width = iconSizes[size];
+    icon.style.height = iconSizes[size];
     icon.style.color = 'var(--text-primary, #000)';
 
     const label = document.createElement('div');
