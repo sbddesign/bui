@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 
 const SRC_DIR = path.join(__dirname, 'src', 'svg');
 const DIST_DIR = path.join(__dirname, 'dist');
+const PACKAGE_JSON_PATH = path.join(__dirname, 'package.json');
 
 // Web component template
 const createIconComponent = (iconName, size, svgContent, variant) => {
@@ -149,6 +150,9 @@ async function buildIcons() {
 
     // Generate React wrappers
     generateReactWrappers();
+
+    // Update package.json exports
+    await updatePackageExports(icons);
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
@@ -177,6 +181,39 @@ async function watchIcons() {
       console.log(`File ${path} has been removed`);
       buildIcons();
     });
+}
+
+// Update package.json exports
+async function updatePackageExports(icons) {
+  try {
+    const packageJsonContent = await fs.readFile(PACKAGE_JSON_PATH, 'utf-8');
+    const packageJson = JSON.parse(packageJsonContent);
+
+    // Build exports object
+    const exports = {
+      '.': './dist/index.js',
+      './react': {
+        types: './react.d.ts',
+        default: './react.js',
+      },
+    };
+
+    // Add exports for each icon variant and size
+    icons.forEach(({ iconName, size, variant }) => {
+      const exportPath = `./${iconName}/${variant}/${size}.js`;
+      const distPath = `./dist/${iconName}/${variant}/${size}.js`;
+      exports[exportPath] = distPath;
+    });
+
+    packageJson.exports = exports;
+
+    // Write updated package.json
+    await fs.writeFile(PACKAGE_JSON_PATH, JSON.stringify(packageJson, null, 2) + '\n', 'utf-8');
+    console.log(`✓ Updated package.json exports with ${icons.length} icon paths`);
+  } catch (error) {
+    console.error('Failed to update package.json exports:', error);
+    // Don't fail the build if package.json update fails
+  }
 }
 
 // Main execution

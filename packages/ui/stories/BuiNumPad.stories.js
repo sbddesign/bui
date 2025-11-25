@@ -1,5 +1,5 @@
 import '../numpad.js';
-import '../../icons/dist/angleLeft/lg.js';
+import '../../icons/dist/angleLeft/outline/lg.js';
 
 export default {
   title: 'BUI/NumPad',
