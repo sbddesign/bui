@@ -125,9 +125,9 @@ function createIconGrid(icons, size) {
     iconItem.style.justifyContent = 'center';
     iconItem.style.gap = '8px';
     iconItem.style.padding = '16px';
-    iconItem.style.border = '1px solid var(--border-subtle, #e0e0e0)';
+    iconItem.style.border = '1px solid var(--system-divider)';
     iconItem.style.borderRadius = '8px';
-    iconItem.style.backgroundColor = 'var(--background-subtle, #f5f5f5)';
+    iconItem.style.backgroundColor = 'var(--system-placeholder)';
 
     const kebabName = camelToKebab(iconName);
     const icon = document.createElement(`bui-${kebabName}-${size}`);
@@ -140,12 +140,12 @@ function createIconGrid(icons, size) {
     };
     icon.style.width = iconSizes[size];
     icon.style.height = iconSizes[size];
-    icon.style.color = 'var(--text-primary, #000)';
+    icon.style.color = 'var(--text-primary)';
 
     const label = document.createElement('div');
     label.textContent = `${iconName} (${size})`;
     label.style.fontSize = '12px';
-    label.style.color = 'var(--text-secondary, #666)';
+    label.style.color = 'var(--text-secondary)';
     label.style.textAlign = 'center';
     label.style.wordBreak = 'break-word';
 
@@ -169,7 +169,7 @@ export const SmallIcons = {
     title.style.margin = '0';
     title.style.fontSize = '24px';
     title.style.fontWeight = '600';
-    title.style.color = 'var(--text-primary, #000)';
+    title.style.color = 'var(--text-primary)';
 
     wrapper.appendChild(title);
     wrapper.appendChild(createIconGrid(iconGroups.sm, 'sm'));
@@ -190,7 +190,7 @@ export const MediumIcons = {
     title.style.margin = '0';
     title.style.fontSize = '24px';
     title.style.fontWeight = '600';
-    title.style.color = 'var(--text-primary, #000)';
+    title.style.color = 'var(--text-primary)';
 
     wrapper.appendChild(title);
     wrapper.appendChild(createIconGrid(iconGroups.md, 'md'));
@@ -211,7 +211,7 @@ export const LargeIcons = {
     title.style.margin = '0';
     title.style.fontSize = '24px';
     title.style.fontWeight = '600';
-    title.style.color = 'var(--text-primary, #000)';
+    title.style.color = 'var(--text-primary)';
 
     wrapper.appendChild(title);
     wrapper.appendChild(createIconGrid(iconGroups.lg, 'lg'));
@@ -232,7 +232,7 @@ export const AllIcons = {
     mainTitle.style.margin = '0';
     mainTitle.style.fontSize = '32px';
     mainTitle.style.fontWeight = '700';
-    mainTitle.style.color = 'var(--text-primary, #000)';
+    mainTitle.style.color = 'var(--text-primary)';
     mainTitle.style.marginBottom = '16px';
 
     wrapper.appendChild(mainTitle);
