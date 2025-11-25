@@ -20,6 +20,10 @@ const createIconComponent = (iconName, size, svgContent) => {
   // Extract the inner content of the SVG (everything between <svg> tags)
   const innerContent = svgContent.replace(/<svg[^>]*>([\s\S]*)<\/svg>/i, '$1');
 
+  // Extract the viewBox from the source SVG, default to "0 0 24 24" if not found
+  const viewBoxMatch = svgContent.match(/viewBox=["']([^"']+)["']/i);
+  const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+
   return `import { LitElement, html, css } from 'lit';
 
 export class ${className} extends LitElement {
@@ -37,7 +41,7 @@ export class ${className} extends LitElement {
 
   render() {
     return html\`
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="${viewBox}">
         ${innerContent}
       </svg>
     \`;
