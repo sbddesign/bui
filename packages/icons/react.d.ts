@@ -263,4 +263,4 @@ export declare const BuiWarningLgReact: React.ComponentType<
     onClick?: (e: Event) => void;
   }
 >;
-export {}
+export {};

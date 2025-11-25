@@ -6,7 +6,7 @@
   import '@sbddesign/bui-ui/button.js';
   import '@sbddesign/bui-ui/message.js';
   import '@sbddesign/bui-icons/angleLeft/lg.js';
-  
+
   onMount(() => {
     // Add Inter font if not already loaded
     if (!document.querySelector('link[href*="fonts.googleapis.com"]')) {
@@ -37,12 +37,9 @@
       <p>A simple bitcoin wallet</p>
       <div>
         <bui-message text="This is a message"></bui-message>
-        <bui-angle-left-lg style="width: 48px; height: 48px; color: var(--text-primary);"></bui-angle-left-lg>
-        <bui-button
-          style-type="filled" 
-          size="large" 
-          label="Get Started"
-        ></bui-button>
+        <bui-angle-left-lg style="width: 48px; height: 48px; color: var(--text-primary);"
+        ></bui-angle-left-lg>
+        <bui-button style-type="filled" size="large" label="Get Started"></bui-button>
       </div>
       <div>
         <bui-button style-type="outline" size="large" label="Restore Wallet"></bui-button>

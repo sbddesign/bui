@@ -1,93 +1,113 @@
 import React from 'react';
-import {createComponent} from '@lit/react';
+import { createComponent } from '@lit/react';
 import * as __mod_0 from './dist/angleDown/lg.js';
-const __BuiIconAngleDownLg_resolved_0 = (__mod_0 && (__mod_0.BuiIconAngleDownLg ?? __mod_0.default));
+const __BuiIconAngleDownLg_resolved_0 = __mod_0 && (__mod_0.BuiIconAngleDownLg ?? __mod_0.default);
 import * as __mod_1 from './dist/angleDown/md.js';
-const __BuiIconAngleDownMd_resolved_1 = (__mod_1 && (__mod_1.BuiIconAngleDownMd ?? __mod_1.default));
+const __BuiIconAngleDownMd_resolved_1 = __mod_1 && (__mod_1.BuiIconAngleDownMd ?? __mod_1.default);
 import * as __mod_2 from './dist/angleDown/sm.js';
-const __BuiIconAngleDownSm_resolved_2 = (__mod_2 && (__mod_2.BuiIconAngleDownSm ?? __mod_2.default));
+const __BuiIconAngleDownSm_resolved_2 = __mod_2 && (__mod_2.BuiIconAngleDownSm ?? __mod_2.default);
 import * as __mod_3 from './dist/angleLeft/lg.js';
-const __BuiIconAngleLeftLg_resolved_3 = (__mod_3 && (__mod_3.BuiIconAngleLeftLg ?? __mod_3.default));
+const __BuiIconAngleLeftLg_resolved_3 = __mod_3 && (__mod_3.BuiIconAngleLeftLg ?? __mod_3.default);
 import * as __mod_4 from './dist/angleLeft/md.js';
-const __BuiIconAngleLeftMd_resolved_4 = (__mod_4 && (__mod_4.BuiIconAngleLeftMd ?? __mod_4.default));
+const __BuiIconAngleLeftMd_resolved_4 = __mod_4 && (__mod_4.BuiIconAngleLeftMd ?? __mod_4.default);
 import * as __mod_5 from './dist/angleLeft/sm.js';
-const __BuiIconAngleLeftSm_resolved_5 = (__mod_5 && (__mod_5.BuiIconAngleLeftSm ?? __mod_5.default));
+const __BuiIconAngleLeftSm_resolved_5 = __mod_5 && (__mod_5.BuiIconAngleLeftSm ?? __mod_5.default);
 import * as __mod_6 from './dist/angleRight/lg.js';
-const __BuiIconAngleRightLg_resolved_6 = (__mod_6 && (__mod_6.BuiIconAngleRightLg ?? __mod_6.default));
+const __BuiIconAngleRightLg_resolved_6 =
+  __mod_6 && (__mod_6.BuiIconAngleRightLg ?? __mod_6.default);
 import * as __mod_7 from './dist/angleRight/md.js';
-const __BuiIconAngleRightMd_resolved_7 = (__mod_7 && (__mod_7.BuiIconAngleRightMd ?? __mod_7.default));
+const __BuiIconAngleRightMd_resolved_7 =
+  __mod_7 && (__mod_7.BuiIconAngleRightMd ?? __mod_7.default);
 import * as __mod_8 from './dist/angleRight/sm.js';
-const __BuiIconAngleRightSm_resolved_8 = (__mod_8 && (__mod_8.BuiIconAngleRightSm ?? __mod_8.default));
+const __BuiIconAngleRightSm_resolved_8 =
+  __mod_8 && (__mod_8.BuiIconAngleRightSm ?? __mod_8.default);
 import * as __mod_9 from './dist/angleUp/lg.js';
-const __BuiIconAngleUpLg_resolved_9 = (__mod_9 && (__mod_9.BuiIconAngleUpLg ?? __mod_9.default));
+const __BuiIconAngleUpLg_resolved_9 = __mod_9 && (__mod_9.BuiIconAngleUpLg ?? __mod_9.default);
 import * as __mod_10 from './dist/angleUp/md.js';
-const __BuiIconAngleUpMd_resolved_10 = (__mod_10 && (__mod_10.BuiIconAngleUpMd ?? __mod_10.default));
+const __BuiIconAngleUpMd_resolved_10 = __mod_10 && (__mod_10.BuiIconAngleUpMd ?? __mod_10.default);
 import * as __mod_11 from './dist/angleUp/sm.js';
-const __BuiIconAngleUpSm_resolved_11 = (__mod_11 && (__mod_11.BuiIconAngleUpSm ?? __mod_11.default));
+const __BuiIconAngleUpSm_resolved_11 = __mod_11 && (__mod_11.BuiIconAngleUpSm ?? __mod_11.default);
 import * as __mod_12 from './dist/arrowDown/lg.js';
-const __BuiIconArrowDownLg_resolved_12 = (__mod_12 && (__mod_12.BuiIconArrowDownLg ?? __mod_12.default));
+const __BuiIconArrowDownLg_resolved_12 =
+  __mod_12 && (__mod_12.BuiIconArrowDownLg ?? __mod_12.default);
 import * as __mod_13 from './dist/arrowDown/md.js';
-const __BuiIconArrowDownMd_resolved_13 = (__mod_13 && (__mod_13.BuiIconArrowDownMd ?? __mod_13.default));
+const __BuiIconArrowDownMd_resolved_13 =
+  __mod_13 && (__mod_13.BuiIconArrowDownMd ?? __mod_13.default);
 import * as __mod_14 from './dist/arrowDown/sm.js';
-const __BuiIconArrowDownSm_resolved_14 = (__mod_14 && (__mod_14.BuiIconArrowDownSm ?? __mod_14.default));
+const __BuiIconArrowDownSm_resolved_14 =
+  __mod_14 && (__mod_14.BuiIconArrowDownSm ?? __mod_14.default);
 import * as __mod_15 from './dist/arrowLeft/lg.js';
-const __BuiIconArrowLeftLg_resolved_15 = (__mod_15 && (__mod_15.BuiIconArrowLeftLg ?? __mod_15.default));
+const __BuiIconArrowLeftLg_resolved_15 =
+  __mod_15 && (__mod_15.BuiIconArrowLeftLg ?? __mod_15.default);
 import * as __mod_16 from './dist/arrowLeft/md.js';
-const __BuiIconArrowLeftMd_resolved_16 = (__mod_16 && (__mod_16.BuiIconArrowLeftMd ?? __mod_16.default));
+const __BuiIconArrowLeftMd_resolved_16 =
+  __mod_16 && (__mod_16.BuiIconArrowLeftMd ?? __mod_16.default);
 import * as __mod_17 from './dist/arrowLeft/sm.js';
-const __BuiIconArrowLeftSm_resolved_17 = (__mod_17 && (__mod_17.BuiIconArrowLeftSm ?? __mod_17.default));
+const __BuiIconArrowLeftSm_resolved_17 =
+  __mod_17 && (__mod_17.BuiIconArrowLeftSm ?? __mod_17.default);
 import * as __mod_18 from './dist/arrowRight/lg.js';
-const __BuiIconArrowRightLg_resolved_18 = (__mod_18 && (__mod_18.BuiIconArrowRightLg ?? __mod_18.default));
+const __BuiIconArrowRightLg_resolved_18 =
+  __mod_18 && (__mod_18.BuiIconArrowRightLg ?? __mod_18.default);
 import * as __mod_19 from './dist/arrowRight/md.js';
-const __BuiIconArrowRightMd_resolved_19 = (__mod_19 && (__mod_19.BuiIconArrowRightMd ?? __mod_19.default));
+const __BuiIconArrowRightMd_resolved_19 =
+  __mod_19 && (__mod_19.BuiIconArrowRightMd ?? __mod_19.default);
 import * as __mod_20 from './dist/arrowRight/sm.js';
-const __BuiIconArrowRightSm_resolved_20 = (__mod_20 && (__mod_20.BuiIconArrowRightSm ?? __mod_20.default));
+const __BuiIconArrowRightSm_resolved_20 =
+  __mod_20 && (__mod_20.BuiIconArrowRightSm ?? __mod_20.default);
 import * as __mod_21 from './dist/arrowUp/lg.js';
-const __BuiIconArrowUpLg_resolved_21 = (__mod_21 && (__mod_21.BuiIconArrowUpLg ?? __mod_21.default));
+const __BuiIconArrowUpLg_resolved_21 = __mod_21 && (__mod_21.BuiIconArrowUpLg ?? __mod_21.default);
 import * as __mod_22 from './dist/arrowUp/md.js';
-const __BuiIconArrowUpMd_resolved_22 = (__mod_22 && (__mod_22.BuiIconArrowUpMd ?? __mod_22.default));
+const __BuiIconArrowUpMd_resolved_22 = __mod_22 && (__mod_22.BuiIconArrowUpMd ?? __mod_22.default);
 import * as __mod_23 from './dist/arrowUp/sm.js';
-const __BuiIconArrowUpSm_resolved_23 = (__mod_23 && (__mod_23.BuiIconArrowUpSm ?? __mod_23.default));
+const __BuiIconArrowUpSm_resolved_23 = __mod_23 && (__mod_23.BuiIconArrowUpSm ?? __mod_23.default);
 import * as __mod_24 from './dist/bitcoin/lg.js';
-const __BuiIconBitcoinLg_resolved_24 = (__mod_24 && (__mod_24.BuiIconBitcoinLg ?? __mod_24.default));
+const __BuiIconBitcoinLg_resolved_24 = __mod_24 && (__mod_24.BuiIconBitcoinLg ?? __mod_24.default);
 import * as __mod_25 from './dist/bitcoin/md.js';
-const __BuiIconBitcoinMd_resolved_25 = (__mod_25 && (__mod_25.BuiIconBitcoinMd ?? __mod_25.default));
+const __BuiIconBitcoinMd_resolved_25 = __mod_25 && (__mod_25.BuiIconBitcoinMd ?? __mod_25.default);
 import * as __mod_26 from './dist/checkCircle/lg.js';
-const __BuiIconCheckCircleLg_resolved_26 = (__mod_26 && (__mod_26.BuiIconCheckCircleLg ?? __mod_26.default));
+const __BuiIconCheckCircleLg_resolved_26 =
+  __mod_26 && (__mod_26.BuiIconCheckCircleLg ?? __mod_26.default);
 import * as __mod_27 from './dist/checkCircle/md.js';
-const __BuiIconCheckCircleMd_resolved_27 = (__mod_27 && (__mod_27.BuiIconCheckCircleMd ?? __mod_27.default));
+const __BuiIconCheckCircleMd_resolved_27 =
+  __mod_27 && (__mod_27.BuiIconCheckCircleMd ?? __mod_27.default);
 import * as __mod_28 from './dist/clipboard/lg.js';
-const __BuiIconClipboardLg_resolved_28 = (__mod_28 && (__mod_28.BuiIconClipboardLg ?? __mod_28.default));
+const __BuiIconClipboardLg_resolved_28 =
+  __mod_28 && (__mod_28.BuiIconClipboardLg ?? __mod_28.default);
 import * as __mod_29 from './dist/crossCircle/lg.js';
-const __BuiIconCrossCircleLg_resolved_29 = (__mod_29 && (__mod_29.BuiIconCrossCircleLg ?? __mod_29.default));
+const __BuiIconCrossCircleLg_resolved_29 =
+  __mod_29 && (__mod_29.BuiIconCrossCircleLg ?? __mod_29.default);
 import * as __mod_30 from './dist/crossCircle/md.js';
-const __BuiIconCrossCircleMd_resolved_30 = (__mod_30 && (__mod_30.BuiIconCrossCircleMd ?? __mod_30.default));
+const __BuiIconCrossCircleMd_resolved_30 =
+  __mod_30 && (__mod_30.BuiIconCrossCircleMd ?? __mod_30.default);
 import * as __mod_31 from './dist/cycle/lg.js';
-const __BuiIconCycleLg_resolved_31 = (__mod_31 && (__mod_31.BuiIconCycleLg ?? __mod_31.default));
+const __BuiIconCycleLg_resolved_31 = __mod_31 && (__mod_31.BuiIconCycleLg ?? __mod_31.default);
 import * as __mod_32 from './dist/cycle/md.js';
-const __BuiIconCycleMd_resolved_32 = (__mod_32 && (__mod_32.BuiIconCycleMd ?? __mod_32.default));
+const __BuiIconCycleMd_resolved_32 = __mod_32 && (__mod_32.BuiIconCycleMd ?? __mod_32.default);
 import * as __mod_33 from './dist/cycle/sm.js';
-const __BuiIconCycleSm_resolved_33 = (__mod_33 && (__mod_33.BuiIconCycleSm ?? __mod_33.default));
+const __BuiIconCycleSm_resolved_33 = __mod_33 && (__mod_33.BuiIconCycleSm ?? __mod_33.default);
 import * as __mod_34 from './dist/lightning/lg.js';
-const __BuiIconLightningLg_resolved_34 = (__mod_34 && (__mod_34.BuiIconLightningLg ?? __mod_34.default));
+const __BuiIconLightningLg_resolved_34 =
+  __mod_34 && (__mod_34.BuiIconLightningLg ?? __mod_34.default);
 import * as __mod_35 from './dist/lightning/md.js';
-const __BuiIconLightningMd_resolved_35 = (__mod_35 && (__mod_35.BuiIconLightningMd ?? __mod_35.default));
+const __BuiIconLightningMd_resolved_35 =
+  __mod_35 && (__mod_35.BuiIconLightningMd ?? __mod_35.default);
 import * as __mod_36 from './dist/lightning/sm.js';
-const __BuiIconLightningSm_resolved_36 = (__mod_36 && (__mod_36.BuiIconLightningSm ?? __mod_36.default));
+const __BuiIconLightningSm_resolved_36 =
+  __mod_36 && (__mod_36.BuiIconLightningSm ?? __mod_36.default);
 import * as __mod_37 from './dist/scan/lg.js';
-const __BuiIconScanLg_resolved_37 = (__mod_37 && (__mod_37.BuiIconScanLg ?? __mod_37.default));
+const __BuiIconScanLg_resolved_37 = __mod_37 && (__mod_37.BuiIconScanLg ?? __mod_37.default);
 import * as __mod_38 from './dist/scan/md.js';
-const __BuiIconScanMd_resolved_38 = (__mod_38 && (__mod_38.BuiIconScanMd ?? __mod_38.default));
+const __BuiIconScanMd_resolved_38 = __mod_38 && (__mod_38.BuiIconScanMd ?? __mod_38.default);
 import * as __mod_39 from './dist/scan/sm.js';
-const __BuiIconScanSm_resolved_39 = (__mod_39 && (__mod_39.BuiIconScanSm ?? __mod_39.default));
+const __BuiIconScanSm_resolved_39 = __mod_39 && (__mod_39.BuiIconScanSm ?? __mod_39.default);
 import * as __mod_40 from './dist/search/lg.js';
-const __BuiIconSearchLg_resolved_40 = (__mod_40 && (__mod_40.BuiIconSearchLg ?? __mod_40.default));
+const __BuiIconSearchLg_resolved_40 = __mod_40 && (__mod_40.BuiIconSearchLg ?? __mod_40.default);
 import * as __mod_41 from './dist/search/md.js';
-const __BuiIconSearchMd_resolved_41 = (__mod_41 && (__mod_41.BuiIconSearchMd ?? __mod_41.default));
+const __BuiIconSearchMd_resolved_41 = __mod_41 && (__mod_41.BuiIconSearchMd ?? __mod_41.default);
 import * as __mod_42 from './dist/search/sm.js';
-const __BuiIconSearchSm_resolved_42 = (__mod_42 && (__mod_42.BuiIconSearchSm ?? __mod_42.default));
+const __BuiIconSearchSm_resolved_42 = __mod_42 && (__mod_42.BuiIconSearchSm ?? __mod_42.default);
 import * as __mod_43 from './dist/warning/lg.js';
-const __BuiIconWarningLg_resolved_43 = (__mod_43 && (__mod_43.BuiIconWarningLg ?? __mod_43.default));
+const __BuiIconWarningLg_resolved_43 = __mod_43 && (__mod_43.BuiIconWarningLg ?? __mod_43.default);
 
 export const BuiAngleDownLgReact = createComponent({
   tagName: 'bui-angle-down-lg',

@@ -120,16 +120,14 @@ async function buildIcons() {
 
     console.log(`\n✓ Built ${icons.length} icon components`);
     console.log(`✓ Generated index.js with ${icons.length} exports`);
-    
+
     // Generate React wrappers
     generateReactWrappers();
-    
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
   }
 }
-
 
 // Watch mode
 async function watchIcons() {
