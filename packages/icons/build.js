@@ -13,9 +13,10 @@ const SRC_DIR = path.join(__dirname, 'src', 'svg');
 const DIST_DIR = path.join(__dirname, 'dist');
 
 // Web component template
-const createIconComponent = (iconName, size, svgContent) => {
-  const className = `BuiIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}${size.charAt(0).toUpperCase() + size.slice(1)}`;
-  const tagName = `bui-${iconName.replace(/([A-Z])/g, '-$1').toLowerCase()}-${size}`;
+const createIconComponent = (iconName, size, svgContent, variant) => {
+  const variantCapitalized = variant.charAt(0).toUpperCase() + variant.slice(1);
+  const className = `BuiIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}${variantCapitalized}${size.charAt(0).toUpperCase() + size.slice(1)}`;
+  const tagName = `bui-${iconName.replace(/([A-Z])/g, '-$1').toLowerCase()}-${variant}-${size}`;
 
   // Extract the inner content of the SVG (everything between <svg> tags)
   const innerContent = svgContent.replace(/<svg[^>]*>([\s\S]*)<\/svg>/i, '$1');
@@ -23,6 +24,11 @@ const createIconComponent = (iconName, size, svgContent) => {
   // Extract the viewBox from the source SVG, default to "0 0 24 24" if not found
   const viewBoxMatch = svgContent.match(/viewBox=["']([^"']+)["']/i);
   const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+
+  // For solid icons, the SVG should have fill="currentColor", for outline it should be fill="none"
+  // Check if the source SVG has fill="currentColor" on the SVG element
+  const hasFillCurrentColor = svgContent.match(/<svg[^>]*fill=["']currentColor["'][^>]*>/i);
+  const svgFill = hasFillCurrentColor ? 'currentColor' : 'none';
 
   return `import { LitElement, html, css } from 'lit';
 
@@ -41,7 +47,7 @@ export class ${className} extends LitElement {
 
   render() {
     return html\`
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="${viewBox}">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="${svgFill}" viewBox="${viewBox}">
         ${innerContent}
       </svg>
     \`;
@@ -59,8 +65,8 @@ const createIndexFile = (icons) => {
   const imports = [];
   const exports = [];
 
-  icons.forEach(({ iconName, size, className }) => {
-    const importPath = `./${iconName}/${size}.js`;
+  icons.forEach(({ iconName, size, variant, className }) => {
+    const importPath = `./${iconName}/${variant}/${size}.js`;
     imports.push(`import { ${className} } from '${importPath}';`);
     exports.push(`export { ${className} };`);
   });
@@ -71,7 +77,7 @@ ${exports.join('\n')}
 
 // Export all icons as a map for programmatic access
 export const icons = {
-${icons.map(({ iconName, size, className }) => `  '${iconName}-${size}': ${className}`).join(',\n')}
+${icons.map(({ iconName, size, variant, className }) => `  '${iconName}-${variant}-${size}': ${className}`).join(',\n')}
 };
 `;
 };
@@ -83,38 +89,54 @@ async function buildIcons() {
 
     const icons = [];
 
-    // Read all icon directories
-    const iconDirs = await fs.readdir(SRC_DIR);
+    // Process both outline and solid variants
+    const variants = ['outline', 'solid'];
 
-    for (const iconDir of iconDirs) {
-      const iconPath = path.join(SRC_DIR, iconDir);
-      const stat = await fs.stat(iconPath);
+    for (const variant of variants) {
+      const variantPath = path.join(SRC_DIR, variant);
 
-      if (!stat.isDirectory()) continue;
+      // Check if variant directory exists
+      try {
+        await fs.access(variantPath);
+      } catch {
+        // Variant directory doesn't exist, skip it
+        continue;
+      }
 
-      const iconName = iconDir;
-      const iconDistDir = path.join(DIST_DIR, iconName);
-      await fs.mkdir(iconDistDir, { recursive: true });
+      // Read all icon directories in the variant directory
+      const iconDirs = await fs.readdir(variantPath);
 
-      // Read all SVG files in the icon directory
-      const files = await fs.readdir(iconPath);
-      const svgFiles = files.filter((file) => file.endsWith('.svg'));
+      for (const iconDir of iconDirs) {
+        const iconPath = path.join(variantPath, iconDir);
+        const stat = await fs.stat(iconPath);
 
-      for (const svgFile of svgFiles) {
-        const size = path.basename(svgFile, '.svg');
-        const svgPath = path.join(iconPath, svgFile);
-        const svgContent = await fs.readFile(svgPath, 'utf-8');
+        if (!stat.isDirectory()) continue;
 
-        const className = `BuiIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}${size.charAt(0).toUpperCase() + size.slice(1)}`;
+        const iconName = iconDir;
+        const iconDistDir = path.join(DIST_DIR, iconName, variant);
+        await fs.mkdir(iconDistDir, { recursive: true });
 
-        // Create the web component
-        const componentCode = createIconComponent(iconName, size, svgContent);
-        const componentPath = path.join(iconDistDir, `${size}.js`);
-        await fs.writeFile(componentPath, componentCode);
+        // Read all SVG files in the icon directory
+        const files = await fs.readdir(iconPath);
+        const svgFiles = files.filter((file) => file.endsWith('.svg'));
 
-        icons.push({ iconName, size, className });
+        for (const svgFile of svgFiles) {
+          const size = path.basename(svgFile, '.svg');
+          const svgPath = path.join(iconPath, svgFile);
+          const svgContent = await fs.readFile(svgPath, 'utf-8');
 
-        console.log(`✓ Generated ${iconName}/${size}.js`);
+          const variantCapitalized = variant.charAt(0).toUpperCase() + variant.slice(1);
+          const className = `BuiIcon${iconName.charAt(0).toUpperCase() + iconName.slice(1)}${variantCapitalized}${size.charAt(0).toUpperCase() + size.slice(1)}`;
+
+          // Create the web component
+          const componentCode = createIconComponent(iconName, size, svgContent, variant);
+          const componentPath = path.join(iconDistDir, `${size}.js`);
+          await fs.writeFile(componentPath, componentCode);
+
+          icons.push({ iconName, size, variant, className });
+
+          console.log(`✓ Generated ${iconName}/${variant}/${size}.js`);
+        }
       }
     }
 
