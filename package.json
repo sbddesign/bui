@@ -43,6 +43,12 @@
   "lint-staged": {
     "*.{js,ts,jsx,tsx,json,css,html,svelte}": [
       "prettier --write"
+    ],
+    "packages/ui/**/*.{ts,js}": [
+      "eslint --fix"
+    ],
+    "packages/icons/**/*.js": [
+      "eslint --fix"
     ]
   }
 }
