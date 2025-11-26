@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import './numpad-button.js';
+import '@sbddesign/bui-icons/angleLeft/outline/lg.js';
 
 export class BuiNumPad extends LitElement {
   static properties = {
@@ -85,7 +86,7 @@ export class BuiNumPad extends LitElement {
   private renderBackspaceButton() {
     return html`
       <bui-numpad-button content="icon" aria-label="Backspace" ?disabled="${this.disabled}">
-        <bui-angle-left-lg slot="icon"></bui-angle-left-lg>
+        <bui-angle-left-outline-lg slot="icon"></bui-angle-left-outline-lg>
       </bui-numpad-button>
     `;
   }

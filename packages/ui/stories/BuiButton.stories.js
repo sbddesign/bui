@@ -1,6 +1,6 @@
 import '../button.js';
-import '../../icons/dist/arrowRight/lg.js';
-import '../../icons/dist/arrowLeft/lg.js';
+import '../../icons/dist/arrowRight/outline/lg.js';
+import '../../icons/dist/arrowLeft/outline/lg.js';
 
 export default {
   title: 'BUI/Button',
@@ -62,7 +62,7 @@ export const WithIcon = {
     button.setAttribute('size', args.size);
     if (args.disabled) button.setAttribute('disabled', '');
 
-    const icon = document.createElement('bui-arrow-left-lg');
+    const icon = document.createElement('bui-arrow-left-outline-lg');
     icon.setAttribute('slot', 'icon');
 
     button.appendChild(icon);
@@ -82,7 +82,7 @@ export const IconOnly = {
     button.setAttribute('size', args.size);
     if (args.disabled) button.setAttribute('disabled', '');
 
-    const icon = document.createElement('bui-arrow-right-lg');
+    const icon = document.createElement('bui-arrow-right-outline-lg');
     icon.setAttribute('slot', 'icon');
 
     button.appendChild(icon);
@@ -151,7 +151,7 @@ export const AllStylesWithIcon = {
       button.setAttribute('label', args.label);
       button.setAttribute('size', args.size);
 
-      const icon = document.createElement('bui-arrow-left-lg');
+      const icon = document.createElement('bui-arrow-left-outline-lg');
       icon.setAttribute('slot', 'icon');
 
       button.appendChild(icon);
@@ -184,7 +184,7 @@ export const AllSizesWithIcon = {
       button.setAttribute('label', args.label);
       button.setAttribute('size', size);
 
-      const icon = document.createElement('bui-arrow-right-lg');
+      const icon = document.createElement('bui-arrow-right-outline-lg');
       icon.setAttribute('slot', 'icon');
 
       button.appendChild(icon);
@@ -240,7 +240,7 @@ export const WideWithIcon = {
     button.setAttribute('wide', args.wide);
     if (args.disabled) button.setAttribute('disabled', '');
 
-    const icon = document.createElement('bui-arrow-right-lg');
+    const icon = document.createElement('bui-arrow-right-outline-lg');
     icon.setAttribute('slot', 'icon');
     button.appendChild(icon);
 

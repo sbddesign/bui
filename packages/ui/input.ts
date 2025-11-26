@@ -182,6 +182,9 @@ export class BuiInput extends LitElement {
       .message-container.neutral .message {
         color: var(--system-mood-neutral-text);
       }
+      .icon.neutral {
+        color: var(--system-mood-neutral);
+      }
 
       .input-field.caution {
         border-color: var(--system-mood-caution);
@@ -191,6 +194,9 @@ export class BuiInput extends LitElement {
       }
       .message-container.caution .message {
         color: var(--system-mood-caution-text);
+      }
+      .icon.caution {
+        color: var(--system-mood-caution);
       }
 
       .input-field.danger {
@@ -202,6 +208,9 @@ export class BuiInput extends LitElement {
       .message-container.danger .message {
         color: var(--system-mood-danger-text);
       }
+      .icon.danger {
+        color: var(--system-mood-danger);
+      }
 
       .input-field.success {
         border-color: var(--system-mood-success);
@@ -211,6 +220,9 @@ export class BuiInput extends LitElement {
       }
       .message-container.success .message {
         color: var(--system-mood-success-text);
+      }
+      .icon.success {
+        color: var(--system-mood-success);
       }
 
       /* Focus styles */
@@ -308,6 +320,7 @@ export class BuiInput extends LitElement {
   render() {
     const inputClasses = `input-field ${this.size} ${this.mood}`;
     const messageClasses = `message-container ${this.size} ${this.mood}`;
+    const iconClasses = `icon ${this.mood}`;
 
     return html`
       <div class="input-container">
@@ -318,7 +331,7 @@ export class BuiInput extends LitElement {
             <div class="input-content">
               ${this.showIconLeft
                 ? html`
-                    <div class="icon">
+                    <div class="${iconClasses}">
                       <slot name="icon-left"></slot>
                     </div>
                   `

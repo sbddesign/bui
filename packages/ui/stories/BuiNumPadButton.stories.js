@@ -1,14 +1,14 @@
 import '../numpad-button.js';
-import '../../icons/dist/arrowLeft/lg.js';
-import '../../icons/dist/arrowRight/lg.js';
-import '../../icons/dist/arrowUp/lg.js';
-import '../../icons/dist/arrowDown/lg.js';
-import '../../icons/dist/search/lg.js';
-import '../../icons/dist/checkCircle/lg.js';
-import '../../icons/dist/crossCircle/lg.js';
-import '../../icons/dist/scan/lg.js';
-import '../../icons/dist/clipboard/lg.js';
-import '../../icons/dist/warning/lg.js';
+import '../../icons/dist/arrowLeft/outline/lg.js';
+import '../../icons/dist/arrowRight/outline/lg.js';
+import '../../icons/dist/arrowUp/outline/lg.js';
+import '../../icons/dist/arrowDown/outline/lg.js';
+import '../../icons/dist/search/outline/lg.js';
+import '../../icons/dist/checkCircle/outline/lg.js';
+import '../../icons/dist/crossCircle/outline/lg.js';
+import '../../icons/dist/scan/outline/lg.js';
+import '../../icons/dist/clipboard/outline/lg.js';
+import '../../icons/dist/warning/outline/lg.js';
 
 export default {
   title: 'BUI/NumPad Button',
@@ -68,7 +68,7 @@ export const WithIcon = {
     button.setAttribute('content', args.content);
     if (args.disabled) button.setAttribute('disabled', '');
 
-    const icon = document.createElement('bui-arrow-left-lg');
+    const icon = document.createElement('bui-arrow-left-outline-lg');
     icon.setAttribute('slot', 'icon');
 
     button.appendChild(icon);
@@ -88,15 +88,15 @@ export const IconButtons = {
     container.style.maxWidth = '450px';
 
     const icons = [
-      'bui-arrow-left-lg',
-      'bui-arrow-right-lg',
-      'bui-arrow-up-lg',
-      'bui-arrow-down-lg',
-      'bui-search-lg',
-      'bui-check-circle-lg',
-      'bui-cross-circle-lg',
-      'bui-scan-lg',
-      'bui-clipboard-lg',
+      'bui-arrow-left-outline-lg',
+      'bui-arrow-right-outline-lg',
+      'bui-arrow-up-outline-lg',
+      'bui-arrow-down-outline-lg',
+      'bui-search-outline-lg',
+      'bui-check-circle-outline-lg',
+      'bui-cross-circle-outline-lg',
+      'bui-scan-outline-lg',
+      'bui-clipboard-outline-lg',
     ];
 
     icons.forEach((iconName) => {
@@ -133,7 +133,7 @@ export const DisabledIcon = {
     button.setAttribute('content', args.content);
     button.setAttribute('disabled', '');
 
-    const icon = document.createElement('bui-arrow-left-lg');
+    const icon = document.createElement('bui-arrow-left-outline-lg');
     icon.setAttribute('slot', 'icon');
 
     button.appendChild(icon);

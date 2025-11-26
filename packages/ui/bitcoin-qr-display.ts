@@ -2,9 +2,9 @@ import { LitElement, html, css } from 'lit';
 import type { PropertyValues } from 'lit';
 import './option-dot.js';
 import './button.js';
-import '@sbddesign/bui-icons/cycle/lg.js';
-import '@sbddesign/bui-icons/cycle/md.js';
-import '@sbddesign/bui-icons/checkCircle/lg.js';
+import '@sbddesign/bui-icons/cycle/outline/lg.js';
+import '@sbddesign/bui-icons/cycle/outline/md.js';
+import '@sbddesign/bui-icons/checkCircle/outline/lg.js';
 import { QRCodeStyling } from '@liquid-js/qr-code-styling';
 
 import { validateProperties, createStringLiteralValidationRule } from './utils/validation.js';
@@ -610,7 +610,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
           aria-label="Cycle QR format"
           @click=${() => this.cycleOption()}
         >
-          <bui-cycle-md slot="icon"></bui-cycle-md>
+          <bui-cycle-outline-md slot="icon"></bui-cycle-outline-md>
         </bui-button>
       </div>
     `;
@@ -649,7 +649,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
           <div class="qr complete-qr" style="${qrInlineStyle}">
             <div class="complete-content">
               <div class="complete-icon">
-                <bui-check-circle-lg></bui-check-circle-lg>
+                <bui-check-circle-outline-lg></bui-check-circle-outline-lg>
               </div>
               <p class="complete-text">Payment Received</p>
             </div>
