@@ -10,7 +10,6 @@ const distDir = path.join(rootDir, 'dist');
 const dtsDir = path.join(rootDir, 'types', 'defs');
 const typesDir = path.join(rootDir, 'types');
 const outTypesFile = path.join(typesDir, 'react-jsx.d.ts');
-const outRootFile = path.join(rootDir, 'react.d.ts');
 
 function toKebabCase(input) {
   return input

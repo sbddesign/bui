@@ -10,7 +10,6 @@ const distDir = path.join(rootDir, 'dist');
 const outJs = path.join(rootDir, 'react.js');
 const outDts = path.join(rootDir, 'react.d.ts');
 const manifestPathJson = path.join(rootDir, 'wrappers.manifest.json');
-const manifestPathTs = path.join(rootDir, 'wrappers.manifest.ts');
 const dtsDir = path.join(rootDir, 'types', 'defs');
 
 function read(file) {
@@ -87,7 +86,9 @@ function loadManifest() {
     if (fs.existsSync(manifestPathJson)) {
       return JSON.parse(read(manifestPathJson));
     }
-  } catch {}
+  } catch {
+    // Ignore parse errors, return empty manifest
+  }
   return {};
 }
 
