@@ -209,7 +209,7 @@ export const LargeCluster = {
       { label: 'Last', icon: 'bui-arrow-right-lg', cluster: 'right' },
     ];
 
-    buttons.forEach((btn, index) => {
+    buttons.forEach((btn, _index) => {
       const button = document.createElement('bui-button');
       button.setAttribute('style-type', 'filled');
       button.setAttribute('content', btn.icon ? 'label+icon' : 'label');
@@ -245,7 +245,7 @@ export const VerticalLarge = {
       { label: 'Bottom', icon: 'bui-arrow-down-lg', cluster: 'bottom' },
     ];
 
-    buttons.forEach((btn, index) => {
+    buttons.forEach((btn, _index) => {
       const button = document.createElement('bui-button');
       button.setAttribute('style-type', 'outline');
       button.setAttribute('content', btn.icon ? 'label+icon' : 'label');

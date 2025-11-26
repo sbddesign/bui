@@ -360,7 +360,7 @@ export const ComplexMessages = {
             <span> before continuing.</span>
           `;
           break;
-        case 'icon':
+        case 'icon': {
           const icon = document.createElement('bui-warning-lg');
           icon.style.width = '24px';
           icon.style.height = '24px';
@@ -371,6 +371,7 @@ export const ComplexMessages = {
           message.innerHTML = 'This field requires attention.';
           message.appendChild(icon);
           break;
+        }
         case 'mixed':
           message.innerHTML = `
             <div><strong>Success!</strong><br /><br /></div>
