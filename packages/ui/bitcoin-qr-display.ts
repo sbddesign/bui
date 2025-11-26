@@ -402,11 +402,23 @@ export class BuiBitcoinQrDisplay extends LitElement {
     const qrData = this.getQrData();
 
     // Start with minimal configuration
-    const config: any = {
+    const config = {
       data: qrData,
       dotsOptions: {
         color: this.dotColor,
-        type: this.dotType,
+        type: this.dotType as
+          | 'dot'
+          | 'random-dot'
+          | 'rounded'
+          | 'extra-rounded'
+          | 'vertical-line'
+          | 'horizontal-line'
+          | 'classy'
+          | 'classy-rounded'
+          | 'square'
+          | 'small-square'
+          | 'tiny-square'
+          | 'diamond',
         size: 10,
       },
       backgroundOptions: {
@@ -418,7 +430,7 @@ export class BuiBitcoinQrDisplay extends LitElement {
         mode: 'byte',
         errorCorrectionLevel: this.showImage ? 'H' : 'Q',
       },
-    };
+    } satisfies ConstructorParameters<typeof QRCodeStyling>[0];
 
     // Images will be handled manually with CSS overlay
 
