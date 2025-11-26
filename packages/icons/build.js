@@ -164,7 +164,7 @@ async function watchIcons() {
   console.log('Watching for changes in src/svg...');
 
   const watcher = chokidar.watch(SRC_DIR, {
-    ignored: /(^|[\/\\])\../, // ignore dotfiles
+    ignored: /(^|[/\\])\../, // ignore dotfiles
     persistent: true,
   });
 
