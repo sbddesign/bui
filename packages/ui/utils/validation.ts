@@ -1,21 +1,24 @@
 import type { PropertyValues } from 'lit';
+import type { LitElement } from 'lit';
 
 // Type for validation rules
 export interface ValidationRule {
   property: string;
-  validValues: readonly any[];
+  validValues: readonly unknown[];
   message?: string;
 }
 
 // Validation utility function
-export function validateProperties(
-  component: any,
-  changedProperties: PropertyValues<any>,
+export function validateProperties<T extends LitElement>(
+  component: T,
+  changedProperties: PropertyValues<T>,
   validationRules: ValidationRule[]
 ): void {
   for (const rule of validationRules) {
-    if (changedProperties.has(rule.property)) {
-      const value = component[rule.property];
+    const propertyKey = rule.property as keyof T;
+    // PropertyValues is a Map-like type, cast to access has() with dynamic keys
+    if ((changedProperties as Map<PropertyKey, unknown>).has(propertyKey)) {
+      const value = component[propertyKey];
       if (value !== undefined && value !== null && !rule.validValues.includes(value)) {
         const message =
           rule.message ||
@@ -29,7 +32,7 @@ export function validateProperties(
 // Helper function to create validation rules from type arrays
 export function createValidationRule<T>(
   property: PropertyKey,
-  validValues: readonly any[],
+  validValues: readonly unknown[],
   message?: string
 ): ValidationRule {
   return {
@@ -40,15 +43,17 @@ export function createValidationRule<T>(
 }
 
 // NEW: Type-safe validation that automatically derives valid values
-export function validateEnum<T extends Record<string, any>>(
-  component: any,
-  changedProperties: PropertyValues<any>,
-  enumType: T,
+export function validateEnum<TEnum extends Record<string, unknown>, TComponent extends LitElement>(
+  component: TComponent,
+  changedProperties: PropertyValues<TComponent>,
+  enumType: TEnum,
   property: PropertyKey,
   message?: string
 ): void {
-  if (changedProperties.has(String(property))) {
-    const value = component[property as keyof typeof component];
+  const propertyKey = String(property) as keyof TComponent;
+  // PropertyValues is a Map-like type, cast to access has() with dynamic keys
+  if ((changedProperties as Map<PropertyKey, unknown>).has(propertyKey)) {
+    const value = component[propertyKey];
     const validValues = Object.values(enumType);
     if (value !== undefined && value !== null && !validValues.includes(value)) {
       const errorMessage =
@@ -60,7 +65,7 @@ export function validateEnum<T extends Record<string, any>>(
 }
 
 // NEW: Create validation rule from enum type
-export function createEnumValidationRule<T extends Record<string, any>>(
+export function createEnumValidationRule<T extends Record<string, unknown>>(
   enumType: T,
   property: PropertyKey,
   message?: string
@@ -73,15 +78,17 @@ export function createEnumValidationRule<T extends Record<string, any>>(
 }
 
 // NEW: Validate string literal union types using const assertions
-export function validateStringLiteral<T extends readonly string[]>(
-  component: any,
-  changedProperties: PropertyValues<any>,
+export function validateStringLiteral<T extends readonly string[], TComponent extends LitElement>(
+  component: TComponent,
+  changedProperties: PropertyValues<TComponent>,
   validValues: T,
-  property: keyof any,
+  property: PropertyKey,
   message?: string
 ): void {
-  if (changedProperties.has(String(property))) {
-    const value = component[property];
+  const propertyKey = String(property) as keyof TComponent;
+  // PropertyValues is a Map-like type, cast to access has() with dynamic keys
+  if ((changedProperties as Map<PropertyKey, unknown>).has(propertyKey)) {
+    const value = component[propertyKey];
     if (value !== undefined && value !== null && !validValues.includes(value as T[number])) {
       const errorMessage =
         message ||
@@ -94,12 +101,12 @@ export function validateStringLiteral<T extends readonly string[]>(
 // NEW: Create validation rule from string literal array
 export function createStringLiteralValidationRule<T extends readonly string[]>(
   validValues: T,
-  property: keyof any,
+  property: PropertyKey,
   message?: string
 ): ValidationRule {
   return {
     property: String(property),
-    validValues: validValues as readonly any[],
+    validValues: validValues as readonly unknown[],
     message,
   };
 }
