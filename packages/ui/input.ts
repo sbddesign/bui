@@ -285,8 +285,8 @@ export class BuiInput extends LitElement {
     }
   };
 
-  updated(changedProperties: Map<string | number | symbol, unknown>): void {
-    super.updated(changedProperties as any);
+  updated(changedProperties: PropertyValues<this>): void {
+    super.updated(changedProperties);
     const messageSlot = this.shadowRoot?.querySelector('slot[name="message"]');
     const messageContainer = this.shadowRoot?.querySelector(
       '.message-container'
