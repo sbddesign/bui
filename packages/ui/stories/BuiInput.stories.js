@@ -371,7 +371,6 @@ export const ComplexMessages = {
           message.innerHTML = 'This field requires attention.';
           message.appendChild(icon);
           break;
-        }
         case 'mixed':
           message.innerHTML = `
             <div><strong>Success!</strong><br /><br /></div>
