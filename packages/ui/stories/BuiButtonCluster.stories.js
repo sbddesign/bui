@@ -1,9 +1,9 @@
 import '../button-cluster.js';
 import '../button.js';
-import '../../icons/dist/arrowLeft/lg.js';
-import '../../icons/dist/arrowRight/lg.js';
-import '../../icons/dist/search/lg.js';
-import '../../icons/dist/checkCircle/lg.js';
+import '../../icons/dist/arrowLeft/outline/lg.js';
+import '../../icons/dist/arrowRight/outline/lg.js';
+import '../../icons/dist/search/outline/lg.js';
+import '../../icons/dist/checkCircle/outline/lg.js';
 
 export default {
   title: 'BUI/Button Cluster',
@@ -31,7 +31,7 @@ export const Horizontal = {
     button1.setAttribute('content', 'label+icon');
     button1.setAttribute('label', 'Back');
     button1.setAttribute('cluster', 'left');
-    const icon1 = document.createElement('bui-arrow-left-lg');
+    const icon1 = document.createElement('bui-arrow-left-outline-lg');
     icon1.setAttribute('slot', 'icon');
     button1.appendChild(icon1);
 
@@ -46,7 +46,7 @@ export const Horizontal = {
     button3.setAttribute('content', 'label+icon');
     button3.setAttribute('label', 'Next');
     button3.setAttribute('cluster', 'right');
-    const icon3 = document.createElement('bui-arrow-right-lg');
+    const icon3 = document.createElement('bui-arrow-right-outline-lg');
     icon3.setAttribute('slot', 'icon');
     button3.appendChild(icon3);
 
@@ -73,7 +73,7 @@ export const Vertical = {
     button1.setAttribute('label', 'Option 1');
     button1.setAttribute('cluster', 'top');
     button1.setAttribute('wide', 'true');
-    const icon1 = document.createElement('bui-search-lg');
+    const icon1 = document.createElement('bui-search-outline-lg');
     icon1.setAttribute('slot', 'icon');
     button1.appendChild(icon1);
 
@@ -90,7 +90,7 @@ export const Vertical = {
     button3.setAttribute('label', 'Option 3');
     button3.setAttribute('cluster', 'bottom');
     button3.setAttribute('wide', 'true');
-    const icon3 = document.createElement('bui-check-circle-lg');
+    const icon3 = document.createElement('bui-check-circle-outline-lg');
     icon3.setAttribute('slot', 'icon');
     button3.appendChild(icon3);
 
@@ -116,7 +116,7 @@ export const MixedStyles = {
     button1.setAttribute('content', 'icon');
     button1.setAttribute('size', 'large');
     button1.setAttribute('cluster', 'left');
-    const icon1 = document.createElement('bui-arrow-left-lg');
+    const icon1 = document.createElement('bui-arrow-left-outline-lg');
     icon1.setAttribute('slot', 'icon');
     button1.appendChild(icon1);
 
@@ -132,7 +132,7 @@ export const MixedStyles = {
     button3.setAttribute('content', 'icon');
     button3.setAttribute('size', 'large');
     button3.setAttribute('cluster', 'right');
-    const icon3 = document.createElement('bui-arrow-right-lg');
+    const icon3 = document.createElement('bui-arrow-right-outline-lg');
     icon3.setAttribute('slot', 'icon');
     button3.appendChild(icon3);
 
@@ -156,7 +156,7 @@ export const SingleButton = {
     button.setAttribute('style-type', 'filled');
     button.setAttribute('content', 'label+icon');
     button.setAttribute('label', 'Single Button');
-    const icon = document.createElement('bui-check-circle-lg');
+    const icon = document.createElement('bui-check-circle-outline-lg');
     icon.setAttribute('slot', 'icon');
     button.appendChild(icon);
 
@@ -202,11 +202,11 @@ export const LargeCluster = {
     cluster.setAttribute('direction', args.direction);
 
     const buttons = [
-      { label: 'First', icon: 'bui-arrow-left-lg', cluster: 'left' },
+      { label: 'First', icon: 'bui-arrow-left-outline-lg', cluster: 'left' },
       { label: 'Second', icon: null, cluster: 'middle-horizontal' },
       { label: 'Third', icon: null, cluster: 'middle-horizontal' },
       { label: 'Fourth', icon: null, cluster: 'middle-horizontal' },
-      { label: 'Last', icon: 'bui-arrow-right-lg', cluster: 'right' },
+      { label: 'Last', icon: 'bui-arrow-right-outline-lg', cluster: 'right' },
     ];
 
     buttons.forEach((btn, index) => {
@@ -238,11 +238,11 @@ export const VerticalLarge = {
     cluster.setAttribute('direction', args.direction);
 
     const buttons = [
-      { label: 'Top', icon: 'bui-arrow-up-lg', cluster: 'top' },
+      { label: 'Top', icon: 'bui-arrow-up-outline-lg', cluster: 'top' },
       { label: 'Middle 1', icon: null, cluster: 'middle-vertical' },
       { label: 'Middle 2', icon: null, cluster: 'middle-vertical' },
       { label: 'Middle 3', icon: null, cluster: 'middle-vertical' },
-      { label: 'Bottom', icon: 'bui-arrow-down-lg', cluster: 'bottom' },
+      { label: 'Bottom', icon: 'bui-arrow-down-outline-lg', cluster: 'bottom' },
     ];
 
     buttons.forEach((btn, index) => {

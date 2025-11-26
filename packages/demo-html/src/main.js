@@ -2,7 +2,7 @@
 import '@sbddesign/bui-ui/tokens.css';
 import '@sbddesign/bui-ui/button.js';
 import '@sbddesign/bui-ui/message.js';
-import '@sbddesign/bui-icons/angleLeft/lg.js';
+import '@sbddesign/bui-icons/angleLeft/outline/lg.js';
 
 // // Wire up demo interactions
 // const htmlEl = document.documentElement

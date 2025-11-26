@@ -1,9 +1,9 @@
 import '../input.js';
-import '../../icons/dist/search/lg.js';
-import '../../icons/dist/scan/lg.js';
-import '../../icons/dist/crossCircle/lg.js';
-import '../../icons/dist/checkCircle/lg.js';
-import '../../icons/dist/warning/lg.js';
+import '../../icons/dist/search/outline/lg.js';
+import '../../icons/dist/scan/outline/lg.js';
+import '../../icons/dist/crossCircle/outline/lg.js';
+import '../../icons/dist/checkCircle/outline/lg.js';
+import '../../icons/dist/warning/outline/lg.js';
 
 export default {
   title: 'BUI/Input',
@@ -159,24 +159,24 @@ export const WithIcons = {
         placeholder: 'Search...',
         showIconLeft: true,
         showIconRight: false,
-        iconLeft: 'search-lg',
+        iconLeft: 'search-outline-lg',
       },
       {
         label: 'Scan Input',
         placeholder: 'Scan QR code...',
         showIconLeft: true,
         showIconRight: true,
-        iconLeft: 'scan-lg',
-        iconRight: 'crossCircle-lg',
+        iconLeft: 'scan-outline-lg',
+        iconRight: 'cross-circle-outline-lg',
         iconRightAction: 'clear',
       },
       {
         label: 'Success Input',
         placeholder: 'Enter valid data...',
         mood: 'success',
-        showIconLeft: false,
-        showIconRight: true,
-        iconRight: 'checkCircle-lg',
+        showIconLeft: true,
+        showIconRight: false,
+        iconLeft: 'check-circle-outline-lg',
       },
     ];
 
@@ -361,7 +361,7 @@ export const ComplexMessages = {
           `;
           break;
         case 'icon':
-          const icon = document.createElement('bui-warning-lg');
+          const icon = document.createElement('bui-warning-outline-lg');
           icon.style.width = '24px';
           icon.style.height = '24px';
           icon.style.marginLeft = '8px';
@@ -419,13 +419,13 @@ export const Interactive = {
 
     // Add icons if needed
     if (args.showIconLeft) {
-      const iconLeft = document.createElement('bui-search-lg');
+      const iconLeft = document.createElement('bui-search-outline-lg');
       iconLeft.setAttribute('slot', 'icon-left');
       input.appendChild(iconLeft);
     }
 
     if (args.showIconRight) {
-      const iconRight = document.createElement('bui-cross-circle-lg');
+      const iconRight = document.createElement('bui-cross-circle-outline-lg');
       iconRight.setAttribute('slot', 'icon-right');
       input.appendChild(iconRight);
     }
