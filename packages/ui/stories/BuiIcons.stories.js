@@ -7,9 +7,13 @@ import '../../icons/dist/arrowDown/outline/sm.js';
 import '../../icons/dist/arrowLeft/outline/sm.js';
 import '../../icons/dist/arrowRight/outline/sm.js';
 import '../../icons/dist/arrowUp/outline/sm.js';
+import '../../icons/dist/clock/outline/sm.js';
+import '../../icons/dist/cross/outline/sm.js';
 import '../../icons/dist/cycle/outline/sm.js';
+import '../../icons/dist/menu/outline/sm.js';
 import '../../icons/dist/scan/outline/sm.js';
 import '../../icons/dist/search/outline/sm.js';
+import '../../icons/dist/user/outline/sm.js';
 
 // Import all medium outline icons
 import '../../icons/dist/angleDown/outline/md.js';
@@ -22,11 +26,15 @@ import '../../icons/dist/arrowRight/outline/md.js';
 import '../../icons/dist/arrowUp/outline/md.js';
 import '../../icons/dist/bitcoin/outline/md.js';
 import '../../icons/dist/checkCircle/outline/md.js';
+import '../../icons/dist/clock/outline/md.js';
+import '../../icons/dist/cross/outline/md.js';
 import '../../icons/dist/crossCircle/outline/md.js';
 import '../../icons/dist/cycle/outline/md.js';
 import '../../icons/dist/lightning/outline/md.js';
+import '../../icons/dist/menu/outline/md.js';
 import '../../icons/dist/scan/outline/md.js';
 import '../../icons/dist/search/outline/md.js';
+import '../../icons/dist/user/outline/md.js';
 
 // Import all large outline icons
 import '../../icons/dist/angleDown/outline/lg.js';
@@ -40,11 +48,15 @@ import '../../icons/dist/arrowUp/outline/lg.js';
 import '../../icons/dist/bitcoin/outline/lg.js';
 import '../../icons/dist/checkCircle/outline/lg.js';
 import '../../icons/dist/clipboard/outline/lg.js';
+import '../../icons/dist/clock/outline/lg.js';
+import '../../icons/dist/cross/outline/lg.js';
 import '../../icons/dist/crossCircle/outline/lg.js';
 import '../../icons/dist/cycle/outline/lg.js';
 import '../../icons/dist/lightning/outline/lg.js';
+import '../../icons/dist/menu/outline/lg.js';
 import '../../icons/dist/scan/outline/lg.js';
 import '../../icons/dist/search/outline/lg.js';
+import '../../icons/dist/user/outline/lg.js';
 import '../../icons/dist/warning/outline/lg.js';
 
 // Import all small solid icons
@@ -73,9 +85,13 @@ const iconGroups = {
       'arrowLeft',
       'arrowRight',
       'arrowUp',
+      'clock',
+      'cross',
       'cycle',
+      'menu',
       'scan',
       'search',
+      'user',
     ],
     md: [
       'angleDown',
@@ -88,11 +104,15 @@ const iconGroups = {
       'arrowUp',
       'bitcoin',
       'checkCircle',
+      'clock',
+      'cross',
       'crossCircle',
       'cycle',
       'lightning',
+      'menu',
       'scan',
       'search',
+      'user',
     ],
     lg: [
       'angleDown',
@@ -106,11 +126,15 @@ const iconGroups = {
       'bitcoin',
       'checkCircle',
       'clipboard',
+      'clock',
+      'cross',
       'crossCircle',
       'cycle',
       'lightning',
+      'menu',
       'scan',
       'search',
+      'user',
       'warning',
     ],
   },
