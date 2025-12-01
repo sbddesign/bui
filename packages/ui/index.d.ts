@@ -9,8 +9,8 @@ type ButtonElement = import('./button.js').BuiButton;
 type InputElement = import('./input.js').BuiInput;
 type MessageElement = import('./message.js').BuiMessage;
 type MoneyValueElement = import('./money-value.js').BuiMoneyValue;
-type NumpadButtonElement = import('./numpad-button.js').BuiNumpadButton;
-type NumpadElement = import('./numpad.js').BuiNumpad;
+type NumpadButtonElement = import('./numpad-button.js').BuiNumPadButton;
+type NumpadElement = import('./numpad.js').BuiNumPad;
 type OptionDotElement = import('./option-dot.js').BuiOptionDot;
 type ToggleElement = import('./toggle.js').BuiToggle;
 
