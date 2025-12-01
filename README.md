@@ -39,3 +39,7 @@ To interact with the components via [storybook](https://storybook.js.org/), run 
 ### demo-svelte
 
 `demo-svelte` demonstrates usage of the `ui` components and `tokens` inside a basic Svelte app, showing cross-framework compatibility of the web components.
+
+### demo-html
+
+`demo-html` demonstrates usage of the `ui` components and `tokens` inside a basic HTML app, showing vanilla javascript compatibility of the web components.
