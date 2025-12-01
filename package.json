@@ -45,10 +45,10 @@
       "prettier --write"
     ],
     "packages/ui/**/*.{ts,js}": [
-      "eslint --fix"
+      "pnpm exec eslint --config packages/ui/eslint.config.js --fix"
     ],
     "packages/icons/**/*.js": [
-      "eslint --fix"
+      "pnpm exec eslint --config packages/icons/eslint.config.js --fix"
     ]
   }
 }
