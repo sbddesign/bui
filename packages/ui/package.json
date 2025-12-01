@@ -28,13 +28,6 @@
   "type": "module",
   "module": "dist/index.js",
   "types": "./index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "types/react-jsx.d.ts"
-      ]
-    }
-  },
   "files": [
     "dist",
     "types",
@@ -54,55 +47,55 @@
       "default": "./react.js"
     },
     "./button.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/button.d.ts",
       "default": "./dist/button.js"
     },
     "./toggle.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/toggle.d.ts",
       "default": "./dist/toggle.js"
     },
     "./message.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/message.d.ts",
       "default": "./dist/message.js"
     },
     "./numpad-button.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/numpad-button.d.ts",
       "default": "./dist/numpad-button.js"
     },
     "./numpad.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/numpad.d.ts",
       "default": "./dist/numpad.js"
     },
     "./button-cluster.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/button-cluster.d.ts",
       "default": "./dist/button-cluster.js"
     },
     "./input.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/input.d.ts",
       "default": "./dist/input.js"
     },
     "./money-value.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/money-value.d.ts",
       "default": "./dist/money-value.js"
     },
     "./bitcoin-value.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/bitcoin-value.d.ts",
       "default": "./dist/bitcoin-value.js"
     },
     "./option-dot.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/option-dot.d.ts",
       "default": "./dist/option-dot.js"
     },
     "./bitcoin-qr-display.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/bitcoin-qr-display.d.ts",
       "default": "./dist/bitcoin-qr-display.js"
     },
     "./amount-option-tile.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/amount-option-tile.d.ts",
       "default": "./dist/amount-option-tile.js"
     },
     "./avatar.js": {
-      "types": "./types/react-jsx.d.ts",
+      "types": "./types/defs/avatar.d.ts",
       "default": "./dist/avatar.js"
     },
     "./tokens.css": "./tokens.css"
