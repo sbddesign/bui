@@ -1,5 +1,4 @@
 import '../message.js';
-import { html } from 'lit';
 
 export default {
   title: 'BUI/Message',

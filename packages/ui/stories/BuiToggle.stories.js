@@ -1,5 +1,4 @@
 import '../toggle.js';
-import { html } from 'lit';
 
 export default {
   title: 'BUI/Toggle',

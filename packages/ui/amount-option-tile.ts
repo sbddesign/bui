@@ -200,7 +200,6 @@ export class BuiAmountOptionTile extends LitElement {
     const isSelected = this.selected;
     const isCustom = this.custom;
     const hasAmount = this.amountDefined;
-    const isBitcoinFirst = this.bitcoinFirst;
 
     return html`
       <div
@@ -211,17 +210,12 @@ export class BuiAmountOptionTile extends LitElement {
         @click=${this.handleClick}
         @keydown=${this.handleKeydown}
       >
-        ${this.renderContent(isSelected, isCustom, hasAmount, isBitcoinFirst)}
+        ${this.renderContent(isSelected, isCustom, hasAmount)}
       </div>
     `;
   }
 
-  private renderContent(
-    isSelected: boolean,
-    isCustom: boolean,
-    hasAmount: boolean,
-    isBitcoinFirst: boolean
-  ) {
+  private renderContent(isSelected: boolean, isCustom: boolean, hasAmount: boolean) {
     if (isCustom && !hasAmount) {
       return html`<div class="custom-text">Custom Amount</div>`;
     }
