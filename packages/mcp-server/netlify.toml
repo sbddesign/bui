@@ -1,0 +1,10 @@
+[build]
+  command = "pnpm install && pnpm generate-data && pnpm build:edge"
+  publish = "."
+
+[[edge_functions]]
+  function = "mcp-handler"
+  path = "/mcp"
+
+[build.environment]
+  NODE_VERSION = "20"

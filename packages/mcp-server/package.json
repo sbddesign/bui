@@ -1,0 +1,29 @@
+{
+  "name": "@sbddesign/bui-mcp-server",
+  "version": "0.0.1",
+  "description": "MCP server for BUI UI Kit component information",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "pnpm generate-data && pnpm build:edge && tsc",
+    "build:edge": "node scripts/build-edge-function.js",
+    "build:watch": "tsc --watch",
+    "generate-data": "node scripts/generate-mcp-data.js",
+    "dev": "netlify dev",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  },
+  "files": [
+    "dist",
+    "netlify.toml",
+    "netlify"
+  ]
+}
