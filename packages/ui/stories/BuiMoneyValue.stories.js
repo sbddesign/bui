@@ -33,6 +33,18 @@ export default {
     showEstimate: false,
     textSize: 'base',
   },
+  render: (args) => {
+    const moneyValue = document.createElement('bui-money-value');
+    if (args.symbolPosition) moneyValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.symbol) moneyValue.setAttribute('symbol', args.symbol);
+    if (args.amount !== undefined) moneyValue.setAttribute('amount', args.amount.toString());
+    if (args.truncation) moneyValue.setAttribute('truncation', '');
+    if (args.satcomma) moneyValue.setAttribute('satcomma', '');
+    if (args.size) moneyValue.setAttribute('size', args.size);
+    if (args.showEstimate) moneyValue.setAttribute('show-estimate', '');
+    if (args.textSize) moneyValue.setAttribute('text-size', args.textSize);
+    return moneyValue;
+  },
 };
 
 // Basic usage with default props

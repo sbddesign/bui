@@ -36,6 +36,18 @@ export default {
     showEstimate: false,
     textSize: 'base',
   },
+  render: (args) => {
+    const bitcoinValue = document.createElement('bui-bitcoin-value');
+    if (args.format) bitcoinValue.setAttribute('format', args.format);
+    if (args.truncated) bitcoinValue.setAttribute('truncated', '');
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
+    if (args.symbolPosition) bitcoinValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.satcomma) bitcoinValue.setAttribute('satcomma', '');
+    if (args.size) bitcoinValue.setAttribute('size', args.size);
+    if (args.showEstimate) bitcoinValue.setAttribute('show-estimate', '');
+    if (args.textSize) bitcoinValue.setAttribute('text-size', args.textSize);
+    return bitcoinValue;
+  },
 };
 
 // BIP177 format (default) - ₿ symbol on the left

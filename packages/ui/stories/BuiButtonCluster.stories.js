@@ -15,6 +15,11 @@ export default {
   args: {
     direction: 'horizontal',
   },
+  render: (args) => {
+    const cluster = document.createElement('bui-button-cluster');
+    if (args.direction) cluster.setAttribute('direction', args.direction);
+    return cluster;
+  },
 };
 
 export const Horizontal = {

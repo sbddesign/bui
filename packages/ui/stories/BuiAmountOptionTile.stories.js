@@ -46,6 +46,28 @@ export default {
     primaryTextSize: '6xl',
     secondaryTextSize: '2xl',
   },
+  render: (args) => {
+    const tile = document.createElement('bui-amount-option-tile');
+    if (args.emoji) tile.setAttribute('emoji', args.emoji);
+    if (args.message) tile.setAttribute('message', args.message);
+    if (args.showEmoji) tile.setAttribute('show-emoji', '');
+    if (args.showMessage) tile.setAttribute('show-message', '');
+    if (args.showSecondaryCurrency) tile.setAttribute('show-secondary-currency', '');
+    if (args.bitcoinFirst) tile.setAttribute('bitcoin-first', '');
+    if (args.custom) tile.setAttribute('custom', '');
+    if (args.amountDefined) tile.setAttribute('amount-defined', '');
+    if (args.selected) tile.setAttribute('selected', '');
+    if (args.primaryAmount !== undefined)
+      tile.setAttribute('primary-amount', args.primaryAmount.toString());
+    if (args.primarySymbol) tile.setAttribute('primary-symbol', args.primarySymbol);
+    if (args.secondaryAmount !== undefined)
+      tile.setAttribute('secondary-amount', args.secondaryAmount.toString());
+    if (args.secondarySymbol) tile.setAttribute('secondary-symbol', args.secondarySymbol);
+    if (args.showEstimate) tile.setAttribute('show-estimate', '');
+    if (args.primaryTextSize) tile.setAttribute('primary-text-size', args.primaryTextSize);
+    if (args.secondaryTextSize) tile.setAttribute('secondary-text-size', args.secondaryTextSize);
+    return tile;
+  },
 };
 
 // Basic tile with default settings

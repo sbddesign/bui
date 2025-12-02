@@ -37,6 +37,21 @@ export default {
     showIconRight: false,
     iconRightAction: '',
   },
+  render: (args) => {
+    const input = document.createElement('bui-input');
+    if (args.mood) input.setAttribute('mood', args.mood);
+    if (args.size) input.setAttribute('size', args.size);
+    if (args.label) input.setAttribute('label', args.label);
+    if (args.value !== undefined) input.setAttribute('value', args.value);
+    if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
+    if (args.showLabel !== undefined) input.setAttribute('show-label', args.showLabel ? '' : null);
+    if (args.showIconLeft !== undefined)
+      input.setAttribute('show-icon-left', args.showIconLeft ? '' : null);
+    if (args.showIconRight !== undefined)
+      input.setAttribute('show-icon-right', args.showIconRight ? '' : null);
+    if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
+    return input;
+  },
 };
 
 // Basic input
@@ -360,7 +375,7 @@ export const ComplexMessages = {
             <span> before continuing.</span>
           `;
           break;
-        case 'icon':
+        case 'icon': {
           const icon = document.createElement('bui-warning-outline-lg');
           icon.style.width = '24px';
           icon.style.height = '24px';
@@ -371,6 +386,7 @@ export const ComplexMessages = {
           message.innerHTML = 'This field requires attention.';
           message.appendChild(icon);
           break;
+        }
         case 'mixed':
           message.innerHTML = `
             <div><strong>Success!</strong><br /><br /></div>

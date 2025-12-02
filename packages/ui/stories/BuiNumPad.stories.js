@@ -11,6 +11,11 @@ export default {
   args: {
     disabled: false,
   },
+  render: (args) => {
+    const numpad = document.createElement('bui-numpad');
+    if (args.disabled) numpad.setAttribute('disabled', '');
+    return numpad;
+  },
   parameters: {
     docs: {
       description: {

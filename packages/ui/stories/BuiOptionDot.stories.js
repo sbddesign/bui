@@ -10,6 +10,11 @@ export default {
   args: {
     active: false,
   },
+  render: (args) => {
+    const dot = document.createElement('bui-option-dot');
+    if (args.active) dot.setAttribute('active', '');
+    return dot;
+  },
 };
 
 export const Default = {

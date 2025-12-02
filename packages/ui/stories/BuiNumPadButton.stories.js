@@ -24,6 +24,13 @@ export default {
     content: 'number',
     disabled: false,
   },
+  render: (args) => {
+    const button = document.createElement('bui-numpad-button');
+    if (args.number) button.setAttribute('number', args.number);
+    if (args.content) button.setAttribute('content', args.content);
+    if (args.disabled) button.setAttribute('disabled', '');
+    return button;
+  },
 };
 
 export const Default = {

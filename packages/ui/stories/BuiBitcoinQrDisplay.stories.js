@@ -44,6 +44,26 @@ export default {
     errorMessage: 'Sorry, an error occurred. Try again later.',
     complete: false,
   },
+  render: (args) => {
+    const qrDisplay = document.createElement('bui-bitcoin-qr-display');
+    if (args.address) qrDisplay.setAttribute('address', args.address);
+    if (args.lightning) qrDisplay.setAttribute('lightning', args.lightning);
+    if (args.option) qrDisplay.setAttribute('option', args.option);
+    if (args.selector) qrDisplay.setAttribute('selector', args.selector);
+    if (args.size) qrDisplay.setAttribute('size', args.size.toString());
+    if (args.showImage) qrDisplay.setAttribute('show-image', '');
+    if (args.dotType) qrDisplay.setAttribute('dot-type', args.dotType);
+    if (args.dotColor) qrDisplay.setAttribute('dot-color', args.dotColor);
+    if (args.unifiedImage) qrDisplay.setAttribute('unified-image', args.unifiedImage);
+    if (args.lightningImage) qrDisplay.setAttribute('lightning-image', args.lightningImage);
+    if (args.onchainImage) qrDisplay.setAttribute('onchain-image', args.onchainImage);
+    if (args.copyOnTap) qrDisplay.setAttribute('copy-on-tap', '');
+    if (args.placeholder) qrDisplay.setAttribute('placeholder', '');
+    if (args.error) qrDisplay.setAttribute('error', '');
+    if (args.errorMessage) qrDisplay.setAttribute('error-message', args.errorMessage);
+    if (args.complete) qrDisplay.setAttribute('complete', '');
+    return qrDisplay;
+  },
 };
 
 export const OptionDots = {
