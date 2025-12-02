@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: bui-mcp-server
+    env: node
+    buildCommand: pnpm install && pnpm generate-data && pnpm build
+    startCommand: node dist/http-server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
