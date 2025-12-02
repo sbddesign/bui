@@ -14,6 +14,13 @@ export default {
     disabled: false,
     size: 'big',
   },
+  render: (args) => {
+    const toggle = document.createElement('bui-toggle');
+    if (args.size) toggle.setAttribute('size', args.size);
+    if (args.active) toggle.setAttribute('active', '');
+    if (args.disabled) toggle.setAttribute('disabled', '');
+    return toggle;
+  },
   parameters: {
     docs: {
       description: {

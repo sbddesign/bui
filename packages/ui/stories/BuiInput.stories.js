@@ -37,6 +37,37 @@ export default {
     showIconRight: false,
     iconRightAction: '',
   },
+  render: (args) => {
+    const input = document.createElement('bui-input');
+    if (args.mood) input.setAttribute('mood', args.mood);
+    if (args.size) input.setAttribute('size', args.size);
+    if (args.label) input.setAttribute('label', args.label);
+    if (args.value !== undefined) input.setAttribute('value', args.value);
+    if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
+    if (args.showLabel !== undefined) {
+      if (args.showLabel) {
+        input.setAttribute('show-label', '');
+      } else {
+        input.removeAttribute('show-label');
+      }
+    }
+    if (args.showIconLeft !== undefined) {
+      if (args.showIconLeft) {
+        input.setAttribute('show-icon-left', '');
+      } else {
+        input.removeAttribute('show-icon-left');
+      }
+    }
+    if (args.showIconRight !== undefined) {
+      if (args.showIconRight) {
+        input.setAttribute('show-icon-right', '');
+      } else {
+        input.removeAttribute('show-icon-right');
+      }
+    }
+    if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
+    return input;
+  },
 };
 
 // Basic input
@@ -47,15 +78,33 @@ export const Default = {
   },
   render: (args) => {
     const input = document.createElement('bui-input');
-    input.mood = args.mood;
-    input.size = args.size;
-    input.label = args.label;
-    input.value = args.value;
-    input.placeholder = args.placeholder;
-    input.showLabel = args.showLabel;
-    input.showIconLeft = args.showIconLeft;
-    input.showIconRight = args.showIconRight;
-    input.iconRightAction = args.iconRightAction;
+    if (args.mood) input.setAttribute('mood', args.mood);
+    if (args.size) input.setAttribute('size', args.size);
+    if (args.label) input.setAttribute('label', args.label);
+    if (args.value !== undefined) input.setAttribute('value', args.value);
+    if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
+    if (args.showLabel !== undefined) {
+      if (args.showLabel) {
+        input.setAttribute('show-label', '');
+      } else {
+        input.removeAttribute('show-label');
+      }
+    }
+    if (args.showIconLeft !== undefined) {
+      if (args.showIconLeft) {
+        input.setAttribute('show-icon-left', '');
+      } else {
+        input.removeAttribute('show-icon-left');
+      }
+    }
+    if (args.showIconRight !== undefined) {
+      if (args.showIconRight) {
+        input.setAttribute('show-icon-right', '');
+      } else {
+        input.removeAttribute('show-icon-right');
+      }
+    }
+    if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
     return input;
   },
 };
@@ -360,7 +409,7 @@ export const ComplexMessages = {
             <span> before continuing.</span>
           `;
           break;
-        case 'icon':
+        case 'icon': {
           const icon = document.createElement('bui-warning-outline-lg');
           icon.style.width = '24px';
           icon.style.height = '24px';
@@ -371,6 +420,7 @@ export const ComplexMessages = {
           message.innerHTML = 'This field requires attention.';
           message.appendChild(icon);
           break;
+        }
         case 'mixed':
           message.innerHTML = `
             <div><strong>Success!</strong><br /><br /></div>
@@ -407,15 +457,33 @@ export const Interactive = {
   },
   render: (args) => {
     const input = document.createElement('bui-input');
-    input.mood = args.mood;
-    input.size = args.size;
-    input.label = args.label;
-    input.value = args.value;
-    input.placeholder = args.placeholder;
-    input.showLabel = args.showLabel;
-    input.showIconLeft = args.showIconLeft;
-    input.showIconRight = args.showIconRight;
-    input.iconRightAction = args.iconRightAction;
+    if (args.mood) input.setAttribute('mood', args.mood);
+    if (args.size) input.setAttribute('size', args.size);
+    if (args.label) input.setAttribute('label', args.label);
+    if (args.value !== undefined) input.setAttribute('value', args.value);
+    if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
+    if (args.showLabel !== undefined) {
+      if (args.showLabel) {
+        input.setAttribute('show-label', '');
+      } else {
+        input.removeAttribute('show-label');
+      }
+    }
+    if (args.showIconLeft !== undefined) {
+      if (args.showIconLeft) {
+        input.setAttribute('show-icon-left', '');
+      } else {
+        input.removeAttribute('show-icon-left');
+      }
+    }
+    if (args.showIconRight !== undefined) {
+      if (args.showIconRight) {
+        input.setAttribute('show-icon-right', '');
+      } else {
+        input.removeAttribute('show-icon-right');
+      }
+    }
+    if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
 
     // Add icons if needed
     if (args.showIconLeft) {

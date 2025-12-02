@@ -97,6 +97,22 @@ export default {
     showInitial: true,
     size: 'medium',
   },
+  render: (args) => {
+    const avatar = document.createElement('bui-avatar');
+    if (args.imageUrl) avatar.setAttribute('image-url', args.imageUrl);
+    if (args.imageUrl2x) avatar.setAttribute('image-url-2x', args.imageUrl2x);
+    if (args.text) avatar.setAttribute('text', args.text);
+    if (args.size) avatar.setAttribute('size', args.size);
+
+    // Handle boolean attribute properly
+    if (args.showInitial === true) {
+      avatar.setAttribute('show-initial', '');
+    } else if (args.showInitial === false) {
+      avatar.removeAttribute('show-initial');
+    }
+
+    return avatar;
+  },
 };
 
 export const Default = {

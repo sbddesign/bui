@@ -14,6 +14,19 @@ export default {
     mood: 'neutral',
     showIcon: true,
   },
+  render: (args) => {
+    const message = document.createElement('bui-message');
+    if (args.mood) message.setAttribute('mood', args.mood);
+    if (args.text) message.setAttribute('text', args.text);
+    if (args.showIcon !== undefined) {
+      if (args.showIcon) {
+        message.setAttribute('show-icon', '');
+      } else {
+        message.removeAttribute('show-icon');
+      }
+    }
+    return message;
+  },
   parameters: {
     docs: {
       description: {

@@ -33,6 +33,18 @@ export default {
     showEstimate: false,
     textSize: 'base',
   },
+  render: (args) => {
+    const moneyValue = document.createElement('bui-money-value');
+    if (args.symbolPosition) moneyValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.symbol) moneyValue.setAttribute('symbol', args.symbol);
+    if (args.amount !== undefined) moneyValue.setAttribute('amount', args.amount.toString());
+    if (args.truncation) moneyValue.setAttribute('truncation', '');
+    if (args.satcomma) moneyValue.setAttribute('satcomma', '');
+    if (args.size) moneyValue.setAttribute('size', args.size);
+    if (args.showEstimate) moneyValue.setAttribute('show-estimate', '');
+    if (args.textSize) moneyValue.setAttribute('text-size', args.textSize);
+    return moneyValue;
+  },
 };
 
 // Basic usage with default props
@@ -42,7 +54,7 @@ export const Default = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.amount = args.amount;
+    if (args.amount !== undefined) moneyValue.setAttribute('amount', args.amount.toString());
     return moneyValue;
   },
 };
@@ -56,9 +68,9 @@ export const SymbolLeft = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.symbolPosition = args.symbolPosition;
-    moneyValue.symbol = args.symbol;
-    moneyValue.amount = args.amount;
+    if (args.symbolPosition) moneyValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.symbol) moneyValue.setAttribute('symbol', args.symbol);
+    if (args.amount !== undefined) moneyValue.setAttribute('amount', args.amount.toString());
     return moneyValue;
   },
 };
@@ -72,9 +84,9 @@ export const SymbolRight = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.symbolPosition = args.symbolPosition;
-    moneyValue.symbol = args.symbol;
-    moneyValue.amount = args.amount;
+    if (args.symbolPosition) moneyValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.symbol) moneyValue.setAttribute('symbol', args.symbol);
+    if (args.amount !== undefined) moneyValue.setAttribute('amount', args.amount.toString());
     return moneyValue;
   },
 };
@@ -87,8 +99,8 @@ export const WithEstimate = {
   },
   render: (args) => {
     const moneyValue = document.createElement('bui-money-value');
-    moneyValue.showEstimate = args.showEstimate;
-    moneyValue.amount = args.amount;
+    if (args.showEstimate) moneyValue.setAttribute('show-estimate', '');
+    if (args.amount !== undefined) moneyValue.setAttribute('amount', args.amount.toString());
     return moneyValue;
   },
 };

@@ -36,6 +36,18 @@ export default {
     showEstimate: false,
     textSize: 'base',
   },
+  render: (args) => {
+    const bitcoinValue = document.createElement('bui-bitcoin-value');
+    if (args.format) bitcoinValue.setAttribute('format', args.format);
+    if (args.truncated) bitcoinValue.setAttribute('truncated', '');
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
+    if (args.symbolPosition) bitcoinValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.satcomma) bitcoinValue.setAttribute('satcomma', '');
+    if (args.size) bitcoinValue.setAttribute('size', args.size);
+    if (args.showEstimate) bitcoinValue.setAttribute('show-estimate', '');
+    if (args.textSize) bitcoinValue.setAttribute('text-size', args.textSize);
+    return bitcoinValue;
+  },
 };
 
 // BIP177 format (default) - ₿ symbol on the left
@@ -46,9 +58,9 @@ export const BIP177 = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.format = args.format;
-    bitcoinValue.amount = args.amount;
-    bitcoinValue.truncated = args.truncated;
+    if (args.format) bitcoinValue.setAttribute('format', args.format);
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
+    if (args.truncated) bitcoinValue.setAttribute('truncated', '');
     return bitcoinValue;
   },
 };
@@ -61,9 +73,9 @@ export const Sats = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.format = args.format;
-    bitcoinValue.amount = args.amount;
-    bitcoinValue.truncated = args.truncated;
+    if (args.format) bitcoinValue.setAttribute('format', args.format);
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
+    if (args.truncated) bitcoinValue.setAttribute('truncated', '');
     return bitcoinValue;
   },
 };
@@ -76,9 +88,9 @@ export const BTC = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.format = args.format;
-    bitcoinValue.amount = args.amount;
-    bitcoinValue.truncated = args.truncated;
+    if (args.format) bitcoinValue.setAttribute('format', args.format);
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
+    if (args.truncated) bitcoinValue.setAttribute('truncated', '');
     return bitcoinValue;
   },
 };
@@ -91,8 +103,8 @@ export const WithEstimate = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.showEstimate = args.showEstimate;
-    bitcoinValue.amount = args.amount;
+    if (args.showEstimate) bitcoinValue.setAttribute('show-estimate', '');
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
     return bitcoinValue;
   },
 };
@@ -391,16 +403,14 @@ export const Interactive = {
   },
   render: (args) => {
     const bitcoinValue = document.createElement('bui-bitcoin-value');
-    bitcoinValue.format = args.format;
-    bitcoinValue.amount = args.amount;
-    bitcoinValue.truncated = args.truncated;
-    bitcoinValue.satcomma = args.satcomma;
-    bitcoinValue.size = args.size;
-    bitcoinValue.showEstimate = args.showEstimate;
-    bitcoinValue.textSize = args.textSize;
-    if (args.symbolPosition) {
-      bitcoinValue.symbolPosition = args.symbolPosition;
-    }
+    if (args.format) bitcoinValue.setAttribute('format', args.format);
+    if (args.amount !== undefined) bitcoinValue.setAttribute('amount', args.amount.toString());
+    if (args.truncated) bitcoinValue.setAttribute('truncated', '');
+    if (args.symbolPosition) bitcoinValue.setAttribute('symbol-position', args.symbolPosition);
+    if (args.satcomma) bitcoinValue.setAttribute('satcomma', '');
+    if (args.size) bitcoinValue.setAttribute('size', args.size);
+    if (args.showEstimate) bitcoinValue.setAttribute('show-estimate', '');
+    if (args.textSize) bitcoinValue.setAttribute('text-size', args.textSize);
     return bitcoinValue;
   },
 };
