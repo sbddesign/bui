@@ -103,7 +103,14 @@ export default {
     if (args.imageUrl2x) avatar.setAttribute('image-url-2x', args.imageUrl2x);
     if (args.text) avatar.setAttribute('text', args.text);
     if (args.size) avatar.setAttribute('size', args.size);
-    if (args.showInitial) avatar.setAttribute('show-initial', '');
+
+    // Handle boolean attribute properly
+    if (args.showInitial === true) {
+      avatar.setAttribute('show-initial', '');
+    } else if (args.showInitial === false) {
+      avatar.removeAttribute('show-initial');
+    }
+
     return avatar;
   },
 };
