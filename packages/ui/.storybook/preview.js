@@ -54,6 +54,10 @@ const preview = {
           // styleType -> style-type, etc.
           transformed = transformed.replace(/\bstyleType=/g, 'style-type=');
 
+          // Remove empty string values from boolean attributes (e.g., show-initial="" -> show-initial)
+          // Match attribute names followed by =""
+          transformed = transformed.replace(/(\w+(?:-\w+)*)=""/g, '$1');
+
           return transformed;
         },
       },
