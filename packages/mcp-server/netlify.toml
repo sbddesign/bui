@@ -1,0 +1,37 @@
+# Netlify Configuration for BUI MCP Server
+# This configures the deployment settings for the MCP server edge function
+
+[build]
+  # Build command - generates component data before deploy
+  command = "npm run build"
+  
+  # Publish directory (not really used for edge functions, but required)
+  publish = "public"
+  
+  # Functions directory
+  edge_functions = "netlify/edge-functions"
+
+# Edge function routing
+[[edge_functions]]
+  path = "/mcp"
+  function = "mcp"
+
+# Headers for CORS support
+[[headers]]
+  for = "/mcp"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+
+# Redirect root to a helpful page
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+# 404 handling
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

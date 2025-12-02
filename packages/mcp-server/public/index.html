@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BUI MCP Server</title>
+    <style>
+      :root {
+        --bg: #0a0a0b;
+        --text: #fafafa;
+        --text-secondary: #a1a1aa;
+        --accent: #f59e0b;
+        --border: #27272a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 640px;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      h1 .icon {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        color: var(--text-secondary);
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        background: #18181b;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .card h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--accent);
+      }
+
+      .endpoint {
+        background: #09090b;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 0.875rem;
+        overflow-x: auto;
+      }
+
+      .tools {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .tool {
+        background: #09090b;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+      }
+
+      .tool-name {
+        font-weight: 600;
+        color: var(--accent);
+        font-family: 'Monaco', 'Menlo', monospace;
+      }
+
+      .tool-desc {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+
+      pre {
+        background: #09090b;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        overflow-x: auto;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+
+      code {
+        font-family: 'Monaco', 'Menlo', monospace;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        <span class="icon">₿</span>
+        BUI MCP Server
+      </h1>
+      <p class="subtitle">Model Context Protocol server for Bitcoin UI Kit components</p>
+
+      <div class="card">
+        <h2>MCP Endpoint</h2>
+        <div class="endpoint">POST /mcp</div>
+      </div>
+
+      <div class="card">
+        <h2>Available Tools</h2>
+        <div class="tools">
+          <div class="tool">
+            <div class="tool-name">instructions</div>
+            <div class="tool-desc">Learn how to use the Bitcoin UI Kit and these tools</div>
+          </div>
+          <div class="tool">
+            <div class="tool-name">list_components</div>
+            <div class="tool-desc">Get a list of all available components</div>
+          </div>
+          <div class="tool">
+            <div class="tool-name">get_component</div>
+            <div class="tool-desc">Get detailed info about a specific component</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Example Usage</h2>
+        <pre><code>// Initialize
+POST /mcp
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "clientInfo": { "name": "my-client" }
+  }
+}
+
+// Call a tool
+POST /mcp
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "list_components",
+    "arguments": {}
+  }
+}</code></pre>
+      </div>
+
+      <div class="footer">
+        <p>Bitcoin UI Kit - <a href="https://github.com/sbddesign/bui">GitHub</a></p>
+      </div>
+    </div>
+  </body>
+</html>

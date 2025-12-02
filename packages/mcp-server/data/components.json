@@ -1,0 +1,1137 @@
+{
+  "version": "0.0.1",
+  "generatedAt": "2025-12-02T19:54:16.400Z",
+  "packageName": "@sbddesign/bui-ui",
+  "components": [
+    {
+      "name": "BuiButton",
+      "tagName": "bui-button",
+      "description": "A versatile button component with multiple styles (filled, outline, free), sizes, and content options (label, icon, or both).",
+      "properties": [
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": "label",
+          "options": ["label", "icon", "label+icon", "icon+label"],
+          "attribute": "content",
+          "description": "'label', 'icon', 'label+icon', etc.",
+          "reflect": false
+        },
+        {
+          "name": "styleType",
+          "type": "string",
+          "required": false,
+          "default": "filled",
+          "options": ["filled", "outline", "free"],
+          "attribute": "style-type",
+          "description": "'filled', 'outline', 'free'",
+          "reflect": false
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "default": "default",
+          "options": ["default", "small", "large"],
+          "attribute": "size",
+          "description": "'default', 'small', 'large'",
+          "reflect": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "disabled",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "Label",
+          "attribute": "label",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "cluster",
+          "type": "string",
+          "required": false,
+          "options": ["top", "bottom", "left", "right", "middle"],
+          "attribute": "cluster",
+          "description": "'top', 'bottom', 'left', 'right', 'middle'",
+          "reflect": false
+        },
+        {
+          "name": "wide",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "wide",
+          "description": "expands to fill available space",
+          "reflect": true
+        }
+      ],
+      "slots": [
+        {
+          "name": "icon",
+          "description": "Slot for icon"
+        }
+      ],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-button></bui-button>",
+          "description": "Basic BuiButton component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-button content=\"icon\" style-type=\"outline\"></bui-button>",
+          "description": "BuiButton with custom properties"
+        },
+        {
+          "title": "Style Variations",
+          "code": "<bui-button style-type=\"filled\"></bui-button>\n<bui-button style-type=\"outline\"></bui-button>\n<bui-button style-type=\"free\"></bui-button>",
+          "description": "BuiButton style variations"
+        },
+        {
+          "title": "With Slot",
+          "code": "<bui-button>\n  <span slot=\"icon\">Slot content</span>\n</bui-button>",
+          "description": "BuiButton with icon slot"
+        }
+      ]
+    },
+    {
+      "name": "BuiToggle",
+      "tagName": "bui-toggle",
+      "description": "A toggle switch component for boolean input with big and small size options.",
+      "properties": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "active",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "default": "big",
+          "options": ["big", "small"],
+          "attribute": "size",
+          "description": "'big', 'small'",
+          "reflect": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "disabled",
+          "description": "",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [
+        {
+          "name": "toggle",
+          "description": "Dispatched when toggle occurs"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-toggle></bui-toggle>",
+          "description": "Basic BuiToggle component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-toggle size=\"small\"></bui-toggle>",
+          "description": "BuiToggle with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiMessage",
+      "tagName": "bui-message",
+      "description": "A message component for displaying alerts and notifications with different moods (neutral, success, caution, danger).",
+      "properties": [
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": "For this small payment, you could save on fees by sending to a Lightning wallet.",
+          "attribute": "text",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "mood",
+          "type": "string",
+          "required": false,
+          "default": "neutral",
+          "options": ["neutral", "success", "caution", "danger"],
+          "attribute": "mood",
+          "description": "'neutral', 'success', 'caution', 'danger'",
+          "reflect": false
+        },
+        {
+          "name": "showIcon",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "show-icon",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "icon",
+          "description": "",
+          "reflect": false
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-message></bui-message>",
+          "description": "Basic BuiMessage component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-message mood=\"success\"></bui-message>",
+          "description": "BuiMessage with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiInput",
+      "tagName": "bui-input",
+      "description": "A text input component with label, validation states (moods), and optional left/right icon slots.",
+      "properties": [
+        {
+          "name": "mood",
+          "type": "string",
+          "required": false,
+          "default": "neutral",
+          "options": ["neutral", "caution", "danger", "success"],
+          "attribute": "mood",
+          "description": "'neutral', 'caution', 'danger', 'success'",
+          "reflect": true
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "default": "large",
+          "options": ["large", "small"],
+          "attribute": "size",
+          "description": "'large', 'small'",
+          "reflect": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "Label",
+          "attribute": "label",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "value",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "placeholder",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "show-label",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showIconLeft",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "show-icon-left",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showIconRight",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "show-icon-right",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "iconRightAction",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "icon-right-action",
+          "description": "",
+          "reflect": false
+        }
+      ],
+      "slots": [
+        {
+          "name": "icon-left",
+          "description": "Slot for icon-left"
+        },
+        {
+          "name": "icon-right",
+          "description": "Slot for icon-right"
+        },
+        {
+          "name": "message",
+          "description": "Slot for message"
+        }
+      ],
+      "events": [
+        {
+          "name": "input",
+          "description": "Dispatched when input occurs"
+        },
+        {
+          "name": "icon-right-click",
+          "description": "Dispatched when icon right click occurs"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-input></bui-input>",
+          "description": "Basic BuiInput component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-input mood=\"caution\" size=\"small\"></bui-input>",
+          "description": "BuiInput with custom properties"
+        },
+        {
+          "title": "With Slot",
+          "code": "<bui-input>\n  <span slot=\"icon-left\">Slot content</span>\n</bui-input>",
+          "description": "BuiInput with icon-left slot"
+        }
+      ]
+    },
+    {
+      "name": "BuiNumPad",
+      "tagName": "bui-numpad",
+      "description": "A numeric keypad component for entering numbers, arranged in a 3-column grid.",
+      "properties": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "disabled",
+          "description": "",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-numpad></bui-numpad>",
+          "description": "Basic BuiNumPad component"
+        }
+      ]
+    },
+    {
+      "name": "BuiNumPadButton",
+      "tagName": "bui-numpad-button",
+      "description": "Individual button for the numeric keypad, can display numbers or icons.",
+      "properties": [
+        {
+          "name": "number",
+          "type": "string",
+          "required": false,
+          "default": "1",
+          "attribute": "number",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": "number",
+          "options": ["number", "icon"],
+          "attribute": "content",
+          "description": "'number' or 'icon'",
+          "reflect": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "disabled",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "attribute": "aria-label",
+          "description": "",
+          "reflect": true
+        }
+      ],
+      "slots": [
+        {
+          "name": "icon",
+          "description": "Slot for icon"
+        }
+      ],
+      "events": [
+        {
+          "name": "numpad-click",
+          "description": "Dispatched when numpad click occurs"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-numpad-button></bui-numpad-button>",
+          "description": "Basic BuiNumPadButton component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-numpad-button content=\"icon\"></bui-numpad-button>",
+          "description": "BuiNumPadButton with custom properties"
+        },
+        {
+          "title": "With Slot",
+          "code": "<bui-numpad-button>\n  <span slot=\"icon\">Slot content</span>\n</bui-numpad-button>",
+          "description": "BuiNumPadButton with icon slot"
+        }
+      ]
+    },
+    {
+      "name": "BuiButtonCluster",
+      "tagName": "bui-button-cluster",
+      "description": "A container for grouping multiple buttons together horizontally or vertically.",
+      "properties": [
+        {
+          "name": "direction",
+          "type": "string",
+          "required": false,
+          "default": "horizontal",
+          "options": ["horizontal", "vertical"],
+          "attribute": "direction",
+          "description": "'horizontal' | 'vertical'",
+          "reflect": false
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Default slot for content"
+        }
+      ],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-button-cluster></bui-button-cluster>",
+          "description": "Basic BuiButtonCluster component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-button-cluster direction=\"vertical\"></bui-button-cluster>",
+          "description": "BuiButtonCluster with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiMoneyValue",
+      "tagName": "bui-money-value",
+      "description": "A component for displaying monetary values with customizable symbol, position, and formatting options.",
+      "properties": [
+        {
+          "name": "symbolPosition",
+          "type": "string",
+          "required": false,
+          "default": "left",
+          "options": ["left", "right"],
+          "attribute": "symbol-position",
+          "description": "'left' | 'right'",
+          "reflect": true
+        },
+        {
+          "name": "symbol",
+          "type": "string",
+          "required": false,
+          "default": "₿",
+          "attribute": "symbol",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "required": false,
+          "default": 0,
+          "attribute": "amount",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "truncation",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "truncation",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "default": "default",
+          "options": ["small", "default", "large", "xlarge"],
+          "attribute": "size",
+          "description": "'small' | 'default' | 'large' | 'xlarge'",
+          "reflect": true
+        },
+        {
+          "name": "satcomma",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "satcomma",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showEstimate",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "show-estimate",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "textSize",
+          "type": "string",
+          "required": false,
+          "default": "base",
+          "options": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"],
+          "attribute": "text-size",
+          "description": "'base' | 'lg' | ... | '9xl'",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-money-value></bui-money-value>",
+          "description": "Basic BuiMoneyValue component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-money-value symbol-position=\"right\" size=\"default\"></bui-money-value>",
+          "description": "BuiMoneyValue with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiBitcoinValue",
+      "tagName": "bui-bitcoin-value",
+      "description": "A component for displaying Bitcoin amounts in various formats: sats, BTC, or BIP-177 (₿ symbol with sats).",
+      "properties": [
+        {
+          "name": "format",
+          "type": "string",
+          "required": false,
+          "default": "bip177",
+          "options": ["sats", "BTC", "bip177"],
+          "attribute": "format",
+          "description": "'sats' | 'BTC' | 'bip177'",
+          "reflect": true
+        },
+        {
+          "name": "truncated",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "truncated",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "required": false,
+          "default": 0,
+          "attribute": "amount",
+          "description": "amount in sats (integer)",
+          "reflect": true
+        },
+        {
+          "name": "symbolPosition",
+          "type": "string",
+          "required": false,
+          "options": ["left", "right"],
+          "attribute": "symbol-position",
+          "description": "'left' | 'right'",
+          "reflect": true
+        },
+        {
+          "name": "satcomma",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "satcomma",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "default": "default",
+          "options": ["small", "default", "large", "xlarge"],
+          "attribute": "size",
+          "description": "'small' | 'default' | 'large' | 'xlarge'",
+          "reflect": true
+        },
+        {
+          "name": "showEstimate",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "show-estimate",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "textSize",
+          "type": "string",
+          "required": false,
+          "default": "base",
+          "options": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"],
+          "attribute": "text-size",
+          "description": "'base' | ... | '9xl'",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-bitcoin-value></bui-bitcoin-value>",
+          "description": "Basic BuiBitcoinValue component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-bitcoin-value format=\"BTC\" symbol-position=\"right\"></bui-bitcoin-value>",
+          "description": "BuiBitcoinValue with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiOptionDot",
+      "tagName": "bui-option-dot",
+      "description": "A small dot indicator for showing selection states, commonly used for pagination or option selection.",
+      "properties": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "active",
+          "description": "",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-option-dot></bui-option-dot>",
+          "description": "Basic BuiOptionDot component"
+        }
+      ]
+    },
+    {
+      "name": "BuiBitcoinQrDisplay",
+      "tagName": "bui-bitcoin-qr-display",
+      "description": "A QR code display component for Bitcoin payment addresses and Lightning invoices, with unified QR code support.",
+      "properties": [
+        {
+          "name": "address",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "address",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "lightning",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "lightning",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "option",
+          "type": "string",
+          "required": false,
+          "default": "unified",
+          "options": ["unified", "lightning", "onchain"],
+          "attribute": "option",
+          "description": "'unified' | 'onchain' | 'lightning'",
+          "reflect": true
+        },
+        {
+          "name": "selector",
+          "type": "string",
+          "required": false,
+          "default": "dots",
+          "options": ["dots", "toggle"],
+          "attribute": "selector",
+          "description": "'dots' | 'toggle'",
+          "reflect": true
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "required": false,
+          "default": 332,
+          "attribute": "size",
+          "description": "QR inner size in px (square)",
+          "reflect": false
+        },
+        {
+          "name": "showImage",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "showImage",
+          "description": "Show icon overlay on QR code",
+          "reflect": true
+        },
+        {
+          "name": "dotType",
+          "type": "string",
+          "required": false,
+          "default": "dot",
+          "options": [
+            "dot",
+            "square",
+            "rounded",
+            "extra-rounded",
+            "classy",
+            "classy-rounded",
+            "random-dot",
+            "vertical-line",
+            "horizontal-line",
+            "small-square",
+            "tiny-square",
+            "diamond"
+          ],
+          "attribute": "dotType",
+          "description": "QR dot style: 'rounded' | 'square' | 'dots' | 'classy' | 'classy-rounded' | 'extra-rounded'",
+          "reflect": true
+        },
+        {
+          "name": "dotColor",
+          "type": "string",
+          "required": false,
+          "default": "#000000",
+          "attribute": "dotColor",
+          "description": "QR dot color",
+          "reflect": true
+        },
+        {
+          "name": "unifiedImage",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "unifiedImage",
+          "description": "Custom image URL for unified QR codes",
+          "reflect": false
+        },
+        {
+          "name": "lightningImage",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "lightningImage",
+          "description": "Custom image URL for lightning QR codes",
+          "reflect": false
+        },
+        {
+          "name": "onchainImage",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "attribute": "onchainImage",
+          "description": "Custom image URL for on-chain QR codes",
+          "reflect": false
+        },
+        {
+          "name": "copyOnTap",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "copyOnTap",
+          "description": "Enable tap-to-copy functionality",
+          "reflect": true
+        },
+        {
+          "name": "placeholder",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "placeholder",
+          "description": "Show placeholder/loading state",
+          "reflect": true
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "error",
+          "description": "Show error state",
+          "reflect": true
+        },
+        {
+          "name": "errorMessage",
+          "type": "string",
+          "required": false,
+          "default": "Sorry, an error occurred. Try again later.",
+          "attribute": "errorMessage",
+          "description": "Custom error message",
+          "reflect": false
+        },
+        {
+          "name": "complete",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "complete",
+          "description": "Show complete/success state",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [
+        {
+          "name": "bui-copy",
+          "description": "Dispatched when bui copy occurs"
+        },
+        {
+          "name": "bui-copy-error",
+          "description": "Dispatched when bui copy error occurs"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-bitcoin-qr-display></bui-bitcoin-qr-display>",
+          "description": "Basic BuiBitcoinQrDisplay component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-bitcoin-qr-display option=\"lightning\" selector=\"toggle\"></bui-bitcoin-qr-display>",
+          "description": "BuiBitcoinQrDisplay with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiAmountOptionTile",
+      "tagName": "bui-amount-option-tile",
+      "description": "A tile component for displaying selectable amount options with primary/secondary currencies and emoji messages.",
+      "properties": [
+        {
+          "name": "emoji",
+          "type": "string",
+          "required": false,
+          "default": "🔥",
+          "attribute": "emoji",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "required": false,
+          "default": "Incredible",
+          "attribute": "message",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showEmoji",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "show-emoji",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showMessage",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "show-message",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showSecondaryCurrency",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "show-secondary-currency",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "bitcoinFirst",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "bitcoin-first",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "custom",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "custom",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "amountDefined",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "amount-defined",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "selected",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "selected",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "primaryAmount",
+          "type": "number",
+          "required": false,
+          "default": 1,
+          "attribute": "primary-amount",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "primarySymbol",
+          "type": "string",
+          "required": false,
+          "default": "$",
+          "attribute": "primary-symbol",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "secondaryAmount",
+          "type": "number",
+          "required": false,
+          "default": 1000,
+          "attribute": "secondary-amount",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "secondarySymbol",
+          "type": "string",
+          "required": false,
+          "default": "₿",
+          "attribute": "secondary-symbol",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "showEstimate",
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "attribute": "show-estimate",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "primaryTextSize",
+          "type": "string",
+          "required": false,
+          "default": "6xl",
+          "options": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"],
+          "attribute": "primary-text-size",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "secondaryTextSize",
+          "type": "string",
+          "required": false,
+          "default": "2xl",
+          "options": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"],
+          "attribute": "secondary-text-size",
+          "description": "",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [
+        {
+          "name": "amount-tile-click",
+          "description": "Dispatched when amount tile click occurs"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-amount-option-tile></bui-amount-option-tile>",
+          "description": "Basic BuiAmountOptionTile component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-amount-option-tile primary-text-size=\"lg\" secondary-text-size=\"lg\"></bui-amount-option-tile>",
+          "description": "BuiAmountOptionTile with custom properties"
+        }
+      ]
+    },
+    {
+      "name": "BuiAvatar",
+      "tagName": "bui-avatar",
+      "description": "An avatar component for displaying user images or auto-generated gradient backgrounds with optional initials.",
+      "properties": [
+        {
+          "name": "imageUrl",
+          "type": "string",
+          "required": false,
+          "attribute": "image-url",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "imageUrl2x",
+          "type": "string",
+          "required": false,
+          "attribute": "image-url-2x",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "attribute": "text",
+          "description": "",
+          "reflect": false
+        },
+        {
+          "name": "showInitial",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "attribute": "show-initial",
+          "description": "",
+          "reflect": true
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "default": "medium",
+          "options": ["small", "medium", "large"],
+          "attribute": "size",
+          "description": "",
+          "reflect": true
+        }
+      ],
+      "slots": [],
+      "events": [],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<bui-avatar></bui-avatar>",
+          "description": "Basic BuiAvatar component"
+        },
+        {
+          "title": "With Properties",
+          "code": "<bui-avatar size=\"medium\"></bui-avatar>",
+          "description": "BuiAvatar with custom properties"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "overview": "The Bitcoin UI Kit (BUI) is a collection of Web Components built with Lit for creating Bitcoin-focused user interfaces. These components are designed to be framework-agnostic and can be used in any web project (vanilla HTML, React, Vue, Svelte, etc.).",
+    "installation": "npm install @sbddesign/bui-ui @sbddesign/bui-tokens @sbddesign/bui-icons",
+    "setup": "1. Include the CSS variables from @sbddesign/bui-tokens\n2. Include the Inter and Outfit fonts from Google Fonts\n3. Import the components you need from @sbddesign/bui-ui",
+    "usage": "Components are used as custom HTML elements (Web Components). \n\nTo use a component:\n1. Call list_components to see all available components\n2. Call get_component with the component name to get its details\n3. Use the tagName to create the HTML element\n4. Set attributes/properties according to the component's property list\n5. Use slots to provide custom content where supported\n\nExample workflow:\n- list_components → shows \"Button\" is available\n- get_component(\"Button\") → returns { tagName: \"bui-button\", properties: [...], ... }\n- Use: <bui-button style-type=\"filled\" label=\"Click me\"></bui-button>",
+    "fontSetup": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap\" rel=\"stylesheet\">",
+    "tokensImport": "/* In your CSS */\n@import '@sbddesign/bui-tokens/lib/tailwindcss/tailwind-theme.css';\n\n/* Or in HTML */\n<link rel=\"stylesheet\" href=\"node_modules/@sbddesign/bui-tokens/lib/tailwindcss/tailwind-theme.css\">",
+    "componentImport": "/* Import all components */\nimport '@sbddesign/bui-ui';\n\n/* Or import specific components */\nimport '@sbddesign/bui-ui/button.js';\nimport '@sbddesign/bui-ui/input.js';"
+  }
+}

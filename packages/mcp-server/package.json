@@ -1,0 +1,27 @@
+{
+  "name": "@sbddesign/bui-mcp-server",
+  "version": "0.0.1",
+  "description": "MCP Server for Bitcoin UI Kit components",
+  "type": "module",
+  "scripts": {
+    "generate-data": "node scripts/generate-component-data.js",
+    "build": "npm run generate-data",
+    "test": "node test/test-mcp.js",
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "bitcoin",
+    "ui-kit",
+    "web-components"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@netlify/edge-functions": "^2.11.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {}
+}
