@@ -18,7 +18,13 @@ export default {
     const message = document.createElement('bui-message');
     if (args.mood) message.setAttribute('mood', args.mood);
     if (args.text) message.setAttribute('text', args.text);
-    if (args.showIcon !== undefined) message.setAttribute('show-icon', args.showIcon ? '' : null);
+    if (args.showIcon !== undefined) {
+      if (args.showIcon) {
+        message.setAttribute('show-icon', '');
+      } else {
+        message.removeAttribute('show-icon');
+      }
+    }
     return message;
   },
   parameters: {

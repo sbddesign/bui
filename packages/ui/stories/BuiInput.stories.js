@@ -44,11 +44,27 @@ export default {
     if (args.label) input.setAttribute('label', args.label);
     if (args.value !== undefined) input.setAttribute('value', args.value);
     if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
-    if (args.showLabel !== undefined) input.setAttribute('show-label', args.showLabel ? '' : null);
-    if (args.showIconLeft !== undefined)
-      input.setAttribute('show-icon-left', args.showIconLeft ? '' : null);
-    if (args.showIconRight !== undefined)
-      input.setAttribute('show-icon-right', args.showIconRight ? '' : null);
+    if (args.showLabel !== undefined) {
+      if (args.showLabel) {
+        input.setAttribute('show-label', '');
+      } else {
+        input.removeAttribute('show-label');
+      }
+    }
+    if (args.showIconLeft !== undefined) {
+      if (args.showIconLeft) {
+        input.setAttribute('show-icon-left', '');
+      } else {
+        input.removeAttribute('show-icon-left');
+      }
+    }
+    if (args.showIconRight !== undefined) {
+      if (args.showIconRight) {
+        input.setAttribute('show-icon-right', '');
+      } else {
+        input.removeAttribute('show-icon-right');
+      }
+    }
     if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
     return input;
   },
@@ -67,11 +83,27 @@ export const Default = {
     if (args.label) input.setAttribute('label', args.label);
     if (args.value !== undefined) input.setAttribute('value', args.value);
     if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
-    if (args.showLabel !== undefined) input.setAttribute('show-label', args.showLabel ? '' : null);
-    if (args.showIconLeft !== undefined)
-      input.setAttribute('show-icon-left', args.showIconLeft ? '' : null);
-    if (args.showIconRight !== undefined)
-      input.setAttribute('show-icon-right', args.showIconRight ? '' : null);
+    if (args.showLabel !== undefined) {
+      if (args.showLabel) {
+        input.setAttribute('show-label', '');
+      } else {
+        input.removeAttribute('show-label');
+      }
+    }
+    if (args.showIconLeft !== undefined) {
+      if (args.showIconLeft) {
+        input.setAttribute('show-icon-left', '');
+      } else {
+        input.removeAttribute('show-icon-left');
+      }
+    }
+    if (args.showIconRight !== undefined) {
+      if (args.showIconRight) {
+        input.setAttribute('show-icon-right', '');
+      } else {
+        input.removeAttribute('show-icon-right');
+      }
+    }
     if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
     return input;
   },
@@ -430,11 +462,27 @@ export const Interactive = {
     if (args.label) input.setAttribute('label', args.label);
     if (args.value !== undefined) input.setAttribute('value', args.value);
     if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
-    if (args.showLabel !== undefined) input.setAttribute('show-label', args.showLabel ? '' : null);
-    if (args.showIconLeft !== undefined)
-      input.setAttribute('show-icon-left', args.showIconLeft ? '' : null);
-    if (args.showIconRight !== undefined)
-      input.setAttribute('show-icon-right', args.showIconRight ? '' : null);
+    if (args.showLabel !== undefined) {
+      if (args.showLabel) {
+        input.setAttribute('show-label', '');
+      } else {
+        input.removeAttribute('show-label');
+      }
+    }
+    if (args.showIconLeft !== undefined) {
+      if (args.showIconLeft) {
+        input.setAttribute('show-icon-left', '');
+      } else {
+        input.removeAttribute('show-icon-left');
+      }
+    }
+    if (args.showIconRight !== undefined) {
+      if (args.showIconRight) {
+        input.setAttribute('show-icon-right', '');
+      } else {
+        input.removeAttribute('show-icon-right');
+      }
+    }
     if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
 
     // Add icons if needed
