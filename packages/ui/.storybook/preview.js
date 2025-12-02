@@ -17,6 +17,47 @@ const preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
+
+    docs: {
+      source: {
+        transform: (code, _storyContext) => {
+          // Remove decorator wrapper div and style tag
+          // The decorator adds: <div data-theme="..." data-mode="..." style="..."><style>...</style>...</div>
+          let transformed = code;
+
+          // Remove style tag with font imports (handle multiline)
+          transformed = transformed.replace(
+            /<style>[\s\S]*?@import url\([^)]+\)[\s\S]*?<\/style>/g,
+            ''
+          );
+          transformed = transformed.replace(/<style>[\s\S]*?font-family[\s\S]*?<\/style>/g, '');
+
+          // Remove the outer wrapper div with data-theme and data-mode attributes
+          // Handle both single-line and multi-line formats
+          transformed = transformed.replace(/<div[^>]*data-theme="[^"]*"[^>]*>/g, '');
+          transformed = transformed.replace(/<div[^>]*data-mode="[^"]*"[^>]*>/g, '');
+
+          // Remove closing wrapper div tags
+          transformed = transformed.replace(/<\/div>\s*$/gm, '');
+
+          // Extract just the component element if it's wrapped
+          // Look for web component tags (bui-*)
+          const componentMatch = transformed.match(/<bui-[^>]*>[\s\S]*?<\/bui-[^>]*>/);
+          if (componentMatch) {
+            transformed = componentMatch[0];
+          }
+
+          // Clean up extra whitespace and newlines
+          transformed = transformed.trim();
+
+          // Convert camelCase attributes to kebab-case for web components
+          // styleType -> style-type, etc.
+          transformed = transformed.replace(/\bstyleType=/g, 'style-type=');
+
+          return transformed;
+        },
+      },
+    },
   },
   globalTypes: {
     theme: {
