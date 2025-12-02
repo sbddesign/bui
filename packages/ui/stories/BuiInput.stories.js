@@ -62,15 +62,17 @@ export const Default = {
   },
   render: (args) => {
     const input = document.createElement('bui-input');
-    input.mood = args.mood;
-    input.size = args.size;
-    input.label = args.label;
-    input.value = args.value;
-    input.placeholder = args.placeholder;
-    input.showLabel = args.showLabel;
-    input.showIconLeft = args.showIconLeft;
-    input.showIconRight = args.showIconRight;
-    input.iconRightAction = args.iconRightAction;
+    if (args.mood) input.setAttribute('mood', args.mood);
+    if (args.size) input.setAttribute('size', args.size);
+    if (args.label) input.setAttribute('label', args.label);
+    if (args.value !== undefined) input.setAttribute('value', args.value);
+    if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
+    if (args.showLabel !== undefined) input.setAttribute('show-label', args.showLabel ? '' : null);
+    if (args.showIconLeft !== undefined)
+      input.setAttribute('show-icon-left', args.showIconLeft ? '' : null);
+    if (args.showIconRight !== undefined)
+      input.setAttribute('show-icon-right', args.showIconRight ? '' : null);
+    if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
     return input;
   },
 };
@@ -423,15 +425,17 @@ export const Interactive = {
   },
   render: (args) => {
     const input = document.createElement('bui-input');
-    input.mood = args.mood;
-    input.size = args.size;
-    input.label = args.label;
-    input.value = args.value;
-    input.placeholder = args.placeholder;
-    input.showLabel = args.showLabel;
-    input.showIconLeft = args.showIconLeft;
-    input.showIconRight = args.showIconRight;
-    input.iconRightAction = args.iconRightAction;
+    if (args.mood) input.setAttribute('mood', args.mood);
+    if (args.size) input.setAttribute('size', args.size);
+    if (args.label) input.setAttribute('label', args.label);
+    if (args.value !== undefined) input.setAttribute('value', args.value);
+    if (args.placeholder) input.setAttribute('placeholder', args.placeholder);
+    if (args.showLabel !== undefined) input.setAttribute('show-label', args.showLabel ? '' : null);
+    if (args.showIconLeft !== undefined)
+      input.setAttribute('show-icon-left', args.showIconLeft ? '' : null);
+    if (args.showIconRight !== undefined)
+      input.setAttribute('show-icon-right', args.showIconRight ? '' : null);
+    if (args.iconRightAction) input.setAttribute('icon-right-action', args.iconRightAction);
 
     // Add icons if needed
     if (args.showIconLeft) {
