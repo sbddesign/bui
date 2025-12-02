@@ -1,0 +1,24 @@
+{
+  "name": "@sbddesign/bui-mcp-server",
+  "version": "0.0.1",
+  "description": "MCP server for BUI UI Kit component information",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node scripts/generate-mcp-data.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0"
+  },
+  "keywords": [
+    "mcp",
+    "ui-kit",
+    "web-components"
+  ],
+  "author": "",
+  "license": "ISC"
+}

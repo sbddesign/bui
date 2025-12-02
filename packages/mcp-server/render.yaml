@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: bui-mcp-server
+    env: node
+    buildCommand: cd /opt/render/project/src && pnpm install && cd packages/mcp-server && pnpm build
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production

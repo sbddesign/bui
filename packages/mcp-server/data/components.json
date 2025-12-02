@@ -1,0 +1,849 @@
+[
+  {
+    "name": "AmountOptionTile",
+    "className": "BuiAmountOptionTile",
+    "tagName": "bui-amount-option-tile",
+    "properties": [
+      {
+        "name": "emoji",
+        "attribute": "emoji",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "🔥",
+        "validValues": null
+      },
+      {
+        "name": "message",
+        "attribute": "message",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "Incredible",
+        "validValues": null
+      },
+      {
+        "name": "showEmoji",
+        "attribute": "show-emoji",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "showMessage",
+        "attribute": "show-message",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "showSecondaryCurrency",
+        "attribute": "show-secondary-currency",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "bitcoinFirst",
+        "attribute": "bitcoin-first",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "custom",
+        "attribute": "custom",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "amountDefined",
+        "attribute": "amount-defined",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "selected",
+        "attribute": "selected",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "primaryAmount",
+        "attribute": "primary-amount",
+        "type": "Number",
+        "reflect": true,
+        "required": false,
+        "defaultValue": 1,
+        "validValues": null
+      },
+      {
+        "name": "primarySymbol",
+        "attribute": "primary-symbol",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "$",
+        "validValues": null
+      },
+      {
+        "name": "secondaryAmount",
+        "attribute": "secondary-amount",
+        "type": "Number",
+        "reflect": true,
+        "required": false,
+        "defaultValue": 1000,
+        "validValues": null
+      },
+      {
+        "name": "secondarySymbol",
+        "attribute": "secondary-symbol",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "₿",
+        "validValues": null
+      },
+      {
+        "name": "showEstimate",
+        "attribute": "show-estimate",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "primaryTextSize",
+        "attribute": "primary-text-size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "6xl",
+        "validValues": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+      },
+      {
+        "name": "secondaryTextSize",
+        "attribute": "secondary-text-size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "2xl",
+        "validValues": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+      }
+    ]
+  },
+  {
+    "name": "Avatar",
+    "className": "BuiAvatar",
+    "tagName": "bui-avatar",
+    "properties": [
+      {
+        "name": "imageUrl",
+        "attribute": "image-url",
+        "type": "String",
+        "reflect": false,
+        "required": true,
+        "validValues": null
+      },
+      {
+        "name": "imageUrl2x",
+        "attribute": "image-url-2x",
+        "type": "String",
+        "reflect": false,
+        "required": true,
+        "validValues": null
+      },
+      {
+        "name": "text",
+        "attribute": "text",
+        "type": "String",
+        "reflect": false,
+        "required": true,
+        "validValues": null
+      },
+      {
+        "name": "showInitial",
+        "attribute": "show-initial",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "medium",
+        "validValues": ["small", "medium", "large"]
+      }
+    ]
+  },
+  {
+    "name": "BitcoinQrDisplay",
+    "className": "BuiBitcoinQrDisplay",
+    "tagName": "bui-bitcoin-qr-display",
+    "properties": [
+      {
+        "name": "address",
+        "attribute": "address",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "lightning",
+        "attribute": "lightning",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "option",
+        "attribute": "option",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "unified",
+        "validValues": ["unified", "lightning", "onchain"]
+      },
+      {
+        "name": "selector",
+        "attribute": "selector",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "dots",
+        "validValues": ["dots", "toggle"]
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "Number",
+        "reflect": false,
+        "required": false,
+        "defaultValue": 332,
+        "validValues": null
+      },
+      {
+        "name": "showImage",
+        "attribute": "showImage",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "dotType",
+        "attribute": "dotType",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "dot",
+        "validValues": [
+          "dot",
+          "square",
+          "rounded",
+          "extra-rounded",
+          "classy",
+          "classy-rounded",
+          "random-dot",
+          "vertical-line",
+          "horizontal-line",
+          "small-square",
+          "tiny-square",
+          "diamond"
+        ]
+      },
+      {
+        "name": "dotColor",
+        "attribute": "dotColor",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "#000000",
+        "validValues": null
+      },
+      {
+        "name": "unifiedImage",
+        "attribute": "unifiedImage",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "lightningImage",
+        "attribute": "lightningImage",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "onchainImage",
+        "attribute": "onchainImage",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "copyOnTap",
+        "attribute": "copyOnTap",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "placeholder",
+        "attribute": "placeholder",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "error",
+        "attribute": "error",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "errorMessage",
+        "attribute": "errorMessage",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "Sorry, an error occurred. Try again later.",
+        "validValues": null
+      },
+      {
+        "name": "complete",
+        "attribute": "complete",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "BitcoinValue",
+    "className": "BuiBitcoinValue",
+    "tagName": "bui-bitcoin-value",
+    "properties": [
+      {
+        "name": "format",
+        "attribute": "format",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "bip177",
+        "validValues": ["sats", "BTC", "bip177"]
+      },
+      {
+        "name": "truncated",
+        "attribute": "truncated",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "amount",
+        "attribute": "amount",
+        "type": "Number",
+        "reflect": true,
+        "required": false,
+        "defaultValue": 0,
+        "validValues": null
+      },
+      {
+        "name": "symbolPosition",
+        "attribute": "symbol-position",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "undefined",
+        "validValues": ["left", "right"]
+      },
+      {
+        "name": "satcomma",
+        "attribute": "satcomma",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "default",
+        "validValues": ["small", "default", "large", "xlarge"]
+      },
+      {
+        "name": "showEstimate",
+        "attribute": "show-estimate",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "textSize",
+        "attribute": "text-size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "base",
+        "validValues": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "className": "BuiButton",
+    "tagName": "bui-button",
+    "properties": [
+      {
+        "name": "content",
+        "attribute": "content",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "label",
+        "validValues": ["label", "icon", "label+icon", "icon+label"]
+      },
+      {
+        "name": "styleType",
+        "attribute": "style-type",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "filled",
+        "validValues": ["filled", "outline", "free"]
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "default",
+        "validValues": ["default", "small", "large"]
+      },
+      {
+        "name": "disabled",
+        "attribute": "disabled",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "label",
+        "attribute": "label",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "Label",
+        "validValues": null
+      },
+      {
+        "name": "cluster",
+        "attribute": "cluster",
+        "type": "String",
+        "reflect": false,
+        "required": true,
+        "validValues": null
+      },
+      {
+        "name": "wide",
+        "attribute": "wide",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "ButtonCluster",
+    "className": "BuiButtonCluster",
+    "tagName": "bui-button-cluster",
+    "properties": [
+      {
+        "name": "direction",
+        "attribute": "direction",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "horizontal",
+        "validValues": ["horizontal", "vertical"]
+      }
+    ]
+  },
+  {
+    "name": "Input",
+    "className": "BuiInput",
+    "tagName": "bui-input",
+    "properties": [
+      {
+        "name": "mood",
+        "attribute": "mood",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "neutral",
+        "validValues": ["neutral", "caution", "danger", "success"]
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "large",
+        "validValues": ["large", "small"]
+      },
+      {
+        "name": "label",
+        "attribute": "label",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "Label",
+        "validValues": null
+      },
+      {
+        "name": "value",
+        "attribute": "value",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "placeholder",
+        "attribute": "placeholder",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      },
+      {
+        "name": "showLabel",
+        "attribute": "show-label",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "showIconLeft",
+        "attribute": "show-icon-left",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "showIconRight",
+        "attribute": "show-icon-right",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "iconRightAction",
+        "attribute": "icon-right-action",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "Message",
+    "className": "BuiMessage",
+    "tagName": "bui-message",
+    "properties": [
+      {
+        "name": "text",
+        "attribute": "text",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "For this small payment, you could save on fees by sending to a Lightning wallet.",
+        "validValues": null
+      },
+      {
+        "name": "mood",
+        "attribute": "mood",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "neutral",
+        "validValues": ["neutral", "success", "caution", "danger"]
+      },
+      {
+        "name": "showIcon",
+        "attribute": "show-icon",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": true,
+        "validValues": null
+      },
+      {
+        "name": "icon",
+        "attribute": "icon",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "",
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "MoneyValue",
+    "className": "BuiMoneyValue",
+    "tagName": "bui-money-value",
+    "properties": [
+      {
+        "name": "symbolPosition",
+        "attribute": "symbol-position",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "left",
+        "validValues": ["left", "right"]
+      },
+      {
+        "name": "symbol",
+        "attribute": "symbol",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "₿",
+        "validValues": ["left", "right"]
+      },
+      {
+        "name": "amount",
+        "attribute": "amount",
+        "type": "Number",
+        "reflect": true,
+        "required": false,
+        "defaultValue": 0,
+        "validValues": null
+      },
+      {
+        "name": "truncation",
+        "attribute": "truncation",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "default",
+        "validValues": ["small", "default", "large", "xlarge"]
+      },
+      {
+        "name": "satcomma",
+        "attribute": "satcomma",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "showEstimate",
+        "attribute": "show-estimate",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "textSize",
+        "attribute": "text-size",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "base",
+        "validValues": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+      }
+    ]
+  },
+  {
+    "name": "NumPad",
+    "className": "BuiNumPad",
+    "tagName": "bui-numpad",
+    "properties": [
+      {
+        "name": "disabled",
+        "attribute": "disabled",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "NumPadButton",
+    "className": "BuiNumPadButton",
+    "tagName": "bui-numpad-button",
+    "properties": [
+      {
+        "name": "number",
+        "attribute": "number",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": 1,
+        "validValues": null
+      },
+      {
+        "name": "content",
+        "attribute": "content",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "number",
+        "validValues": null
+      },
+      {
+        "name": "disabled",
+        "attribute": "disabled",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "ariaLabel",
+        "attribute": "aria-label",
+        "type": "String",
+        "reflect": true,
+        "required": false,
+        "defaultValue": "null",
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "OptionDot",
+    "className": "BuiOptionDot",
+    "tagName": "bui-option-dot",
+    "properties": [
+      {
+        "name": "active",
+        "attribute": "active",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      }
+    ]
+  },
+  {
+    "name": "Toggle",
+    "className": "BuiToggle",
+    "tagName": "bui-toggle",
+    "properties": [
+      {
+        "name": "active",
+        "attribute": "active",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      },
+      {
+        "name": "size",
+        "attribute": "size",
+        "type": "String",
+        "reflect": false,
+        "required": false,
+        "defaultValue": "big",
+        "validValues": ["big", "small"]
+      },
+      {
+        "name": "disabled",
+        "attribute": "disabled",
+        "type": "Boolean",
+        "reflect": true,
+        "required": false,
+        "defaultValue": false,
+        "validValues": null
+      }
+    ]
+  }
+]
