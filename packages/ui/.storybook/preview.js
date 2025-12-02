@@ -105,8 +105,34 @@ const preview = {
           transformed = transformed.replace(/\bstyleType=/g, 'style-type=');
 
           // Remove empty string values from boolean attributes (e.g., show-initial="" -> show-initial)
-          // Match attribute names followed by =""
-          transformed = transformed.replace(/(\w+(?:-\w+)*)=""/g, '$1');
+          // Only match known boolean attribute names to avoid transforming text attributes like value=""
+          const booleanAttributes = [
+            'disabled',
+            'active',
+            'selected',
+            'wide',
+            'show-icon',
+            'show-label',
+            'show-icon-left',
+            'show-icon-right',
+            'show-initial',
+            'show-emoji',
+            'show-message',
+            'show-secondary-currency',
+            'show-estimate',
+            'show-image',
+            'bitcoin-first',
+            'custom',
+            'amount-defined',
+            'truncated',
+            'satcomma',
+            'truncation',
+            'copy-on-tap',
+            'error',
+            'complete',
+          ];
+          const booleanAttrPattern = `(${booleanAttributes.join('|')})`;
+          transformed = transformed.replace(new RegExp(`${booleanAttrPattern}=""`, 'g'), '$1');
 
           return transformed;
         },
