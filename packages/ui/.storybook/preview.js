@@ -41,10 +41,60 @@ const preview = {
           transformed = transformed.replace(/<\/div>\s*$/gm, '');
 
           // Extract just the component element if it's wrapped
-          // Look for web component tags (bui-*)
-          const componentMatch = transformed.match(/<bui-[^>]*>[\s\S]*?<\/bui-[^>]*>/);
+          // Look for web component tags (bui-*) and handle nested components properly
+          const extractComponent = (html) => {
+            const openTagMatch = html.match(/<bui-[^>]*>/);
+            if (!openTagMatch) return null;
+
+            const openTag = openTagMatch[0];
+            const tagNameMatch = openTag.match(/<bui-([^\s>]+)/);
+            if (!tagNameMatch) return null;
+
+            const tagName = tagNameMatch[1];
+            const startIndex = openTagMatch.index;
+            let depth = 0;
+            let i = startIndex + openTag.length;
+
+            // Find the matching closing tag by tracking nested bui-* tags
+            while (i < html.length) {
+              const remaining = html.substring(i);
+              const openMatch = remaining.match(/<bui-[^>]*>/);
+              const closeMatch = remaining.match(/<\/bui-[^>]*>/);
+
+              if (!closeMatch) break;
+
+              const openIndex = openMatch ? openMatch.index + i : Infinity;
+              const closeIndex = closeMatch.index + i;
+              const closeTag = closeMatch[0];
+              const closeTagNameMatch = closeTag.match(/<\/bui-([^\s>]+)/);
+
+              if (openIndex < closeIndex) {
+                // Found nested opening tag before closing tag
+                depth++;
+                i = openIndex + openMatch[0].length;
+              } else {
+                // Found closing tag
+                if (closeTagNameMatch && closeTagNameMatch[1] === tagName) {
+                  if (depth === 0) {
+                    // Found matching closing tag at top level
+                    return html.substring(startIndex, closeIndex + closeTag.length);
+                  }
+                  // This closing tag matches our target but we're still nested
+                  depth--;
+                } else if (depth > 0) {
+                  // This closing tag is for a nested component
+                  depth--;
+                }
+                i = closeIndex + closeTag.length;
+              }
+            }
+
+            return null;
+          };
+
+          const componentMatch = extractComponent(transformed);
           if (componentMatch) {
-            transformed = componentMatch[0];
+            transformed = componentMatch;
           }
 
           // Clean up extra whitespace and newlines
