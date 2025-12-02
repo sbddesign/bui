@@ -24,6 +24,16 @@ export default {
     content: 'label',
     wide: false,
   },
+  render: (args) => {
+    const button = document.createElement('bui-button');
+    if (args.styleType) button.setAttribute('style-type', args.styleType);
+    if (args.size) button.setAttribute('size', args.size);
+    if (args.content) button.setAttribute('content', args.content);
+    if (args.label) button.setAttribute('label', args.label);
+    if (args.disabled) button.setAttribute('disabled', '');
+    if (args.wide) button.setAttribute('wide', '');
+    return button;
+  },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
