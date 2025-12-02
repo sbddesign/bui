@@ -1,0 +1,834 @@
+{
+  "generatedAt": "2025-12-02T20:04:23.720Z",
+  "components": [
+    {
+      "name": "Amount Option Tile",
+      "tagName": "bui-amount-option-tile",
+      "className": "BuiAmountOptionTile",
+      "source": "packages/ui/amount-option-tile.ts",
+      "description": "Metadata for BuiAmountOptionTile (bui-amount-option-tile) generated from source.",
+      "attributes": [
+        {
+          "property": "emoji",
+          "attribute": "emoji",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "🔥"
+        },
+        {
+          "property": "message",
+          "attribute": "message",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "Incredible"
+        },
+        {
+          "property": "showEmoji",
+          "attribute": "show-emoji",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "showMessage",
+          "attribute": "show-message",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "showSecondaryCurrency",
+          "attribute": "show-secondary-currency",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "bitcoinFirst",
+          "attribute": "bitcoin-first",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "notes": "Uses custom converter.",
+          "default": false
+        },
+        {
+          "property": "custom",
+          "attribute": "custom",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "notes": "Uses custom converter.",
+          "default": false
+        },
+        {
+          "property": "amountDefined",
+          "attribute": "amount-defined",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "notes": "Uses custom converter.",
+          "default": true
+        },
+        {
+          "property": "selected",
+          "attribute": "selected",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "notes": "Uses custom converter.",
+          "default": false
+        },
+        {
+          "property": "primaryAmount",
+          "attribute": "primary-amount",
+          "type": "number",
+          "reflects": true,
+          "required": false,
+          "default": 1
+        },
+        {
+          "property": "primarySymbol",
+          "attribute": "primary-symbol",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "$"
+        },
+        {
+          "property": "secondaryAmount",
+          "attribute": "secondary-amount",
+          "type": "number",
+          "reflects": true,
+          "required": false,
+          "default": 1000
+        },
+        {
+          "property": "secondarySymbol",
+          "attribute": "secondary-symbol",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "₿"
+        },
+        {
+          "property": "showEstimate",
+          "attribute": "show-estimate",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "primaryTextSize",
+          "attribute": "primary-text-size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "6xl",
+          "values": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+        },
+        {
+          "property": "secondaryTextSize",
+          "attribute": "secondary-text-size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "2xl",
+          "values": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+        }
+      ],
+      "events": ["amount-tile-click"]
+    },
+    {
+      "name": "Avatar",
+      "tagName": "bui-avatar",
+      "className": "BuiAvatar",
+      "source": "packages/ui/avatar.ts",
+      "description": "Metadata for BuiAvatar (bui-avatar) generated from source.",
+      "attributes": [
+        {
+          "property": "imageUrl",
+          "attribute": "image-url",
+          "type": "string",
+          "reflects": false,
+          "required": true
+        },
+        {
+          "property": "imageUrl2x",
+          "attribute": "image-url-2x",
+          "type": "string",
+          "reflects": false,
+          "required": true
+        },
+        {
+          "property": "text",
+          "attribute": "text",
+          "type": "string",
+          "reflects": false,
+          "required": true
+        },
+        {
+          "property": "showInitial",
+          "attribute": "show-initial",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "notes": "Uses custom converter.",
+          "default": false
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "medium",
+          "values": ["small", "medium", "large"]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Bitcoin Qr Display",
+      "tagName": "bui-bitcoin-qr-display",
+      "className": "BuiBitcoinQrDisplay",
+      "source": "packages/ui/bitcoin-qr-display.ts",
+      "description": "Metadata for BuiBitcoinQrDisplay (bui-bitcoin-qr-display) generated from source.",
+      "attributes": [
+        {
+          "property": "address",
+          "attribute": "address",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "lightning",
+          "attribute": "lightning",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "option",
+          "attribute": "option",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "unified",
+          "values": ["unified", "lightning", "onchain"]
+        },
+        {
+          "property": "selector",
+          "attribute": "selector",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "dots",
+          "values": ["dots", "toggle"]
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "number",
+          "reflects": false,
+          "required": false,
+          "default": 332
+        },
+        {
+          "property": "showImage",
+          "attribute": "show-image",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "dotType",
+          "attribute": "dot-type",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "dot",
+          "values": [
+            "dot",
+            "square",
+            "rounded",
+            "extra-rounded",
+            "classy",
+            "classy-rounded",
+            "random-dot",
+            "vertical-line",
+            "horizontal-line",
+            "small-square",
+            "tiny-square",
+            "diamond"
+          ]
+        },
+        {
+          "property": "dotColor",
+          "attribute": "dot-color",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "#000000"
+        },
+        {
+          "property": "unifiedImage",
+          "attribute": "unified-image",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "lightningImage",
+          "attribute": "lightning-image",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "onchainImage",
+          "attribute": "onchain-image",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "copyOnTap",
+          "attribute": "copy-on-tap",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "placeholder",
+          "attribute": "placeholder",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "error",
+          "attribute": "error",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "errorMessage",
+          "attribute": "error-message",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "Sorry, an error occurred. Try again later."
+        },
+        {
+          "property": "complete",
+          "attribute": "complete",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        }
+      ],
+      "events": ["bui-copy", "bui-copy-error"]
+    },
+    {
+      "name": "Bitcoin Value",
+      "tagName": "bui-bitcoin-value",
+      "className": "BuiBitcoinValue",
+      "source": "packages/ui/bitcoin-value.ts",
+      "description": "Metadata for BuiBitcoinValue (bui-bitcoin-value) generated from source.",
+      "attributes": [
+        {
+          "property": "format",
+          "attribute": "format",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "bip177",
+          "values": ["sats", "BTC", "bip177"]
+        },
+        {
+          "property": "truncated",
+          "attribute": "truncated",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "amount",
+          "attribute": "amount",
+          "type": "number",
+          "reflects": true,
+          "required": false,
+          "default": 0
+        },
+        {
+          "property": "symbolPosition",
+          "attribute": "symbol-position",
+          "type": "string",
+          "reflects": true,
+          "required": true,
+          "values": ["left", "right"]
+        },
+        {
+          "property": "satcomma",
+          "attribute": "satcomma",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "default",
+          "values": ["small", "default", "large", "xlarge"]
+        },
+        {
+          "property": "showEstimate",
+          "attribute": "show-estimate",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "textSize",
+          "attribute": "text-size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "base",
+          "values": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Button",
+      "tagName": "bui-button",
+      "className": "BuiButton",
+      "source": "packages/ui/button.ts",
+      "description": "Metadata for BuiButton (bui-button) generated from source.",
+      "attributes": [
+        {
+          "property": "content",
+          "attribute": "content",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "label",
+          "values": ["label", "icon", "label+icon", "icon+label"]
+        },
+        {
+          "property": "styleType",
+          "attribute": "style-type",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "filled",
+          "values": ["filled", "outline", "free"]
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "default",
+          "values": ["default", "small", "large"]
+        },
+        {
+          "property": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "label",
+          "attribute": "label",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "Label"
+        },
+        {
+          "property": "cluster",
+          "attribute": "cluster",
+          "type": "string",
+          "reflects": false,
+          "required": true
+        },
+        {
+          "property": "wide",
+          "attribute": "wide",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Button Cluster",
+      "tagName": "bui-button-cluster",
+      "className": "BuiButtonCluster",
+      "source": "packages/ui/button-cluster.ts",
+      "description": "Metadata for BuiButtonCluster (bui-button-cluster) generated from source.",
+      "attributes": [
+        {
+          "property": "direction",
+          "attribute": "direction",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "horizontal",
+          "values": ["horizontal", "vertical"]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Input",
+      "tagName": "bui-input",
+      "className": "BuiInput",
+      "source": "packages/ui/input.ts",
+      "description": "Metadata for BuiInput (bui-input) generated from source.",
+      "attributes": [
+        {
+          "property": "mood",
+          "attribute": "mood",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "neutral",
+          "values": ["neutral", "caution", "danger", "success"]
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "large",
+          "values": ["large", "small"]
+        },
+        {
+          "property": "label",
+          "attribute": "label",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "Label"
+        },
+        {
+          "property": "value",
+          "attribute": "value",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "placeholder",
+          "attribute": "placeholder",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": ""
+        },
+        {
+          "property": "showLabel",
+          "attribute": "show-label",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "showIconLeft",
+          "attribute": "show-icon-left",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "showIconRight",
+          "attribute": "show-icon-right",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "iconRightAction",
+          "attribute": "icon-right-action",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        }
+      ],
+      "events": ["input", "icon-right-click"]
+    },
+    {
+      "name": "Message",
+      "tagName": "bui-message",
+      "className": "BuiMessage",
+      "source": "packages/ui/message.ts",
+      "description": "Metadata for BuiMessage (bui-message) generated from source.",
+      "attributes": [
+        {
+          "property": "text",
+          "attribute": "text",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "For this small payment, you could save on fees by sending to a Lightning wallet."
+        },
+        {
+          "property": "mood",
+          "attribute": "mood",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "neutral",
+          "values": ["neutral", "success", "caution", "danger"]
+        },
+        {
+          "property": "showIcon",
+          "attribute": "show-icon",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": true
+        },
+        {
+          "property": "icon",
+          "attribute": "icon",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": ""
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Money Value",
+      "tagName": "bui-money-value",
+      "className": "BuiMoneyValue",
+      "source": "packages/ui/money-value.ts",
+      "description": "Metadata for BuiMoneyValue (bui-money-value) generated from source.",
+      "attributes": [
+        {
+          "property": "symbolPosition",
+          "attribute": "symbol-position",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "left",
+          "values": ["left", "right"]
+        },
+        {
+          "property": "symbol",
+          "attribute": "symbol",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "₿"
+        },
+        {
+          "property": "amount",
+          "attribute": "amount",
+          "type": "number",
+          "reflects": true,
+          "required": false,
+          "default": 0
+        },
+        {
+          "property": "truncation",
+          "attribute": "truncation",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "default",
+          "values": ["small", "default", "large", "xlarge"]
+        },
+        {
+          "property": "satcomma",
+          "attribute": "satcomma",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "showEstimate",
+          "attribute": "show-estimate",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "textSize",
+          "attribute": "text-size",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": "base",
+          "values": ["base", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl"]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Num Pad",
+      "tagName": "bui-numpad",
+      "className": "BuiNumPad",
+      "source": "packages/ui/numpad.ts",
+      "description": "Metadata for BuiNumPad (bui-numpad) generated from source.",
+      "attributes": [
+        {
+          "property": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Num Pad Button",
+      "tagName": "bui-numpad-button",
+      "className": "BuiNumPadButton",
+      "source": "packages/ui/numpad-button.ts",
+      "description": "Metadata for BuiNumPadButton (bui-numpad-button) generated from source.",
+      "attributes": [
+        {
+          "property": "number",
+          "attribute": "number",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "1"
+        },
+        {
+          "property": "content",
+          "attribute": "content",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "number"
+        },
+        {
+          "property": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "ariaLabel",
+          "attribute": "aria-label",
+          "type": "string",
+          "reflects": true,
+          "required": false,
+          "default": null
+        }
+      ],
+      "events": ["numpad-click"]
+    },
+    {
+      "name": "Option Dot",
+      "tagName": "bui-option-dot",
+      "className": "BuiOptionDot",
+      "source": "packages/ui/option-dot.ts",
+      "description": "Metadata for BuiOptionDot (bui-option-dot) generated from source.",
+      "attributes": [
+        {
+          "property": "active",
+          "attribute": "active",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "notes": "Uses custom converter.",
+          "default": false
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "Toggle",
+      "tagName": "bui-toggle",
+      "className": "BuiToggle",
+      "source": "packages/ui/toggle.ts",
+      "description": "Metadata for BuiToggle (bui-toggle) generated from source.",
+      "attributes": [
+        {
+          "property": "active",
+          "attribute": "active",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        },
+        {
+          "property": "size",
+          "attribute": "size",
+          "type": "string",
+          "reflects": false,
+          "required": false,
+          "default": "big",
+          "values": ["big", "small"]
+        },
+        {
+          "property": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "reflects": true,
+          "required": false,
+          "default": false
+        }
+      ],
+      "events": ["toggle"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@sbddesign/bui-mcp",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/server.js",
+  "exports": {
+    ".": "./dist/server.js",
+    "./edge": "./dist/bui-mcp.js",
+    "./data": "./generated/components.json"
+  },
+  "scripts": {
+    "build": "rimraf dist && pnpm run generate:data && tsc -p tsconfig.json",
+    "generate:data": "tsx --tsconfig tsconfig.scripts.json scripts/generate-mcp-data.ts",
+    "dev": "tsx src/server.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "rimraf": "^5.0.10",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

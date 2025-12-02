@@ -1,0 +1,10 @@
+[build]
+  command = "pnpm --filter @sbddesign/bui-mcp build"
+  publish = "packages/mcp-server/dist"
+
+[edge_functions]
+  directory = "packages/mcp-server/dist"
+
+[[edge_functions]]
+  function = "bui-mcp"
+  path = "/mcp/*"
