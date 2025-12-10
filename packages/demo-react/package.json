@@ -11,8 +11,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": ">=19.1.2 <19.2.0 || >=19.2.1",
+    "react-dom": ">=19.1.2 <19.2.0 || >=19.2.1",
     "@sbddesign/bui-ui": "workspace:*",
     "@sbddesign/bui-icons": "workspace:*"
   },
